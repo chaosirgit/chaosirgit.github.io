@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Laravel 使用WorkerMan(GateWay) | 超哥哥的学习笔记</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Laravel,PHP,WorkerMan,GateWay," />
+  
+
+  <meta name="description" content="前言记录在 Laravel 中使用 WorkerMan 或 GateWay 过程。 开始安装1composer require workerman/gateway-worker 创建命令行使用 artisan 创建一个命令行工具来启动 WorkerMan 因为 WorkerMan 只能在命令行中启动。 1php artisan make:command WorkerMan 更改 /app/Cons">
+<meta name="keywords" content="Laravel,WorkerMan,GateWay,PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Laravel 使用WorkerMan(GateWay)">
+<meta property="og:url" content="http://blog.adminchao.com/archives/fc208a4f.html">
+<meta property="og:site_name" content="超哥哥的学习笔记">
+<meta property="og:description" content="前言记录在 Laravel 中使用 WorkerMan 或 GateWay 过程。 开始安装1composer require workerman/gateway-worker 创建命令行使用 artisan 创建一个命令行工具来启动 WorkerMan 因为 WorkerMan 只能在命令行中启动。 1php artisan make:command WorkerMan 更改 /app/Cons">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-09-02T15:44:18.903Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Laravel 使用WorkerMan(GateWay)">
+<meta name="twitter:description" content="前言记录在 Laravel 中使用 WorkerMan 或 GateWay 过程。 开始安装1composer require workerman/gateway-worker 创建命令行使用 artisan 创建一个命令行工具来启动 WorkerMan 因为 WorkerMan 只能在命令行中启动。 1php artisan make:command WorkerMan 更改 /app/Cons">
+
+  
+
+  
+    <link rel="icon" href="/images/chaosirgit.png">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/chaosir.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开始"><span class="toc-text">开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建命令行"><span class="toc-text">创建命令行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更改-app-Console-Commands-WorkerMan-php-文件"><span class="toc-text">更改 /app/Console/Commands/WorkerMan.php 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建-config-gateway-php-文件"><span class="toc-text">创建 config/gateway.php 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建监听文件"><span class="toc-text">创建监听文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动-WorkerMan-服务端"><span class="toc-text">启动 WorkerMan 服务端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-text">测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码中使用"><span class="toc-text">代码中使用</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Laravel-使用Workerman-GateWay" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Laravel 使用WorkerMan(GateWay)</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2019.07.22</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>chaosir</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://blog.adminchao.com/archives/fc208a4f.html#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>记录在 Laravel 中使用 WorkerMan 或 GateWay 过程。</p>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer require workerman/gateway-worker</span><br></pre></td></tr></table></figure>
+<h3 id="创建命令行"><a href="#创建命令行" class="headerlink" title="创建命令行"></a>创建命令行</h3><p>使用 artisan 创建一个命令行工具来启动 WorkerMan 因为 WorkerMan 只能在命令行中启动。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php artisan make:command WorkerMan</span><br></pre></td></tr></table></figure>
+<h3 id="更改-app-Console-Commands-WorkerMan-php-文件"><a href="#更改-app-Console-Commands-WorkerMan-php-文件" class="headerlink" title="更改 /app/Console/Commands/WorkerMan.php 文件"></a>更改 <code>/app/Console/Commands/WorkerMan.php</code> 文件</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Console</span>\<span class="title">Commands</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">GatewayWorker</span>\<span class="title">BusinessWorker</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">GatewayWorker</span>\<span class="title">Gateway</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">GatewayWorker</span>\<span class="title">Register</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Console</span>\<span class="title">Command</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Workerman</span>\<span class="title">Worker</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WorkerMan</span> <span class="keyword">extends</span> <span class="title">Command</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The name and signature of the console command.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> string</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> $signature = <span class="string">'workerman &#123;action&#125; &#123;--d&#125;'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The console command description.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> string</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> $description = <span class="string">'Start a Workerman server'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Create a new command instance.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">parent</span>::__construct();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Execute the console command.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">global</span> $argv;</span><br><span class="line">        $action = <span class="keyword">$this</span>-&gt;argument(<span class="string">'action'</span>);</span><br><span class="line"></span><br><span class="line">        $argv[<span class="number">0</span>] = <span class="string">'wk'</span>;</span><br><span class="line">        $argv[<span class="number">1</span>] = $action;</span><br><span class="line">        $argv[<span class="number">2</span>] = <span class="keyword">$this</span>-&gt;option(<span class="string">'d'</span>) ? <span class="string">'-d'</span> : <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">$this</span>-&gt;start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">start</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;startGateWay();</span><br><span class="line">        <span class="keyword">$this</span>-&gt;startBusinessWorker();</span><br><span class="line">        <span class="keyword">$this</span>-&gt;startRegister();</span><br><span class="line">        Worker::runAll();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//BusinessWorker是运行业务逻辑的进程，BusinessWorker收到Gateway转发来的事件及请求时会默认调用Events.php中的onConnect onMessage</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">startBusinessWorker</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $worker                  = <span class="keyword">new</span> BusinessWorker();</span><br><span class="line">        $worker-&gt;name            = config(<span class="string">'gateway.business.name'</span>);        <span class="comment">//设置BusinessWorker进程的名称</span></span><br><span class="line">        $worker-&gt;count           = config(<span class="string">'gateway.business.count'</span>);       <span class="comment">//设置BusinessWorker进程的数量</span></span><br><span class="line">        $worker-&gt;registerAddress = config(<span class="string">'gateway.business.register_address'</span>);        <span class="comment">//注册服务地址-向Register进程注册-内部通讯使用</span></span><br><span class="line">        $worker-&gt;eventHandler    = config(<span class="string">'gateway.business.event'</span>);        <span class="comment">//设置使用哪个类来处理业务,业务类至少要实现onMessage静态方法，onConnect和onClose静态方法可以不用实现</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">startGateWay</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $address = config(<span class="string">'gateway.gateway.address'</span>);</span><br><span class="line">        $port    = config(<span class="string">'gateway.gateway.port'</span>);</span><br><span class="line">        <span class="keyword">if</span> (config(<span class="string">'gateway.gateway.ssl_open'</span>)) &#123;</span><br><span class="line">            <span class="comment">// 证书最好是申请的证书-开启wss 打开注释</span></span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * Workerman版本不小于3.3.7</span></span><br><span class="line"><span class="comment">             * PHP安装了openssl扩展</span></span><br><span class="line"><span class="comment">             * 已经申请了证书（pem/crt文件及key文件）放在磁盘某个目录(位置任意)</span></span><br><span class="line"><span class="comment">             * */</span></span><br><span class="line">            $context = <span class="keyword">array</span>(</span><br><span class="line">                <span class="comment">// 更多ssl选项请参考手册 http://php.net/manual/zh/context.ssl.php</span></span><br><span class="line">                <span class="string">'ssl'</span> =&gt; <span class="keyword">array</span>(</span><br><span class="line">                    <span class="comment">// 请使用绝对路径</span></span><br><span class="line">                    <span class="string">'local_cert'</span>        =&gt; config(<span class="string">'gateway.gateway.ssl.local_cert'</span>), <span class="comment">// 也可以是crt文件</span></span><br><span class="line">                    <span class="string">'local_pk'</span>          =&gt; config(<span class="string">'gateway.gateway.ssl.local_pk'</span>),</span><br><span class="line">                    <span class="string">'verify_peer'</span>       =&gt; config(<span class="string">'gateway.gateway.ssl.verify_peer'</span>),</span><br><span class="line">                    <span class="string">'allow_self_signed'</span> =&gt; config(<span class="string">'gateway.gateway.ssl.allow_self_signed'</span>), <span class="comment">//如果是自签名证书需要开启此选项</span></span><br><span class="line">                )</span><br><span class="line">            );</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 开启SSL，websocket+SSL 即wss websocket协议(端口任意，只要没有被其它程序占用就行)</span></span><br><span class="line"></span><br><span class="line">            $gateway            = <span class="keyword">new</span> Gateway($address . <span class="string">':'</span> . $port, $context);</span><br><span class="line">            $gateway-&gt;transport = <span class="string">'ssl'</span>;</span><br><span class="line">            <span class="comment">//  $gateway = new Gateway("websocket://0.0.0.0:443", $context);</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            $gateway = <span class="keyword">new</span> Gateway($address . <span class="string">':'</span> . $port);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        $gateway-&gt;name                 = config(<span class="string">'gateway.gateway.name'</span>);     <span class="comment">//设置Gateway进程的名称，方便status命令中查看统计</span></span><br><span class="line">        $gateway-&gt;count                = config(<span class="string">'gateway.gateway.count'</span>);     <span class="comment">//进程的数量</span></span><br><span class="line">        $gateway-&gt;lanIp                = config(<span class="string">'gateway.gateway.lan_ip'</span>);       <span class="comment">//内网ip,多服务器分布式部署的时候需要填写真实的内网ip</span></span><br><span class="line">        $gateway-&gt;startPort            = config(<span class="string">'gateway.gateway.start_port'</span>);      <span class="comment">//监听本机端口的起始端口</span></span><br><span class="line">        $gateway-&gt;pingInterval         = config(<span class="string">'gateway.gateway.heart_ping'</span>);        <span class="comment">//心跳检测时间间隔 单位：秒。如果设置为0代表不做任何心跳检测。</span></span><br><span class="line">        $gateway-&gt;pingNotResponseLimit = config(<span class="string">'gateway.gateway.ping_not'</span>);     <span class="comment">//客户端连续$pingNotResponseLimit次$pingInterval时间内不发送任何数据则断开链接，并触发onClose。 如果设置为0代表客户端不用发送心跳数据</span></span><br><span class="line"></span><br><span class="line">        $gateway-&gt;pingData        = config(<span class="string">'gateway.gateway.ping_data'</span>);      <span class="comment">//当需要服务端定时给客户端发送心跳数据时， $gateway-&gt;pingData设置为服务端要发送的心跳请求数据，心跳数据是任意的，只要客户端能识别即可。</span></span><br><span class="line">        $gateway-&gt;registerAddress = config(<span class="string">'gateway.gateway.register_address'</span>);      <span class="comment">//注册服务地址-向Register进程注册-内部通讯使用</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Gateway进程和BusinessWorker进程启动后分别向Register进程注册自己的通讯地址，Gateway进程和BusinessWorker通过Register进程得到通讯地址后，就可以建立起连接并通讯了。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">startRegister</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Register(config(<span class="string">'gateway.start.address'</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="创建-config-gateway-php-文件"><a href="#创建-config-gateway-php-文件" class="headerlink" title="创建 config/gateway.php 文件"></a>创建 <code>config/gateway.php</code> 文件</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> [</span><br><span class="line">    <span class="comment">//BusinessWorker是运行业务逻辑的进程，BusinessWorker收到Gateway转发来的事件及请求时会默认调用Events.php中的onConnect onMessage</span></span><br><span class="line">    <span class="string">'business'</span> =&gt; [</span><br><span class="line">        <span class="comment">//注册服务地址-向Register进程注册-内部通讯使用</span></span><br><span class="line">        <span class="string">'register_address'</span> =&gt; env(<span class="string">'BUSINESS_REGISTER_ADDRESS'</span>, <span class="string">'127.0.0.1:2020'</span>),</span><br><span class="line">        <span class="comment">//设置BusinessWorker进程的名称</span></span><br><span class="line">        <span class="string">'name'</span>             =&gt; env(<span class="string">'BUSINESS_NAME'</span>, <span class="string">'BusinessWorker'</span>),</span><br><span class="line">        <span class="comment">//设置BusinessWorker进程的数量</span></span><br><span class="line">        <span class="string">'count'</span>            =&gt; env(<span class="string">'BUSINESS_COUNT'</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="comment">//设置使用哪个类来处理业务,业务类至少要实现onMessage静态方法，onConnect和onClose静态方法可以不用实现</span></span><br><span class="line">        <span class="string">'event'</span>            =&gt; env(<span class="string">'BUSINESS_EVENT'</span>, \App\Workerman\Events::class),</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">'gateway'</span>  =&gt; [</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * Workerman版本不小于3.3.7</span></span><br><span class="line"><span class="comment">         * PHP安装了openssl扩展</span></span><br><span class="line"><span class="comment">         * 已经申请了证书（pem/crt文件及key文件）放在磁盘某个目录(位置任意)</span></span><br><span class="line"><span class="comment">         * 更多ssl选项请参考手册 http://php.net/manual/zh/context.ssl.php</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//默认关闭 SSL,开启 需要配置 ssl内容</span></span><br><span class="line">        <span class="string">'ssl_open'</span> =&gt; env(<span class="string">'GATEWAY_SSL'</span>, <span class="keyword">false</span>),</span><br><span class="line">        <span class="string">'ssl'</span>      =&gt; [</span><br><span class="line">            <span class="comment">// 磁盘路径/server.pem 也可以是crt文件</span></span><br><span class="line">            <span class="string">'local_cert'</span> =&gt; env(<span class="string">'GATEWAY_SSL_LOCAL_CERT'</span>, <span class="string">''</span>),</span><br><span class="line">            <span class="comment">// 磁盘路径/server.key</span></span><br><span class="line">            <span class="string">'local_pk'</span>   =&gt; env(<span class="string">'GATEWAY_SSL_LOCAL_PK'</span>, <span class="string">''</span>),</span><br><span class="line"></span><br><span class="line">            <span class="string">'verify_peer'</span>       =&gt; env(<span class="string">'GATEWAY_VERIFY_PEER'</span>, <span class="keyword">false</span>),</span><br><span class="line">            <span class="comment">//如果是自签名证书需要开启此选项</span></span><br><span class="line">            <span class="string">'allow_self_signed'</span> =&gt; env(<span class="string">'GATEWAY_SELF_SIGNED'</span>, <span class="keyword">false</span>),</span><br><span class="line">        ],</span><br><span class="line"></span><br><span class="line">        <span class="string">'address'</span>          =&gt; env(<span class="string">'GATEWAY_ADDRESS'</span>, <span class="string">'websocket://0.0.0.0'</span>),</span><br><span class="line">        <span class="comment">//websocket协议 端口</span></span><br><span class="line">        <span class="string">'port'</span>             =&gt; env(<span class="string">'GATEWAY_PORT'</span>, <span class="string">'2021'</span>),</span><br><span class="line">        <span class="comment">//开启SSL，websocket+SSL 即wss websocket协议(端口任意，只要没有被其它程序占用就行)</span></span><br><span class="line">        <span class="comment">//'address' =&gt; env('GATEWAY_ADDRESS','websocket://0.0.0.0:443')</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置Gateway进程的名称，方便status命令中查看统计</span></span><br><span class="line">        <span class="string">'name'</span>             =&gt; env(<span class="string">'GATEWAY_NAME'</span>, <span class="string">'Gateway'</span>),</span><br><span class="line">        <span class="comment">//进程的数量</span></span><br><span class="line">        <span class="string">'count'</span>            =&gt; env(<span class="string">'GATEWAY_COUNT'</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="comment">//内网ip,多服务器分布式部署的时候需要填写真实的内网ip</span></span><br><span class="line">        <span class="string">'lan_ip'</span>           =&gt; env(<span class="string">'GATEWAY_LAN_IP'</span>, <span class="string">'127.0.0.1'</span>),</span><br><span class="line">        <span class="comment">//监听本机端口的起始端口</span></span><br><span class="line">        <span class="string">'start_port'</span>       =&gt; env(<span class="string">'GATEWAY_START_PORT'</span>, <span class="number">2010</span>),</span><br><span class="line">        <span class="comment">//心跳检测时间间隔 单位：秒。如果设置为0代表不做任何心跳检测。</span></span><br><span class="line">        <span class="string">'heart_ping'</span>       =&gt; env(<span class="string">'GATEWAY_HEART_PING'</span>, <span class="number">30</span>),</span><br><span class="line">        <span class="comment">//客户端连续 ping_not 次 heart_ping 时间内不发送任何数据则断开链接，并触发onClose。 如果设置为0代表客户端不用发送心跳数据</span></span><br><span class="line">        <span class="string">'ping_not'</span>         =&gt; env(<span class="string">'GATEWAY_PING_NOT'</span>, <span class="number">0</span>),</span><br><span class="line">        <span class="comment">//当需要服务端定时给客户端发送心跳数据时， $gateway-&gt;pingData设置为服务端要发送的心跳请求数据，心跳数据是任意的，只要客户端能识别即可。</span></span><br><span class="line">        <span class="string">'ping_data'</span>        =&gt; env(<span class="string">'GATEWAY_PING_DATA'</span>, <span class="string">'&#123;"type":"@heart@"&#125;'</span>),</span><br><span class="line">        <span class="comment">//注册服务地址-向Register进程注册-内部通讯使用</span></span><br><span class="line">        <span class="string">'register_address'</span> =&gt; env(<span class="string">'GATEWAY_REGISTER_ADDRESS'</span>, <span class="string">'127.0.0.1:2020'</span>),</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">'start'</span>    =&gt; [</span><br><span class="line">        <span class="comment">//Gateway进程和BusinessWorker进程启动后分别向Register进程注册自己的通讯地址，Gateway进程和BusinessWorker通过Register进程得到通讯地址后，就可以建立起连接并通讯了。</span></span><br><span class="line">        <span class="string">'address'</span> =&gt; env(<span class="string">'GATEWAY_START_ADDRESS'</span>, <span class="string">'text://0.0.0.0:2020'</span>),</span><br><span class="line">    ],</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+<h3 id="创建监听文件"><a href="#创建监听文件" class="headerlink" title="创建监听文件"></a>创建监听文件</h3><p>创建 <code>\App\Workerman\Events.php</code> 文件</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Workerman</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">GatewayWorker</span>\<span class="title">Lib</span>\<span class="title">Gateway</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">Log</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Workerman</span>\<span class="title">Lib</span>\<span class="title">Timer</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Events</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 当businessWorker进程启动时触发。每个进程生命周期内都只会触发一次。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $businessWorker businessWorker进程实例</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">onWorkerStart</span><span class="params">($businessWorker)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 当客户端连接上gateway进程时(TCP三次握手完毕时)触发的回调函数。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $client_id 固定为20个字符的字符串，用来全局标记一个socket连接，每个客户端连接都会被分配一个全局唯一的client_id。如果client_id对应的客</span></span><br><span class="line"><span class="comment">     *                   户端连接断开了，那么这个client_id也就失效了。当这个客户端再次连接到Gateway时，将会获得一个新的client_id。也就是说</span></span><br><span class="line"><span class="comment">     *                   client_id和客户端的socket连接生命周期是一致的。</span></span><br><span class="line"><span class="comment">     *                   client_id一旦被使用过，将不会被再次使用，也就是说client_id是不会重复的，即使分布式部署也不会重复。</span></span><br><span class="line"><span class="comment">     *                   只要有client_id，并且对应的客户端在线，就可以调用Gateway::sendToClient($client_id, $data)等方法向这个客户端发送数据。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">onConnect</span><span class="params">($client_id)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line"><span class="comment">//        Gateway::sendToCurrentClient("Your client_id is $client_id");</span></span><br><span class="line">        Gateway::sendToClient($client_id, json_encode(<span class="keyword">array</span>(</span><br><span class="line">            <span class="string">'type'</span>      =&gt; <span class="string">'init'</span>,</span><br><span class="line">            <span class="string">'client_id'</span> =&gt; $client_id</span><br><span class="line">        )));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 当客户端连接上gateway完成websocket握手时触发的回调函数。</span></span><br><span class="line"><span class="comment">     * 注意：此回调只有gateway为websocket协议并且gateway没有设置onWebSocketConnect时才有效。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $client_id 固定为20个字符的字符串，用来全局标记一个socket连接，每个客户端连接都会被分配一个全局唯一的client_id。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $data websocket握手时的http头数据，包含get、server等变量</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">onWebSocketConnect</span><span class="params">($client_id, $data)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 当客户端发来数据(Gateway进程收到数据)后触发的回调函数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $client_id 全局唯一的客户端socket连接标识</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $message 完整的客户端请求数据，数据类型取决于Gateway所使用协议的decode方法返的回值类型</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">onMessage</span><span class="params">($client_id, $message)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 客户端与Gateway进程的连接断开时触发。不管是客户端主动断开还是服务端主动断开，都会触发这个回调。一般在这里做一些数据清理工作。</span></span><br><span class="line"><span class="comment">     * 注意：onClose回调里无法使用Gateway::getSession()来获得当前用户的session数据，但是仍然可以使用$_SESSION变量获得。</span></span><br><span class="line"><span class="comment">     * 注意：onClose回调里无法使用Gateway::getUidByClientId()接口来获得uid，解决办法是在Gateway::bindUid()时记录一个$_SESSION['uid']，onClose的时候用$_SESSION['uid']来获得uid。</span></span><br><span class="line"><span class="comment">     * 注意：断网断电等极端情况可能无法及时触发onClose回调，因为这种情况客户端来不及给服务端发送断开连接的包(fin包)，服务端就无法得知连接已经断开。检测这种极端情况需要心跳检测，并且必须设置$gateway-&gt;pingNotResponseLimit&gt;0。这种断网断电的极端情况onClose将被延迟触发，延迟时间为小于$gateway-&gt;pingInterval*$gateway-&gt;pingNotResponseLimit秒，如果$gateway-&gt;pingInterval 和 $gateway-&gt;pingNotResponseLimit 中任何一个为0，则可能会无限延迟。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $client_id 全局唯一的client_id</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">onClose</span><span class="params">($client_id)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="启动-WorkerMan-服务端"><a href="#启动-WorkerMan-服务端" class="headerlink" title="启动 WorkerMan 服务端"></a>启动 WorkerMan 服务端</h3><p>在命令行里面执行，支持的命令大概有 start|stop|restart，其中 -d 的意思是 daemon 模式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php artisan workman start -d</span><br></pre></td></tr></table></figure></p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>在浏览器 F12 打开调试模式，在 Console 里输入<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 打开一个WebSocket:</span></span><br><span class="line"><span class="keyword">var</span> ws = <span class="keyword">new</span> WebSocket(<span class="string">'ws://localhost:2020'</span>);</span><br><span class="line"><span class="comment">// 响应onmessage事件:</span></span><br><span class="line">ws.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>) </span>&#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(msg); </span><br><span class="line">               &#125;;</span><br><span class="line"><span class="comment">// 给服务器发送一个字符串:</span></span><br><span class="line">ws.send(<span class="string">'Hello!'</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="代码中使用"><a href="#代码中使用" class="headerlink" title="代码中使用"></a>代码中使用</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">use</span> <span class="title">GatewayWorker</span>\<span class="title">Lib</span>\<span class="title">Gateway</span>;</span><br><span class="line">    </span><br><span class="line">            Gateway::$registerAddress = config(<span class="string">'gateway.gateway.register_address'</span>);</span><br><span class="line">            Gateway::bindUid($client_id,$user_id);</span><br></pre></td></tr></table></figure>
+    
+  </div>
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+  
+      <div class="git"></div>
+  
+  <script src="/js/util.js"></script>
+<script>
+function closeModal() {
+    Util.addClass($modalDialog, 'hide-dialog')
+    Util.removeClass($modalDialog, 'show-dialog');
+    Util.addClass($cover, 'hide')
+    Util.removeClass($cover, 'show');
+  }
+var $toolboxMobile = document.getElementById('toolbox-mobile');
+  var $cover = document.getElementById('cover');
+  var $close = document.getElementById('close');
+  var $modalDialog = document.getElementById('modal-dialog');
+if ($toolboxMobile) {
+    Util.bind($toolboxMobile, 'click', function() {
+      Util.addClass($modalDialog, 'show-dialog')
+      Util.removeClass($modalDialog, 'hide-dialog');
+
+      Util.addClass($cover, 'show')
+      Util.removeClass($cover, 'hide');
+    });
+
+
+    Util.bind($cover, 'click', closeModal);
+    Util.bind($close, 'click', closeModal);
+  }
+</script>
+</article>
+
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持我</div>
+        <ul>
+        
+          <li class="item">
+            <span>微信扫一扫</span>
+            <img src="/images/wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <span>支付宝扫一扫</span>
+            <img src="/images/alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/archives/c77b23f0.html">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/archives/c0ae76d4.html">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'chaosir';
+    
+    var disqus_url = 'http://blog.adminchao.com/archives/fc208a4f.html';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//chaosir.disqus.com/count.js" async></script>
+
+
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+  </div>
+
+  
+
+  
+<script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+
+
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Iris MVC路由(三) | 超哥哥的学习笔记</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="iris,go," />
+  
+
+  <meta name="description" content="定义路由在根目录 main.go 输入以下内容 12345678910111213141516171819package mainimport (	&quot;github.com/kataras/iris&quot;	&quot;github.com/kataras/iris/mvc&quot;  &quot;./controllers&quot;)func main() &amp;#123;	app := iris.New()	// 注册视图目录	app.Re">
+<meta name="keywords" content="iris,go">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Iris MVC路由(三)">
+<meta property="og:url" content="http://blog.adminchao.com/archives/b3c12085.html">
+<meta property="og:site_name" content="超哥哥的学习笔记">
+<meta property="og:description" content="定义路由在根目录 main.go 输入以下内容 12345678910111213141516171819package mainimport (	&quot;github.com/kataras/iris&quot;	&quot;github.com/kataras/iris/mvc&quot;  &quot;./controllers&quot;)func main() &amp;#123;	app := iris.New()	// 注册视图目录	app.Re">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-03-03T04:35:01.615Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Iris MVC路由(三)">
+<meta name="twitter:description" content="定义路由在根目录 main.go 输入以下内容 12345678910111213141516171819package mainimport (	&quot;github.com/kataras/iris&quot;	&quot;github.com/kataras/iris/mvc&quot;  &quot;./controllers&quot;)func main() &amp;#123;	app := iris.New()	// 注册视图目录	app.Re">
+
+  
+
+  
+    <link rel="icon" href="/images/chaosirgit.png">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/chaosir.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#定义路由"><span class="toc-text">定义路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建控制器"><span class="toc-text">创建控制器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建视图"><span class="toc-text">创建视图</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Iris-MVC路由-三" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Iris MVC路由(三)</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.03</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>chaosir</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://blog.adminchao.com/archives/b3c12085.html#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="定义路由"><a href="#定义路由" class="headerlink" title="定义路由"></a>定义路由</h2><p>在根目录 <code>main.go</code> 输入以下内容</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"github.com/kataras/iris"</span></span><br><span class="line">	<span class="string">"github.com/kataras/iris/mvc"</span></span><br><span class="line">  <span class="string">"./controllers"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	app := iris.New()</span><br><span class="line">	<span class="comment">// 注册视图目录</span></span><br><span class="line">	app.RegisterView(iris.HTML(<span class="string">"./views"</span>, <span class="string">".html"</span>))</span><br><span class="line">	<span class="comment">// 定义根路由控制器</span></span><br><span class="line">	mvc.New(app).Handle(<span class="built_in">new</span>(controllers.DefaultController))</span><br><span class="line">	<span class="comment">// 定义用户分组路由控制器</span></span><br><span class="line">	mvc.New(app.Party(<span class="string">"/user"</span>)).Handle(<span class="built_in">new</span>(controllers.UserController))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	app.Run(iris.Addr(<span class="string">":80"</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="创建控制器"><a href="#创建控制器" class="headerlink" title="创建控制器"></a>创建控制器</h2><p>创建 <code>controllers/UserController.go</code> 输入以下内容</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> controllers</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"github.com/kataras/iris"</span></span><br><span class="line">	<span class="string">"github.com/kataras/iris/mvc"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义控制器结构体</span></span><br><span class="line"><span class="keyword">type</span> UserController <span class="keyword">struct</span> &#123;</span><br><span class="line">	Ctx iris.Context	<span class="comment">//首字母大写-可在外包访问</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// GetLogin handes GET: http://localhost:80/user/login</span></span><br><span class="line"><span class="comment">// 返回视图-详见第3部分，创建视图</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(uc *UserController)</span> <span class="title">GetLogin</span><span class="params">()</span> <span class="title">mvc</span>.<span class="title">Result</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> mvc.View&#123;</span><br><span class="line">		Name:<span class="string">"login.html"</span>,</span><br><span class="line">		Data:iris.Map&#123;</span><br><span class="line">			<span class="string">"Title"</span>:<span class="string">"登陆"</span>,</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// GetUserinfoBy handles GET: http://localhost:80/user/userinfo/1/2.</span></span><br><span class="line"><span class="comment">// 返回 json 主要看控制器里GET接收参数，以及路由定义规则</span></span><br><span class="line"><span class="comment">// Get为请求方式 驼峰式命名代表路由加 ‘/’ By 关键字接受路由中的参数</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(uc *UserController)</span> <span class="title">GetUserinfoBy</span><span class="params">(id <span class="keyword">int</span>,name <span class="keyword">string</span>)</span> <span class="title">interface</span></span>&#123;&#125; &#123;</span><br><span class="line">	<span class="keyword">return</span> iris.Map&#123;</span><br><span class="line">		<span class="string">"id"</span> : id,</span><br><span class="line">		<span class="string">"name"</span> : name,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//PostLogin handles POST: http://localhost:80/user/login</span></span><br><span class="line"><span class="comment">//Form 表单 Post 方法接收数据</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(uc *UserController)</span> <span class="title">PostLogin</span><span class="params">()</span> <span class="title">interface</span></span>&#123;&#125;&#123;</span><br><span class="line"></span><br><span class="line">		username := uc.Ctx.PostValue(<span class="string">"username"</span>)</span><br><span class="line">		password := uc.Ctx.PostValue(<span class="string">"password"</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> iris.Map&#123;</span><br><span class="line">		<span class="string">"username"</span>:username,</span><br><span class="line">		<span class="string">"password"</span>:password,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="创建视图"><a href="#创建视图" class="headerlink" title="创建视图"></a>创建视图</h2><p>创建 <code>view/login.html</code> 输入以下内容</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>&#123;&#123;.Title&#125;&#125;<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123;.Title&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"login"</span> <span class="attr">method</span>=<span class="string">"POST"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">b</span>&gt;</span>Username<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">placeholder</span>=<span class="string">"Enter Username"</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">required</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">b</span>&gt;</span>Password<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">placeholder</span>=<span class="string">"Enter Password"</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">required</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span>Login<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+  
+      <div class="git"></div>
+  
+  <script src="/js/util.js"></script>
+<script>
+function closeModal() {
+    Util.addClass($modalDialog, 'hide-dialog')
+    Util.removeClass($modalDialog, 'show-dialog');
+    Util.addClass($cover, 'hide')
+    Util.removeClass($cover, 'show');
+  }
+var $toolboxMobile = document.getElementById('toolbox-mobile');
+  var $cover = document.getElementById('cover');
+  var $close = document.getElementById('close');
+  var $modalDialog = document.getElementById('modal-dialog');
+if ($toolboxMobile) {
+    Util.bind($toolboxMobile, 'click', function() {
+      Util.addClass($modalDialog, 'show-dialog')
+      Util.removeClass($modalDialog, 'hide-dialog');
+
+      Util.addClass($cover, 'show')
+      Util.removeClass($cover, 'hide');
+    });
+
+
+    Util.bind($cover, 'click', closeModal);
+    Util.bind($close, 'click', closeModal);
+  }
+</script>
+</article>
+
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持我</div>
+        <ul>
+        
+          <li class="item">
+            <span>微信扫一扫</span>
+            <img src="/images/wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <span>支付宝扫一扫</span>
+            <img src="/images/alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/archives/cbe049d3.html">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/archives/a681b356.html">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'chaosir';
+    
+    var disqus_url = 'http://blog.adminchao.com/archives/b3c12085.html';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//chaosir.disqus.com/count.js" async></script>
+
+
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+  </div>
+
+  
+
+  
+<script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+
+
+</script>
+
+
+
+</body>
+</html>

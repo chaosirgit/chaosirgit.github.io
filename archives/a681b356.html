@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Laravel Passport 个人令牌多用户登陆 | 超哥哥的学习笔记</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Laravel,Passport,Oauth,php," />
+  
+
+  <meta name="description" content="前言最近有个项目需要用到多用户表系统认证，对于 Token 的发放和鉴权，使用了 Passport 来实现 API 授权认证，但是 Passport 对于多用户表登陆实现还是比较难的，在网上到的一些多用户表登陆也都是用 GuzzleHttp 携带额外参数来实现的，不太满足我的需求。经过了一段时期的摸索，终于实现了 Passport 通过个人令牌来多用户登陆。 实现Laravel 版本 6.0 安装">
+<meta name="keywords" content="Passport,Laravel,Oauth">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Laravel Passport 个人令牌多用户登陆">
+<meta property="og:url" content="http://blog.adminchao.com/archives/a681b356.html">
+<meta property="og:site_name" content="超哥哥的学习笔记">
+<meta property="og:description" content="前言最近有个项目需要用到多用户表系统认证，对于 Token 的发放和鉴权，使用了 Passport 来实现 API 授权认证，但是 Passport 对于多用户表登陆实现还是比较难的，在网上到的一些多用户表登陆也都是用 GuzzleHttp 携带额外参数来实现的，不太满足我的需求。经过了一段时期的摸索，终于实现了 Passport 通过个人令牌来多用户登陆。 实现Laravel 版本 6.0 安装">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-03-27T19:00:29.429Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Laravel Passport 个人令牌多用户登陆">
+<meta name="twitter:description" content="前言最近有个项目需要用到多用户表系统认证，对于 Token 的发放和鉴权，使用了 Passport 来实现 API 授权认证，但是 Passport 对于多用户表登陆实现还是比较难的，在网上到的一些多用户表登陆也都是用 GuzzleHttp 携带额外参数来实现的，不太满足我的需求。经过了一段时期的摸索，终于实现了 Passport 通过个人令牌来多用户登陆。 实现Laravel 版本 6.0 安装">
+
+  
+
+  
+    <link rel="icon" href="/images/chaosirgit.png">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/chaosir.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导出默认迁移文件"><span class="toc-text">导出默认迁移文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#建立自定义-access-token-表"><span class="toc-text">建立自定义 access_token 表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运行数据库迁移"><span class="toc-text">运行数据库迁移</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成客户端"><span class="toc-text">生成客户端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建自定义-access-tokens-模型"><span class="toc-text">创建自定义 access_tokens 模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-text">配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建中间件"><span class="toc-text">创建中间件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注册中间件"><span class="toc-text">注册中间件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置-Token-过期时间"><span class="toc-text">设置 Token 过期时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模型-Use-Trait"><span class="toc-text">模型 Use Trait</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#格式化返回信息"><span class="toc-text">格式化返回信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#路由"><span class="toc-text">路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#User-用户发放-Token"><span class="toc-text">User 用户发放 Token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Other-用户发放-Token"><span class="toc-text">Other 用户发放 Token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#根据-Token-获取-User-用户信息"><span class="toc-text">根据 Token 获取 User 用户信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试"><span class="toc-text">测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Get-api-v1-login"><span class="toc-text">Get api/v1/login</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Get-other-v1-login"><span class="toc-text">Get other/v1/login</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Get-api-v1-user"><span class="toc-text">Get api/v1/user</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Get-other-v1-other"><span class="toc-text">Get other/v1/other</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#问题"><span class="toc-text">问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完成"><span class="toc-text">完成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Get-api-v1-user-1"><span class="toc-text">Get api/v1/user</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Get-other-v1-other-1"><span class="toc-text">Get other/v1/other</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#以上-Done"><span class="toc-text">以上 Done</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Laravel-Passport-个人令牌多用户登陆" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Laravel Passport 个人令牌多用户登陆</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.27</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>chaosir</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Laravel/">Laravel</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://blog.adminchao.com/archives/a681b356.html#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近有个项目需要用到多用户表系统认证，对于 Token 的发放和鉴权，使用了 Passport 来实现 API 授权认证，但是 Passport 对于多用户表登陆实现还是比较难的，在网上到的一些多用户表登陆也都是用 GuzzleHttp 携带额外参数来实现的，不太满足我的需求。经过了一段时期的摸索，终于实现了 Passport 通过个人令牌来多用户登陆。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>Laravel 版本 6.0</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer <span class="keyword">require</span> laravel/passport</span><br></pre></td></tr></table></figure>
+<h3 id="导出默认迁移文件"><a href="#导出默认迁移文件" class="headerlink" title="导出默认迁移文件"></a>导出默认迁移文件</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php artisan vendor:publish --tag=passport-migrations</span><br></pre></td></tr></table></figure>
+<p>运行该命令会在 <code>\app\database\migrations\</code> 生成</p>
+<ul>
+<li>Date_create_oauth_auth_codes_table.php</li>
+<li>Date_create_oauth_access_tokens_table.php</li>
+<li>Date_create_oauth_refresh_tokens_table.php</li>
+<li>Date_create_oauth_clients_table.php</li>
+<li>Date_create_oauth_personal_access_clients_table.php</li>
+</ul>
+<p>五个数据库迁移文件，其中 <code>Date_create_oauth_access_tokens_table</code> 是用来记录发放成功的 Token 的。我们需要拷贝一个这个表用来建立另一个用户表的 Token 记录。</p>
+<h3 id="建立自定义-access-token-表"><a href="#建立自定义-access-token-表" class="headerlink" title="建立自定义 access_token 表"></a>建立自定义 access_token 表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php artisan make:migration create_oauth_other_tokens --create=oauth_other_tokens</span><br></pre></td></tr></table></figure>
+<p>生成 <code>Date_create_oauth_other_tokens</code> 迁移文件。</p>
+<p>复制 <code>Date_create_oauth_access_tokens_table</code> 文件内容到 <code>Date_create_oauth_other_tokens</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Migrations</span>\<span class="title">Migration</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Schema</span>\<span class="title">Blueprint</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">Schema</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CreateOauthOtherTokens</span> <span class="keyword">extends</span> <span class="title">Migration</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Run the migrations.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">up</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Schema::create(<span class="string">'oauth_other_tokens'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span> </span>&#123;</span><br><span class="line">            $table-&gt;string(<span class="string">'id'</span>, <span class="number">100</span>)-&gt;primary();</span><br><span class="line">            $table-&gt;unsignedBigInteger(<span class="string">'user_id'</span>)-&gt;nullable()-&gt;index();</span><br><span class="line">            $table-&gt;unsignedBigInteger(<span class="string">'client_id'</span>);</span><br><span class="line">            $table-&gt;string(<span class="string">'name'</span>)-&gt;nullable();</span><br><span class="line">            $table-&gt;text(<span class="string">'scopes'</span>)-&gt;nullable();</span><br><span class="line">            $table-&gt;boolean(<span class="string">'revoked'</span>);</span><br><span class="line">            $table-&gt;timestamps();</span><br><span class="line">            $table-&gt;dateTime(<span class="string">'expires_at'</span>)-&gt;nullable();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Reverse the migrations.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">down</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Schema::dropIfExists(<span class="string">'oauth_other_tokens'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="运行数据库迁移"><a href="#运行数据库迁移" class="headerlink" title="运行数据库迁移"></a>运行数据库迁移</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php artisan migrate</span><br></pre></td></tr></table></figure>
+<h3 id="生成客户端"><a href="#生成客户端" class="headerlink" title="生成客户端"></a>生成客户端</h3><p>生成两个 <code>personal</code> 客户端，一个用与 User 用户，一个用于 Other 用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>1</span><br><span class="line">php artisan passport:client --personal</span><br><span class="line"></span><br><span class="line">What should we name the personal access client? []:</span><br><span class="line"><span class="meta"> &gt;</span> User</span><br><span class="line"></span><br><span class="line">Personal access client created successfully.</span><br><span class="line">Client ID: 1</span><br><span class="line">Client secret: 7KqVA8gPxRhPtFdfdsfsuVi4n3xpUBOEiNW4lPI</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>2</span><br><span class="line">php artisan passport:client --personal</span><br><span class="line"></span><br><span class="line">What should we name the personal access client? []:</span><br><span class="line"><span class="meta"> &gt;</span> Other</span><br><span class="line"></span><br><span class="line">Personal access client created successfully.</span><br><span class="line">Client ID: 2</span><br><span class="line">Client secret: 7KqVA8gPxRhPtFdfdsfsuVi4n3xpUBOEiNW4fde</span><br></pre></td></tr></table></figure>
+<h3 id="创建自定义-access-tokens-模型"><a href="#创建自定义-access-tokens-模型" class="headerlink" title="创建自定义 access_tokens 模型"></a>创建自定义 access_tokens 模型</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php artisan make:model OtherToken</span><br></pre></td></tr></table></figure>
+<p><code>\app\OtherToken.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Eloquent</span>\<span class="title">Model</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Laravel</span>\<span class="title">Passport</span>\<span class="title">Token</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这里要注意继承 Laravel\Passport\Token</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MiniToken</span> <span class="keyword">extends</span> <span class="title">Token</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> $table = <span class="string">'oauth_other_tokens'</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">user</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $provider = config(<span class="string">'auth.guards.other.provider'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;belongsTo(config(<span class="string">'auth.providers.'</span>.$provider.<span class="string">'.model'</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p><code>\config\auth.php</code> 配置另一个用户模型</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">   <span class="string">'guards'</span> =&gt; [</span><br><span class="line">        <span class="string">'web'</span> =&gt; [</span><br><span class="line">            <span class="string">'driver'</span> =&gt; <span class="string">'session'</span>,</span><br><span class="line">            <span class="string">'provider'</span> =&gt; <span class="string">'users'</span>,</span><br><span class="line">        ],</span><br><span class="line"></span><br><span class="line">        <span class="string">'api'</span> =&gt; [</span><br><span class="line">            <span class="string">'driver'</span> =&gt; <span class="string">'passport'</span>,</span><br><span class="line">            <span class="string">'provider'</span> =&gt; <span class="string">'users'</span>,</span><br><span class="line"><span class="comment">//            'hash' =&gt; false,</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">'other'</span> =&gt; [</span><br><span class="line">            <span class="string">'driver'</span> =&gt; <span class="string">'passport'</span>,</span><br><span class="line">            <span class="string">'provider'</span> =&gt; <span class="string">'others'</span>,</span><br><span class="line">        ],</span><br><span class="line">    ],</span><br><span class="line"></span><br><span class="line"><span class="string">'providers'</span> =&gt; [</span><br><span class="line">        <span class="string">'users'</span> =&gt; [</span><br><span class="line">            <span class="string">'driver'</span> =&gt; <span class="string">'eloquent'</span>,</span><br><span class="line">            <span class="string">'model'</span> =&gt; App\User::class,</span><br><span class="line">        ],</span><br><span class="line">        <span class="string">'others'</span> =&gt; [</span><br><span class="line">            <span class="string">'driver'</span> =&gt; <span class="string">'eloquent'</span>,</span><br><span class="line">            <span class="string">'model'</span> =&gt; App\Other::class,</span><br><span class="line">        ],</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 'users' =&gt; [</span></span><br><span class="line">        <span class="comment">//     'driver' =&gt; 'database',</span></span><br><span class="line">        <span class="comment">//     'table' =&gt; 'users',</span></span><br><span class="line">        <span class="comment">// ],</span></span><br><span class="line">    ],</span><br></pre></td></tr></table></figure>
+<h3 id="创建中间件"><a href="#创建中间件" class="headerlink" title="创建中间件"></a>创建中间件</h3><p>对两个用户路由分别创建中间件，此中间件主要用来设置 Passport 相对应的 Token 模型</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">php artisan make:middleware UserPassport</span><br><span class="line">php artisan make:middleware OtherPassport</span><br></pre></td></tr></table></figure>
+<p>在中间件设置响应 Token 模型</p>
+<p><code>\app\Http\Middleware\UserPassport.php</code> </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Middleware</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Closure</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Laravel</span>\<span class="title">Passport</span>\<span class="title">Passport</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserPassport</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Handle an incoming request.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  \Illuminate\Http\Request  $request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  \Closure  $next</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span><span class="params">($request, Closure $next)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      	<span class="comment">//这里用原来的 Token 模型</span></span><br><span class="line">        Passport::useTokenModel(<span class="string">'Laravel\Passport\Token'</span>);</span><br><span class="line">      	<span class="comment">//设置 ClientId</span></span><br><span class="line">        Passport::personalAccessClientId(config(<span class="string">'auth.clients.api'</span>));</span><br><span class="line">        <span class="keyword">return</span> $next($request);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>\app\Http\Middleware\OtherPassport</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Middleware</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Closure</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Laravel</span>\<span class="title">Passport</span>\<span class="title">Passport</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MiniPassport</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Handle an incoming request.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  \Illuminate\Http\Request  $request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  \Closure  $next</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span><span class="params">($request, Closure $next)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      	<span class="comment">//使用自定义 Token 模型</span></span><br><span class="line">        Passport::useTokenModel(<span class="string">'App\MiniToken'</span>);</span><br><span class="line">      	<span class="comment">//设置 ClientId</span></span><br><span class="line">        Passport::personalAccessClientId(config(<span class="string">'auth.clients.other'</span>));</span><br><span class="line">        <span class="keyword">return</span> $next($request);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="注册中间件"><a href="#注册中间件" class="headerlink" title="注册中间件"></a>注册中间件</h3><p><code>app\Http\Kernel.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> $middlewareGroups = [</span><br><span class="line">        <span class="string">'web'</span> =&gt; [</span><br><span class="line">            \App\Http\Middleware\EncryptCookies::class,</span><br><span class="line">            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,</span><br><span class="line">            \Illuminate\Session\Middleware\StartSession::class,</span><br><span class="line">            <span class="comment">// \Illuminate\Session\Middleware\AuthenticateSession::class,</span></span><br><span class="line">            \Illuminate\View\Middleware\ShareErrorsFromSession::class,</span><br><span class="line">            \App\Http\Middleware\VerifyCsrfToken::class,</span><br><span class="line">            \Illuminate\Routing\Middleware\SubstituteBindings::class,</span><br><span class="line">        ],</span><br><span class="line"></span><br><span class="line">        <span class="string">'api'</span> =&gt; [</span><br><span class="line">            <span class="string">'throttle:60,1'</span>,</span><br><span class="line">            \Illuminate\Routing\Middleware\SubstituteBindings::class,</span><br><span class="line">						\App\Http\Middleware\ApiPassport::class,</span><br><span class="line">        ],</span><br><span class="line"></span><br><span class="line">        <span class="string">'other'</span> =&gt; [</span><br><span class="line">            <span class="string">'throttle:60,1'</span>,</span><br><span class="line">            \Illuminate\Routing\Middleware\SubstituteBindings::class,</span><br><span class="line">            \App\Http\Middleware\MiniPassport::class,</span><br><span class="line">        ],</span><br><span class="line">    ];</span><br></pre></td></tr></table></figure>
+<h3 id="设置-Token-过期时间"><a href="#设置-Token-过期时间" class="headerlink" title="设置 Token 过期时间"></a>设置 Token 过期时间</h3><p><code>app\Providers\AuthServiceProvider.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Providers</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Carbon</span>\<span class="title">Carbon</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Foundation</span>\<span class="title">Support</span>\<span class="title">Providers</span>\<span class="title">AuthServiceProvider</span> <span class="title">as</span> <span class="title">ServiceProvider</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">Gate</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Laravel</span>\<span class="title">Passport</span>\<span class="title">Client</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Laravel</span>\<span class="title">Passport</span>\<span class="title">Passport</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Laravel</span>\<span class="title">Passport</span>\<span class="title">RouteRegistrar</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AuthServiceProvider</span> <span class="keyword">extends</span> <span class="title">ServiceProvider</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The policy mappings for the application.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> array</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> $policies = [</span><br><span class="line">        <span class="comment">// 'App\Model' =&gt; 'App\Policies\ModelPolicy',</span></span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Register any authentication / authorization services.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">boot</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;registerPolicies();</span><br><span class="line">        <span class="comment">//默认令牌发放的有效期是永久</span></span><br><span class="line"></span><br><span class="line">        Passport::personalAccessTokensExpireIn(Carbon::now()-&gt;addWeeks(<span class="number">2</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="模型-Use-Trait"><a href="#模型-Use-Trait" class="headerlink" title="模型 Use Trait"></a>模型 Use Trait</h3><p><code>User</code> 模型 和 <code>Other</code> 模型都要 <code>Use HasApiTokens</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Other</span> <span class="keyword">extends</span> <span class="title">Authenticatable</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">use</span> <span class="title">HasApiTokens</span>,<span class="title">Notifiable</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> $table = <span class="string">'drivers'</span>;</span><br><span class="line">    <span class="keyword">protected</span> $appends = [<span class="string">'user_name'</span>,<span class="string">'company_name'</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getUserNameAttribute</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;hasOne(<span class="string">'App\User'</span>,<span class="string">'id'</span>,<span class="string">'user_id'</span>)-&gt;value(<span class="string">'email'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getCompanyNameAttribute</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;hasOne(<span class="string">'App\company'</span>,<span class="string">'id'</span>,<span class="string">'company_id'</span>)-&gt;value(<span class="string">'company_code'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// User 模型类似</span></span><br></pre></td></tr></table></figure>
+<h3 id="格式化返回信息"><a href="#格式化返回信息" class="headerlink" title="格式化返回信息"></a>格式化返回信息</h3><p>验证失败返回格式化 json 数据</p>
+<p>在 <code>\app\Exceptions\Handler.php</code> 中</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">render</span><span class="params">($request, Exception $exception)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">  			<span class="comment">//判断路由</span></span><br><span class="line">        <span class="keyword">if</span> ($request-&gt;is(<span class="string">'api/*'</span>) || $request-&gt;is(<span class="string">'other/*'</span>))&#123;</span><br><span class="line">          	<span class="comment">//判断如果是提交数据验证错误</span></span><br><span class="line">            <span class="keyword">if</span> ($exception <span class="keyword">instanceof</span> ValidationException)&#123;</span><br><span class="line">              <span class="comment">//$this-&gt;error 是自己封装的一个 Trait 返回 json 数据，您也可以自己封装，这里不再展示</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;error(current($exception-&gt;errors())[<span class="number">0</span>],<span class="number">42200</span>,$exception-&gt;status);</span><br><span class="line">            <span class="comment">//判断如果是鉴权错误</span></span><br><span class="line">            &#125;<span class="keyword">elseif</span>($exception <span class="keyword">instanceof</span> AuthenticationException)&#123;</span><br><span class="line">               <span class="comment">//$this-&gt;error 是自己封装的一个 Trait 返回 json 数据，您也可以自己封装，这里不再展示</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;error(<span class="string">'授权失败'</span>,<span class="number">40100</span>,<span class="number">401</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">parent</span>::render($request, $exception);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>自定义路由文件自己解决哦 ^_^</p>
+<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><p><code>\routes\api.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Request</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">|--------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">| API Routes</span></span><br><span class="line"><span class="comment">|--------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">|</span></span><br><span class="line"><span class="comment">| Here is where you can register API routes for your application. These</span></span><br><span class="line"><span class="comment">| routes are loaded by the RouteServiceProvider within a group which</span></span><br><span class="line"><span class="comment">| is assigned the "api" middleware group. Enjoy building your API!</span></span><br><span class="line"><span class="comment">|</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">Route::prefix(<span class="string">'v1'</span>)-&gt;group(<span class="function"><span class="keyword">function</span> <span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//无需授权的api</span></span><br><span class="line">    Route::get(<span class="string">'login'</span>, <span class="string">'UserController@login'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//需要授权的api</span></span><br><span class="line">    Route::middleware(<span class="string">'auth:api'</span>)-&gt;group(<span class="function"><span class="keyword">function</span> <span class="params">()</span></span>&#123;</span><br><span class="line">        Route::get(<span class="string">'/user'</span>,<span class="function"><span class="keyword">function</span><span class="params">(Request $request)</span></span>&#123;</span><br><span class="line">            <span class="keyword">return</span> auth()-&gt;user();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>\routes\other.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Request</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">|--------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">| Other Routes</span></span><br><span class="line"><span class="comment">|--------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">|</span></span><br><span class="line"><span class="comment">| Here is where you can register Other routes for your application. These</span></span><br><span class="line"><span class="comment">| routes are loaded by the RouteServiceProvider within a group which</span></span><br><span class="line"><span class="comment">| is assigned the "other" middleware group. Enjoy building your Other!</span></span><br><span class="line"><span class="comment">|</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">Route::prefix(<span class="string">'v1'</span>)-&gt;group(<span class="function"><span class="keyword">function</span> <span class="params">()</span></span>&#123;</span><br><span class="line">    Route::get(<span class="string">'/login'</span>,<span class="string">'OtherController@login'</span>);</span><br><span class="line">    <span class="comment">//需要授权的 other</span></span><br><span class="line">    Route::middleware(<span class="string">'auth:other'</span>)-&gt;group(<span class="function"><span class="keyword">function</span> <span class="params">()</span></span>&#123;</span><br><span class="line">        Route::get(<span class="string">'/other'</span>,<span class="function"><span class="keyword">function</span><span class="params">(Request $request)</span></span>&#123;</span><br><span class="line">            <span class="keyword">return</span> auth()-&gt;user();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="User-用户发放-Token"><a href="#User-用户发放-Token" class="headerlink" title="User 用户发放 Token"></a>User 用户发放 Token</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">User</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">login</span><span class="params">(LoginPost $request)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      $user = User::find(<span class="number">1</span>);</span><br><span class="line">       <span class="keyword">return</span> $user-&gt;createToken(<span class="string">'Api'</span>,[<span class="string">'*'</span>])-&gt;accessToken;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Other-用户发放-Token"><a href="#Other-用户发放-Token" class="headerlink" title="Other 用户发放 Token"></a>Other 用户发放 Token</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Other</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">login</span><span class="params">(LoginPost $request)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      $other = Other::find(<span class="number">1</span>);</span><br><span class="line">       <span class="keyword">return</span> $other-&gt;createToken(<span class="string">'Other'</span>,[<span class="string">'*'</span>])-&gt;accessToken;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="根据-Token-获取-User-用户信息"><a href="#根据-Token-获取-User-用户信息" class="headerlink" title="根据 Token 获取 User 用户信息"></a>根据 Token 获取 User 用户信息</h3><p>路由中已写明 请求时注意 Headers 携带 Authorization = Bearer $token</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><h3 id="Get-api-v1-login"><a href="#Get-api-v1-login" class="headerlink" title="Get api/v1/login"></a>Get api/v1/login</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">"error_code"</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">"message"</span>: <span class="string">"请求成功"</span>,</span><br><span class="line">    <span class="string">"data"</span>: &#123;</span><br><span class="line">        <span class="string">"token_type"</span>: <span class="string">"Bearer"</span>,</span><br><span class="line">        <span class="string">"access_token"</span>: <span class="string">"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGQ2ZmMzNjYwNmU4YjNhNWU1YWQxODMyNDRlNWNlM2JiY2FkNTFkNjc2MGJkZjUxOWMwNzFkNzdiZDY5YjAzZmNlNjc1ZTM0NmQ1MWNkNDUiLCJpYXQiOjE1ODUzMzQwNzgsIm5iZiI6MTU4NTMzNDA3OCwiZXhwIjoxNTg2NTQzNjc3LCJzdWIiOiIyIiwic2NvcGVzIjpbIioiXX0.sQKSS9WCdhMp8_5GTSkQ_sqGMiTVxdVXomub3i3DI3h1xCoAPWYH_rj8W8uTjlX82wzIsFjn0bSKhqTeZFRQDFZWYN-2MatgBk-i6P0dxm-x97sIPfCRMm-omkXIvdWjeJyt..."</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Get-other-v1-login"><a href="#Get-other-v1-login" class="headerlink" title="Get other/v1/login"></a>Get other/v1/login</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">"error_code"</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">"message"</span>: <span class="string">"请求成功"</span>,</span><br><span class="line">    <span class="string">"data"</span>: &#123;</span><br><span class="line">        <span class="string">"token_type"</span>: <span class="string">"Bearer"</span>,</span><br><span class="line">        <span class="string">"access_token"</span>: <span class="string">"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiZmM0NDQzZmQwZmEwYmMzMTNjM2JlMmE5NjUyNzBiYjc5Y2IwMDBmODM0YzkwNzg1M2U1Y2E1NWY5ZDJjODNhOTM5Y2M0YTU1Mjg4MTJlNTQiLCJpYXQiOjE1ODUzMzQxNDUsIm5iZiI6MTU4NTMzNDE0NSwiZXhwIjoxNTg2NTQzNzQ1LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.LCXpbAQnFTatXyDJtMZmFitt6mo4_h42CqOd3hbnx..."</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Get-api-v1-user"><a href="#Get-api-v1-user" class="headerlink" title="Get api/v1/user"></a>Get api/v1/user</h3><ul>
+<li>携带 <code>api/v1/login</code> 返回的 Token</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"id"</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="string">"email"</span>: <span class="string">"test@163.com"</span>,</span><br><span class="line">    <span class="string">"sms_verified_at"</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="string">"created_at"</span>: <span class="string">"2020-03-15 23:58:39"</span>,</span><br><span class="line">    <span class="string">"updated_at"</span>: <span class="string">"2020-03-15 23:58:39"</span>,</span><br><span class="line">    <span class="string">"check_company_status"</span>: <span class="number">2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>携带 <code>other/v1/login</code> 返回的 Token</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"success"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">"error_code"</span>: <span class="number">40100</span>,</span><br><span class="line">    <span class="string">"message"</span>: <span class="string">"授权失败"</span>,</span><br><span class="line">    <span class="string">"data"</span>: []</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Get-other-v1-other"><a href="#Get-other-v1-other" class="headerlink" title="Get other/v1/other"></a>Get other/v1/other</h3><ul>
+<li>携带 <code>api/v1/login</code> 返回的 Token</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"id"</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">"user_id"</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"测试"</span>,</span><br><span class="line">    <span class="string">"phone"</span>: <span class="string">"138****0869"</span>,</span><br><span class="line">    <span class="string">"created_at"</span>: <span class="string">"2020-03-20 00:32:55"</span>,</span><br><span class="line">    <span class="string">"updated_at"</span>: <span class="string">"2020-03-20 00:32:55"</span>,</span><br><span class="line">    <span class="string">"user_name"</span>: <span class="string">"adminchaochao@163.com"</span>,</span><br><span class="line">    <span class="string">"company_name"</span>: <span class="string">"河南模因网络科技有限公司"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>携带 <code>other/v1/login</code> 返回的 Token</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"success"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">"error_code"</span>: <span class="number">40100</span>,</span><br><span class="line">    <span class="string">"message"</span>: <span class="string">"授权失败"</span>,</span><br><span class="line">    <span class="string">"data"</span>: []</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>由此可见并不能满足需求，使用 Api 发放的 Token 可以获得到两个用户的信息，而 Other 发放的 Token 全是授权失败，Bye Bye~!!</p>
+<p>哈哈，开玩笑了啦，在这里要万分感谢我的一个大神朋友～他帮忙找了一下午的源码，最后调试了中间件没执行，原来中间件执行是有顺序的，那么更改一下中间件执行顺序即可：</p>
+<p><code>\app\Http\Kernel.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//找到这个...</span></span><br><span class="line">  <span class="keyword">protected</span> $middlewarePriority = [</span><br><span class="line">      <span class="comment">//把刚才定义的两个设置 Token 模型的中间件提前</span></span><br><span class="line">    	<span class="comment">// 1</span></span><br><span class="line">      \App\Http\Middleware\OtherPassport::class,</span><br><span class="line">      <span class="comment">// 2</span></span><br><span class="line">      \App\Http\Middleware\ApiPassport::class,</span><br><span class="line">      \Illuminate\Session\Middleware\StartSession::class,</span><br><span class="line">      \Illuminate\View\Middleware\ShareErrorsFromSession::class,</span><br><span class="line">      \App\Http\Middleware\Authenticate::class,</span><br><span class="line">      \Illuminate\Routing\Middleware\ThrottleRequests::class,</span><br><span class="line">      \Illuminate\Session\Middleware\AuthenticateSession::class,</span><br><span class="line">      \Illuminate\Routing\Middleware\SubstituteBindings::class,</span><br><span class="line">      \Illuminate\Auth\Middleware\Authorize::class,</span><br><span class="line">  ];</span><br></pre></td></tr></table></figure>
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h3 id="Get-api-v1-user-1"><a href="#Get-api-v1-user-1" class="headerlink" title="Get api/v1/user"></a>Get api/v1/user</h3><ul>
+<li>携带  <code>api/v1/login</code>  返回的 Token</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"id"</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="string">"email"</span>: <span class="string">"test@163.com"</span>,</span><br><span class="line">    <span class="string">"sms_verified_at"</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="string">"created_at"</span>: <span class="string">"2020-03-15 23:58:39"</span>,</span><br><span class="line">    <span class="string">"updated_at"</span>: <span class="string">"2020-03-15 23:58:39"</span>,</span><br><span class="line">    <span class="string">"check_company_status"</span>: <span class="number">2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>携带 <code>other/v1/login</code> 返回的 Token</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"success"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">"error_code"</span>: <span class="number">40100</span>,</span><br><span class="line">    <span class="string">"message"</span>: <span class="string">"授权失败"</span>,</span><br><span class="line">    <span class="string">"data"</span>: []</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Get-other-v1-other-1"><a href="#Get-other-v1-other-1" class="headerlink" title="Get other/v1/other"></a>Get other/v1/other</h3><ul>
+<li>携带 <code>api/v1/login</code> 返回的 Token</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"success"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">"error_code"</span>: <span class="number">40100</span>,</span><br><span class="line">    <span class="string">"message"</span>: <span class="string">"授权失败"</span>,</span><br><span class="line">    <span class="string">"data"</span>: []</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>携带 <code>other/v1/login</code> 返回的 Token</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"id"</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">"user_id"</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"测试"</span>,</span><br><span class="line">    <span class="string">"phone"</span>: <span class="string">"138****0869"</span>,</span><br><span class="line">    <span class="string">"created_at"</span>: <span class="string">"2020-03-20 00:32:55"</span>,</span><br><span class="line">    <span class="string">"updated_at"</span>: <span class="string">"2020-03-20 00:32:55"</span>,</span><br><span class="line">    <span class="string">"user_name"</span>: <span class="string">"adminchaochao@163.com"</span>,</span><br><span class="line">    <span class="string">"company_name"</span>: <span class="string">"河南模因网络科技有限公司"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="以上-Done"><a href="#以上-Done" class="headerlink" title="以上 Done"></a>以上 Done</h3><p>谢谢，如果有什么更好的方法请留言哦～</p>
+
+    
+  </div>
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+  
+      <div class="git"></div>
+  
+  <script src="/js/util.js"></script>
+<script>
+function closeModal() {
+    Util.addClass($modalDialog, 'hide-dialog')
+    Util.removeClass($modalDialog, 'show-dialog');
+    Util.addClass($cover, 'hide')
+    Util.removeClass($cover, 'show');
+  }
+var $toolboxMobile = document.getElementById('toolbox-mobile');
+  var $cover = document.getElementById('cover');
+  var $close = document.getElementById('close');
+  var $modalDialog = document.getElementById('modal-dialog');
+if ($toolboxMobile) {
+    Util.bind($toolboxMobile, 'click', function() {
+      Util.addClass($modalDialog, 'show-dialog')
+      Util.removeClass($modalDialog, 'hide-dialog');
+
+      Util.addClass($cover, 'show')
+      Util.removeClass($cover, 'hide');
+    });
+
+
+    Util.bind($cover, 'click', closeModal);
+    Util.bind($close, 'click', closeModal);
+  }
+</script>
+</article>
+
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持我</div>
+        <ul>
+        
+          <li class="item">
+            <span>微信扫一扫</span>
+            <img src="/images/wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <span>支付宝扫一扫</span>
+            <img src="/images/alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/archives/b3c12085.html">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/archives/58100827.html">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'chaosir';
+    
+    var disqus_url = 'http://blog.adminchao.com/archives/a681b356.html';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//chaosir.disqus.com/count.js" async></script>
+
+
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+  </div>
+
+  
+
+  
+<script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+
+
+</script>
+
+
+
+</body>
+</html>

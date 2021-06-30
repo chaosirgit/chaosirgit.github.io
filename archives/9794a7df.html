@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>使用 Lumen 创建 RestApi 实例教程 | 超哥哥的学习笔记</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Lumen,PHP框架,RestApi,实例教程," />
+  
+
+  <meta name="description" content="项目需求开发一个用户注册的 rest API 要求： HttpMethod: PostURI: api/account/registerRequest Body    字段 必选 类型及范围 说明     phone 是 string 注册手机号   password 是 string 密码   code 是 string 验证码   gender 是 enum 性别   nickname 否 s">
+<meta name="keywords" content="RestApi,Lumen,PHP框架,实例,教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Lumen 创建 RestApi 实例教程">
+<meta property="og:url" content="http://blog.adminchao.com/archives/9794a7df.html">
+<meta property="og:site_name" content="超哥哥的学习笔记">
+<meta property="og:description" content="项目需求开发一个用户注册的 rest API 要求： HttpMethod: PostURI: api/account/registerRequest Body    字段 必选 类型及范围 说明     phone 是 string 注册手机号   password 是 string 密码   code 是 string 验证码   gender 是 enum 性别   nickname 否 s">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-08T05:17:49.698Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 Lumen 创建 RestApi 实例教程">
+<meta name="twitter:description" content="项目需求开发一个用户注册的 rest API 要求： HttpMethod: PostURI: api/account/registerRequest Body    字段 必选 类型及范围 说明     phone 是 string 注册手机号   password 是 string 密码   code 是 string 验证码   gender 是 enum 性别   nickname 否 s">
+
+  
+
+  
+    <link rel="icon" href="/images/chaosirgit.png">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/chaosir.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#项目需求"><span class="toc-text">项目需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#项目开始"><span class="toc-text">项目开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置数据库"><span class="toc-text">配置数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据库迁移"><span class="toc-text">数据库迁移</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#列修改器"><span class="toc-text">列修改器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用的字段类型"><span class="toc-text">常用的字段类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建模型"><span class="toc-text">创建模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建控制器"><span class="toc-text">创建控制器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#遇到的问题"><span class="toc-text">遇到的问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义路由"><span class="toc-text">定义路由</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#项目完成"><span class="toc-text">项目完成</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-使用-Lumen-创建-RestApi-实例教程" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">使用 Lumen 创建 RestApi 实例教程</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.06.09</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>chaosir</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Lumen/">Lumen</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://blog.adminchao.com/archives/9794a7df.html#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="项目需求"><a href="#项目需求" class="headerlink" title="项目需求"></a>项目需求</h2><p>开发一个用户注册的 rest API 要求：</p>
+<p>HttpMethod: Post<br>URI: api/account/register<br><strong>Request Body</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>必选</th>
+<th>类型及范围</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>phone</td>
+<td>是</td>
+<td>string</td>
+<td>注册手机号</td>
+</tr>
+<tr>
+<td>password</td>
+<td>是</td>
+<td>string</td>
+<td>密码</td>
+</tr>
+<tr>
+<td>code</td>
+<td>是</td>
+<td>string</td>
+<td>验证码</td>
+</tr>
+<tr>
+<td>gender</td>
+<td>是</td>
+<td>enum</td>
+<td>性别</td>
+</tr>
+<tr>
+<td>nickname</td>
+<td>否</td>
+<td>string</td>
+<td>昵称，不超过 20 字符</td>
+</tr>
+<tr>
+<td>birthday</td>
+<td>否</td>
+<td>date</td>
+<td>生日</td>
+</tr>
+<tr>
+<td>height</td>
+<td>否</td>
+<td>int</td>
+<td>身高</td>
+</tr>
+<tr>
+<td>weight</td>
+<td>否</td>
+<td>int</td>
+<td>体重</td>
+</tr>
+<tr>
+<td>email</td>
+<td>否</td>
+<td>string</td>
+<td>邮箱</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Response code:</strong></p>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>400</td>
+<td>失败</td>
+</tr>
+<tr>
+<td>500</td>
+<td>其他未处理错误</td>
+</tr>
+</tbody>
+</table>
+<h2 id="项目开始"><a href="#项目开始" class="headerlink" title="项目开始"></a>项目开始</h2><h3 id="配置数据库"><a href="#配置数据库" class="headerlink" title="配置数据库"></a>配置数据库</h3><p>在 lumen 项目根目录下找到 .env.example 拷贝为 .env<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp ./.env.example ./.env</span><br></pre></td></tr></table></figure></p>
+<p>打开 .env 文件 , 配置数据库连接信息(数据库名等不加引号)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DB_DATABASE=&lt;db_name&gt;</span><br><span class="line">DB_USERNAME=&lt;db_username&gt;</span><br><span class="line">DB_PASSWORD=&lt;db_password&gt;</span><br></pre></td></tr></table></figure></p>
+<p>然后在 bootstrap/app.php 中取消下面两行之前的注释：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$app-&gt;withFacades();</span><br><span class="line">$app-&gt;withEloquent();</span><br></pre></td></tr></table></figure>
+<h3 id="数据库迁移"><a href="#数据库迁移" class="headerlink" title="数据库迁移"></a>数据库迁移</h3><p>接下来我们来创建数据表。<br>项目根目录下运行如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php artisan make:migration create_table_user --create=user</span><br></pre></td></tr></table></figure></p>
+<p>该命令将会在 <code>database/migrations</code> 目录下创建一个迁移文件 <code>&lt;date&gt;_create_table_user.php</code><br>接下来我们来编辑这个文件来定义数据表。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">Schema</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Schema</span>\<span class="title">Blueprint</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Migrations</span>\<span class="title">Migration</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CreateTableUser</span> <span class="keyword">extends</span> <span class="title">Migration</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">     <span class="comment">/**</span></span><br><span class="line"><span class="comment">      * Run the migrations.</span></span><br><span class="line"><span class="comment">      *</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">     <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">up</span><span class="params">()</span></span></span><br><span class="line"><span class="function">     </span>&#123;</span><br><span class="line">       <span class="comment">//以下为自定义修改，其他代码自动生成</span></span><br><span class="line">         Schema::create(<span class="string">'user'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span> </span>&#123;</span><br><span class="line">             $table-&gt;increments(<span class="string">'id'</span>);</span><br><span class="line">             $table-&gt;timestamps();<span class="comment">//该方法会自动在表里建立 created_at 与 updated_at;</span></span><br><span class="line">             $table-&gt;string(<span class="string">'phone'</span>);</span><br><span class="line">             $table-&gt;string(<span class="string">'password'</span>);</span><br><span class="line">             $table-&gt;enum(<span class="string">'gender'</span>,[<span class="string">'male'</span>,<span class="string">'female'</span>]);</span><br><span class="line">             $table-&gt;string(<span class="string">'nickname'</span>)-&gt;nullable();</span><br><span class="line">             $table-&gt;date(<span class="string">'birthday'</span>)-&gt;nullable();<span class="comment">//使用列修改器设置允许为null;</span></span><br><span class="line">             $table-&gt;integer(<span class="string">'height'</span>)-&gt;nullable();</span><br><span class="line">             $table-&gt;integer(<span class="string">'weight'</span>)-&gt;nullable();</span><br><span class="line">             $table-&gt;string(<span class="string">'email'</span>)-&gt;nullable();</span><br><span class="line">         &#125;);</span><br><span class="line">      <span class="comment">//以上为自定义修改，其他代码自动生成</span></span><br><span class="line">     &#125;</span><br><span class="line">     <span class="comment">/**</span></span><br><span class="line"><span class="comment">      * Reverse the migrations.</span></span><br><span class="line"><span class="comment">      *</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">     <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">down</span><span class="params">()</span></span></span><br><span class="line"><span class="function">     </span>&#123;</span><br><span class="line">         Schema::dropIfExists(<span class="string">'user'</span>);</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="列修改器"><a href="#列修改器" class="headerlink" title="列修改器"></a>列修改器</h4><p>把必选为否的字段用列修改器设置允许为 <code>null</code> ，列修改器列表：</p>
+<table>
+<thead>
+<tr>
+<th>修改器</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-&gt;first()</td>
+<td>将该列置为表中第一个列 (仅适用于MySQL)</td>
+</tr>
+<tr>
+<td>-&gt;after(‘column’)</td>
+<td>将该列置于另一个列之后 (仅适用于MySQL)</td>
+</tr>
+<tr>
+<td>-&gt;nullable()</td>
+<td>允许该列的值为NULL</td>
+</tr>
+<tr>
+<td>-&gt;default($value)</td>
+<td>指定列的默认值</td>
+</tr>
+<tr>
+<td>-&gt;unsigned()</td>
+<td>设置 integer 列为 UNSIGNED</td>
+</tr>
+</tbody>
+</table>
+<p>现在我们来运行这个迁移：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php artisan migrate</span><br></pre></td></tr></table></figure>
+<p>这样，就会在数据库中创建对应的表。<br>查询这个表的字段看看:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show columns from user;</span><br><span class="line">+------------+-----------------------+------+-----+---------+----------------+</span><br><span class="line">| Field      | Type                  | Null | Key | Default | Extra          |</span><br><span class="line">+------------+-----------------------+------+-----+---------+----------------+</span><br><span class="line">| id         | int(10) unsigned      | NO   | PRI | NULL    | auto_increment |</span><br><span class="line">| created_at | timestamp             | YES  |     | NULL    |                |</span><br><span class="line">| updated_at | timestamp             | YES  |     | NULL    |                |</span><br><span class="line">| phone      | varchar(255)          | NO   |     | NULL    |                |</span><br><span class="line">| password   | varchar(255)          | NO   |     | NULL    |                |</span><br><span class="line">| gender     | enum(&apos;male&apos;,&apos;female&apos;) | NO   |     | NULL    |                |</span><br><span class="line">| nickname   | varchar(255)          | YES  |     | NULL    |                |</span><br><span class="line">| birthday   | date                  | YES  |     | NULL    |                |</span><br><span class="line">| height     | int(11)               | YES  |     | NULL    |                |</span><br><span class="line">| weight     | int(11)               | YES  |     | NULL    |                |</span><br><span class="line">| email      | varchar(255)          | YES  |     | NULL    |                |</span><br><span class="line">+------------+-----------------------+------+-----+---------+----------------+</span><br><span class="line">11 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<h4 id="常用的字段类型"><a href="#常用的字段类型" class="headerlink" title="常用的字段类型"></a>常用的字段类型</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$table-&gt;bigIncrements(‘id’)</td>
+<td>递增 ID（主键），相当于「UNSIGNED BIG INTEGER」型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;boolean(‘confirmed’)</td>
+<td>相当于 BOOLEAN 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;char(‘name’, 4)</td>
+<td>相当于 CHAR 型态，并带有长度。</td>
+</tr>
+<tr>
+<td>$table-&gt;date(‘created_at’)</td>
+<td>相当于 DATE 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;dateTime(‘created_at’)</td>
+<td>相当于 DATETIME 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;dateTimeTz(‘created_at’)</td>
+<td>DATETIME (带时区) 形态</td>
+</tr>
+<tr>
+<td>$table-&gt;decimal(‘amount’, 5, 2)</td>
+<td>相当于 DECIMAL 型态，并带有精度与基数。</td>
+</tr>
+<tr>
+<td>$table-&gt;double(‘column’, 15, 8)</td>
+<td>相当于 DOUBLE 型态，总共有 15 位数，在小数点后面有 8 位数。</td>
+</tr>
+<tr>
+<td>$table-&gt;enum(‘choices’, [‘foo’, ‘bar’])</td>
+<td>相当于 ENUM 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;float(‘amount’, 8, 2)</td>
+<td>相当于 FLOAT 型态，总共有 8 位数，在小数点后面有 2 位数。</td>
+</tr>
+<tr>
+<td>$table-&gt;increments(‘id’)</td>
+<td>递增的 ID (主键)，使用相当于「UNSIGNED INTEGER」的型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;integer(‘votes’)</td>
+<td>相当于 INTEGER 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;ipAddress(‘visitor’)</td>
+<td>相当于 IP 地址形态。</td>
+</tr>
+<tr>
+<td>$table-&gt;json(‘options’)</td>
+<td>相当于 JSON 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;jsonb(‘options’)</td>
+<td>相当于 JSONB 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;longText(‘description’)</td>
+<td>相当于 LONGTEXT 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;mediumIncrements(‘id’)</td>
+<td>递增 ID (主键) ，相当于「UNSIGNED MEDIUM INTEGER」型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;mediumInteger(‘numbers’)</td>
+<td>相当于 MEDIUMINT 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;mediumText(‘description’)</td>
+<td>相当于 MEDIUMTEXT 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;nullableTimestamps()</td>
+<td>与 timestamps() 相同，但允许为 NULL。</td>
+</tr>
+<tr>
+<td>$table-&gt;rememberToken()</td>
+<td>加入 remember_token 并使用 VARCHAR(100) NULL。</td>
+</tr>
+<tr>
+<td>$table-&gt;smallIncrements(‘id’)</td>
+<td>递增 ID (主键) ，相当于「UNSIGNED SMALL INTEGER」型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;smallInteger(‘votes’)</td>
+<td>相当于 SMALLINT 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;softDeletes()</td>
+<td>加入 deleted_at 字段用于软删除操作。</td>
+</tr>
+<tr>
+<td>$table-&gt;string(‘email’)</td>
+<td>相当于 VARCHAR 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;string(‘name’, 100)</td>
+<td>相当于 VARCHAR 型态，并带有长度。</td>
+</tr>
+<tr>
+<td>$table-&gt;text(‘description’)</td>
+<td>相当于 TEXT 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;time(‘sunrise’)</td>
+<td>相当于 TIME 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;timeTz(‘sunrise’)</td>
+<td>相当于 TIME (带时区) 形态。</td>
+</tr>
+<tr>
+<td>$table-&gt;tinyInteger(‘numbers’)</td>
+<td>相当于 TINYINT 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;timestamp(‘added_on’)</td>
+<td>相当于 TIMESTAMP 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;timestamps()</td>
+<td>加入 created_at 和 updated_at 字段。</td>
+</tr>
+<tr>
+<td>$table-&gt;unsignedInteger(‘votes’)</td>
+<td>相当于 Unsigned INT 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;unsignedMediumInteger(‘votes’)</td>
+<td>相当于 Unsigned MEDIUMINT 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;unsignedSmallInteger(‘votes’)</td>
+<td>相当于 Unsigned SMALLINT 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;unsignedTinyInteger(‘votes’)</td>
+<td>相当于 Unsigned TINYINT 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;uuid(‘id’)</td>
+<td>相当于 UUID 型态。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="创建模型"><a href="#创建模型" class="headerlink" title="创建模型"></a>创建模型</h3><p>接下来我们在 <code>app</code> 目录下创建模型文件 <code>User.php</code>，并编写代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"> <span class="keyword">namespace</span> <span class="title">App</span>;</span><br><span class="line"> <span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Eloquent</span>\<span class="title">Model</span>;</span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">Model</span></span></span><br><span class="line"><span class="class"> </span>&#123;</span><br><span class="line">         <span class="keyword">protected</span> $fillable =</span><br><span class="line">          [<span class="string">'phone'</span>,<span class="string">'password'</span>,<span class="string">'gender'</span>,<span class="string">'nickname'</span>,<span class="string">'birthday'</span>,<span class="string">'height'</span>,<span class="string">'weight'</span>,<span class="string">'email'</span>];</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="创建控制器"><a href="#创建控制器" class="headerlink" title="创建控制器"></a>创建控制器</h3><p>然后创建控制器文件 <code>app/Http/Controllers/UserController.php</code> :<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">User</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Request</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Response</span>; <span class="comment">//这个会自动引用</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">Crypt</span>;<span class="comment">//加密所需门面</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">DB</span>;<span class="comment">//引入数据库操作门面</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">         <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">register</span> <span class="params">(Request $request)</span></span>&#123;</span><br><span class="line">         $phone = $request-&gt;input(<span class="string">'phone'</span>);</span><br><span class="line">         $password = $request-&gt;input(<span class="string">'password'</span>);</span><br><span class="line">         $code= $request-&gt;input(<span class="string">'code'</span>);</span><br><span class="line">         $gender= $request-&gt;input(<span class="string">'gender'</span>);</span><br><span class="line">         $nickname= $request-&gt;input(<span class="string">'nickname'</span>) ?? <span class="keyword">null</span>;</span><br><span class="line">         $birthday= $request-&gt;input(<span class="string">'birthday'</span>) ?? <span class="keyword">null</span>;</span><br><span class="line">         $height= $request-&gt;input(<span class="string">'height'</span>) ?? <span class="keyword">null</span>;</span><br><span class="line">         $weight= $request-&gt;input(<span class="string">'weight'</span>) ?? <span class="keyword">null</span>;</span><br><span class="line">         $email= $request-&gt;input(<span class="string">'email'</span>) ?? <span class="keyword">null</span>;</span><br><span class="line">         <span class="comment">//如果验证码正确</span></span><br><span class="line">         <span class="keyword">if</span>($code == <span class="string">'888888'</span>)&#123;</span><br><span class="line">                 <span class="keyword">if</span>(!preg_match(<span class="string">'/^\d&#123;11&#125;$/'</span>,$phone))&#123;</span><br><span class="line">                 <span class="comment">//return 'phone flase &lt;br&gt;';&#125;</span></span><br><span class="line">                 <span class="keyword">return</span> response(<span class="string">'请填写正确的手机号'</span>,<span class="number">400</span>)-&gt;header(<span class="string">'Content-Type'</span>,<span class="string">'text/html;charset=utf-8'</span>);&#125;</span><br><span class="line">                 <span class="keyword">if</span>(!preg_match(<span class="string">'/^[0-9a-zA-Z\S]&#123;6,16&#125;$/'</span>,$password))&#123;</span><br><span class="line">                 <span class="comment">//return 'password is 6-16 &lt;br&gt;';&#125;</span></span><br><span class="line">                 <span class="keyword">return</span> response(<span class="string">'密码必须是6-16位字母or数字or符号'</span>,<span class="number">400</span>)-&gt;header(<span class="string">'Content-Type'</span>,<span class="string">'text/html;charset=utf-8'</span>);&#125;</span><br><span class="line">                 <span class="keyword">if</span>($gender == <span class="keyword">null</span>)&#123;</span><br><span class="line">                 <span class="comment">//return 'select gender &lt;br&gt;';&#125;</span></span><br><span class="line">                 <span class="keyword">return</span> response(<span class="string">'性别不能为空'</span>,<span class="number">400</span>)-&gt;header(<span class="string">'Content-Type'</span>,<span class="string">'text/html;charset=utf-8'</span>);&#125;</span><br><span class="line">                 <span class="keyword">if</span>($nickname != <span class="keyword">null</span> &amp;&amp; !preg_match(<span class="string">'/^[\x&#123;4e00&#125;-\x&#123;9fa5&#125;A-Za-z0-9]&#123;1,20&#125;$/u'</span>,$nickname))&#123;</span><br><span class="line">         <span class="comment">//      return 'nickname mast &lt;=20 &lt;br&gt;';&#125;</span></span><br><span class="line">                 <span class="keyword">return</span> response(<span class="string">'昵称不能超过20个字符且不能含有符号'</span>,<span class="number">400</span>)-&gt;header(<span class="string">'Content-Type'</span>,<span class="string">'text/html;charset=utf-8'</span>);&#125;</span><br><span class="line">                 <span class="keyword">if</span>($birthday != <span class="keyword">null</span> &amp;&amp; !preg_match(<span class="string">'/\d&#123;4&#125;-\d&#123;2&#125;-\d&#123;2&#125;/'</span>,$birthday))&#123;</span><br><span class="line">                 <span class="comment">//return 'birthday: yyyy-mm-dd &lt;br&gt;';&#125;</span></span><br><span class="line">                 <span class="keyword">return</span> response(<span class="string">'请填写正确的生日格式'</span>,<span class="number">400</span>)-&gt;header(<span class="string">'Content-Type'</span>,<span class="string">'text/html;charset=utf-8'</span>);&#125;</span><br><span class="line">                 <span class="keyword">if</span>($height != <span class="keyword">null</span> &amp;&amp; !preg_match(<span class="string">'/^\d&#123;2,3&#125;$/'</span>,$height))&#123;</span><br><span class="line">                 <span class="comment">//return 'height is 2-3bit number &lt;br&gt;';&#125;</span></span><br><span class="line">                 <span class="keyword">return</span> response(<span class="string">'请填写正确的身高'</span>,<span class="number">400</span>)-&gt;header(<span class="string">'Content-Type'</span>,<span class="string">'text/html;charset=utf-8'</span>);&#125;</span><br><span class="line">                 <span class="keyword">if</span>($weight != <span class="keyword">null</span> &amp;&amp; !preg_match(<span class="string">'/^\d&#123;2,3&#125;$/'</span>,$weight))&#123;</span><br><span class="line">                 <span class="comment">//return 'weight is 2-3bit number &lt;br&gt;';&#125;</span></span><br><span class="line">                 <span class="keyword">return</span> response(<span class="string">'请填写正确的体重'</span>,<span class="number">400</span>)-&gt;header(<span class="string">'Content-Type'</span>,<span class="string">'text/html;charset=utf-8'</span>);&#125;</span><br><span class="line">                 <span class="keyword">if</span>($email != <span class="keyword">null</span> &amp;&amp; !preg_match(<span class="string">'/\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]&#123;2,14&#125;/'</span>,$email))&#123;</span><br><span class="line">                 <span class="keyword">return</span> response(<span class="string">'请填写正确的电子邮箱'</span>,<span class="number">400</span>)-&gt;header(<span class="string">'Content-Type'</span>,<span class="string">'text/html;charset=utf-8'</span>);&#125;</span><br><span class="line">                 <span class="comment">//是否存在重复的</span></span><br><span class="line">                 $userlist = DB::select(<span class="string">'select id,phone,email from user where phone = :phone or email = :email'</span>,[<span class="string">'phone'</span> =&gt; $phone,<span class="string">'email'</span> =&gt; $email]);</span><br><span class="line">                 <span class="keyword">if</span>($userlist)&#123;</span><br><span class="line">                         <span class="keyword">return</span> response(<span class="string">'您的手机号或邮箱已注册'</span>,<span class="number">400</span>)-&gt;header(<span class="string">'Content-Type'</span>,<span class="string">'text/html;charset=utf-8'</span>);</span><br><span class="line">                 &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                 DB::insert(<span class="string">'insert into user (created_at,phone,password,gender,nickname,birthday,height,weight,email) values (:created_at,:phone,:            password,:gender,:nickname,:birthday,:height,:weight,:email)'</span>,[<span class="string">'created_at'</span>=&gt;date(<span class="string">'Y-m-d H:i:s'</span>),<span class="string">'phone'</span>=&gt;$phone,<span class="string">'password'</span>=&gt;Crypt::encrypt($password),       <span class="string">'gender'</span>=&gt;$gender,<span class="string">'nickname'</span>=&gt;$nickname,<span class="string">'birthday'</span>=&gt;$birthday,<span class="string">'height'</span>=&gt;$height,<span class="string">'weight'</span>=&gt;$weight,<span class="string">'email'</span>=&gt;$email]);</span><br><span class="line">                 <span class="keyword">return</span> response(<span class="string">'注册成功'</span>,<span class="number">200</span>)-&gt;header(<span class="string">'Content-Type'</span>,<span class="string">'text/html;charset=utf-8'</span>);</span><br><span class="line">         <span class="comment">//      return 'oK';</span></span><br><span class="line">                 &#125;</span><br><span class="line">         &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">         <span class="comment">//      return '验证码错误';</span></span><br><span class="line">                 <span class="keyword">return</span> response(<span class="string">'验证码错误'</span>,<span class="number">400</span>)-&gt;header(<span class="string">'Content-Type'</span>,<span class="string">'text/html;charset=utf-8'</span>);</span><br><span class="line">         &#125;</span><br><span class="line">         &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h4><p>response 的使用方法  </p>
+<p>单个:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> response(<span class="string">'失败'</span>,<span class="number">400</span>)-&gt;header(<span class="string">'Content-Type'</span>,<span class="string">'text/html;charset=utf-8'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>多个:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> response($content)</span><br><span class="line">            -&gt;header(<span class="string">'Content-Type'</span>, $type)</span><br><span class="line">            -&gt;header(<span class="string">'X-Header-One'</span>, <span class="string">'Header Value'</span>)</span><br><span class="line">            -&gt;header(<span class="string">'X-Header-Two'</span>, <span class="string">'Header Value'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>json:<br><code>json</code> 方法会自动将标头的 <code>Content-Type</code> 设置为 <code>application/json</code>，<br>并通过 <code>PHP</code> 的 <code>json_encode</code> 函数将指定的数组转换为 <code>JSON</code>:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> response()-&gt;json([<span class="string">'name'</span> =&gt; <span class="string">'chaosir'</span>, <span class="string">'age'</span> =&gt; <span class="string">'30'</span>]);</span><br></pre></td></tr></table></figure></p>
+<p>DB 操作问题<br>在使用 <code>DB</code> 类来操作数据库时报错，原因是没有引入数据库操作门面：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">DB</span>;</span><br></pre></td></tr></table></figure></p>
+<p>并且打开 <code>bootstrap\app.php</code> 取消 <code>$app-&gt;withFacades();</code> 之前的注释</p>
+<p>使用实例:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$userlist = DB::select(<span class="string">'select id,phone,email from user where phone = :phone or email = :email'</span>,</span><br><span class="line">[<span class="string">'phone'</span> =&gt; $phone,<span class="string">'email'</span> =&gt; $email]);</span><br></pre></td></tr></table></figure></p>
+<h3 id="定义路由"><a href="#定义路由" class="headerlink" title="定义路由"></a>定义路由</h3><p>打开 <code>/routes/web.php</code> 设置如下路由：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$app-&gt;post(<span class="string">'api/account/register'</span>,<span class="string">'UserController@register'</span>);</span><br></pre></td></tr></table></figure></p>
+<h2 id="项目完成"><a href="#项目完成" class="headerlink" title="项目完成"></a>项目完成</h2>
+    
+  </div>
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+  
+      <div class="git"></div>
+  
+  <script src="/js/util.js"></script>
+<script>
+function closeModal() {
+    Util.addClass($modalDialog, 'hide-dialog')
+    Util.removeClass($modalDialog, 'show-dialog');
+    Util.addClass($cover, 'hide')
+    Util.removeClass($cover, 'show');
+  }
+var $toolboxMobile = document.getElementById('toolbox-mobile');
+  var $cover = document.getElementById('cover');
+  var $close = document.getElementById('close');
+  var $modalDialog = document.getElementById('modal-dialog');
+if ($toolboxMobile) {
+    Util.bind($toolboxMobile, 'click', function() {
+      Util.addClass($modalDialog, 'show-dialog')
+      Util.removeClass($modalDialog, 'hide-dialog');
+
+      Util.addClass($cover, 'show')
+      Util.removeClass($cover, 'hide');
+    });
+
+
+    Util.bind($cover, 'click', closeModal);
+    Util.bind($close, 'click', closeModal);
+  }
+</script>
+</article>
+
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持我</div>
+        <ul>
+        
+          <li class="item">
+            <span>微信扫一扫</span>
+            <img src="/images/wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <span>支付宝扫一扫</span>
+            <img src="/images/alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/archives/e92d1f8b.html">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/archives/7f372516.html">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'chaosir';
+    
+    var disqus_url = 'http://blog.adminchao.com/archives/9794a7df.html';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//chaosir.disqus.com/count.js" async></script>
+
+
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+  </div>
+
+  
+
+  
+<script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+
+
+</script>
+
+
+
+</body>
+</html>

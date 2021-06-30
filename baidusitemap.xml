@@ -1,0 +1,1293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/fc38307b.html</loc>
+    <lastmod>2021-06-30T15:39:23.413Z</lastmod>
+    <data>
+        <display>
+        <title>Laradock 安装 GRPC 扩展</title>
+        <pubTime>2021-06-30T15:31:29.000Z</pubTime>
+        
+        <tag>laravel</tag>
+         
+        <tag>docker</tag>
+         
+        <tag>laradock</tag>
+         
+        <tag>扩展</tag>
+         
+        <tag>extension</tag>
+         
+        <tag>grpc</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="http://blog.adminchao.com/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/fc208a4f.html</loc>
+    <lastmod>2020-09-02T15:44:18.903Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel 使用WorkerMan(GateWay)</title>
+        <pubTime>2019-07-22T08:30:53.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>PHP</tag>
+         
+        <tag>WorkerMan</tag>
+         
+        <tag>GateWay</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="http://blog.adminchao.com/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/14f7b572.html</loc>
+    <lastmod>2020-07-21T01:27:17.557Z</lastmod>
+    <data>
+        <display>
+        <title>Docker 使用笔记</title>
+        <pubTime>2020-07-20T07:39:19.000Z</pubTime>
+        
+        <tag>Docker</tag>
+         
+        <tag>Laradock</tag>
+         
+        <tag>Laravel</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="http://blog.adminchao.com/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/58100827.html</loc>
+    <lastmod>2020-05-27T03:23:01.846Z</lastmod>
+    <data>
+        <display>
+        <title>Flex 手册</title>
+        <pubTime>2020-05-27T03:07:29.000Z</pubTime>
+        
+        <tag>前端</tag>
+         
+        <tag>布局</tag>
+         
+        <tag>Flex</tag>
+         
+        <tag>教程</tag>
+         
+        <tag>学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="http://blog.adminchao.com/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+             
+              <breadCrumb title="技术" url="http://blog.adminchao.com/categories/%E5%89%8D%E7%AB%AF/%E6%8A%80%E6%9C%AF/"/>
+          
+             
+              <breadCrumb title="思维导图" url="http://blog.adminchao.com/categories/%E5%89%8D%E7%AB%AF/%E6%8A%80%E6%9C%AF/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/a681b356.html</loc>
+    <lastmod>2020-03-27T19:00:29.429Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel Passport 个人令牌多用户登陆</title>
+        <pubTime>2020-03-27T13:08:27.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>Passport</tag>
+         
+        <tag>Oauth</tag>
+         
+        <tag>php</tag>
+         
+         
+           
+             
+              <breadCrumb title="Laravel" url="http://blog.adminchao.com/categories/Laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/cbe049d3.html</loc>
+    <lastmod>2020-03-03T04:35:01.616Z</lastmod>
+    <data>
+        <display>
+        <title>Iris 安装及初始(二)</title>
+        <pubTime>2020-03-01T11:21:06.000Z</pubTime>
+        
+        <tag>iris</tag>
+         
+        <tag>go</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/b3c12085.html</loc>
+    <lastmod>2020-03-03T04:35:01.615Z</lastmod>
+    <data>
+        <display>
+        <title>Iris MVC路由(三)</title>
+        <pubTime>2020-03-03T00:40:28.000Z</pubTime>
+        
+        <tag>iris</tag>
+         
+        <tag>go</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/7f9f2030.html</loc>
+    <lastmod>2020-03-01T07:04:39.182Z</lastmod>
+    <data>
+        <display>
+        <title>Iris I Love She(一)</title>
+        <pubTime>2020-03-01T06:17:47.000Z</pubTime>
+        
+        <tag>iris</tag>
+         
+        <tag>go</tag>
+         
+         
+           
+             
+              <breadCrumb title="go" url="http://blog.adminchao.com/categories/go/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/c0ae76d4.html</loc>
+    <lastmod>2019-07-25T10:46:56.228Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel Throttle 中间件接口形式</title>
+        <pubTime>2019-07-25T10:33:53.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>PHP</tag>
+         
+        <tag>中间件</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="http://blog.adminchao.com/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/c77b23f0.html</loc>
+    <lastmod>2019-06-21T09:56:13.987Z</lastmod>
+    <data>
+        <display>
+        <title>Guzzle 基础用法</title>
+        <pubTime>2019-06-17T15:51:47.000Z</pubTime>
+        
+        <tag>Guzzle</tag>
+         
+        <tag>PHP</tag>
+         
+         
+           
+             
+              <breadCrumb title="Laravel" url="http://blog.adminchao.com/categories/Laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/b1e7ae06.html</loc>
+    <lastmod>2019-05-22T06:18:39.136Z</lastmod>
+    <data>
+        <display>
+        <title>百度编辑器多图上传改为七牛云</title>
+        <pubTime>2019-05-22T05:00:10.000Z</pubTime>
+        
+        <tag>UEditor</tag>
+         
+        <tag>qiniu</tag>
+         
+        <tag>图片上传</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="http://blog.adminchao.com/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/70f00860.html</loc>
+    <lastmod>2019-05-02T09:42:45.233Z</lastmod>
+    <data>
+        <display>
+        <title>更改 alfred 默认 shell 为 iTerm</title>
+        <pubTime>2019-05-02T09:39:49.000Z</pubTime>
+        
+        <tag>效率</tag>
+         
+        <tag>alfred</tag>
+         
+        <tag>shell</tag>
+         
+        <tag>iTerm</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="http://blog.adminchao.com/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/51a12e8a.html</loc>
+    <lastmod>2019-05-02T09:41:23.989Z</lastmod>
+    <data>
+        <display>
+        <title>Mac Aria2 使用</title>
+        <pubTime>2019-04-27T08:36:20.000Z</pubTime>
+        
+        <tag>Mac</tag>
+         
+        <tag>下载</tag>
+         
+        <tag>迅雷</tag>
+         
+        <tag>网盘</tag>
+         
+        <tag>Aria2</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="http://blog.adminchao.com/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/505b2cb.html</loc>
+    <lastmod>2019-03-31T19:37:34.422Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel Eloquent 高级</title>
+        <pubTime>2018-08-22T03:02:10.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>Eloquent</tag>
+         
+        <tag>高级</tag>
+         
+        <tag>联表</tag>
+         
+        <tag>计数</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="http://blog.adminchao.com/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/9582034c.html</loc>
+    <lastmod>2019-03-28T07:25:32.897Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel Eloquent 返回结果优化</title>
+        <pubTime>2019-01-10T07:29:08.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>PHP</tag>
+         
+        <tag>Eloquent</tag>
+         
+        <tag>模型</tag>
+         
+        <tag>实例</tag>
+         
+        <tag>ORM</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="http://blog.adminchao.com/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/ca8452d7.html</loc>
+    <lastmod>2019-03-16T02:43:19.807Z</lastmod>
+    <data>
+        <display>
+        <title>红包类</title>
+        <pubTime>2019-03-16T02:39:09.000Z</pubTime>
+        
+        <tag>php</tag>
+         
+        <tag>红包</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="http://blog.adminchao.com/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/2a0c86cd.html</loc>
+    <lastmod>2019-01-13T10:10:57.615Z</lastmod>
+    <data>
+        <display>
+        <title>抽奖算法</title>
+        <pubTime>2019-01-13T10:08:37.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>PHP</tag>
+         
+        <tag>抽奖</tag>
+         
+        <tag>算法</tag>
+         
+        <tag>概率</tag>
+         
+         
+           
+             
+              <breadCrumb title="代码" url="http://blog.adminchao.com/categories/%E4%BB%A3%E7%A0%81/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/8b68010d.html</loc>
+    <lastmod>2019-01-12T05:33:06.198Z</lastmod>
+    <data>
+        <display>
+        <title>扫描 PHP 危险文件脚本</title>
+        <pubTime>2019-01-12T05:30:20.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>PHP</tag>
+         
+        <tag>脚本</tag>
+         
+         
+           
+             
+              <breadCrumb title="代码" url="http://blog.adminchao.com/categories/%E4%BB%A3%E7%A0%81/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/56938b09.html</loc>
+    <lastmod>2018-11-14T07:45:05.409Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel 分组获取最新记录</title>
+        <pubTime>2018-11-14T06:35:10.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>GroupBy</tag>
+         
+        <tag>Select</tag>
+         
+        <tag>SubQuery</tag>
+         
+         
+           
+             
+              <breadCrumb title="Laravel" url="http://blog.adminchao.com/categories/Laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/5d3f30e1.html</loc>
+    <lastmod>2018-10-15T02:21:19.933Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel Artisan 后台调用</title>
+        <pubTime>2018-10-15T02:04:39.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>Artisan</tag>
+         
+        <tag>后台</tag>
+         
+        <tag>命令行</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="http://blog.adminchao.com/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/89ba934f.html</loc>
+    <lastmod>2018-10-11T05:37:55.116Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel Paginate 分页</title>
+        <pubTime>2018-06-08T03:56:23.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>实例</tag>
+         
+        <tag>Paginate</tag>
+         
+        <tag>分页</tag>
+         
+         
+           
+             
+              <breadCrumb title="Laravel" url="http://blog.adminchao.com/categories/Laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/5cf5d8cd.html</loc>
+    <lastmod>2018-07-31T09:27:37.055Z</lastmod>
+    <data>
+        <display>
+        <title>vue 教程</title>
+        <pubTime>2018-07-30T12:41:15.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/fef79e6c.html</loc>
+    <lastmod>2018-07-31T09:27:37.052Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel 阿里云短信使用</title>
+        <pubTime>2018-07-31T09:14:34.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>Sms</tag>
+         
+        <tag>AliYun</tag>
+         
+        <tag>短信</tag>
+         
+         
+           
+             
+              <breadCrumb title="Laravel" url="http://blog.adminchao.com/categories/Laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/a97f5e57.html</loc>
+    <lastmod>2018-07-04T07:29:13.762Z</lastmod>
+    <data>
+        <display>
+        <title>独立使用 Eloquent</title>
+        <pubTime>2018-07-04T06:14:22.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>PHP</tag>
+         
+        <tag>教程</tag>
+         
+        <tag>Eloquent</tag>
+         
+         
+           
+             
+              <breadCrumb title="Laravel" url="http://blog.adminchao.com/categories/Laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/1dda264e.html</loc>
+    <lastmod>2018-06-08T05:22:59.861Z</lastmod>
+    <data>
+        <display>
+        <title>Ubuntu php7 安装 redis 扩展</title>
+        <pubTime>2017-07-12T04:43:31.000Z</pubTime>
+        
+        <tag>redis</tag>
+         
+        <tag>ubuntu</tag>
+         
+         
+           
+             
+              <breadCrumb title="LNMP" url="http://blog.adminchao.com/categories/LNMP/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/166ddea1.html</loc>
+    <lastmod>2018-06-08T05:17:59.905Z</lastmod>
+    <data>
+        <display>
+        <title>Thinkphp5 创建 API 实例教程</title>
+        <pubTime>2017-08-04T12:20:03.000Z</pubTime>
+        
+        <tag>教程</tag>
+         
+        <tag>实例</tag>
+         
+        <tag>tp5</tag>
+         
+        <tag>ThinkPHP5</tag>
+         
+        <tag>API</tag>
+         
+         
+           
+             
+              <breadCrumb title="ThinkPHP5" url="http://blog.adminchao.com/categories/ThinkPHP5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/7f372516.html</loc>
+    <lastmod>2018-06-08T05:17:59.905Z</lastmod>
+    <data>
+        <display>
+        <title>rest API 实例教程之 token 生成</title>
+        <pubTime>2017-06-21T08:42:09.000Z</pubTime>
+        
+        <tag>php</tag>
+         
+        <tag>API</tag>
+         
+        <tag>rest API</tag>
+         
+        <tag>lumen</tag>
+         
+        <tag>token</tag>
+         
+        <tag>bearer token</tag>
+         
+         
+           
+             
+              <breadCrumb title="Lumen" url="http://blog.adminchao.com/categories/Lumen/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/cedc43fd.html</loc>
+    <lastmod>2018-06-08T05:17:59.904Z</lastmod>
+    <data>
+        <display>
+        <title>JavaScript 学习笔记</title>
+        <pubTime>2017-08-08T12:54:56.000Z</pubTime>
+        
+        <tag>JavaScript</tag>
+         
+        <tag>JS</tag>
+         
+         
+           
+             
+              <breadCrumb title="JavaScript" url="http://blog.adminchao.com/categories/JavaScript/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/f012f767.html</loc>
+    <lastmod>2018-06-08T05:17:49.709Z</lastmod>
+    <data>
+        <display>
+        <title>从零搭建 LNMP 教程</title>
+        <pubTime>2017-10-08T05:08:09.000Z</pubTime>
+        
+        <tag>教程</tag>
+         
+        <tag>LNMP</tag>
+         
+        <tag>环境</tag>
+         
+         
+           
+             
+              <breadCrumb title="LNMP" url="http://blog.adminchao.com/categories/LNMP/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/f62b88ad.html</loc>
+    <lastmod>2018-06-08T05:17:49.708Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel 全局作用域</title>
+        <pubTime>2018-06-08T03:41:08.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>PHP</tag>
+         
+        <tag>实例</tag>
+         
+        <tag>Global</tag>
+         
+        <tag>Scope</tag>
+         
+        <tag>作用域</tag>
+         
+         
+           
+             
+              <breadCrumb title="Laravel" url="http://blog.adminchao.com/categories/Laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/de8d9d0f.html</loc>
+    <lastmod>2018-06-08T05:17:49.705Z</lastmod>
+    <data>
+        <display>
+        <title>树状分类</title>
+        <pubTime>2018-06-08T04:33:49.000Z</pubTime>
+        
+        <tag>PHP</tag>
+         
+        <tag>树状分类</tag>
+         
+         
+           
+             
+              <breadCrumb title="PHP" url="http://blog.adminchao.com/categories/PHP/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/3346bf17.html</loc>
+    <lastmod>2018-06-08T05:17:49.700Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel 生成测试数据</title>
+        <pubTime>2018-03-08T03:14:46.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>PHP</tag>
+         
+        <tag>实例</tag>
+         
+        <tag>Faker</tag>
+         
+        <tag>测试</tag>
+         
+        <tag>数据</tag>
+         
+         
+           
+             
+              <breadCrumb title="Laravel" url="http://blog.adminchao.com/categories/Laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/9794a7df.html</loc>
+    <lastmod>2018-06-08T05:17:49.698Z</lastmod>
+    <data>
+        <display>
+        <title>使用 Lumen 创建 RestApi 实例教程</title>
+        <pubTime>2017-06-09T03:43:31.000Z</pubTime>
+        
+        <tag>Lumen</tag>
+         
+        <tag>PHP框架</tag>
+         
+        <tag>RestApi</tag>
+         
+        <tag>实例教程</tag>
+         
+         
+           
+             
+              <breadCrumb title="Lumen" url="http://blog.adminchao.com/categories/Lumen/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/e92d1f8b.html</loc>
+    <lastmod>2018-06-08T05:17:49.693Z</lastmod>
+    <data>
+        <display>
+        <title>Lumen 的结构与配置</title>
+        <pubTime>2017-06-07T03:37:19.000Z</pubTime>
+        
+        <tag>Lumen</tag>
+         
+        <tag>PHP框架</tag>
+         
+         
+           
+             
+              <breadCrumb title="Lumen" url="http://blog.adminchao.com/categories/Lumen/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/269f8031.html</loc>
+    <lastmod>2018-06-08T05:17:49.691Z</lastmod>
+    <data>
+        <display>
+        <title>我的 phpstorm 配置</title>
+        <pubTime>2017-09-22T04:55:39.000Z</pubTime>
+        
+        <tag>phpstrom</tag>
+         
+        <tag>配置</tag>
+         
+         
+           
+             
+              <breadCrumb title="phpstrom" url="http://blog.adminchao.com/categories/phpstrom/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/7bbccf5e.html</loc>
+    <lastmod>2018-06-08T05:17:49.688Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel 事务用法</title>
+        <pubTime>2018-05-08T03:34:37.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>PHP</tag>
+         
+        <tag>实例</tag>
+         
+        <tag>事务</tag>
+         
+         
+           
+             
+              <breadCrumb title="Laravel" url="http://blog.adminchao.com/categories/Laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/c442743f.html</loc>
+    <lastmod>2018-06-08T05:17:49.679Z</lastmod>
+    <data>
+        <display>
+        <title>Lumen 的安装与部署</title>
+        <pubTime>2017-06-07T03:14:01.000Z</pubTime>
+        
+        <tag>Lumen</tag>
+         
+        <tag>PHP框架</tag>
+         
+         
+           
+             
+              <breadCrumb title="Lumen" url="http://blog.adminchao.com/categories/Lumen/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/fbd4f49e.html</loc>
+    <lastmod>2018-06-08T04:54:12.985Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel overtrue/wechat 微信用法</title>
+        <pubTime>2018-06-08T04:51:35.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>PHP</tag>
+         
+        <tag>实例</tag>
+         
+        <tag>overtrue</tag>
+         
+        <tag>wechat</tag>
+         
+        <tag>微信</tag>
+         
+         
+           
+             
+              <breadCrumb title="Laravel" url="http://blog.adminchao.com/categories/Laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/780b6301.html</loc>
+    <lastmod>2018-06-08T04:49:41.946Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel 七牛云 layui 实现上传图片</title>
+        <pubTime>2018-06-08T04:47:33.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>PHP</tag>
+         
+        <tag>七牛云</tag>
+         
+        <tag>layui</tag>
+         
+        <tag>上传</tag>
+         
+        <tag>图片</tag>
+         
+         
+           
+             
+              <breadCrumb title="Laravel" url="http://blog.adminchao.com/categories/Laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/489422f2.html</loc>
+    <lastmod>2018-06-08T04:49:41.945Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel Excel 用法</title>
+        <pubTime>2018-06-08T04:44:33.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>PHP</tag>
+         
+        <tag>Excel</tag>
+         
+        <tag>Composer</tag>
+         
+         
+           
+             
+              <breadCrumb title="Laravel" url="http://blog.adminchao.com/categories/Laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/dfa2bf5f.html</loc>
+    <lastmod>2018-06-08T04:49:41.944Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel Eloquent 括号查询</title>
+        <pubTime>2018-06-08T04:36:54.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>PHP</tag>
+         
+        <tag>Eloquent</tag>
+         
+        <tag>查询</tag>
+         
+        <tag>实例</tag>
+         
+        <tag>括号</tag>
+         
+         
+           
+             
+              <breadCrumb title="Laravel" url="http://blog.adminchao.com/categories/Laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/c740b766.html</loc>
+    <lastmod>2018-06-08T04:49:41.944Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel Eloquent 连接查询</title>
+        <pubTime>2018-06-08T04:38:16.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>PHP</tag>
+         
+        <tag>Eloquent</tag>
+         
+        <tag>模型</tag>
+         
+        <tag>查询</tag>
+         
+        <tag>连接</tag>
+         
+         
+           
+             
+              <breadCrumb title="Laravel" url="http://blog.adminchao.com/categories/Laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/b39e844c.html</loc>
+    <lastmod>2018-06-08T04:49:41.943Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel ElasticSearch 插件</title>
+        <pubTime>2018-06-08T04:43:00.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>PHP</tag>
+         
+        <tag>ElasticSearch</tag>
+         
+         
+           
+             
+              <breadCrumb title="Laravel" url="http://blog.adminchao.com/categories/Laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/7aea3437.html</loc>
+    <lastmod>2018-06-08T04:49:41.943Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel Eloquent 列值查询</title>
+        <pubTime>2018-06-08T04:39:33.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>PHP</tag>
+         
+        <tag>Eloquent</tag>
+         
+        <tag>模型</tag>
+         
+        <tag>列</tag>
+         
+        <tag>查询</tag>
+         
+         
+           
+             
+              <breadCrumb title="Laravel" url="http://blog.adminchao.com/categories/Laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/71ffe005.html</loc>
+    <lastmod>2018-06-08T04:36:37.341Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel Eloquent 模型使用</title>
+        <pubTime>2018-04-08T03:21:42.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>PHP</tag>
+         
+        <tag>Eloquent</tag>
+         
+        <tag>模型</tag>
+         
+        <tag>实例</tag>
+         
+         
+           
+             
+              <breadCrumb title="Laravel" url="http://blog.adminchao.com/categories/Laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/e220546b.html</loc>
+    <lastmod>2018-06-08T04:03:44.456Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel 临时显示隐藏属性</title>
+        <pubTime>2018-06-08T04:01:30.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>PHP</tag>
+         
+        <tag>实例</tag>
+         
+        <tag>显示</tag>
+         
+        <tag>隐藏</tag>
+         
+        <tag>属性</tag>
+         
+         
+           
+             
+              <breadCrumb title="Laravel" url="http://blog.adminchao.com/categories/Laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/4f74b53d.html</loc>
+    <lastmod>2018-06-08T03:33:28.794Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel Middleware 中间件用法</title>
+        <pubTime>2018-06-08T03:26:34.000Z</pubTime>
+        
+        <tag>Laravel</tag>
+         
+        <tag>实例</tag>
+         
+        <tag>Middleware</tag>
+         
+        <tag>中间件</tag>
+         
+         
+           
+             
+              <breadCrumb title="Laravel" url="http://blog.adminchao.com/categories/Laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/3885509e.html</loc>
+    <lastmod>2018-06-08T03:33:23.818Z</lastmod>
+    <data>
+        <display>
+        <title>Laravel Validator 类用法实例</title>
+        <pubTime>2018-02-08T03:10:44.000Z</pubTime>
+        
+        <tag>PHP</tag>
+         
+        <tag>laravel</tag>
+         
+        <tag>实例</tag>
+         
+        <tag>Validator</tag>
+         
+        <tag>验证</tag>
+         
+         
+           
+             
+              <breadCrumb title="Laravel" url="http://blog.adminchao.com/categories/Laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+    
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/9ea88159.html</loc>
+    <lastmod>2018-06-07T09:54:41.189Z</lastmod>
+    <data>
+        <display>
+        <title>Git 服务端自动部署项目代码</title>
+        <pubTime>2017-12-01T05:24:34.000Z</pubTime>
+        
+        <tag>Git</tag>
+         
+        <tag>hooks</tag>
+         
+         
+           
+             
+              <breadCrumb title="Git" url="http://blog.adminchao.com/categories/Git/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.adminchao.com/archives/5fddf106.html</loc>
+    <lastmod>2018-06-07T09:54:41.188Z</lastmod>
+    <data>
+        <display>
+        <title>Git 常用命令</title>
+        <pubTime>2016-06-19T02:13:37.000Z</pubTime>
+        
+        <tag>Git</tag>
+         
+        <tag>Github</tag>
+         
+         
+           
+             
+              <breadCrumb title="Git" url="http://blog.adminchao.com/categories/Git/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+</urlset>

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Laravel 分组获取最新记录 | 超哥哥的学习笔记</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Laravel,GroupBy,Select,SubQuery," />
+  
+
+  <meta name="description" content="前言今天项目中需要根据分组查询最新记录的业务逻辑，想要使用 Eloquent 查询出来，做个记录。 实现表内容   id name user_id value     1 项目1 61 测试内容1   2 项目2 61 测试内容2   3 项目3 61 测试内容3   4 项目1 61 测试内容123    原生 SQL 为:1select * from (select * from projec">
+<meta name="keywords" content="Laravel,GroupBy,Select,SubQuery">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Laravel 分组获取最新记录">
+<meta property="og:url" content="http://blog.adminchao.com/archives/56938b09.html">
+<meta property="og:site_name" content="超哥哥的学习笔记">
+<meta property="og:description" content="前言今天项目中需要根据分组查询最新记录的业务逻辑，想要使用 Eloquent 查询出来，做个记录。 实现表内容   id name user_id value     1 项目1 61 测试内容1   2 项目2 61 测试内容2   3 项目3 61 测试内容3   4 项目1 61 测试内容123    原生 SQL 为:1select * from (select * from projec">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-14T07:45:05.409Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Laravel 分组获取最新记录">
+<meta name="twitter:description" content="前言今天项目中需要根据分组查询最新记录的业务逻辑，想要使用 Eloquent 查询出来，做个记录。 实现表内容   id name user_id value     1 项目1 61 测试内容1   2 项目2 61 测试内容2   3 项目3 61 测试内容3   4 项目1 61 测试内容123    原生 SQL 为:1select * from (select * from projec">
+
+  
+
+  
+    <link rel="icon" href="/images/chaosirgit.png">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/chaosir.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#表内容"><span class="toc-text">表内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原生-SQL-为"><span class="toc-text">原生 SQL 为:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mysql5-7-查出来的结果为"><span class="toc-text">Mysql5.7 查出来的结果为</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优化后得到"><span class="toc-text">优化后得到</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Eloquent-子查询语法"><span class="toc-text">Eloquent 子查询语法</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Laravel-分组获取最新记录" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Laravel 分组获取最新记录</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.11.14</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>chaosir</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Laravel/">Laravel</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://blog.adminchao.com/archives/56938b09.html#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天项目中需要根据分组查询最新记录的业务逻辑，想要使用 Eloquent 查询出来，做个记录。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="表内容"><a href="#表内容" class="headerlink" title="表内容"></a>表内容</h3><table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>user_id</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>项目1</td>
+<td>61</td>
+<td>测试内容1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>项目2</td>
+<td>61</td>
+<td>测试内容2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>项目3</td>
+<td>61</td>
+<td>测试内容3</td>
+</tr>
+<tr>
+<td>4</td>
+<td>项目1</td>
+<td>61</td>
+<td>测试内容123</td>
+</tr>
+</tbody>
+</table>
+<h3 id="原生-SQL-为"><a href="#原生-SQL-为" class="headerlink" title="原生 SQL 为:"></a>原生 SQL 为:</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">project</span> <span class="keyword">where</span> user_id = :user_id <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">id</span> <span class="keyword">desc</span>) <span class="keyword">as</span> a <span class="keyword">group</span> <span class="keyword">by</span> a.name <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">id</span> <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="Mysql5-7-查出来的结果为"><a href="#Mysql5-7-查出来的结果为" class="headerlink" title="Mysql5.7 查出来的结果为"></a>Mysql5.7 查出来的结果为</h3><table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>user_id</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>项目3</td>
+<td>61</td>
+<td>测试内容3</td>
+</tr>
+<tr>
+<td>2</td>
+<td>项目2</td>
+<td>61</td>
+<td>测试内容2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>项目1</td>
+<td>61</td>
+<td>测试内容1</td>
+</tr>
+</tbody>
+</table>
+<p>原因是 5.7 版本 ORDER BY 没有 LIMIT 的时候，少了一个 DERIVED 操作，估计是内部优化了，认为 ORDER BY 在这种语法中可忽略，有 LIMIT 限制涉及排序后的结果，不会忽略 ORDER BY，可以达到预期。</p>
+<h3 id="优化后得到"><a href="#优化后得到" class="headerlink" title="优化后得到"></a>优化后得到</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">project</span> <span class="keyword">where</span> user_id = :user_id <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">id</span> <span class="keyword">desc</span> <span class="keyword">limit</span> <span class="number">10000</span>) <span class="keyword">as</span> a <span class="keyword">group</span> <span class="keyword">by</span> a.name <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">id</span> <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
+<p>查询结果为</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>user_id</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>项目1</td>
+<td>61</td>
+<td>测试内容123</td>
+</tr>
+<tr>
+<td>3</td>
+<td>项目3</td>
+<td>61</td>
+<td>测试内容3</td>
+</tr>
+<tr>
+<td>2</td>
+<td>项目2</td>
+<td>61</td>
+<td>测试内容2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Eloquent-子查询语法"><a href="#Eloquent-子查询语法" class="headerlink" title="Eloquent 子查询语法"></a>Eloquent 子查询语法</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">projectList</span><span class="params">(Request $request)</span></span>&#123;</span><br><span class="line">        $limit = $request-&gt;get(<span class="string">'limit'</span>,<span class="number">10</span>);</span><br><span class="line">        $user_id = $request-&gt;get(<span class="string">'user_id'</span>,<span class="keyword">null</span>);</span><br><span class="line">        </span><br><span class="line">        $sub_query = Project::where(<span class="string">'user_id'</span>,$user_id)-&gt;orderBy(<span class="string">'id'</span>,<span class="string">'desc'</span>)-&gt;limit(<span class="number">1000</span>);<span class="comment">//子查询</span></span><br><span class="line">        </span><br><span class="line">        $results = Project::select(<span class="string">'*'</span>)</span><br><span class="line">                -&gt;from(DB::raw(<span class="string">'('</span>.$sub_query-&gt;toSql().<span class="string">') as a'</span>)) <span class="comment">//from() 类似与 DB::table(), toSql()得到带 ? 号的执行 sql 语句</span></span><br><span class="line">                -&gt;mergeBindings($sub_query-&gt;getQuery())<span class="comment">//mergeBindings() 合并绑定参数,getQuery()获得具体值</span></span><br><span class="line">                -&gt;groupBy(<span class="string">'name'</span>)</span><br><span class="line">                -&gt;orderBy(<span class="string">'id'</span>,<span class="string">'desc'</span>)</span><br><span class="line">                -&gt;paginate($limit);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;pageDate($results);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+    
+  </div>
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+  
+      <div class="git"></div>
+  
+  <script src="/js/util.js"></script>
+<script>
+function closeModal() {
+    Util.addClass($modalDialog, 'hide-dialog')
+    Util.removeClass($modalDialog, 'show-dialog');
+    Util.addClass($cover, 'hide')
+    Util.removeClass($cover, 'show');
+  }
+var $toolboxMobile = document.getElementById('toolbox-mobile');
+  var $cover = document.getElementById('cover');
+  var $close = document.getElementById('close');
+  var $modalDialog = document.getElementById('modal-dialog');
+if ($toolboxMobile) {
+    Util.bind($toolboxMobile, 'click', function() {
+      Util.addClass($modalDialog, 'show-dialog')
+      Util.removeClass($modalDialog, 'hide-dialog');
+
+      Util.addClass($cover, 'show')
+      Util.removeClass($cover, 'hide');
+    });
+
+
+    Util.bind($cover, 'click', closeModal);
+    Util.bind($close, 'click', closeModal);
+  }
+</script>
+</article>
+
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持我</div>
+        <ul>
+        
+          <li class="item">
+            <span>微信扫一扫</span>
+            <img src="/images/wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <span>支付宝扫一扫</span>
+            <img src="/images/alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/archives/5d3f30e1.html">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/archives/9582034c.html">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'chaosir';
+    
+    var disqus_url = 'http://blog.adminchao.com/archives/56938b09.html';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//chaosir.disqus.com/count.js" async></script>
+
+
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+  </div>
+
+  
+
+  
+<script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+
+
+</script>
+
+
+
+</body>
+</html>

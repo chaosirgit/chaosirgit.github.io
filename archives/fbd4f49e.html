@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Laravel overtrue/wechat 微信用法 | 超哥哥的学习笔记</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Laravel,PHP,实例,overtrue,wechat,微信," />
+  
+
+  <meta name="description" content="网页授权登陆中间件创建 app/Http/Middleware/WechatAuth.php 中间件123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475public fu">
+<meta name="keywords" content="Laravel,PHP,实例,overtrue,wechat,微信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Laravel overtrue&#x2F;wechat 微信用法">
+<meta property="og:url" content="http://blog.adminchao.com/archives/fbd4f49e.html">
+<meta property="og:site_name" content="超哥哥的学习笔记">
+<meta property="og:description" content="网页授权登陆中间件创建 app/Http/Middleware/WechatAuth.php 中间件123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475public fu">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-08T04:54:12.985Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Laravel overtrue&#x2F;wechat 微信用法">
+<meta name="twitter:description" content="网页授权登陆中间件创建 app/Http/Middleware/WechatAuth.php 中间件123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475public fu">
+
+  
+
+  
+    <link rel="icon" href="/images/chaosirgit.png">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/chaosir.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#网页授权登陆中间件"><span class="toc-text">网页授权登陆中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建-app-Http-Middleware-WechatAuth-php-中间件"><span class="toc-text">创建 app/Http/Middleware/WechatAuth.php 中间件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用中间件即可"><span class="toc-text">使用中间件即可</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#微信公众号支付"><span class="toc-text">微信公众号支付</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#生成支付-jssdk"><span class="toc-text">生成支付 jssdk</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JS-根据返回-jssdk-唤起微信支付"><span class="toc-text">JS 根据返回 jssdk 唤起微信支付</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#微信回调"><span class="toc-text">微信回调</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Laravel-overtrue-wechat-微信用法" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Laravel overtrue/wechat 微信用法</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.06.08</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>chaosir</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Laravel/">Laravel</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://blog.adminchao.com/archives/fbd4f49e.html#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h3 id="网页授权登陆中间件"><a href="#网页授权登陆中间件" class="headerlink" title="网页授权登陆中间件"></a>网页授权登陆中间件</h3><h4 id="创建-app-Http-Middleware-WechatAuth-php-中间件"><a href="#创建-app-Http-Middleware-WechatAuth-php-中间件" class="headerlink" title="创建 app/Http/Middleware/WechatAuth.php 中间件"></a>创建 <code>app/Http/Middleware/WechatAuth.php</code> 中间件</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span><span class="params">($request, Closure $next, $account = <span class="string">'default'</span>, $scopes = null)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// $account 与 $scopes 写反的情况</span></span><br><span class="line">        <span class="keyword">if</span> (is_array($scopes) || (\is_string($account) &amp;&amp; str_is(<span class="string">'snsapi_*'</span>, $account))) &#123;</span><br><span class="line">            <span class="keyword">list</span>($account, $scopes) = [$scopes, $account];</span><br><span class="line">            $account || $account = <span class="string">'default'</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        $isNewSession = <span class="keyword">false</span>;</span><br><span class="line">        $sessionKey = \sprintf(<span class="string">'user_id'</span>, $account);</span><br><span class="line">        $config = config(\sprintf(<span class="string">'wechat.official_account.%s'</span>, $account), []);</span><br><span class="line">        $officialAccount = app(\sprintf(<span class="string">'wechat.official_account.%s'</span>, $account));</span><br><span class="line">        $scopes = $scopes ?: array_get($config, <span class="string">'oauth.scopes'</span>, [<span class="string">'snsapi_base'</span>]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (is_string($scopes)) &#123;</span><br><span class="line">            $scopes = array_map(<span class="string">'trim'</span>, explode(<span class="string">','</span>, $scopes));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//$session = session([$sessionKey=&gt;'24260']); //测试环境直接赋值session 正式环境注释</span></span><br><span class="line">        </span><br><span class="line">           <span class="comment">/**</span></span><br><span class="line"><span class="comment">            * 1. 是否有 session</span></span><br><span class="line"><span class="comment">            * 2. 没有 session 判断是否有 code</span></span><br><span class="line"><span class="comment">            * 3. 没有 code 获取code-回调到本页</span></span><br><span class="line"><span class="comment">            * 4. 微信返回 code 参数请求本页</span></span><br><span class="line"><span class="comment">            * 5. 有 code 取得 openid 执行数据库操作</span></span><br><span class="line"><span class="comment">            * 6. openid 在数据库里赋值 session 跳到下一步请求</span></span><br><span class="line"><span class="comment">            * 7. openid 不再数据库里 判断能否取到 nickname ,取不到使用 snsapi_userinfo 授权登陆，否则存入相关信息到数据库并赋值 session</span></span><br><span class="line"><span class="comment">            */</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (!session($sessionKey)) &#123;                          <span class="comment">//1.没有session</span></span><br><span class="line">            <span class="keyword">if</span> ($request-&gt;has(<span class="string">'code'</span>)) &#123;                 <span class="comment">//2.有code</span></span><br><span class="line"></span><br><span class="line">                $wechat_user = $officialAccount-&gt;oauth-&gt;user();         </span><br><span class="line">                $data[<span class="string">'openid'</span>] = $wechat_user-&gt;getId() ?? <span class="string">''</span>;          <span class="comment">//取得openid</span></span><br><span class="line">                $has = UserWechat::getByOpenid($data[<span class="string">'openid'</span>]);</span><br><span class="line">                $has_user = User::where(<span class="string">'tync_openid'</span>,$data[<span class="string">'openid'</span>])-&gt;first();</span><br><span class="line">                <span class="keyword">if</span>(!<span class="keyword">empty</span>($has) &amp;&amp; !<span class="keyword">empty</span>($has_user))&#123;              <span class="comment">//openid 在库里跳转到下一步</span></span><br><span class="line">                    $user_id = User::where(<span class="string">'tync_openid'</span>,$data[<span class="string">'openid'</span>])-&gt;first()-&gt;id ?? <span class="number">0</span>;</span><br><span class="line">                    session([$sessionKey =&gt; $user_id ?? <span class="string">''</span>]);</span><br><span class="line">                    <span class="keyword">return</span> $next($request);</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;                                              <span class="comment">//不再库里</span></span><br><span class="line">                    $data[<span class="string">'nickname'</span>] = $wechat_user-&gt;getNickname() ?? <span class="string">''</span>;</span><br><span class="line">                    <span class="keyword">if</span>(<span class="keyword">empty</span>($data[<span class="string">'nickname'</span>]))&#123;                   <span class="comment">//取不到nickname 使用授权登陆</span></span><br><span class="line">                        session([$sessionKey =&gt; <span class="string">''</span>]);</span><br><span class="line">                        <span class="keyword">return</span> $officialAccount-&gt;oauth-&gt;scopes([<span class="string">'snsapi_userinfo'</span>])-&gt;redirect($request-&gt;fullUrl());</span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;                                          <span class="comment">//取到nickname 存库</span></span><br><span class="line">                        $data[<span class="string">'headimgurl'</span>] = $wechat_user-&gt;getAvatar() ?? <span class="string">''</span>;</span><br><span class="line">                        UserWechat::createUser($data);                  <span class="comment">//存入相关信息</span></span><br><span class="line">                        User::createWeChat($data);</span><br><span class="line">                        $user_id = User::where(<span class="string">'tync_openid'</span>,$data[<span class="string">'openid'</span>])-&gt;first()-&gt;id ?? <span class="number">0</span>;</span><br><span class="line">                        session([$sessionKey =&gt; $user_id ?? <span class="string">''</span>]);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                $isNewSession = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//                Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> redirect()-&gt;to(<span class="keyword">$this</span>-&gt;getTargetUrl($request));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * 3.没有code 获取code-回调到本页</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line"></span><br><span class="line">            session()-&gt;forget($sessionKey);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> $officialAccount-&gt;oauth-&gt;scopes($scopes)-&gt;redirect($request-&gt;fullUrl()); <span class="comment">//获取code-回调到本页</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//        Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> $next($request);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="使用中间件即可"><a href="#使用中间件即可" class="headerlink" title="使用中间件即可"></a>使用中间件即可</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Route::group([<span class="string">'prefix'</span> =&gt; <span class="string">'api'</span>, <span class="string">'middleware'</span> =&gt; [<span class="string">'wechat.oauth'</span>]],<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Route::get(<span class="string">'login'</span>,<span class="string">'WeChatController@login'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="微信公众号支付"><a href="#微信公众号支付" class="headerlink" title="微信公众号支付"></a>微信公众号支付</h3><h4 id="生成支付-jssdk"><a href="#生成支付-jssdk" class="headerlink" title="生成支付 jssdk"></a>生成支付 jssdk</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">payment</span><span class="params">(Request $request)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $type = Input::get(<span class="string">"type"</span>);<span class="comment">//支付类型</span></span><br><span class="line">        $order_no = Input::get(<span class="string">"order_no"</span>);<span class="comment">//订单号</span></span><br><span class="line">        <span class="keyword">if</span> (!in_array($type,<span class="keyword">array</span>(<span class="string">"wechat_pay"</span>,<span class="string">"amount"</span>,<span class="string">"ali_pay"</span>,<span class="string">"alipay_app"</span>)))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;error(<span class="string">"支付类型错误"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        $is_wechat = Input::get(<span class="string">"is_wechat"</span>,<span class="string">"0"</span>);<span class="comment">//是否是微信浏览器</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">empty</span>($order_no)) <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;error(<span class="string">"参数错误"</span>);</span><br><span class="line">        $order = FarmOrder::where(<span class="string">'order_no'</span>,$order_no)-&gt;where(<span class="string">"user_id"</span>,User::getUserId())-&gt;where(<span class="string">"pay_status"</span>,<span class="number">0</span>)-&gt;first();</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">empty</span>($order)) <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;error(<span class="string">"订单未找到"</span>);</span><br><span class="line">        $user_id = User::getUserId();</span><br><span class="line"></span><br><span class="line">            <span class="comment">//微信支付</span></span><br><span class="line">            <span class="keyword">if</span>($type == <span class="string">"wechat_pay"</span>)&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                $order-&gt;pay_id = <span class="number">2</span>;</span><br><span class="line">                $user          = User::find($user_id);</span><br><span class="line">                $app           = app(<span class="string">'wechat.payment.default'</span>);</span><br><span class="line">                <span class="comment">//统一下单(预支付)</span></span><br><span class="line">                $result        = $app-&gt;order-&gt;unify([</span><br><span class="line">                    <span class="string">'body'</span>         =&gt; <span class="string">'田园农场-支付订单'</span>,</span><br><span class="line">                    <span class="string">'out_trade_no'</span> =&gt; $order_no,</span><br><span class="line">                    <span class="string">'total_fee'</span>    =&gt; $order-&gt;total_price * <span class="number">100</span>,</span><br><span class="line"><span class="comment">//                'spbill_create_ip' =&gt; '123.12.12.123', // 可选，如不传该参数，SDK 将会自动获取相应 IP 地址</span></span><br><span class="line">                    <span class="string">'notify_url'</span>   =&gt; <span class="string">'http://www.tianyuannongchang.cn/wechat/notify'</span>, <span class="comment">// 支付结果通知网址，如果不设置则会使用配置里的默认地址</span></span><br><span class="line">                    <span class="string">'trade_type'</span>   =&gt; <span class="string">'JSAPI'</span>,</span><br><span class="line">                    <span class="string">'openid'</span>       =&gt; $user-&gt;tync_openid,</span><br><span class="line">                ]);</span><br><span class="line">                <span class="comment">//根据预支付数据 生成支付 jssdk</span></span><br><span class="line">                $payment = Factory::payment(config(<span class="string">'wechat.payment.default'</span>));</span><br><span class="line">                $jssdk = $payment-&gt;jssdk;</span><br><span class="line">                $json = $jssdk-&gt;bridgeConfig($result[<span class="string">'prepay_id'</span>],<span class="keyword">false</span>); <span class="comment">// 返回 json 字符串，如果想返回数组，传第二个参数 false</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;success($json);</span><br><span class="line"></span><br><span class="line">            &#125;<span class="keyword">catch</span> (\<span class="keyword">Exception</span> $exception)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;error($exception-&gt;getMessage());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;error(<span class="string">"支付类型错误"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="JS-根据返回-jssdk-唤起微信支付"><a href="#JS-根据返回-jssdk-唤起微信支付" class="headerlink" title="JS 根据返回 jssdk 唤起微信支付"></a>JS 根据返回 jssdk 唤起微信支付</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$(<span class="string">"#payment"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">               $.ajax(&#123;</span><br><span class="line">                 url:_SERVER + <span class="string">"api/payment"</span>,          <span class="comment">//上边的接口</span></span><br><span class="line">                 type:<span class="string">'post'</span>,</span><br><span class="line">                 dataType:<span class="string">'json'</span>,</span><br><span class="line">                 data:&#123;</span><br><span class="line">                   type:type,</span><br><span class="line">                   order_no:order_no</span><br><span class="line">                 &#125;,</span><br><span class="line">                 success:<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">                     <span class="keyword">if</span>(data.error == <span class="number">0</span>)&#123;</span><br><span class="line">                         <span class="keyword">if</span>(type == <span class="string">"wechat_pay"</span>)&#123;</span><br><span class="line">                                 <span class="keyword">return</span>  WeixinJSBridge.invoke(        <span class="comment">//微信支付</span></span><br><span class="line">                                     <span class="string">'getBrandWCPayRequest'</span>,</span><br><span class="line">                                     data.msg,</span><br><span class="line">                                     <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">                                         <span class="keyword">if</span>(res.err_msg == <span class="string">"get_brand_wcpay_request:ok"</span> ) &#123;</span><br><span class="line">                                             layer.open(&#123;</span><br><span class="line">                                                 content: <span class="string">'恭喜您，订单支付成功'</span></span><br><span class="line">                                                 ,<span class="attr">btn</span>: [ <span class="string">'确定'</span>]</span><br><span class="line">                                                 ,<span class="attr">yes</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                                                     <span class="built_in">window</span>.location.href=<span class="string">"my-order.html"</span>;</span><br><span class="line">                                                 &#125;</span><br><span class="line">                                             &#125;);</span><br><span class="line">                                         &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                                             layer.open(&#123;<span class="attr">content</span>: <span class="string">'请重试'</span> ,<span class="attr">skin</span>: <span class="string">'msg'</span> ,<span class="attr">time</span>: <span class="number">1</span> &#125;);</span><br><span class="line">                                             <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                                         &#125;</span><br><span class="line">                                     &#125;</span><br><span class="line">                                 );</span><br><span class="line">                             </span><br><span class="line">                         &#125;</span><br><span class="line">                     &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                         layer_msg(data.message);</span><br><span class="line">                     &#125;</span><br><span class="line">                 &#125;</span><br><span class="line">               &#125;)</span><br><span class="line">           &#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="微信回调"><a href="#微信回调" class="headerlink" title="微信回调"></a>微信回调</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">notifyWechat</span><span class="params">(Request $request)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line"></span><br><span class="line">       $app = app(<span class="string">'wechat.payment.default'</span>);</span><br><span class="line">       $response = $app-&gt;handlePaidNotify(<span class="function"><span class="keyword">function</span><span class="params">($message, $fail)</span></span>&#123;</span><br><span class="line">           <span class="comment">// 使用通知里的 "微信支付订单号" 或者 "商户订单号" 去自己的数据库找到订单</span></span><br><span class="line">           $order = FarmOrder::getOrderByNo($message[<span class="string">'out_trade_no'</span>]);</span><br><span class="line"></span><br><span class="line">           <span class="keyword">if</span> (<span class="keyword">empty</span>($order) || $order-&gt;pay_status == <span class="number">1</span>) &#123; <span class="comment">// 如果订单不存在 或者 订单已经支付过了</span></span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">true</span>; <span class="comment">// 告诉微信，我已经处理完了，订单没找到，别再通知我了</span></span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">           <span class="keyword">if</span> ($message[<span class="string">'return_code'</span>] === <span class="string">'SUCCESS'</span>) &#123; <span class="comment">// return_code 表示通信状态，不代表支付状态</span></span><br><span class="line">               <span class="comment">// 用户是否支付成功</span></span><br><span class="line">               <span class="keyword">if</span> ($message[<span class="string">'result_code'</span>] === <span class="string">'SUCCESS'</span>) &#123;</span><br><span class="line">                   $order-&gt;pay_time = time(); <span class="comment">// 更新支付时间为当前时间</span></span><br><span class="line">                   $order-&gt;pay_status = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">                   <span class="comment">// 用户支付失败</span></span><br><span class="line">               &#125; <span class="keyword">elseif</span> ($message[<span class="string">'result_code'</span>] === <span class="string">'FAIL'</span>) &#123;</span><br><span class="line">                   $order-&gt;pay_status = <span class="number">0</span>;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">               <span class="keyword">return</span> $fail(<span class="string">'通信失败，请稍后再通知我'</span>);</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           $order-&gt;save(); <span class="comment">// 保存订单</span></span><br><span class="line"></span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">true</span>; <span class="comment">// 返回处理完成</span></span><br><span class="line">       &#125;);</span><br><span class="line"></span><br><span class="line">       <span class="keyword">return</span> $response;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+    
+  </div>
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+  
+      <div class="git"></div>
+  
+  <script src="/js/util.js"></script>
+<script>
+function closeModal() {
+    Util.addClass($modalDialog, 'hide-dialog')
+    Util.removeClass($modalDialog, 'show-dialog');
+    Util.addClass($cover, 'hide')
+    Util.removeClass($cover, 'show');
+  }
+var $toolboxMobile = document.getElementById('toolbox-mobile');
+  var $cover = document.getElementById('cover');
+  var $close = document.getElementById('close');
+  var $modalDialog = document.getElementById('modal-dialog');
+if ($toolboxMobile) {
+    Util.bind($toolboxMobile, 'click', function() {
+      Util.addClass($modalDialog, 'show-dialog')
+      Util.removeClass($modalDialog, 'hide-dialog');
+
+      Util.addClass($cover, 'show')
+      Util.removeClass($cover, 'hide');
+    });
+
+
+    Util.bind($cover, 'click', closeModal);
+    Util.bind($close, 'click', closeModal);
+  }
+</script>
+</article>
+
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持我</div>
+        <ul>
+        
+          <li class="item">
+            <span>微信扫一扫</span>
+            <img src="/images/wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <span>支付宝扫一扫</span>
+            <img src="/images/alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/archives/780b6301.html">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/archives/a97f5e57.html">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'chaosir';
+    
+    var disqus_url = 'http://blog.adminchao.com/archives/fbd4f49e.html';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//chaosir.disqus.com/count.js" async></script>
+
+
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+  </div>
+
+  
+
+  
+<script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+
+
+</script>
+
+
+
+</body>
+</html>

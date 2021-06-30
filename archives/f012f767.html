@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>从零搭建 LNMP 教程 | 超哥哥的学习笔记</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="教程,LNMP,环境," />
+  
+
+  <meta name="description" content="通过 ssh 连接服务器服务器系统版本 Ubuntu 16.041ssh root@127.0.0.1 建立普通账户1adduser username 赋予普通账户 sudo 权限进入 /etc/sudoers.d/ 新建一个文件，文件名随意。添加 username ALL=(ALL:ALL) ALL 即可。 升级软件源1sudo apt-get update 安装 Mysql1sudo apt-">
+<meta name="keywords" content="LNMP,教程,环境,Linux,Nginx,Mysql,PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从零搭建 LNMP 教程">
+<meta property="og:url" content="http://blog.adminchao.com/archives/f012f767.html">
+<meta property="og:site_name" content="超哥哥的学习笔记">
+<meta property="og:description" content="通过 ssh 连接服务器服务器系统版本 Ubuntu 16.041ssh root@127.0.0.1 建立普通账户1adduser username 赋予普通账户 sudo 权限进入 /etc/sudoers.d/ 新建一个文件，文件名随意。添加 username ALL=(ALL:ALL) ALL 即可。 升级软件源1sudo apt-get update 安装 Mysql1sudo apt-">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-08T05:17:49.709Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从零搭建 LNMP 教程">
+<meta name="twitter:description" content="通过 ssh 连接服务器服务器系统版本 Ubuntu 16.041ssh root@127.0.0.1 建立普通账户1adduser username 赋予普通账户 sudo 权限进入 /etc/sudoers.d/ 新建一个文件，文件名随意。添加 username ALL=(ALL:ALL) ALL 即可。 升级软件源1sudo apt-get update 安装 Mysql1sudo apt-">
+
+  
+
+  
+    <link rel="icon" href="/images/chaosirgit.png">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/chaosir.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#通过-ssh-连接服务器"><span class="toc-text">通过 ssh 连接服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建立普通账户"><span class="toc-text">建立普通账户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#赋予普通账户-sudo-权限"><span class="toc-text">赋予普通账户 sudo 权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#升级软件源"><span class="toc-text">升级软件源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-Mysql"><span class="toc-text">安装 Mysql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试-Mysql-是否安装成功"><span class="toc-text">测试 Mysql 是否安装成功</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-Nginx"><span class="toc-text">安装 Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动-Nginx"><span class="toc-text">启动 Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-PHP"><span class="toc-text">安装 PHP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置-Nginx"><span class="toc-text">配置 Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试"><span class="toc-text">测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置-mysql-默认编码集"><span class="toc-text">设置 mysql 默认编码集</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-从零搭建-LNMP" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">从零搭建 LNMP 教程</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.10.08</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>chaosir</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/LNMP/">LNMP</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://blog.adminchao.com/archives/f012f767.html#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="通过-ssh-连接服务器"><a href="#通过-ssh-连接服务器" class="headerlink" title="通过 ssh 连接服务器"></a>通过 ssh 连接服务器</h2><p>服务器系统版本 Ubuntu 16.04<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@127.0.0.1</span><br></pre></td></tr></table></figure></p>
+<h2 id="建立普通账户"><a href="#建立普通账户" class="headerlink" title="建立普通账户"></a>建立普通账户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adduser username</span><br></pre></td></tr></table></figure>
+<h2 id="赋予普通账户-sudo-权限"><a href="#赋予普通账户-sudo-权限" class="headerlink" title="赋予普通账户 sudo 权限"></a>赋予普通账户 sudo 权限</h2><p>进入 <code>/etc/sudoers.d/</code> 新建一个文件，文件名随意。添加 <code>username ALL=(ALL:ALL) ALL</code> 即可。</p>
+<h2 id="升级软件源"><a href="#升级软件源" class="headerlink" title="升级软件源"></a>升级软件源</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+<h2 id="安装-Mysql"><a href="#安装-Mysql" class="headerlink" title="安装 Mysql"></a>安装 Mysql</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mysql-server mysql-client</span><br></pre></td></tr></table></figure>
+<p><em>mysql-server：</em> mysql 服务端，是 mysql 的核心程序，负责生成数据库实例，并提供相关接口供不同的客户端调用。<br><em>mysql-client：</em> 是客户端程序，负责操作 mysql 实例，mysql-client 是众多客户端程序的一种，其他还有 mysql、mysqldump、mysqlslap 这些访问、备份、压力测试的工具。</p>
+<h2 id="测试-Mysql-是否安装成功"><a href="#测试-Mysql-是否安装成功" class="headerlink" title="测试 Mysql 是否安装成功"></a>测试 Mysql 是否安装成功</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p</span><br></pre></td></tr></table></figure>
+<p>输入密码，出现 <code>mysql&gt;</code> 命令行代表安装成功。</p>
+<h2 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nginx</span><br></pre></td></tr></table></figure>
+<p>安装后所有的配置文件都在 <code>/etc/nginx/</code> 。（并且每个虚拟主机已经安排在 <code>/etc/nginx/sites-available</code> ）下。</p>
+<ul>
+<li>程序文件在 <code>/user/sbin/nginx/</code></li>
+<li>日志文件在 <code>/var/log/nginx</code></li>
+<li>启动脚本在 <code>/etc/init.d/</code></li>
+<li>默认的项目目录在 <code>/var/www/</code></li>
+</ul>
+<h2 id="启动-Nginx"><a href="#启动-Nginx" class="headerlink" title="启动 Nginx"></a>启动 Nginx</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /etc/init.d/nginx start</span><br></pre></td></tr></table></figure>
+<p>or<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service nginx start</span><br></pre></td></tr></table></figure></p>
+<p>测试 nginx 是否安装成功<br>输入网址，出现 welcome nginx 成功。</p>
+<h2 id="安装-PHP"><a href="#安装-PHP" class="headerlink" title="安装 PHP"></a>安装 PHP</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install php5-fpm php5-mysql</span><br></pre></td></tr></table></figure>
+<p><em>php5-fpm</em> 是一个 php FastCGI 管理器，原本是 php 源代码的一个补丁，由于它的先进性，在 php5.3.3 以后被官方收录了，不再是第三方的包，现在下载的 php5-fpm 直接是php源代码并整合了 php5-fpm 的分支。<br><em>php5-cgi</em> 也是一个 php FastCGI 管理器。它有许多不足，所以安装过 php5-fpm 就不要再安装 php5-cgi 啦。<br><em>php5-mysql</em> 是 php 的 mysql 扩展。</p>
+<h2 id="配置-Nginx"><a href="#配置-Nginx" class="headerlink" title="配置 Nginx"></a>配置 Nginx</h2><p>打开 nginx 配置文件 <code>/etc/nginx/nginx.conf</code><br>默认虚拟主机配置文件 <code>/etc/nginx/sites-available/default</code><br>这里我们打开默认虚拟主机配置文件，配置 php 文件的解析。找到如下配置，打开注释<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</span><br><span class="line">        #</span><br><span class="line">        location ~ \.php$ &#123;</span><br><span class="line">                include snippets/fastcgi-php.conf;</span><br><span class="line">        #</span><br><span class="line">        #       # With php7.0-cgi alone:</span><br><span class="line">        #       fastcgi_pass 127.0.0.1:9000;</span><br><span class="line">        #       # With php7.0-fpm:</span><br><span class="line">               fastcgi_pass unix:/run/php/php7.0-fpm.sock;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo service nginx restart  //重启 nginx</span><br><span class="line">sudo service php7.0-fpm restart //重启 php</span><br></pre></td></tr></table></figure>
+<p>在虚拟主机根目录下创建 <code>phpinfo.php</code> 测试 <code>php</code> 是否安装成功。如果想要扩展，执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install php7.0-curl  //php7.0-(库名)</span><br></pre></td></tr></table></figure></p>
+<p>安装。</p>
+<h2 id="设置-mysql-默认编码集"><a href="#设置-mysql-默认编码集" class="headerlink" title="设置 mysql 默认编码集"></a>设置 mysql 默认编码集</h2><p>查看默认编码集。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW VARIABLES LIKE &apos;character%&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>通过 <code>my.cnf</code> 文件增加两个参数：</p>
+<ol>
+<li><p>在 <code>[mysqld]</code> 下添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">default-character-set=utf8（ mysql 5.5 版本以上添加 character-set-server=utf8 ）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 <code>[client]</code> 下添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">default-character-set=utf8</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这样我们建数据库建表的时候就不用特别指定 <code>utf8</code> 的字符集了。配置文件里的这种写法解决了数据存储和比较的问题<br>，但是对客户端的连接是没有作用的，客户端这时候一般需要指定 <code>utf8</code> 方式连接才能避免乱码。也就是传说中的 <code>set names</code> 命令。事实上，<code>set names utf8</code> 命令对应的是服务器端以下几个命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SET character_set_client = utf8;</span><br><span class="line">SET character_set_results = utf8;</span><br><span class="line">SET character_set_connection = utf8;</span><br></pre></td></tr></table></figure></p>
+<p>但这三个参数是不能写在配置文件 <code>my.cnf</code> 里的。只能通过 <code>set</code> 命令来动态修改。我们需要的是在配置文件里写好一劳<br>永逸的办法。那么这时候，是否有在服务端解决问题的办法呢，可行的思路是在 <code>init_connect</code> 里设置。这个命令在每<br>个普通用户连接上来的时候都会触发执行，可以在 <code>[mysqld]</code> 部分增加以下一行设置连接字符集：<br>在 <code>[mysqld]</code> 下添加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">init_connect = &apos;SET NAMES utf8&apos;</span><br></pre></td></tr></table></figure></p>
+
+    
+  </div>
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+  
+      <div class="git"></div>
+  
+  <script src="/js/util.js"></script>
+<script>
+function closeModal() {
+    Util.addClass($modalDialog, 'hide-dialog')
+    Util.removeClass($modalDialog, 'show-dialog');
+    Util.addClass($cover, 'hide')
+    Util.removeClass($cover, 'show');
+  }
+var $toolboxMobile = document.getElementById('toolbox-mobile');
+  var $cover = document.getElementById('cover');
+  var $close = document.getElementById('close');
+  var $modalDialog = document.getElementById('modal-dialog');
+if ($toolboxMobile) {
+    Util.bind($toolboxMobile, 'click', function() {
+      Util.addClass($modalDialog, 'show-dialog')
+      Util.removeClass($modalDialog, 'hide-dialog');
+
+      Util.addClass($cover, 'show')
+      Util.removeClass($cover, 'hide');
+    });
+
+
+    Util.bind($cover, 'click', closeModal);
+    Util.bind($close, 'click', closeModal);
+  }
+</script>
+</article>
+
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持我</div>
+        <ul>
+        
+          <li class="item">
+            <span>微信扫一扫</span>
+            <img src="/images/wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <span>支付宝扫一扫</span>
+            <img src="/images/alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/archives/269f8031.html">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/archives/9ea88159.html">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'chaosir';
+    
+    var disqus_url = 'http://blog.adminchao.com/archives/f012f767.html';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//chaosir.disqus.com/count.js" async></script>
+
+
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+  </div>
+
+  
+
+  
+<script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+
+
+</script>
+
+
+
+</body>
+</html>

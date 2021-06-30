@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Laravel Eloquent 高级 | 超哥哥的学习笔记</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Laravel,Eloquent,高级,联表,计数," />
+  
+
+  <meta name="description" content="前言在使用 Laravel Eloquent 模型时，深刻体会到什么是优雅！虽然在业务逻辑中可以使用模型链式调用DB模型的操作方法来解决，但是始终少了优雅！这里专门记录去 DB 模型的操作方法，使代码优雅化。 目标leftJoin where目标 SQL1select * from user_second left join user on user_second.user_id = user.i">
+<meta name="keywords" content="Laravel,Eloquent,高级,联表,计数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Laravel Eloquent 高级">
+<meta property="og:url" content="http://blog.adminchao.com/archives/505b2cb.html">
+<meta property="og:site_name" content="超哥哥的学习笔记">
+<meta property="og:description" content="前言在使用 Laravel Eloquent 模型时，深刻体会到什么是优雅！虽然在业务逻辑中可以使用模型链式调用DB模型的操作方法来解决，但是始终少了优雅！这里专门记录去 DB 模型的操作方法，使代码优雅化。 目标leftJoin where目标 SQL1select * from user_second left join user on user_second.user_id = user.i">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-31T19:37:34.422Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Laravel Eloquent 高级">
+<meta name="twitter:description" content="前言在使用 Laravel Eloquent 模型时，深刻体会到什么是优雅！虽然在业务逻辑中可以使用模型链式调用DB模型的操作方法来解决，但是始终少了优雅！这里专门记录去 DB 模型的操作方法，使代码优雅化。 目标leftJoin where目标 SQL1select * from user_second left join user on user_second.user_id = user.i">
+
+  
+
+  
+    <link rel="icon" href="/images/chaosirgit.png">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/chaosir.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#目标"><span class="toc-text">目标</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#leftJoin-where"><span class="toc-text">leftJoin where</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#目标-SQL"><span class="toc-text">目标 SQL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决方案"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关联相关"><span class="toc-text">关联相关</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#关联计数"><span class="toc-text">关联计数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关联模型"><span class="toc-text">关联模型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#状态名"><span class="toc-text">状态名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取未评价的商品"><span class="toc-text">获取未评价的商品</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Laravel-Eloquent-高级" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Laravel Eloquent 高级</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.08.22</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>chaosir</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://blog.adminchao.com/archives/505b2cb.html#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在使用 Laravel Eloquent 模型时，深刻体会到什么是优雅！虽然在业务逻辑中可以使用模型链式调用DB模型的操作方法来解决，但是始终少了优雅！这里专门记录去 DB 模型的操作方法，使代码优雅化。</p>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><h3 id="leftJoin-where"><a href="#leftJoin-where" class="headerlink" title="leftJoin where"></a>leftJoin where</h3><h4 id="目标-SQL"><a href="#目标-SQL" class="headerlink" title="目标 SQL"></a>目标 SQL</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> user_second <span class="keyword">left</span> <span class="keyword">join</span> <span class="keyword">user</span> <span class="keyword">on</span> user_second.user_id = user.id <span class="keyword">where</span> user.status = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">UserSecond::leftJoin(<span class="string">'user'</span>,<span class="string">'user_second.user_id'</span>,<span class="string">'='</span>,<span class="string">'user.id'</span>)-&gt;where(<span class="string">'user.status'</span>,<span class="number">1</span>)-&gt;get();</span><br></pre></td></tr></table></figure>
+<p>但是这样的缺点在于  </p>
+<ol>
+<li>得到的结果两个表的字段如果相同，右表会覆盖左表的值。  </li>
+<li>得到的结果不能使用模型精确控制。  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">            "id": 11,       //其实左表也就是`user_second`表的 id 为 9 这里被 `user` 表的 id 覆盖了</span><br><span class="line">            "user_id": 11, //这里是 `user_second` 表的 `user_id`</span><br><span class="line">            "enlist_currency": "256.00000",</span><br><span class="line">            "create_time": "2018-08-21 17:10:43",</span><br><span class="line">            "repeat": 0,</span><br><span class="line">            "parent_id": 0, //这个是 `user` 表里才有的字段，但是 UserSecond 模型并不期望得到这个结果,但是被添加出来了</span><br><span class="line">            "crowd_id": 1</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>优化后得到<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">UserSecond::leftJoin(<span class="string">'user'</span>,<span class="string">'user_second.user_id'</span>,<span class="string">'='</span>,<span class="string">'user.id'</span>)-&gt;where(<span class="string">'user.status'</span>,<span class="number">1</span>)-&gt;selectRaw(<span class="string">'user_second.*'</span>)-&gt;get();</span><br></pre></td></tr></table></figure></p>
+<p>等同于<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">UserSecond::leftJoin(<span class="string">'user'</span>,<span class="string">'user_second.user_id'</span>,<span class="string">'='</span>,<span class="string">'user.id'</span>)-&gt;where(<span class="string">'user.status'</span>,<span class="number">1</span>)-&gt;get([<span class="string">'user_second.*'</span>]);</span><br></pre></td></tr></table></figure></p>
+<p>结果<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"id"</span>: <span class="number">9</span>,</span><br><span class="line">    <span class="attr">"user_id"</span>: <span class="number">11</span>,</span><br><span class="line">    <span class="attr">"enlist_currency"</span>: <span class="string">"256.00000"</span>,</span><br><span class="line">    <span class="attr">"create_time"</span>: <span class="string">"2018-08-21 17:10:43"</span>,</span><br><span class="line">    <span class="attr">"repeat"</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="attr">"crowd_id"</span>: <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>但是这样还得写 <code>leftJoin</code> 中的一大段代码，并且 <code>leftJoin</code> 其实是 DB 模型的方法被 UserSecond 继承了过来，并不是真正意义上的 Eloquent。仔细查阅资料后得到  </p>
+<ol>
+<li>首先在 Model 中做好关联关系 <code>App\UserSecond.php</code> <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">user</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;hasOne(<span class="string">'App\User'</span>,<span class="string">'id'</span>,<span class="string">'user_id'</span>);</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//下边会用到    </span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">order</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;belongsTo(<span class="string">'App\Order'</span>,<span class="string">'order_id'</span>,<span class="string">'id'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>等同于<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">user</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;belongsTo(<span class="string">'App\User'</span>,<span class="string">'user_id'</span>,<span class="string">'id'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//下边会用到    </span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">order</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;hasOne(<span class="string">'App\Order'</span>,<span class="string">'id'</span>,<span class="string">'order_id'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li>使用<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">UserSecond::whereHas(<span class="string">'user'</span>,<span class="function"><span class="keyword">function</span> <span class="params">($query)</span></span>&#123;</span><br><span class="line">                            $query-&gt;where(<span class="string">'status'</span>,<span class="number">1</span>);</span><br><span class="line">                    &#125;)-&gt;get();</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>结果<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">     <span class="attr">"id"</span>: <span class="number">9</span>,</span><br><span class="line">     <span class="attr">"user_id"</span>: <span class="number">11</span>,</span><br><span class="line">     <span class="attr">"enlist_currency"</span>: <span class="string">"256.00000"</span>,</span><br><span class="line">     <span class="attr">"create_time"</span>: <span class="string">"2018-08-21 17:10:43"</span>,</span><br><span class="line">     <span class="attr">"repeat"</span>: <span class="number">0</span>,</span><br><span class="line">     <span class="attr">"crowd_id"</span>: <span class="number">1</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>得到期望的结果。</p>
+<h3 id="关联相关"><a href="#关联相关" class="headerlink" title="关联相关"></a>关联相关</h3><p>所有的关联，你只需在模型中加入类似上边的提到的一个关联关系即可:</p>
+<h4 id="关联计数"><a href="#关联计数" class="headerlink" title="关联计数"></a>关联计数</h4><p>可以关联计数，可以加上关联限定条件计数，默认在结果集合里是 <code>关联名_count</code> 字段。但可以用 <code>as</code> 改名。如下<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">UserSecond::whereHas(<span class="string">'user'</span>,<span class="function"><span class="keyword">function</span> <span class="params">($query)</span></span>&#123;</span><br><span class="line">                            $query-&gt;where(<span class="string">'status'</span>,<span class="number">1</span>);</span><br><span class="line">                    &#125;)-&gt;withCount([<span class="string">'order'</span>,<span class="string">'user as total'</span>=&gt;<span class="function"><span class="keyword">function</span><span class="params">($query)</span></span>&#123;</span><br><span class="line">                        <span class="comment">//user_second.order_id = order.id 时,order 表有几条记录</span></span><br><span class="line">                        <span class="comment">//user_second.user_id = user.id 时,user 表的 money &gt; 20 的有几条记录</span></span><br><span class="line">                        $query-&gt;where(<span class="string">'money'</span>,<span class="string">'&gt;'</span>,<span class="number">20</span>);</span><br><span class="line">                    &#125;])-&gt;get();</span><br></pre></td></tr></table></figure></p>
+<p>结果:<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">           <span class="attr">"id"</span>: <span class="number">9</span>,</span><br><span class="line">           <span class="attr">"user_id"</span>: <span class="number">11</span>,</span><br><span class="line">           <span class="attr">"enlist_currency"</span>: <span class="string">"256.00000"</span>,</span><br><span class="line">           <span class="attr">"create_time"</span>: <span class="string">"2018-08-21 17:10:43"</span>,</span><br><span class="line">           <span class="attr">"repeat"</span>: <span class="number">0</span>,</span><br><span class="line">           <span class="attr">"crowd_id"</span>: <span class="number">1</span>,</span><br><span class="line">           <span class="attr">"order_count"</span>: <span class="number">15</span>,</span><br><span class="line">           <span class="attr">"total"</span>: <span class="number">1</span></span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="关联模型"><a href="#关联模型" class="headerlink" title="关联模型"></a>关联模型</h4><p>关联模型，在结果集中添加 <code>{关联名}</code> 字段，也可以用 <code>as</code> 改名，里面是关联模型的结果集：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">UserSecond::whereHas(<span class="string">'user'</span>,<span class="function"><span class="keyword">function</span> <span class="params">($query)</span></span>&#123;</span><br><span class="line">                            $query-&gt;where(<span class="string">'status'</span>,<span class="number">1</span>);</span><br><span class="line">                    &#125;)-&gt;withCount([<span class="string">'order'</span>,<span class="string">'user as total'</span>=&gt;<span class="function"><span class="keyword">function</span><span class="params">($query)</span></span>&#123;</span><br><span class="line">                        <span class="comment">//user_second.order_id = order.id 时,order 表有几条记录</span></span><br><span class="line">                        <span class="comment">//user_second.user_id = user.id 时,user 表的 money &gt; 20 的有几条记录</span></span><br><span class="line">                        $query-&gt;where(<span class="string">'money'</span>,<span class="string">'&gt;'</span>,<span class="number">20</span>);</span><br><span class="line">                    &#125;])-&gt;with(<span class="string">'user'</span>)-&gt;get();</span><br></pre></td></tr></table></figure></p>
+<p>结果:<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">           <span class="attr">"id"</span>: <span class="number">9</span>,</span><br><span class="line">           <span class="attr">"user_id"</span>: <span class="number">11</span>,</span><br><span class="line">           <span class="attr">"enlist_currency"</span>: <span class="string">"256.00000"</span>,</span><br><span class="line">           <span class="attr">"create_time"</span>: <span class="string">"2018-08-21 17:10:43"</span>,</span><br><span class="line">           <span class="attr">"repeat"</span>: <span class="number">0</span>,</span><br><span class="line">           <span class="attr">"crowd_id"</span>: <span class="number">1</span>,</span><br><span class="line">           <span class="attr">"order_count"</span>: <span class="number">15</span>,</span><br><span class="line">           <span class="attr">"total"</span>: <span class="number">1</span>,</span><br><span class="line">           <span class="attr">"user"</span>:&#123;</span><br><span class="line">               <span class="attr">"id"</span>:<span class="number">11</span>,</span><br><span class="line">               <span class="attr">"money"</span>:<span class="string">"21.00"</span>,</span><br><span class="line">               <span class="attr">"name"</span>:<span class="string">"my"</span></span><br><span class="line">           &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="状态名"><a href="#状态名" class="headerlink" title="状态名"></a>状态名</h3><p>得到每条记录的状态名以前的写法在模型中是<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">protected</span> $appends = [<span class="string">'status_name'</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getStatusNameAttribute</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;attributes[<span class="string">'status'</span>] == <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'关闭'</span>;</span><br><span class="line">    &#125;<span class="keyword">elseif</span>(<span class="keyword">$this</span>-&gt;attributes[<span class="string">'status'</span>] == <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'开启'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>还是那句话，不优雅。<br>优化后<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">protected</span> $appends = [<span class="string">'status_name'</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">static</span> $status = [</span><br><span class="line">        <span class="number">0</span>=&gt;<span class="string">'关闭'</span>,</span><br><span class="line">        <span class="number">1</span>=&gt;<span class="string">'开启'</span>,</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getStatusNameAttribute</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>::$status[<span class="keyword">$this</span>-&gt;attributes[<span class="string">'status'</span>]];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>再加状态只需要加数组上就可以了</p>
+<h3 id="获取未评价的商品"><a href="#获取未评价的商品" class="headerlink" title="获取未评价的商品"></a>获取未评价的商品</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="comment">//获取未评价的商品</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getEvaluateProduct</span><span class="params">(Request $request)</span></span>&#123;</span><br><span class="line">        $order_id = $request-&gt;get(<span class="string">'order_id'</span>,<span class="keyword">null</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">empty</span>($order_id))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;error(<span class="string">'参数错误'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        $results = OrderProduct::where(<span class="string">'order_id'</span>,$order_id)-&gt;doesntHave(<span class="string">'productEvaluate'</span>)-&gt;get();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;success($results);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+  
+      <div class="git"></div>
+  
+  <script src="/js/util.js"></script>
+<script>
+function closeModal() {
+    Util.addClass($modalDialog, 'hide-dialog')
+    Util.removeClass($modalDialog, 'show-dialog');
+    Util.addClass($cover, 'hide')
+    Util.removeClass($cover, 'show');
+  }
+var $toolboxMobile = document.getElementById('toolbox-mobile');
+  var $cover = document.getElementById('cover');
+  var $close = document.getElementById('close');
+  var $modalDialog = document.getElementById('modal-dialog');
+if ($toolboxMobile) {
+    Util.bind($toolboxMobile, 'click', function() {
+      Util.addClass($modalDialog, 'show-dialog')
+      Util.removeClass($modalDialog, 'hide-dialog');
+
+      Util.addClass($cover, 'show')
+      Util.removeClass($cover, 'hide');
+    });
+
+
+    Util.bind($cover, 'click', closeModal);
+    Util.bind($close, 'click', closeModal);
+  }
+</script>
+</article>
+
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持我</div>
+        <ul>
+        
+          <li class="item">
+            <span>微信扫一扫</span>
+            <img src="/images/wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <span>支付宝扫一扫</span>
+            <img src="/images/alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/archives/fef79e6c.html">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/archives/5d3f30e1.html">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'chaosir';
+    
+    var disqus_url = 'http://blog.adminchao.com/archives/505b2cb.html';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//chaosir.disqus.com/count.js" async></script>
+
+
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+  </div>
+
+  
+
+  
+<script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+
+
+</script>
+
+
+
+</body>
+</html>
