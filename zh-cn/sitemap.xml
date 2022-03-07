@@ -2,6 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://chaosirgit.github.io/zh-cn/contact/</loc>
+    <lastmod>2022-03-05T16:34:58+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://chaosirgit.github.io/contact/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="http://chaosirgit.github.io/zh-cn/contact/"
+                />
+  </url><url>
+    <loc>http://chaosirgit.github.io/zh-cn/about/</loc>
+    <lastmod>2022-03-05T16:34:58+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://chaosirgit.github.io/about/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="http://chaosirgit.github.io/zh-cn/about/"
+                />
+  </url><url>
     <loc>http://chaosirgit.github.io/zh-cn/categories/</loc>
     <lastmod>2021-06-30T23:31:29+00:00</lastmod>
     <xhtml:link
