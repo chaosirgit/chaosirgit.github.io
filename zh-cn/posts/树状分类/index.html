@@ -7,9 +7,6 @@
     <meta name="color-scheme" content="light dark">
 
     
-      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; block-all-mixed-content; default-src 'self'; child-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net/; form-action 'self'; frame-src 'self'; img-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/ https://cdn.jsdelivr.net/; script-src https://www.google-analytics.com https://cdn.jsdelivr.net/ https://ssl.google-analytics.com; prefetch-src 'self'; connect-src 'self' https://www.google-analytics.com;">
-
-    
 
     <meta name="author" content="郭超超">
     <meta name="description" content="一个树状分类的函数    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  public static function tree($data,$pid=0,$level=0){ $results = array(); foreach ($data as $value){ // 递归点 如果当前记录的父 id 等于传入的父 id ，说明这个记录是传入父 id 的子级  if($value[&#39;p_id&#39;] == $pid){ $value[&#39;level&#39;] = $level; //递归调用，获得子级下的子级  $value[&#39;children&#39;] = self::tree($data,$value[&#39;id&#39;],$level &#43; 1); //push把以上结果赋给返回数据  $results[] = $value; } //递归出口：遍历完成。  } //返回结果集  return $results; }   ">

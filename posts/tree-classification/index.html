@@ -7,9 +7,6 @@
     <meta name="color-scheme" content="light dark">
 
     
-      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; block-all-mixed-content; default-src 'self'; child-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net/; form-action 'self'; frame-src 'self'; img-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/ https://cdn.jsdelivr.net/; script-src https://www.google-analytics.com https://cdn.jsdelivr.net/ https://ssl.google-analytics.com; prefetch-src 'self'; connect-src 'self' https://www.google-analytics.com;">
-
-    
 
     <meta name="author" content="Ethan Kuo">
     <meta name="description" content="A function for tree classification    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  public static function tree($data,$pid=0,$level=0){ $results = array(); foreach ($data as $value){ // recursion point If the parent id of the current record is equal to the incoming parent id, then this record is a child of the incoming parent id  if($value[&#39;p_id&#39;] == $pid){ $value[&#39;level&#39;] = $level; // recursive call to get the sublevels under the sublevel  $value[&#39;children&#39;] = self::tree($data,$value[&#39;id&#39;],$level &#43; 1); //push assigns the above result to the returned data  $results[] = $value; } // Recursive exit: traversal complete.">

@@ -7,9 +7,6 @@
     <meta name="color-scheme" content="light dark">
 
     
-      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; block-all-mixed-content; default-src 'self'; child-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net/; form-action 'self'; frame-src 'self'; img-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/ https://cdn.jsdelivr.net/; script-src https://www.google-analytics.com https://cdn.jsdelivr.net/ https://ssl.google-analytics.com; prefetch-src 'self'; connect-src 'self' https://www.google-analytics.com;">
-
-    
 
     <meta name="author" content="郭超超">
     <meta name="description" content="前言    在项目中需要以编程方式后台执行脚本，以官方 Artisan::call() 调用的话，如果脚本时间过长，会进程中断，导致脚本执行不成功，所以需要后台挂起执行。

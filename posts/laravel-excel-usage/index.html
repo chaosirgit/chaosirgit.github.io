@@ -7,9 +7,6 @@
     <meta name="color-scheme" content="light dark">
 
     
-      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; block-all-mixed-content; default-src 'self'; child-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net/; form-action 'self'; frame-src 'self'; img-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/ https://cdn.jsdelivr.net/; script-src https://www.google-analytics.com https://cdn.jsdelivr.net/ https://ssl.google-analytics.com; prefetch-src 'self'; connect-src 'self' https://www.google-analytics.com;">
-
-    
 
     <meta name="author" content="Ethan Kuo">
     <meta name="description" content="Laravel-Excel Plugin Usage    Installation    composer installation    1  composer require &#34;maatwebsite/excel:~2.1.0&#34;   After installation, modify config/app.php and append the following to the providers array    1  Maatwebsite\Excel\ExcelServiceProvider::class,   Also append the following to the aliases array:    1  &#39;Excel&#39; =&gt; Maatwebsite\Excel\Facades\Excel::class,   Generate configuration file config/excel.php :    1  php artisan vendor:publish --provider=&#34;Maatwebsite\Excel\ExcelServiceProvider&#34;   Usage    To parse an Excel file    1 2 3  ini_set (&#39;memory_limit&#39;, &#39;1024M&#39;); $data = Excel::load(&#39;excel.">
