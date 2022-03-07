@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>bearer token on 郭超超的博客</title>
-    <link>https://blog.adminchao.com/zh-cn/tags/bearer-token/</link>
+    <link>http://chaosirgit.github.io/zh-cn/tags/bearer-token/</link>
     <description>Recent content in bearer token on 郭超超的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 21 Jun 2017 16:42:09 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/tags/bearer-token/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 21 Jun 2017 16:42:09 +0000</lastBuildDate><atom:link href="http://chaosirgit.github.io/zh-cn/tags/bearer-token/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>rest API 实例教程之 token 生成</title>
-      <link>https://blog.adminchao.com/zh-cn/posts/rest-api-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B%E4%B9%8B-token-%E7%94%9F%E6%88%90/</link>
+      <link>http://chaosirgit.github.io/zh-cn/posts/rest-api-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B%E4%B9%8B-token-%E7%94%9F%E6%88%90/</link>
       <pubDate>Wed, 21 Jun 2017 16:42:09 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/zh-cn/posts/rest-api-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B%E4%B9%8B-token-%E7%94%9F%E6%88%90/</guid>
+      <guid>http://chaosirgit.github.io/zh-cn/posts/rest-api-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B%E4%B9%8B-token-%E7%94%9F%E6%88%90/</guid>
       <description>&lt;h2 id=&#34;项目需求&#34;&gt;
   项目需求
   &lt;a class=&#34;heading-link&#34; href=&#34;#%e9%a1%b9%e7%9b%ae%e9%9c%80%e6%b1%82&#34;&gt;

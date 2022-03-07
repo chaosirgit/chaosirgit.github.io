@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>JavaScript on 郭超超的博客</title>
-    <link>https://blog.adminchao.com/zh-cn/categories/javascript/</link>
+    <link>http://chaosirgit.github.io/zh-cn/categories/javascript/</link>
     <description>Recent content in JavaScript on 郭超超的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 08 Aug 2017 20:54:56 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 08 Aug 2017 20:54:56 +0000</lastBuildDate><atom:link href="http://chaosirgit.github.io/zh-cn/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>JavaScript 学习笔记</title>
-      <link>https://blog.adminchao.com/zh-cn/posts/javascript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <link>http://chaosirgit.github.io/zh-cn/posts/javascript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Tue, 08 Aug 2017 20:54:56 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/zh-cn/posts/javascript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <guid>http://chaosirgit.github.io/zh-cn/posts/javascript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
       <description>&lt;h2 id=&#34;前言&#34;&gt;
   前言
   &lt;a class=&#34;heading-link&#34; href=&#34;#%e5%89%8d%e8%a8%80&#34;&gt;

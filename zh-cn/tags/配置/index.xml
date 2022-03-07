@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>配置 on 郭超超的博客</title>
-    <link>https://blog.adminchao.com/zh-cn/tags/%E9%85%8D%E7%BD%AE/</link>
+    <link>http://chaosirgit.github.io/zh-cn/tags/%E9%85%8D%E7%BD%AE/</link>
     <description>Recent content in 配置 on 郭超超的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 22 Sep 2017 12:55:39 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/tags/%E9%85%8D%E7%BD%AE/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Sep 2017 12:55:39 +0000</lastBuildDate><atom:link href="http://chaosirgit.github.io/zh-cn/tags/%E9%85%8D%E7%BD%AE/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>我的 phpstorm 配置</title>
-      <link>https://blog.adminchao.com/zh-cn/posts/%E6%88%91%E7%9A%84-phpstorm-%E9%85%8D%E7%BD%AE/</link>
+      <link>http://chaosirgit.github.io/zh-cn/posts/%E6%88%91%E7%9A%84-phpstorm-%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Fri, 22 Sep 2017 12:55:39 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/zh-cn/posts/%E6%88%91%E7%9A%84-phpstorm-%E9%85%8D%E7%BD%AE/</guid>
+      <guid>http://chaosirgit.github.io/zh-cn/posts/%E6%88%91%E7%9A%84-phpstorm-%E9%85%8D%E7%BD%AE/</guid>
       <description>前言    感觉 phpstorm 很爽，所以抛弃了我心爱的 atom 转身投入 phpstorm 的怀抱，把我的 phpstorm 配置做个笔记，以便在不同环境下使用。
 下载    在 Google 搜索 phpstorm 下载。
 安装    这个直接默认下一步安装就可以。

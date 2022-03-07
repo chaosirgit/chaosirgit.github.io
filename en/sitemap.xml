@@ -2,922 +2,922 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://blog.adminchao.com/categories/</loc>
+    <loc>http://chaosirgit.github.io/categories/</loc>
     <lastmod>2021-06-30T23:31:29+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/categories/"
+                href="http://chaosirgit.github.io/zh-cn/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/categories/"
+                href="http://chaosirgit.github.io/categories/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/docker/</loc>
+    <loc>http://chaosirgit.github.io/tags/docker/</loc>
     <lastmod>2021-06-30T23:31:29+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/docker/"
+                href="http://chaosirgit.github.io/zh-cn/tags/docker/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/docker/"
+                href="http://chaosirgit.github.io/tags/docker/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/</loc>
+    <loc>http://chaosirgit.github.io/</loc>
     <lastmod>2021-06-30T23:31:29+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/"
+                href="http://chaosirgit.github.io/zh-cn/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/"
+                href="http://chaosirgit.github.io/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/extension/</loc>
+    <loc>http://chaosirgit.github.io/tags/extension/</loc>
     <lastmod>2021-06-30T23:31:29+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/extension/"
+                href="http://chaosirgit.github.io/zh-cn/tags/extension/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/extension/"
+                href="http://chaosirgit.github.io/tags/extension/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/grpc/</loc>
+    <loc>http://chaosirgit.github.io/tags/grpc/</loc>
     <lastmod>2021-06-30T23:31:29+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/grpc/"
+                href="http://chaosirgit.github.io/zh-cn/tags/grpc/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/grpc/"
+                href="http://chaosirgit.github.io/tags/grpc/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/laradock/</loc>
+    <loc>http://chaosirgit.github.io/tags/laradock/</loc>
     <lastmod>2021-06-30T23:31:29+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/laradock/"
+                href="http://chaosirgit.github.io/zh-cn/tags/laradock/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/laradock/"
+                href="http://chaosirgit.github.io/tags/laradock/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/posts/laradock-install-grpc-extension/</loc>
+    <loc>http://chaosirgit.github.io/posts/laradock-install-grpc-extension/</loc>
     <lastmod>2021-06-30T23:31:29+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/laravel/</loc>
+    <loc>http://chaosirgit.github.io/tags/laravel/</loc>
     <lastmod>2021-06-30T23:31:29+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/laravel/"
+                href="http://chaosirgit.github.io/zh-cn/tags/laravel/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/laravel/"
+                href="http://chaosirgit.github.io/tags/laravel/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/posts/</loc>
+    <loc>http://chaosirgit.github.io/posts/</loc>
     <lastmod>2021-06-30T23:31:29+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/posts/"
+                href="http://chaosirgit.github.io/zh-cn/posts/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/posts/"
+                href="http://chaosirgit.github.io/posts/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/</loc>
+    <loc>http://chaosirgit.github.io/tags/</loc>
     <lastmod>2021-06-30T23:31:29+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/"
+                href="http://chaosirgit.github.io/zh-cn/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/"
+                href="http://chaosirgit.github.io/tags/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/categories/technology/</loc>
+    <loc>http://chaosirgit.github.io/categories/technology/</loc>
     <lastmod>2021-06-30T23:31:29+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/posts/docker-usage-notes/</loc>
+    <loc>http://chaosirgit.github.io/posts/docker-usage-notes/</loc>
     <lastmod>2020-07-20T15:39:19+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/categories/laravel/</loc>
+    <loc>http://chaosirgit.github.io/categories/laravel/</loc>
     <lastmod>2020-03-27T21:08:27+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/categories/laravel/"
+                href="http://chaosirgit.github.io/zh-cn/categories/laravel/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/categories/laravel/"
+                href="http://chaosirgit.github.io/categories/laravel/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/posts/laravel-passport-personal-token-multi-user-login/</loc>
+    <loc>http://chaosirgit.github.io/posts/laravel-passport-personal-token-multi-user-login/</loc>
     <lastmod>2020-03-27T21:08:27+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/oauth/</loc>
-    <lastmod>2020-03-27T21:08:27+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/oauth/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://blog.adminchao.com/tags/oauth/"
-                />
-  </url><url>
-    <loc>https://blog.adminchao.com/tags/passport/</loc>
+    <loc>http://chaosirgit.github.io/tags/oauth/</loc>
     <lastmod>2020-03-27T21:08:27+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/passport/"
+                href="http://chaosirgit.github.io/zh-cn/tags/oauth/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/passport/"
+                href="http://chaosirgit.github.io/tags/oauth/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/php/</loc>
+    <loc>http://chaosirgit.github.io/tags/passport/</loc>
     <lastmod>2020-03-27T21:08:27+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/php/"
+                href="http://chaosirgit.github.io/zh-cn/tags/passport/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/php/"
+                href="http://chaosirgit.github.io/tags/passport/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/go/</loc>
+    <loc>http://chaosirgit.github.io/tags/php/</loc>
+    <lastmod>2020-03-27T21:08:27+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="http://chaosirgit.github.io/zh-cn/tags/php/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://chaosirgit.github.io/tags/php/"
+                />
+  </url><url>
+    <loc>http://chaosirgit.github.io/tags/go/</loc>
     <lastmod>2020-03-03T08:40:28+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/go/"
+                href="http://chaosirgit.github.io/zh-cn/tags/go/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/go/"
+                href="http://chaosirgit.github.io/tags/go/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/categories/iris/</loc>
+    <loc>http://chaosirgit.github.io/categories/iris/</loc>
     <lastmod>2020-03-03T08:40:28+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/categories/iris/"
+                href="http://chaosirgit.github.io/zh-cn/categories/iris/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/categories/iris/"
+                href="http://chaosirgit.github.io/categories/iris/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/iris/</loc>
+    <loc>http://chaosirgit.github.io/tags/iris/</loc>
     <lastmod>2020-03-03T08:40:28+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/iris/"
+                href="http://chaosirgit.github.io/zh-cn/tags/iris/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/iris/"
+                href="http://chaosirgit.github.io/tags/iris/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/posts/iris-mvc-routing-iii/</loc>
+    <loc>http://chaosirgit.github.io/posts/iris-mvc-routing-iii/</loc>
     <lastmod>2020-03-03T08:40:28+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/posts/iris-install-and-init-ii/</loc>
+    <loc>http://chaosirgit.github.io/posts/iris-install-and-init-ii/</loc>
     <lastmod>2020-03-01T19:21:06+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/categories/go/</loc>
+    <loc>http://chaosirgit.github.io/categories/go/</loc>
     <lastmod>2020-03-01T14:17:47+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/categories/go/"
+                href="http://chaosirgit.github.io/zh-cn/categories/go/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/categories/go/"
+                href="http://chaosirgit.github.io/categories/go/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/posts/iris-i-love-she-i/</loc>
+    <loc>http://chaosirgit.github.io/posts/iris-i-love-she-i/</loc>
     <lastmod>2020-03-01T14:17:47+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/posts/laravel-throttle-middleware-response-with-json/</loc>
+    <loc>http://chaosirgit.github.io/posts/laravel-throttle-middleware-response-with-json/</loc>
     <lastmod>2019-07-25T18:33:53+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/middleware/</loc>
+    <loc>http://chaosirgit.github.io/tags/middleware/</loc>
     <lastmod>2019-07-25T18:33:53+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/gateway/</loc>
+    <loc>http://chaosirgit.github.io/tags/gateway/</loc>
     <lastmod>2019-07-22T16:30:53+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/gateway/"
+                href="http://chaosirgit.github.io/zh-cn/tags/gateway/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/gateway/"
+                href="http://chaosirgit.github.io/tags/gateway/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/posts/laravel-using-workermangateway/</loc>
+    <loc>http://chaosirgit.github.io/posts/laravel-using-workermangateway/</loc>
     <lastmod>2019-07-22T16:30:53+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/workerman/</loc>
+    <loc>http://chaosirgit.github.io/tags/workerman/</loc>
     <lastmod>2019-07-22T16:30:53+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/workerman/"
+                href="http://chaosirgit.github.io/zh-cn/tags/workerman/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/workerman/"
+                href="http://chaosirgit.github.io/tags/workerman/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/guzzle/</loc>
+    <loc>http://chaosirgit.github.io/tags/guzzle/</loc>
     <lastmod>2019-06-17T23:51:47+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/guzzle/"
+                href="http://chaosirgit.github.io/zh-cn/tags/guzzle/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/guzzle/"
+                href="http://chaosirgit.github.io/tags/guzzle/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/posts/guzzle-basic-usage/</loc>
+    <loc>http://chaosirgit.github.io/posts/guzzle-basic-usage/</loc>
     <lastmod>2019-06-17T23:51:47+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/image-upload/</loc>
+    <loc>http://chaosirgit.github.io/tags/image-upload/</loc>
     <lastmod>2019-05-22T13:00:10+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/qiniu/</loc>
-    <lastmod>2019-05-22T13:00:10+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/qiniu/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://blog.adminchao.com/tags/qiniu/"
-                />
-  </url><url>
-    <loc>https://blog.adminchao.com/tags/ueditor/</loc>
+    <loc>http://chaosirgit.github.io/tags/qiniu/</loc>
     <lastmod>2019-05-22T13:00:10+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/ueditor/"
+                href="http://chaosirgit.github.io/zh-cn/tags/qiniu/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/ueditor/"
+                href="http://chaosirgit.github.io/tags/qiniu/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/posts/ueditor-multi-image-upload-changed-to-qiniu-cloud/</loc>
+    <loc>http://chaosirgit.github.io/tags/ueditor/</loc>
+    <lastmod>2019-05-22T13:00:10+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="http://chaosirgit.github.io/zh-cn/tags/ueditor/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://chaosirgit.github.io/tags/ueditor/"
+                />
+  </url><url>
+    <loc>http://chaosirgit.github.io/posts/ueditor-multi-image-upload-changed-to-qiniu-cloud/</loc>
     <lastmod>2019-05-22T13:00:10+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/alfred/</loc>
+    <loc>http://chaosirgit.github.io/tags/alfred/</loc>
     <lastmod>2019-05-02T17:39:49+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/alfred/"
+                href="http://chaosirgit.github.io/zh-cn/tags/alfred/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/alfred/"
+                href="http://chaosirgit.github.io/tags/alfred/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/posts/change-alfred-default-shell-to-iterm/</loc>
+    <loc>http://chaosirgit.github.io/posts/change-alfred-default-shell-to-iterm/</loc>
     <lastmod>2019-05-02T17:39:49+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/efficiency/</loc>
+    <loc>http://chaosirgit.github.io/tags/efficiency/</loc>
     <lastmod>2019-05-02T17:39:49+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/iterm/</loc>
-    <lastmod>2019-05-02T17:39:49+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/iterm/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://blog.adminchao.com/tags/iterm/"
-                />
-  </url><url>
-    <loc>https://blog.adminchao.com/tags/shell/</loc>
+    <loc>http://chaosirgit.github.io/tags/iterm/</loc>
     <lastmod>2019-05-02T17:39:49+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/shell/"
+                href="http://chaosirgit.github.io/zh-cn/tags/iterm/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/shell/"
+                href="http://chaosirgit.github.io/tags/iterm/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/categories/tools/</loc>
+    <loc>http://chaosirgit.github.io/tags/shell/</loc>
+    <lastmod>2019-05-02T17:39:49+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="http://chaosirgit.github.io/zh-cn/tags/shell/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://chaosirgit.github.io/tags/shell/"
+                />
+  </url><url>
+    <loc>http://chaosirgit.github.io/categories/tools/</loc>
     <lastmod>2019-05-02T17:39:49+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/aria2/</loc>
+    <loc>http://chaosirgit.github.io/tags/aria2/</loc>
     <lastmod>2019-04-27T16:36:20+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/aria2/"
+                href="http://chaosirgit.github.io/zh-cn/tags/aria2/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/aria2/"
+                href="http://chaosirgit.github.io/tags/aria2/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/downloads/</loc>
+    <loc>http://chaosirgit.github.io/tags/downloads/</loc>
     <lastmod>2019-04-27T16:36:20+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/mac/</loc>
+    <loc>http://chaosirgit.github.io/tags/mac/</loc>
     <lastmod>2019-04-27T16:36:20+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/mac/"
+                href="http://chaosirgit.github.io/zh-cn/tags/mac/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/mac/"
+                href="http://chaosirgit.github.io/tags/mac/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/posts/mac-aria2-usage/</loc>
+    <loc>http://chaosirgit.github.io/posts/mac-aria2-usage/</loc>
     <lastmod>2019-04-27T16:36:20+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/online-discs/</loc>
+    <loc>http://chaosirgit.github.io/tags/online-discs/</loc>
     <lastmod>2019-04-27T16:36:20+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/thunder/</loc>
+    <loc>http://chaosirgit.github.io/tags/thunder/</loc>
     <lastmod>2019-04-27T16:36:20+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/red-packet/</loc>
+    <loc>http://chaosirgit.github.io/tags/red-packet/</loc>
     <lastmod>2019-03-16T10:39:09+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/posts/red-packet-class/</loc>
+    <loc>http://chaosirgit.github.io/posts/red-packet-class/</loc>
     <lastmod>2019-03-16T10:39:09+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/algorithm/</loc>
+    <loc>http://chaosirgit.github.io/tags/algorithm/</loc>
     <lastmod>2019-01-13T18:08:37+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/categories/code/</loc>
+    <loc>http://chaosirgit.github.io/categories/code/</loc>
     <lastmod>2019-01-13T18:08:37+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/posts/lottery-algorithm/</loc>
+    <loc>http://chaosirgit.github.io/posts/lottery-algorithm/</loc>
     <lastmod>2019-01-13T18:08:37+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/probability/</loc>
+    <loc>http://chaosirgit.github.io/tags/probability/</loc>
     <lastmod>2019-01-13T18:08:37+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/sweepstakes/</loc>
+    <loc>http://chaosirgit.github.io/tags/sweepstakes/</loc>
     <lastmod>2019-01-13T18:08:37+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/posts/scan-php-for-dangerous-file-scripts/</loc>
+    <loc>http://chaosirgit.github.io/posts/scan-php-for-dangerous-file-scripts/</loc>
     <lastmod>2019-01-12T13:30:20+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/scripts/</loc>
+    <loc>http://chaosirgit.github.io/tags/scripts/</loc>
     <lastmod>2019-01-12T13:30:20+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/eloquent/</loc>
+    <loc>http://chaosirgit.github.io/tags/eloquent/</loc>
     <lastmod>2019-01-10T15:29:08+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/eloquent/"
+                href="http://chaosirgit.github.io/zh-cn/tags/eloquent/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/eloquent/"
+                href="http://chaosirgit.github.io/tags/eloquent/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/example/</loc>
+    <loc>http://chaosirgit.github.io/tags/example/</loc>
     <lastmod>2019-01-10T15:29:08+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/posts/laravel-eloquent-return-result-optimization/</loc>
+    <loc>http://chaosirgit.github.io/posts/laravel-eloquent-return-result-optimization/</loc>
     <lastmod>2019-01-10T15:29:08+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/model/</loc>
+    <loc>http://chaosirgit.github.io/tags/model/</loc>
     <lastmod>2019-01-10T15:29:08+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/orm/</loc>
+    <loc>http://chaosirgit.github.io/tags/orm/</loc>
     <lastmod>2019-01-10T15:29:08+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/orm/"
+                href="http://chaosirgit.github.io/zh-cn/tags/orm/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/orm/"
+                href="http://chaosirgit.github.io/tags/orm/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/groupby/</loc>
+    <loc>http://chaosirgit.github.io/tags/groupby/</loc>
     <lastmod>2018-11-14T14:35:10+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/groupby/"
+                href="http://chaosirgit.github.io/zh-cn/tags/groupby/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/groupby/"
+                href="http://chaosirgit.github.io/tags/groupby/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/posts/laravel-get-the-latest-records-in-groups/</loc>
+    <loc>http://chaosirgit.github.io/posts/laravel-get-the-latest-records-in-groups/</loc>
     <lastmod>2018-11-14T14:35:10+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/select/</loc>
-    <lastmod>2018-11-14T14:35:10+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/select/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://blog.adminchao.com/tags/select/"
-                />
-  </url><url>
-    <loc>https://blog.adminchao.com/tags/subquery/</loc>
+    <loc>http://chaosirgit.github.io/tags/select/</loc>
     <lastmod>2018-11-14T14:35:10+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/subquery/"
+                href="http://chaosirgit.github.io/zh-cn/tags/select/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/subquery/"
+                href="http://chaosirgit.github.io/tags/select/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/artisan/</loc>
+    <loc>http://chaosirgit.github.io/tags/subquery/</loc>
+    <lastmod>2018-11-14T14:35:10+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="http://chaosirgit.github.io/zh-cn/tags/subquery/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://chaosirgit.github.io/tags/subquery/"
+                />
+  </url><url>
+    <loc>http://chaosirgit.github.io/tags/artisan/</loc>
     <lastmod>2018-10-15T10:04:39+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/artisan/"
+                href="http://chaosirgit.github.io/zh-cn/tags/artisan/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/artisan/"
+                href="http://chaosirgit.github.io/tags/artisan/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/backend/</loc>
+    <loc>http://chaosirgit.github.io/tags/backend/</loc>
     <lastmod>2018-10-15T10:04:39+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/command/</loc>
+    <loc>http://chaosirgit.github.io/tags/command/</loc>
     <lastmod>2018-10-15T10:04:39+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/posts/laravel-artisan-backend-call/</loc>
+    <loc>http://chaosirgit.github.io/posts/laravel-artisan-backend-call/</loc>
     <lastmod>2018-10-15T10:04:39+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/advance/</loc>
+    <loc>http://chaosirgit.github.io/tags/advance/</loc>
     <lastmod>2018-08-22T11:02:10+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/count/</loc>
+    <loc>http://chaosirgit.github.io/tags/count/</loc>
     <lastmod>2018-08-22T11:02:10+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/join/</loc>
+    <loc>http://chaosirgit.github.io/tags/join/</loc>
     <lastmod>2018-08-22T11:02:10+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/posts/laravel-eloquent-advanced-usage/</loc>
+    <loc>http://chaosirgit.github.io/posts/laravel-eloquent-advanced-usage/</loc>
     <lastmod>2018-08-22T11:02:10+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/aliyun/</loc>
+    <loc>http://chaosirgit.github.io/tags/aliyun/</loc>
     <lastmod>2018-07-31T17:14:34+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/aliyun/"
+                href="http://chaosirgit.github.io/zh-cn/tags/aliyun/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/aliyun/"
+                href="http://chaosirgit.github.io/tags/aliyun/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/posts/laravel-alicloud-sms-usage/</loc>
+    <loc>http://chaosirgit.github.io/posts/laravel-alicloud-sms-usage/</loc>
     <lastmod>2018-07-31T17:14:34+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/sms/</loc>
+    <loc>http://chaosirgit.github.io/tags/sms/</loc>
     <lastmod>2018-07-31T17:14:34+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/sms/"
+                href="http://chaosirgit.github.io/zh-cn/tags/sms/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/sms/"
+                href="http://chaosirgit.github.io/tags/sms/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/posts/standalone-use-of-eloquent/</loc>
+    <loc>http://chaosirgit.github.io/posts/standalone-use-of-eloquent/</loc>
     <lastmod>2018-07-04T14:14:22+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/tutorials/</loc>
+    <loc>http://chaosirgit.github.io/tags/tutorials/</loc>
     <lastmod>2018-07-04T14:14:22+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/posts/laravel-overtrue-wechat-usage/</loc>
+    <loc>http://chaosirgit.github.io/posts/laravel-overtrue-wechat-usage/</loc>
     <lastmod>2018-06-08T12:51:35+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/overtrue/</loc>
-    <lastmod>2018-06-08T12:51:35+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/overtrue/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://blog.adminchao.com/tags/overtrue/"
-                />
-  </url><url>
-    <loc>https://blog.adminchao.com/tags/wechat/</loc>
+    <loc>http://chaosirgit.github.io/tags/overtrue/</loc>
     <lastmod>2018-06-08T12:51:35+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/wechat/"
+                href="http://chaosirgit.github.io/zh-cn/tags/overtrue/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/wechat/"
+                href="http://chaosirgit.github.io/tags/overtrue/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/image/</loc>
+    <loc>http://chaosirgit.github.io/tags/wechat/</loc>
+    <lastmod>2018-06-08T12:51:35+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="http://chaosirgit.github.io/zh-cn/tags/wechat/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://chaosirgit.github.io/tags/wechat/"
+                />
+  </url><url>
+    <loc>http://chaosirgit.github.io/tags/image/</loc>
     <lastmod>2018-06-08T12:47:33+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/posts/laravel-qiniu-layui-upload-image/</loc>
+    <loc>http://chaosirgit.github.io/posts/laravel-qiniu-layui-upload-image/</loc>
     <lastmod>2018-06-08T12:47:33+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/layui/</loc>
+    <loc>http://chaosirgit.github.io/tags/layui/</loc>
     <lastmod>2018-06-08T12:47:33+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/layui/"
+                href="http://chaosirgit.github.io/zh-cn/tags/layui/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/layui/"
+                href="http://chaosirgit.github.io/tags/layui/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/upload/</loc>
+    <loc>http://chaosirgit.github.io/tags/upload/</loc>
     <lastmod>2018-06-08T12:47:33+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/composer/</loc>
+    <loc>http://chaosirgit.github.io/tags/composer/</loc>
     <lastmod>2018-06-08T12:44:33+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/composer/"
+                href="http://chaosirgit.github.io/zh-cn/tags/composer/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/composer/"
+                href="http://chaosirgit.github.io/tags/composer/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/excel/</loc>
+    <loc>http://chaosirgit.github.io/tags/excel/</loc>
     <lastmod>2018-06-08T12:44:33+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/excel/"
+                href="http://chaosirgit.github.io/zh-cn/tags/excel/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/excel/"
+                href="http://chaosirgit.github.io/tags/excel/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/posts/laravel-excel-usage/</loc>
+    <loc>http://chaosirgit.github.io/posts/laravel-excel-usage/</loc>
     <lastmod>2018-06-08T12:44:33+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/elasticsearch/</loc>
+    <loc>http://chaosirgit.github.io/tags/elasticsearch/</loc>
     <lastmod>2018-06-08T12:43:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/elasticsearch/"
+                href="http://chaosirgit.github.io/zh-cn/tags/elasticsearch/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/elasticsearch/"
+                href="http://chaosirgit.github.io/tags/elasticsearch/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/posts/laravel-elasticsearch-plugin/</loc>
+    <loc>http://chaosirgit.github.io/posts/laravel-elasticsearch-plugin/</loc>
     <lastmod>2018-06-08T12:43:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/bracket/</loc>
+    <loc>http://chaosirgit.github.io/tags/bracket/</loc>
     <lastmod>2018-06-08T12:36:54+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/posts/laravel-eloquent-bracket-query/</loc>
+    <loc>http://chaosirgit.github.io/posts/laravel-eloquent-bracket-query/</loc>
     <lastmod>2018-06-08T12:36:54+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/query/</loc>
+    <loc>http://chaosirgit.github.io/tags/query/</loc>
     <lastmod>2018-06-08T12:36:54+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/categories/php/</loc>
+    <loc>http://chaosirgit.github.io/categories/php/</loc>
     <lastmod>2018-06-08T12:33:49+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/categories/php/"
+                href="http://chaosirgit.github.io/zh-cn/categories/php/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/categories/php/"
+                href="http://chaosirgit.github.io/categories/php/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/tree-classification/</loc>
+    <loc>http://chaosirgit.github.io/tags/tree-classification/</loc>
     <lastmod>2018-06-08T12:33:49+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/posts/tree-classification/</loc>
+    <loc>http://chaosirgit.github.io/posts/tree-classification/</loc>
     <lastmod>2018-06-08T12:33:49+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/posts/laravel-paginate/</loc>
+    <loc>http://chaosirgit.github.io/posts/laravel-paginate/</loc>
     <lastmod>2018-06-08T11:56:23+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/paginate/</loc>
+    <loc>http://chaosirgit.github.io/tags/paginate/</loc>
     <lastmod>2018-06-08T11:56:23+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/paginate/"
+                href="http://chaosirgit.github.io/zh-cn/tags/paginate/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/paginate/"
+                href="http://chaosirgit.github.io/tags/paginate/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/global/</loc>
+    <loc>http://chaosirgit.github.io/tags/global/</loc>
     <lastmod>2018-06-08T11:41:08+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/global/"
+                href="http://chaosirgit.github.io/zh-cn/tags/global/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/global/"
+                href="http://chaosirgit.github.io/tags/global/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/posts/laravel-global-scopes/</loc>
+    <loc>http://chaosirgit.github.io/posts/laravel-global-scopes/</loc>
     <lastmod>2018-06-08T11:41:08+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/scope/</loc>
+    <loc>http://chaosirgit.github.io/tags/scope/</loc>
     <lastmod>2018-06-08T11:41:08+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/scope/"
+                href="http://chaosirgit.github.io/zh-cn/tags/scope/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/scope/"
+                href="http://chaosirgit.github.io/tags/scope/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/faker/</loc>
+    <loc>http://chaosirgit.github.io/tags/faker/</loc>
     <lastmod>2018-03-08T11:14:46+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/faker/"
+                href="http://chaosirgit.github.io/zh-cn/tags/faker/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/faker/"
+                href="http://chaosirgit.github.io/tags/faker/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/posts/laravel-generating-test-data/</loc>
+    <loc>http://chaosirgit.github.io/posts/laravel-generating-test-data/</loc>
     <lastmod>2018-03-08T11:14:46+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/test/</loc>
+    <loc>http://chaosirgit.github.io/tags/test/</loc>
     <lastmod>2018-03-08T11:14:46+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/posts/automating-code-deployment-with-git/</loc>
+    <loc>http://chaosirgit.github.io/posts/automating-code-deployment-with-git/</loc>
     <lastmod>2017-12-01T13:24:34+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/git/</loc>
-    <lastmod>2017-12-01T13:24:34+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/git/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://blog.adminchao.com/tags/git/"
-                />
-  </url><url>
-    <loc>https://blog.adminchao.com/categories/git/</loc>
+    <loc>http://chaosirgit.github.io/tags/git/</loc>
     <lastmod>2017-12-01T13:24:34+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/categories/git/"
+                href="http://chaosirgit.github.io/zh-cn/tags/git/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/categories/git/"
+                href="http://chaosirgit.github.io/tags/git/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/hooks/</loc>
+    <loc>http://chaosirgit.github.io/categories/git/</loc>
     <lastmod>2017-12-01T13:24:34+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/hooks/"
+                href="http://chaosirgit.github.io/zh-cn/categories/git/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/hooks/"
+                href="http://chaosirgit.github.io/categories/git/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/posts/building-lnmp-from-scratch-tutorial/</loc>
+    <loc>http://chaosirgit.github.io/tags/hooks/</loc>
+    <lastmod>2017-12-01T13:24:34+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="http://chaosirgit.github.io/zh-cn/tags/hooks/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://chaosirgit.github.io/tags/hooks/"
+                />
+  </url><url>
+    <loc>http://chaosirgit.github.io/posts/building-lnmp-from-scratch-tutorial/</loc>
     <lastmod>2017-10-08T13:08:09+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/lnmp/</loc>
+    <loc>http://chaosirgit.github.io/tags/lnmp/</loc>
     <lastmod>2017-10-08T13:08:09+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/lnmp/"
+                href="http://chaosirgit.github.io/zh-cn/tags/lnmp/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/lnmp/"
+                href="http://chaosirgit.github.io/tags/lnmp/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/categories/lnmp/</loc>
+    <loc>http://chaosirgit.github.io/categories/lnmp/</loc>
     <lastmod>2017-10-08T13:08:09+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/categories/lnmp/"
+                href="http://chaosirgit.github.io/zh-cn/categories/lnmp/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/categories/lnmp/"
+                href="http://chaosirgit.github.io/categories/lnmp/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/tags/tutorial/</loc>
+    <loc>http://chaosirgit.github.io/tags/tutorial/</loc>
     <lastmod>2017-10-08T13:08:09+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/configuration/</loc>
+    <loc>http://chaosirgit.github.io/tags/configuration/</loc>
     <lastmod>2017-09-22T12:55:39+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/posts/my-phpstorm-configuration/</loc>
+    <loc>http://chaosirgit.github.io/posts/my-phpstorm-configuration/</loc>
     <lastmod>2017-09-22T12:55:39+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/phpstrom/</loc>
-    <lastmod>2017-09-22T12:55:39+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/phpstrom/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://blog.adminchao.com/tags/phpstrom/"
-                />
-  </url><url>
-    <loc>https://blog.adminchao.com/categories/phpstrom/</loc>
+    <loc>http://chaosirgit.github.io/tags/phpstrom/</loc>
     <lastmod>2017-09-22T12:55:39+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/categories/phpstrom/"
+                href="http://chaosirgit.github.io/zh-cn/tags/phpstrom/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/categories/phpstrom/"
+                href="http://chaosirgit.github.io/tags/phpstrom/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/posts/git-common-commands/</loc>
+    <loc>http://chaosirgit.github.io/categories/phpstrom/</loc>
+    <lastmod>2017-09-22T12:55:39+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="http://chaosirgit.github.io/zh-cn/categories/phpstrom/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://chaosirgit.github.io/categories/phpstrom/"
+                />
+  </url><url>
+    <loc>http://chaosirgit.github.io/posts/git-common-commands/</loc>
     <lastmod>2016-06-19T10:13:37+00:00</lastmod>
   </url><url>
-    <loc>https://blog.adminchao.com/tags/github/</loc>
+    <loc>http://chaosirgit.github.io/tags/github/</loc>
     <lastmod>2016-06-19T10:13:37+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/tags/github/"
+                href="http://chaosirgit.github.io/zh-cn/tags/github/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/tags/github/"
+                href="http://chaosirgit.github.io/tags/github/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/authors/</loc>
+    <loc>http://chaosirgit.github.io/authors/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/authors/"
+                href="http://chaosirgit.github.io/zh-cn/authors/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/authors/"
+                href="http://chaosirgit.github.io/authors/"
                 />
   </url><url>
-    <loc>https://blog.adminchao.com/series/</loc>
+    <loc>http://chaosirgit.github.io/series/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://blog.adminchao.com/zh-cn/series/"
+                href="http://chaosirgit.github.io/zh-cn/series/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.adminchao.com/series/"
+                href="http://chaosirgit.github.io/series/"
                 />
   </url>
 </urlset>

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ORM on 郭超超的博客</title>
-    <link>https://blog.adminchao.com/zh-cn/tags/orm/</link>
+    <link>http://chaosirgit.github.io/zh-cn/tags/orm/</link>
     <description>Recent content in ORM on 郭超超的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 10 Jan 2019 15:29:08 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/tags/orm/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 10 Jan 2019 15:29:08 +0000</lastBuildDate><atom:link href="http://chaosirgit.github.io/zh-cn/tags/orm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Laravel Eloquent 返回结果优化</title>
-      <link>https://blog.adminchao.com/zh-cn/posts/laravel-eloquent-%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C%E4%BC%98%E5%8C%96/</link>
+      <link>http://chaosirgit.github.io/zh-cn/posts/laravel-eloquent-%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C%E4%BC%98%E5%8C%96/</link>
       <pubDate>Thu, 10 Jan 2019 15:29:08 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/zh-cn/posts/laravel-eloquent-%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C%E4%BC%98%E5%8C%96/</guid>
+      <guid>http://chaosirgit.github.io/zh-cn/posts/laravel-eloquent-%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C%E4%BC%98%E5%8C%96/</guid>
       <description>前言    我们都知道在模型中使用 appends 属性来构建访问器使得返回结果添加一些字段信息，但是这样的话有一个坏处，就是所有这个模型的返回结果都会有这些字段信息，如果接口中规定了严格的返回信息字段，这样就不合适了。
 能不能有好的方法动态的显示或隐藏这些字段信息呢？
 答案是肯定的。

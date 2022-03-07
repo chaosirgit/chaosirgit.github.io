@@ -22,7 +22,7 @@
     <meta property="og:title" content="Tree Classification" />
 <meta property="og:description" content="A function for tree classification    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  public static function tree($data,$pid=0,$level=0){ $results = array(); foreach ($data as $value){ // recursion point If the parent id of the current record is equal to the incoming parent id, then this record is a child of the incoming parent id  if($value[&#39;p_id&#39;] == $pid){ $value[&#39;level&#39;] = $level; // recursive call to get the sublevels under the sublevel  $value[&#39;children&#39;] = self::tree($data,$value[&#39;id&#39;],$level &#43; 1); //push assigns the above result to the returned data  $results[] = $value; } // Recursive exit: traversal complete." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.adminchao.com/posts/tree-classification/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="http://chaosirgit.github.io/posts/tree-classification/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2018-06-08T12:33:49+00:00" />
 <meta property="article:modified_time" content="2018-06-08T12:33:49+00:00" />
 
@@ -33,7 +33,7 @@
 </title>
 
     
-      <link rel="canonical" href="https://blog.adminchao.com/posts/tree-classification/">
+      <link rel="canonical" href="http://chaosirgit.github.io/posts/tree-classification/">
     
 
     <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
@@ -121,7 +121,7 @@
                 
               
               <li class="navigation-item">
-                <a href="https://blog.adminchao.com/zh-cn/">🇨🇳</a>
+                <a href="http://chaosirgit.github.io/zh-cn/">🇨🇳</a>
               </li>
             
           
@@ -139,7 +139,7 @@
       <header>
         <div class="post-title">
           <h1 class="title">
-            <a class="title-link" href="https://blog.adminchao.com/posts/tree-classification/">
+            <a class="title-link" href="http://chaosirgit.github.io/posts/tree-classification/">
               Tree Classification
             </a>
           </h1>

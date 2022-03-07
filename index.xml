@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ethan Kuo Blog</title>
-    <link>https://blog.adminchao.com/</link>
+    <link>http://chaosirgit.github.io/</link>
     <description>Recent content on Ethan Kuo Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 30 Jun 2021 23:31:29 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Jun 2021 23:31:29 +0000</lastBuildDate><atom:link href="http://chaosirgit.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Laradock Install GRPC Extension</title>
-      <link>https://blog.adminchao.com/posts/laradock-install-grpc-extension/</link>
+      <link>http://chaosirgit.github.io/posts/laradock-install-grpc-extension/</link>
       <pubDate>Wed, 30 Jun 2021 23:31:29 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/laradock-install-grpc-extension/</guid>
+      <guid>http://chaosirgit.github.io/posts/laradock-install-grpc-extension/</guid>
       <description>Preface    Installing uncommon PHP extensions in a Laradock environment, this method can be used to install GRPC extensions as well as other uncommon extensions.
 Step    Modify configuration file:    laradock/docker-compose.yml
 In the workspace configuration parameter field
@@ -22,10 +22,10 @@ In the workspace configuration parameter field
     
     <item>
       <title>Docker Usage Notes</title>
-      <link>https://blog.adminchao.com/posts/docker-usage-notes/</link>
+      <link>http://chaosirgit.github.io/posts/docker-usage-notes/</link>
       <pubDate>Mon, 20 Jul 2020 15:39:19 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/docker-usage-notes/</guid>
+      <guid>http://chaosirgit.github.io/posts/docker-usage-notes/</guid>
       <description>Preface    Take some notes in the process of learning and using Docker.
 Command    Check the version of Docker after installation
 1 2 3 4  $ docker --version Docker version 19.03.8, build afacb8b $ docker-compose --version docker-compose version 1.25.5, build 8a1c60f6   Try running an Nginx server：
@@ -34,59 +34,59 @@ Command    Check the version of Docker after installation
     
     <item>
       <title>Laravel Passport Personal Token Multi-User Login</title>
-      <link>https://blog.adminchao.com/posts/laravel-passport-personal-token-multi-user-login/</link>
+      <link>http://chaosirgit.github.io/posts/laravel-passport-personal-token-multi-user-login/</link>
       <pubDate>Fri, 27 Mar 2020 21:08:27 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/laravel-passport-personal-token-multi-user-login/</guid>
+      <guid>http://chaosirgit.github.io/posts/laravel-passport-personal-token-multi-user-login/</guid>
       <description>Preface    Recently a project needs to use multi-user table system authentication, using Passport to achieve for Token issuance and authentication, but for multi-user table login Passport is still difficult to achieve, see some multi-user table login is also used GuzzleHttp carry additional parameters to achieve, does not meet my needs. After a period of exploration, I finally implemented Passport through the personal token multi-user table login.
 Step    Laravel Version 6.</description>
     </item>
     
     <item>
       <title>Iris MVC Routing-III</title>
-      <link>https://blog.adminchao.com/posts/iris-mvc-routing-iii/</link>
+      <link>http://chaosirgit.github.io/posts/iris-mvc-routing-iii/</link>
       <pubDate>Tue, 03 Mar 2020 08:40:28 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/iris-mvc-routing-iii/</guid>
+      <guid>http://chaosirgit.github.io/posts/iris-mvc-routing-iii/</guid>
       <description>Define Routes    Enter the following in the root directory main.go
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19  package main import ( &amp;#34;github.com/kataras/iris&amp;#34; &amp;#34;github.com/kataras/iris/mvc&amp;#34; &amp;#34;./controllers&amp;#34; ) func main() { app := iris.New() // Register the view directory 	app.RegisterView(iris.HTML(&amp;#34;./views&amp;#34;, &amp;#34;.html&amp;#34;)) // Define root route controller 	mvc.New(app).Handle(new(controllers.DefaultController)) // Define user group route controller 	mvc.New(app.Party(&amp;#34;/user&amp;#34;)).Handle(new(controllers.UserController)) app.</description>
     </item>
     
     <item>
       <title>Iris Installation And Initialization II</title>
-      <link>https://blog.adminchao.com/posts/iris-install-and-init-ii/</link>
+      <link>http://chaosirgit.github.io/posts/iris-install-and-init-ii/</link>
       <pubDate>Sun, 01 Mar 2020 19:21:06 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/iris-install-and-init-ii/</guid>
+      <guid>http://chaosirgit.github.io/posts/iris-install-and-init-ii/</guid>
       <description>Installation      Requirement GO &amp;gt;= 1.8 Recommended 1.9
 1  go get -u github.com/kataras/iris     Initializing Web Services    1 2 3 4 5 6 7 8 9 10 11 12  package main import ( &amp;#34;github.com/kataras/iris&amp;#34; ) func main() { // Create App 	app := iris.New() //Listening port 	app.Run(iris.Addr(&amp;#34;:80&amp;#34;),iris.WithoutServerError(iris.ErrServerClosed)) }   Configuration    Iris supports .</description>
     </item>
     
     <item>
       <title>Iris I Love She I</title>
-      <link>https://blog.adminchao.com/posts/iris-i-love-she-i/</link>
+      <link>http://chaosirgit.github.io/posts/iris-i-love-she-i/</link>
       <pubDate>Sun, 01 Mar 2020 14:17:47 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/iris-i-love-she-i/</guid>
+      <guid>http://chaosirgit.github.io/posts/iris-i-love-she-i/</guid>
       <description>Preface    Golang is popular all over the world, such as Google, AWS, Cloudflare, CoreOS, etc., have started to use Golang to develop their cloud computing related products on a large scale. In the process of learning Golang, I was also deeply impressed by Golang. The Golang natively supports high concurrency and strong performance, and if you are skilled, the development efficiency is no worse than Python and other languages.</description>
     </item>
     
     <item>
       <title>Laravel Throttle Middleware Response With JSON</title>
-      <link>https://blog.adminchao.com/posts/laravel-throttle-middleware-response-with-json/</link>
+      <link>http://chaosirgit.github.io/posts/laravel-throttle-middleware-response-with-json/</link>
       <pubDate>Thu, 25 Jul 2019 18:33:53 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/laravel-throttle-middleware-response-with-json/</guid>
+      <guid>http://chaosirgit.github.io/posts/laravel-throttle-middleware-response-with-json/</guid>
       <description>Preface    Laravel comes with a request frequency limitation middleware, but this middleware does not return JSON, which is always needed in the form of JSON in daily work.
 Step    Generate middleware file    1  php artisan make:middleware ThrottleRequests   Copy the code to app\Http\Middleware\ThrottleRequests.php    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198  &amp;lt;?</description>
     </item>
     
     <item>
       <title>Laravel Using WorkerMan(GateWay)</title>
-      <link>https://blog.adminchao.com/posts/laravel-using-workermangateway/</link>
+      <link>http://chaosirgit.github.io/posts/laravel-using-workermangateway/</link>
       <pubDate>Mon, 22 Jul 2019 16:30:53 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/laravel-using-workermangateway/</guid>
+      <guid>http://chaosirgit.github.io/posts/laravel-using-workermangateway/</guid>
       <description>Preface    Document the process of using WorkerMan or GateWay in Laravel.
 Begin    Installation    1  composer require workerman/gateway-worker   Create command    Use artisan to create a command tool to start WorkerMan because WorkerMan can only be started from the command line.
 1  php artisan make:command WorkerMan   Change the /app/Console/Commands/WorkerMan.php file    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122  &amp;lt;?</description>
@@ -94,39 +94,39 @@ Begin    Installation    1  composer require workerman/gateway-worker   Create c
     
     <item>
       <title>Guzzle Basic Usage</title>
-      <link>https://blog.adminchao.com/posts/guzzle-basic-usage/</link>
+      <link>http://chaosirgit.github.io/posts/guzzle-basic-usage/</link>
       <pubDate>Mon, 17 Jun 2019 23:51:47 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/guzzle-basic-usage/</guid>
+      <guid>http://chaosirgit.github.io/posts/guzzle-basic-usage/</guid>
       <description>Installation    1  composer require guzzlehttp/guzzle:~6.0   Use    1 2 3 4 5 6 7 8 9 10 11 12 13  &amp;lt;?php use GuzzleHttp\Client; $client = new Client(); $api = &amp;#39;http://www.test.com/api/register&amp;#39;; $request_data = [&amp;#39;username&amp;#39;=&amp;gt;&amp;#39;111&amp;#39;,&amp;#39;password&amp;#39;=&amp;gt;&amp;#39;222&amp;#39;]; $sign = md5(&amp;#39;key&amp;#39;); $response = $client-&amp;gt;request(&amp;#39;POST&amp;#39;,$api,[&amp;#39;form_params&amp;#39;=&amp;gt;$request_data,&amp;#39;headers&amp;#39;=&amp;gt;[&amp;#39;Sign&amp;#39;=&amp;gt;$sign]]); $res_string = $response-&amp;gt;getBody()-&amp;gt;getContents(); $res_data = json_decode($res_string,true); var_dump($res_data);   Encapsulation of requests    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40  &amp;lt;?</description>
     </item>
     
     <item>
       <title>UEditor Multi-Image Upload Changed To QiNiu Cloud.md</title>
-      <link>https://blog.adminchao.com/posts/ueditor-multi-image-upload-changed-to-qiniu-cloud/</link>
+      <link>http://chaosirgit.github.io/posts/ueditor-multi-image-upload-changed-to-qiniu-cloud/</link>
       <pubDate>Wed, 22 May 2019 13:00:10 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/ueditor-multi-image-upload-changed-to-qiniu-cloud/</guid>
+      <guid>http://chaosirgit.github.io/posts/ueditor-multi-image-upload-changed-to-qiniu-cloud/</guid>
       <description>Preface    Modify UEditor to upload multiple images to Qiniu-cloud UEditor version is 1.4.3
 Begin    Modify the ueditor/1.4.3/php/config.json configuration file    1 2 3 4 5 6 7 8 9 10 11 12 13  { /* Upload image configuration item */ &amp;#34;imageUrl&amp;#34;: &amp;#34;https://up-z2.qiniup.com/&amp;#34;, /* Qiniu-cloud upload interface */ &amp;#34;imageActionName&amp;#34;: &amp;#34;uploadimage&amp;#34;, /* Name of the action to execute the upload image */ &amp;#34;imageFieldName&amp;#34;: &amp;#34;file&amp;#34;, /* The name of the submitted image form is modified to file here.</description>
     </item>
     
     <item>
       <title>Change Alfred Default Shell To iTerm</title>
-      <link>https://blog.adminchao.com/posts/change-alfred-default-shell-to-iterm/</link>
+      <link>http://chaosirgit.github.io/posts/change-alfred-default-shell-to-iterm/</link>
       <pubDate>Thu, 02 May 2019 17:39:49 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/change-alfred-default-shell-to-iterm/</guid>
+      <guid>http://chaosirgit.github.io/posts/change-alfred-default-shell-to-iterm/</guid>
       <description>Change alfred default shell to iTerm2    Code Record
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  on alfred_script(q) run script &amp;#34; on run {q} tell application \&amp;#34;:Applications:iTerm.app\&amp;#34; activate try select first window on error create window with default profile select first window end try tell the first window tell current session to write text q end tell end tell end run &amp;#34; with parameters {q} end alfred_script   </description>
     </item>
     
     <item>
       <title>Mac Aria2 Usage</title>
-      <link>https://blog.adminchao.com/posts/mac-aria2-usage/</link>
+      <link>http://chaosirgit.github.io/posts/mac-aria2-usage/</link>
       <pubDate>Sat, 27 Apr 2019 16:36:20 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/mac-aria2-usage/</guid>
+      <guid>http://chaosirgit.github.io/posts/mac-aria2-usage/</guid>
       <description>Preface    Every time you download a file you have to pay a protection fee, not to pay the download speed is simply to make the times backwards. Luckily, I found Aria2 by accident. Thank you, gods.
 Installation    Installing Aria2 on Mac is easy
 1  brew install aria2   Usage     Download the file to the default directory aria2c running directory, in this case /Users/your username for Mac  1  aria2c [Download file address]    Download the file to the specified directory  1  aria2c -d [directory] [download file address]    Download file renaming  1  aria2c -o [filename] [download file address]    Download files in segments, between 1 and 5 parts  1  aria2c -s [parts] [download file address]    Breakpoint download  1  aria2c -c [download file address]    Background download  1  aria2c -D [download file address]   Download Baidu cloud file    You need to install a BaiduPan Explorer extension on your Chrome browser to get the real address of your Baidu cloud files</description>
@@ -134,59 +134,59 @@ Installation    Installing Aria2 on Mac is easy
     
     <item>
       <title>Red Packet Class</title>
-      <link>https://blog.adminchao.com/posts/red-packet-class/</link>
+      <link>http://chaosirgit.github.io/posts/red-packet-class/</link>
       <pubDate>Sat, 16 Mar 2019 10:39:09 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/red-packet-class/</guid>
+      <guid>http://chaosirgit.github.io/posts/red-packet-class/</guid>
       <description>Preface    Copied the bonus class written by someone else and it feels pretty good to use. The original address is in the comments. Hereby record
 Code    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177  &amp;lt;?</description>
     </item>
     
     <item>
       <title>Lottery Algorithm</title>
-      <link>https://blog.adminchao.com/posts/lottery-algorithm/</link>
+      <link>http://chaosirgit.github.io/posts/lottery-algorithm/</link>
       <pubDate>Sun, 13 Jan 2019 18:08:37 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/lottery-algorithm/</guid>
+      <guid>http://chaosirgit.github.io/posts/lottery-algorithm/</guid>
       <description>Codes    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51  &amp;lt;?php namespace App\Utils; class PROBABILITY { //chance is the probability of drawing, the smaller the value, the smaller the probability // $arr = [ // [&amp;#39;name&amp;#39;=&amp;gt;&amp;#39;$1000 phone&amp;#39;,&amp;#39;chance&amp;#39;=&amp;gt;&amp;#39;1&amp;#39;], // [&amp;#39;name&amp;#39;=&amp;gt;&amp;#39;$100 voucher&amp;#39;,&amp;#39;chance&amp;#39;=&amp;gt;&amp;#39;10&amp;#39;], // [&amp;#39;name&amp;#39;=&amp;gt;&amp;#39;$10 voucher&amp;#39;,&amp;#39;chance&amp;#39;=&amp;gt;&amp;#39;100&amp;#39;], // [&amp;#39;name&amp;#39;=&amp;gt;&amp;#39;Thanks for participating&amp;#39;,&amp;#39;chance&amp;#39;=&amp;gt;&amp;#39;700&amp;#39;], // ];  /** * The lottery probability algorithm * @param array $prizeArr array of prizes * @param string $index Probability key name * @return mixed the prizes drawn */ public static function lottery_raffle($prizeArr,$index=&amp;#39;chance&amp;#39;) { $result = &amp;#39;&amp;#39;; // array set to a collection  $prize = collect($prizeArr); $randArr = $prize-&amp;gt;pluck($index)-&amp;gt;toArray(); // total probability precision of the probability array  $proSum = array_sum($randArr); //probability array loop  foreach ($randArr as $key =&amp;gt; $val) { //generate a random number - from 1 to probability and generate a random send  $randNum = mt_rand(1, $proSum); //hit - if the random send is less than this probability value  if ($randNum &amp;lt;= $val) { // echo &amp;#39;yes:&amp;#39;.</description>
     </item>
     
     <item>
       <title>Scan PHP For Dangerous File Scripts</title>
-      <link>https://blog.adminchao.com/posts/scan-php-for-dangerous-file-scripts/</link>
+      <link>http://chaosirgit.github.io/posts/scan-php-for-dangerous-file-scripts/</link>
       <pubDate>Sat, 12 Jan 2019 13:30:20 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/scan-php-for-dangerous-file-scripts/</guid>
+      <guid>http://chaosirgit.github.io/posts/scan-php-for-dangerous-file-scripts/</guid>
       <description>Code    Laravel php artisan make:command ScanHorse:
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193  &amp;lt;?</description>
     </item>
     
     <item>
       <title>Laravel Eloquent Return Result Optimization</title>
-      <link>https://blog.adminchao.com/posts/laravel-eloquent-return-result-optimization/</link>
+      <link>http://chaosirgit.github.io/posts/laravel-eloquent-return-result-optimization/</link>
       <pubDate>Thu, 10 Jan 2019 15:29:08 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/laravel-eloquent-return-result-optimization/</guid>
+      <guid>http://chaosirgit.github.io/posts/laravel-eloquent-return-result-optimization/</guid>
       <description>Preface    We all know that using the appends property in the model to build the accessor makes the return result add some field information, but then there is a disadvantage that all the return results of this model will have these field information, which is not appropriate if the interface specifies a strict return information field.
 Can there be a good way to show or hide these fields dynamically?</description>
     </item>
     
     <item>
       <title>Laravel Get The Latest Records In Groups</title>
-      <link>https://blog.adminchao.com/posts/laravel-get-the-latest-records-in-groups/</link>
+      <link>http://chaosirgit.github.io/posts/laravel-get-the-latest-records-in-groups/</link>
       <pubDate>Wed, 14 Nov 2018 14:35:10 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/laravel-get-the-latest-records-in-groups/</guid>
+      <guid>http://chaosirgit.github.io/posts/laravel-get-the-latest-records-in-groups/</guid>
       <description>Preface    Today&amp;rsquo;s project requires the business logic of querying the latest records based on grouping, and I want to use Eloquent to query out and make a record.
 Realization    Table Contents       id name user_id value     1 Project 1 61 test 1   2 Project 2 61 test 2   3 Project 3 61 test 3   4 Project 1 61 test 123    Raw SQL is:    1  select * from (select * from project where user_id = :user_id order by id desc) as a group by a.</description>
     </item>
     
     <item>
       <title>Laravel Artisan Backend Call</title>
-      <link>https://blog.adminchao.com/posts/laravel-artisan-backend-call/</link>
+      <link>http://chaosirgit.github.io/posts/laravel-artisan-backend-call/</link>
       <pubDate>Mon, 15 Oct 2018 10:04:39 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/laravel-artisan-backend-call/</guid>
+      <guid>http://chaosirgit.github.io/posts/laravel-artisan-backend-call/</guid>
       <description>Preface    If you need to execute a script programmatically in the background in your project, with the official Artisan::call() call, if the script takes too long, the process will be interrupted and the script will not execute successfully, so you need to hang the execution in the background.
 Artisan Command Line Tools    Please refer to the official documentation.
 Called programmatically    1 2 3 4 5  &amp;lt;?</description>
@@ -194,30 +194,30 @@ Called programmatically    1 2 3 4 5  &amp;lt;?</description>
     
     <item>
       <title>Laravel Eloquent Advanced Usage</title>
-      <link>https://blog.adminchao.com/posts/laravel-eloquent-advanced-usage/</link>
+      <link>http://chaosirgit.github.io/posts/laravel-eloquent-advanced-usage/</link>
       <pubDate>Wed, 22 Aug 2018 11:02:10 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/laravel-eloquent-advanced-usage/</guid>
+      <guid>http://chaosirgit.github.io/posts/laravel-eloquent-advanced-usage/</guid>
       <description>Preface    When using Laravel Eloquent model, I deeply appreciate what elegance is! Although you can chain calls to DB operation methods in the business logic to solve the problem, but there is always less elegance! Here is a special record of the operation methods with Eloquent to make the code elegant.
 Target    leftJoin where    Target SQL    1  select * from user_second left join user on user_second.</description>
     </item>
     
     <item>
       <title>Laravel AliCloud SMS Usage</title>
-      <link>https://blog.adminchao.com/posts/laravel-alicloud-sms-usage/</link>
+      <link>http://chaosirgit.github.io/posts/laravel-alicloud-sms-usage/</link>
       <pubDate>Tue, 31 Jul 2018 17:14:34 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/laravel-alicloud-sms-usage/</guid>
+      <guid>http://chaosirgit.github.io/posts/laravel-alicloud-sms-usage/</guid>
       <description>curder/laravel-aliyun-sms    Installation    1  composer require curder/laravel-aliyun-sms   Configuration    Configure the following information in the .env file of the Laravel project.
 1 2 3 4 5 6 7 8 9  ALIYUN_SMS_ENABLE_HTTP_PROXY=false ALIYUN_SMS_HTTP_PROXY_IP=127.0.0.1 ALIYUN_SMS_HTTP_PROXY_PORT=8888 ALIYUN_SMS_REGION_ID=cn-hangzhou ALIYUN_SMS_AK=&amp;#34;&amp;#34; ALIYUN_SMS_AS=&amp;#34;&amp;#34; ALIYUN_SMS_SIGN_NAME=&amp;#34;&amp;#34; ALIYUN_SMS_VARIABLE=&amp;#34;&amp;#34; ALIYUN_SMS_CODE=&amp;#34;&amp;#34;   Register ServiceProvide    Add the following line to the providers array in the project&amp;rsquo;s config/app.php file.</description>
     </item>
     
     <item>
       <title>Standalone Use Of Eloquent</title>
-      <link>https://blog.adminchao.com/posts/standalone-use-of-eloquent/</link>
+      <link>http://chaosirgit.github.io/posts/standalone-use-of-eloquent/</link>
       <pubDate>Wed, 04 Jul 2018 14:14:22 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/standalone-use-of-eloquent/</guid>
+      <guid>http://chaosirgit.github.io/posts/standalone-use-of-eloquent/</guid>
       <description>Preface    Laravel&amp;rsquo;s Eloquent is a great ORM, Eloquent is a standalone module, we can also use Eloquent in our own projects through composer, this article will explain in detail how to integrate Eloquent in your own projects.
 Installation    In the project directory, execute
 1  composer require illuminate/database:^5.0   Or add it directly to the composer.json file:
@@ -226,105 +226,105 @@ Installation    In the project directory, execute
     
     <item>
       <title>Laravel overtrue/wechat Usage</title>
-      <link>https://blog.adminchao.com/posts/laravel-overtrue-wechat-usage/</link>
+      <link>http://chaosirgit.github.io/posts/laravel-overtrue-wechat-usage/</link>
       <pubDate>Fri, 08 Jun 2018 12:51:35 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/laravel-overtrue-wechat-usage/</guid>
+      <guid>http://chaosirgit.github.io/posts/laravel-overtrue-wechat-usage/</guid>
       <description>Web Authorization Login Middleware    Create app/Http/Middleware/WechatAuth.php middleware    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75  public function handle($request, Closure $next, $account = &amp;#39;default&amp;#39;, $scopes = null) { // The case where $account and $scopes are written backwards  if (is_array($scopes) || (\is_string($account) &amp;amp;&amp;amp; str_is(&amp;#39;snsapi_*&amp;#39;, $account))) { list($account, $scopes) = [$scopes, $account]; $account || $account = &amp;#39;default&amp;#39;; } $isNewSession = false; $sessionKey = \sprintf(&amp;#39;user_id&amp;#39;, $account); $config = config(\sprintf(&amp;#39;wechat.</description>
     </item>
     
     <item>
       <title>Laravel Qiniu Layui Upload Image</title>
-      <link>https://blog.adminchao.com/posts/laravel-qiniu-layui-upload-image/</link>
+      <link>http://chaosirgit.github.io/posts/laravel-qiniu-layui-upload-image/</link>
       <pubDate>Fri, 08 Jun 2018 12:47:33 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/laravel-qiniu-layui-upload-image/</guid>
+      <guid>http://chaosirgit.github.io/posts/laravel-qiniu-layui-upload-image/</guid>
       <description>Installation    1  composer require qiniu/php-sdk   Usage    PHP returns the upload token    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26  &amp;lt;?php namespace App\Http\Controllers\Admin; use App\Setting; use Illuminate\Http\Request; use App\Http\Controllers\Controller; use Qiniu\Auth; class DefaultController extends Controller { public function upload(){ $accessKey = Setting::getValueByKey(&amp;#39;qn_accessKey&amp;#39;); $secretKey = Setting::getValueByKey(&amp;#39;qn_secretKey&amp;#39;); $bucket = Setting::getValueByKey(&amp;#39;qn_bucket_static&amp;#39;); $baseUrl = Setting::getValueByKey(&amp;#39;qn_static_url&amp;#39;); //Build forensic objects  $auth = new Auth($accessKey,$secretKey); //generate upload token  $token = $auth-&amp;gt;uploadToken($bucket); return $token; } }   layui carry token to request seven cows cloud upload interface    layui HTML code    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22  &amp;lt;div class=&amp;#34;layui-form-item&amp;#34;&amp;gt; &amp;lt;label class=&amp;#34;layui-form-label&amp;#34; for=&amp;#34;fileInput&amp;#34;&amp;gt;Thumbnail&amp;lt;/label&amp;gt; &amp;lt;div class=&amp;#34;layui-input-block&amp;#34;&amp;gt; &amp;lt;button type=&amp;#34;button&amp;#34; class=&amp;#34;layui-btn&amp;#34; id=&amp;#34;thum&amp;#34;&amp;gt;Upload image&amp;lt;/button&amp;gt; &amp;lt;div class=&amp;#34;layui-upload-list&amp;#34;&amp;gt; &amp;lt;div id=&amp;#34;thum_img&amp;#34;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;layui-form-item&amp;#34;&amp;gt; &amp;lt;label class=&amp;#34;layui-form-label&amp;#34; for=&amp;#34;fileInput&amp;#34;&amp;gt;Detailed image&amp;lt;/label&amp;gt; &amp;lt;div class=&amp;#34;layui-input-block&amp;#34;&amp;gt; &amp;lt;button type=&amp;#34;button&amp;#34; class=&amp;#34;layui-btn&amp;#34; id=&amp;#34;imgs&amp;#34;&amp;gt; Upload &amp;lt;/button&amp;gt; &amp;lt;div class=&amp;#34;layui-upload-list&amp;#34;&amp;gt; &amp;lt;div id=&amp;#34;imgs_list&amp;#34;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/div&amp;gt;   layui JS code    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47  function uploadInsts(elem,multiple,number,imgDiv){ if(multiple == null){ multiple = false; } if(number == null){ number = 0; } layui.</description>
     </item>
     
     <item>
       <title>Laravel Excel Usage</title>
-      <link>https://blog.adminchao.com/posts/laravel-excel-usage/</link>
+      <link>http://chaosirgit.github.io/posts/laravel-excel-usage/</link>
       <pubDate>Fri, 08 Jun 2018 12:44:33 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/laravel-excel-usage/</guid>
+      <guid>http://chaosirgit.github.io/posts/laravel-excel-usage/</guid>
       <description>Laravel-Excel Plugin Usage    Installation    composer installation    1  composer require &amp;#34;maatwebsite/excel:~2.1.0&amp;#34;   After installation, modify config/app.php and append the following to the providers array    1  Maatwebsite\Excel\ExcelServiceProvider::class,   Also append the following to the aliases array:    1  &amp;#39;Excel&amp;#39; =&amp;gt; Maatwebsite\Excel\Facades\Excel::class,   Generate configuration file config/excel.php :    1  php artisan vendor:publish --provider=&amp;#34;Maatwebsite\Excel\ExcelServiceProvider&amp;#34;   Usage    To parse an Excel file    1 2 3  ini_set (&amp;#39;memory_limit&amp;#39;, &amp;#39;1024M&amp;#39;); $data = Excel::load(&amp;#39;excel.</description>
     </item>
     
     <item>
       <title>Laravel ElasticSearch Plugin</title>
-      <link>https://blog.adminchao.com/posts/laravel-elasticsearch-plugin/</link>
+      <link>http://chaosirgit.github.io/posts/laravel-elasticsearch-plugin/</link>
       <pubDate>Fri, 08 Jun 2018 12:43:00 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/laravel-elasticsearch-plugin/</guid>
+      <guid>http://chaosirgit.github.io/posts/laravel-elasticsearch-plugin/</guid>
       <description>ElasticSearch Problems and Usage    The solution of index.max_result_window error    1  curl -XPUT &amp;#34;http://localhost:9200/my_index/_settings&amp;#34; -d &amp;#39;{ &amp;#34;index&amp;#34; : { &amp;#34;max_result_window&amp;#34; : 100000000 } }&amp;#39;   Search Package    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57  public static function SearchAccountLogEs($must = array(),$must_not = array(),$should = array(),$aggs = array(),$size = 10,$page = 1,$sort = array(),$debug = false){ $index = Config::get(&amp;#39;elasticsearch.</description>
     </item>
     
     <item>
       <title>Laravel Eloquent Bracket Query</title>
-      <link>https://blog.adminchao.com/posts/laravel-eloquent-bracket-query/</link>
+      <link>http://chaosirgit.github.io/posts/laravel-eloquent-bracket-query/</link>
       <pubDate>Fri, 08 Jun 2018 12:36:54 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/laravel-eloquent-bracket-query/</guid>
+      <guid>http://chaosirgit.github.io/posts/laravel-eloquent-bracket-query/</guid>
       <description>Is equivalent to select * from queue_second_sold where status=0 and (buy_user_id = 341 or (sell_user_id = 341 and buy_user_id != 0)) order by id desc,and is used as follows:
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24  /** * Trading Floor - Directed Trading * @param Request $request * @return \Illuminate\Http\JsonResponse */ public function soldList(Request $request){ $type = $request-&amp;gt;get(&amp;#39;type&amp;#39;,0); // Trading Floor  $limit = $request-&amp;gt;get(&amp;#39;limit&amp;#39;,10); $user = User::getUserInfo(); if($type == 1){ //Directed Transactions  $results = QueueSecondSold::where(&amp;#39;status&amp;#39;,0) -&amp;gt;where(function($query) use ($user){ $query-&amp;gt;where(&amp;#39;sell_user_id&amp;#39;,$user-&amp;gt;id) -&amp;gt;where(&amp;#39;buy_user_id&amp;#39;,&amp;#39;!</description>
     </item>
     
     <item>
       <title>Tree Classification</title>
-      <link>https://blog.adminchao.com/posts/tree-classification/</link>
+      <link>http://chaosirgit.github.io/posts/tree-classification/</link>
       <pubDate>Fri, 08 Jun 2018 12:33:49 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/tree-classification/</guid>
+      <guid>http://chaosirgit.github.io/posts/tree-classification/</guid>
       <description>A function for tree classification    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  public static function tree($data,$pid=0,$level=0){ $results = array(); foreach ($data as $value){ // recursion point If the parent id of the current record is equal to the incoming parent id, then this record is a child of the incoming parent id  if($value[&amp;#39;p_id&amp;#39;] == $pid){ $value[&amp;#39;level&amp;#39;] = $level; // recursive call to get the sublevels under the sublevel  $value[&amp;#39;children&amp;#39;] = self::tree($data,$value[&amp;#39;id&amp;#39;],$level + 1); //push assigns the above result to the returned data  $results[] = $value; } // Recursive exit: traversal complete.</description>
     </item>
     
     <item>
       <title>Laravel Paginate</title>
-      <link>https://blog.adminchao.com/posts/laravel-paginate/</link>
+      <link>http://chaosirgit.github.io/posts/laravel-paginate/</link>
       <pubDate>Fri, 08 Jun 2018 11:56:23 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/laravel-paginate/</guid>
+      <guid>http://chaosirgit.github.io/posts/laravel-paginate/</guid>
       <description>Preface    Using the paginate method of Laravel Eloquent will make it easy to paginate the data. It works very well! I like it too much.
 Usage    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25  //paginate source code public function paginate($perPage = 15, $columns = [&amp;#39;*&amp;#39;], $pageName = &amp;#39;page&amp;#39;, $page = null) { $page = $page ?</description>
     </item>
     
     <item>
       <title>Laravel Global Scopes</title>
-      <link>https://blog.adminchao.com/posts/laravel-global-scopes/</link>
+      <link>http://chaosirgit.github.io/posts/laravel-global-scopes/</link>
       <pubDate>Fri, 08 Jun 2018 11:41:08 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/laravel-global-scopes/</guid>
+      <guid>http://chaosirgit.github.io/posts/laravel-global-scopes/</guid>
       <description>Preface    The global scope is used to globally add the execution constraint to all the model operations involved after adding it. For example: the original select * from user becomes select * from user where is_delete = 0 after adding
 Usage    Create App/Scopes/SiteScope.php ：    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31  &amp;lt;?</description>
     </item>
     
     <item>
       <title>Laravel Generating Test Data</title>
-      <link>https://blog.adminchao.com/posts/laravel-generating-test-data/</link>
+      <link>http://chaosirgit.github.io/posts/laravel-generating-test-data/</link>
       <pubDate>Thu, 08 Mar 2018 11:14:46 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/laravel-generating-test-data/</guid>
+      <guid>http://chaosirgit.github.io/posts/laravel-generating-test-data/</guid>
       <description>Preface    Using Laravel Faker to generate test data is very convenient for testing and debugging.
 Usage    Open app/database/factories/ModelFactory.php    Edit:    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56  $factory-&amp;gt;define(App\User::class, function (Faker\Generator $faker) { $faker = Faker\Factory::create(&amp;#39;zh_CN&amp;#39;); //chinese package  return [ &amp;#39;openid&amp;#39; =&amp;gt; str_random(10), &amp;#39;nickname&amp;#39; =&amp;gt; $faker-&amp;gt;name, //Chinese name  &amp;#39;mobile&amp;#39; =&amp;gt; $faker-&amp;gt;phoneNumber, &amp;#39;avatar&amp;#39; =&amp;gt; $faker-&amp;gt;imageUrl(), &amp;#39;integral&amp;#39; =&amp;gt; $faker-&amp;gt;randomNumber(3), &amp;#39;balance&amp;#39; =&amp;gt; $faker-&amp;gt;randomFloat(2, 0, 10000), // Random floating point number, 2 decimal places, min 0, max 10000  &amp;#39;birthday&amp;#39; =&amp;gt; $faker-&amp;gt;date(), &amp;#39;created_time&amp;#39; =&amp;gt; $faker-&amp;gt;unixTime(), &amp;#39;password&amp;#39; =&amp;gt; App\User::generatePassword(&amp;#39;haha123&amp;#39;), // Available model methods to generate data  ]; }); $factory-&amp;gt;define(App\Product::class, function (Faker\Generator $faker) { $faker = Faker\Factory::create(&amp;#39;zh_CN&amp;#39;); // Use the model to generate the array to be associated with the random  $seller = App\Seller::where(&amp;#39;status&amp;#39;, 1)-&amp;gt;get()-&amp;gt;toArray(); foreach ($seller as $value) { $row[] = $value[&amp;#39;id&amp;#39;]; } return [ &amp;#39;product_no&amp;#39; =&amp;gt; $faker-&amp;gt;randomNumber(8), &amp;#39;name&amp;#39; =&amp;gt; &amp;#39;【Test Products】&amp;#39; .</description>
     </item>
     
     <item>
       <title>Automating Code Deployment With Git</title>
-      <link>https://blog.adminchao.com/posts/automating-code-deployment-with-git/</link>
+      <link>http://chaosirgit.github.io/posts/automating-code-deployment-with-git/</link>
       <pubDate>Fri, 01 Dec 2017 13:24:34 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/automating-code-deployment-with-git/</guid>
+      <guid>http://chaosirgit.github.io/posts/automating-code-deployment-with-git/</guid>
       <description>Preface    After building an LNMP environment, you need to deploy the project code on the server, but using git to pull on the server side is too troublesome, so you need to make a git auto-deploy code feature, so that the project directory is automatically updated to the latest code after developers push on it. We need to use hooks.
 Build a Git server    Installing Git    1  sudo apt-get install git   Create a Git user to run the Git service    1  sudo adduser git   Create certificate login    Put the developer&amp;rsquo;s public key, id_rsa.</description>
     </item>
     
     <item>
       <title>Building LNMP From Scratch Tutorial</title>
-      <link>https://blog.adminchao.com/posts/building-lnmp-from-scratch-tutorial/</link>
+      <link>http://chaosirgit.github.io/posts/building-lnmp-from-scratch-tutorial/</link>
       <pubDate>Sun, 08 Oct 2017 13:08:09 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/building-lnmp-from-scratch-tutorial/</guid>
+      <guid>http://chaosirgit.github.io/posts/building-lnmp-from-scratch-tutorial/</guid>
       <description>Connect to the server via ssh    Server System Version Ubuntu 16.04
 1  ssh root@127.0.0.1   Create a general account    1  adduser username   Grant sudo privileges to the general account    Go to /etc/sudoers.d/ and create a new file with any name you want. Add username ALL=(ALL:ALL) ALL and you&amp;rsquo;re done.
 Upgrade software source    1  sudo apt-get update   Installing Mysql    1  sudo apt-get install mysql-server mysql-client   mysql-server: MySQL server, the core program of mysql, is responsible for generating database instances and providing related interfaces for different clients to call.</description>
@@ -332,10 +332,10 @@ Upgrade software source    1  sudo apt-get update   Installing Mysql    1  sudo 
     
     <item>
       <title>My Phpstorm Configuration</title>
-      <link>https://blog.adminchao.com/posts/my-phpstorm-configuration/</link>
+      <link>http://chaosirgit.github.io/posts/my-phpstorm-configuration/</link>
       <pubDate>Fri, 22 Sep 2017 12:55:39 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/my-phpstorm-configuration/</guid>
+      <guid>http://chaosirgit.github.io/posts/my-phpstorm-configuration/</guid>
       <description>Preface    I felt that phpstorm was cool, so I ditched my beloved atom and turned to phpstorm to make notes on my phpstorm configuration for use in different environments.
 Download    Search for phpstorm in Google and download it.
 Installation    This is installed directly by default in the next step.
@@ -344,10 +344,10 @@ Configuration    Visual Beautification Configuration      ⌘+,` to open configu
     
     <item>
       <title>Git Common Commands</title>
-      <link>https://blog.adminchao.com/posts/git-common-commands/</link>
+      <link>http://chaosirgit.github.io/posts/git-common-commands/</link>
       <pubDate>Sun, 19 Jun 2016 10:13:37 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/git-common-commands/</guid>
+      <guid>http://chaosirgit.github.io/posts/git-common-commands/</guid>
       <description>&lt;h2 id=&#34;git-common-commands&#34;&gt;
   Git Common Commands
   &lt;a class=&#34;heading-link&#34; href=&#34;#git-common-commands&#34;&gt;

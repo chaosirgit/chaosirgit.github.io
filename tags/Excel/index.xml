@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Excel on Ethan Kuo Blog</title>
-    <link>https://blog.adminchao.com/tags/excel/</link>
+    <link>http://chaosirgit.github.io/tags/excel/</link>
     <description>Recent content in Excel on Ethan Kuo Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 08 Jun 2018 12:44:33 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/tags/excel/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 08 Jun 2018 12:44:33 +0000</lastBuildDate><atom:link href="http://chaosirgit.github.io/tags/excel/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Laravel Excel Usage</title>
-      <link>https://blog.adminchao.com/posts/laravel-excel-usage/</link>
+      <link>http://chaosirgit.github.io/posts/laravel-excel-usage/</link>
       <pubDate>Fri, 08 Jun 2018 12:44:33 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/posts/laravel-excel-usage/</guid>
+      <guid>http://chaosirgit.github.io/posts/laravel-excel-usage/</guid>
       <description>Laravel-Excel Plugin Usage    Installation    composer installation    1  composer require &amp;#34;maatwebsite/excel:~2.1.0&amp;#34;   After installation, modify config/app.php and append the following to the providers array    1  Maatwebsite\Excel\ExcelServiceProvider::class,   Also append the following to the aliases array:    1  &amp;#39;Excel&amp;#39; =&amp;gt; Maatwebsite\Excel\Facades\Excel::class,   Generate configuration file config/excel.php :    1  php artisan vendor:publish --provider=&amp;#34;Maatwebsite\Excel\ExcelServiceProvider&amp;#34;   Usage    To parse an Excel file    1 2 3  ini_set (&amp;#39;memory_limit&amp;#39;, &amp;#39;1024M&amp;#39;); $data = Excel::load(&amp;#39;excel.</description>
     </item>
     

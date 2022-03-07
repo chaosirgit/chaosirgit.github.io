@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>计数 on 郭超超的博客</title>
-    <link>https://blog.adminchao.com/zh-cn/tags/%E8%AE%A1%E6%95%B0/</link>
+    <link>http://chaosirgit.github.io/zh-cn/tags/%E8%AE%A1%E6%95%B0/</link>
     <description>Recent content in 计数 on 郭超超的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 22 Aug 2018 11:02:10 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/tags/%E8%AE%A1%E6%95%B0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Aug 2018 11:02:10 +0000</lastBuildDate><atom:link href="http://chaosirgit.github.io/zh-cn/tags/%E8%AE%A1%E6%95%B0/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Laravel Eloquent 高级</title>
-      <link>https://blog.adminchao.com/zh-cn/posts/laravel-eloquent-%E9%AB%98%E7%BA%A7/</link>
+      <link>http://chaosirgit.github.io/zh-cn/posts/laravel-eloquent-%E9%AB%98%E7%BA%A7/</link>
       <pubDate>Wed, 22 Aug 2018 11:02:10 +0000</pubDate>
       
-      <guid>https://blog.adminchao.com/zh-cn/posts/laravel-eloquent-%E9%AB%98%E7%BA%A7/</guid>
+      <guid>http://chaosirgit.github.io/zh-cn/posts/laravel-eloquent-%E9%AB%98%E7%BA%A7/</guid>
       <description>前言    在使用 Laravel Eloquent 模型时，深刻体会到什么是优雅！虽然在业务逻辑中可以使用模型链式调用DB模型的操作方法来解决，但是始终少了优雅！这里专门记录去 DB 模型的操作方法，使代码优雅化。
 目标    leftJoin where    目标 SQL    1  select * from user_second left join user on user_second.user_id = user.id where user.status = 1   解决方案    1 2  &amp;lt;?php UserSecond::leftJoin(&amp;#39;user&amp;#39;,&amp;#39;user_second.user_id&amp;#39;,&amp;#39;=&amp;#39;,&amp;#39;user.id&amp;#39;)-&amp;gt;where(&amp;#39;user.status&amp;#39;,1)-&amp;gt;get();   但是这样的缺点在于
  得到的结果两个表的字段如果相同，右表会覆盖左表的值。 得到的结果不能使用模型精确控制。  1 2 3 4 5 6 7 8 9  { &amp;#34;id&amp;#34;: 11, //其实左表也就是`user_second`表的 id 为 9 这里被 `user` 表的 id 覆盖了  &amp;#34;user_id&amp;#34;: 11, //这里是 `user_second` 表的 `user_id`  &amp;#34;enlist_currency&amp;#34;: &amp;#34;256.</description>
