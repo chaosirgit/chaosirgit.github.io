@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>事务 on Ethan Kuo Blog</title>
+    <link>https://blog.adminchao.com/tags/%E4%BA%8B%E5%8A%A1/</link>
+    <description>Recent content in 事务 on Ethan Kuo Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 08 May 2018 11:34:37 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/tags/%E4%BA%8B%E5%8A%A1/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Laravel 事务用法</title>
+      <link>https://blog.adminchao.com/posts/laravel-%E4%BA%8B%E5%8A%A1%E7%94%A8%E6%B3%95/</link>
+      <pubDate>Tue, 08 May 2018 11:34:37 +0000</pubDate>
+      
+      <guid>https://blog.adminchao.com/posts/laravel-%E4%BA%8B%E5%8A%A1%E7%94%A8%E6%B3%95/</guid>
+      <description>前言    Laravel 中使用事务非常简单。
+##用法 数据库引擎必须为 InnoDB 用法如下：
+public function test(Request $request){ $car = new Car(); $car-&amp;gt;user_id = $request-&amp;gt;get(&amp;#39;user_id&amp;#39;); $car-&amp;gt;product_id = $request-&amp;gt;get(&amp;#39;product_id&amp;#39;); $car-&amp;gt;product_sku_id = $request-&amp;gt;get(&amp;#39;product_sku_id&amp;#39;); $car-&amp;gt;product_num = $request-&amp;gt;get(&amp;#39;product_num&amp;#39;); DB::beginTransaction(); //开始  try { $car-&amp;gt;save(); DB::commit(); //提交  return $this-&amp;gt;success(&amp;#34;操作成功&amp;#34;); }catch (\Exception $ex){ DB::rollback(); //回滚  return $this-&amp;gt;error(&amp;#34;操作失败&amp;#34;); } } </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; block-all-mixed-content; default-src 'self'; child-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net/; form-action 'self'; frame-src 'self'; img-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/ https://cdn.jsdelivr.net/; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://cdn.jsdelivr.net/; prefetch-src 'self'; connect-src 'self' https://www.google-analytics.com;">
+
+    
+
+    <meta name="author" content="郭超超">
+    <meta name="description" content="
+  项目需求
+  
+    
+  
+
+  实现登陆功能，获取 token
+  HttpMethod: Post
+  URI: /token
+  Request Header
+  Content-Type: application/x-www-form-urlencoded">
+    <meta name="keywords" content="rest API,API,lumen,php,token,bearer token,教程,实例,Mysql">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="rest API 实例教程之 token 生成"/>
+<meta name="twitter:description" content="
+  项目需求
+  
+    
+  
+
+  实现登陆功能，获取 token
+  HttpMethod: Post
+  URI: /token
+  Request Header
+  Content-Type: application/x-www-form-urlencoded"/>
+
+    <meta property="og:title" content="rest API 实例教程之 token 生成" />
+<meta property="og:description" content="
+  项目需求
+  
+    
+  
+
+  实现登陆功能，获取 token
+  HttpMethod: Post
+  URI: /token
+  Request Header
+  Content-Type: application/x-www-form-urlencoded" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.adminchao.com/zh-cn/posts/rest-api-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B%E4%B9%8B-token-%E7%94%9F%E6%88%90/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2017-06-21T16:42:09+00:00" />
+<meta property="article:modified_time" content="2017-06-21T16:42:09+00:00" /><meta property="og:site_name" content="郭超超的博客" />
+
+
+
+    <title>
+  rest API 实例教程之 token 生成 · 郭超超的博客
+</title>
+
+    
+      <link rel="canonical" href="https://blog.adminchao.com/zh-cn/posts/rest-api-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B%E4%B9%8B-token-%E7%94%9F%E6%88%90/">
+    
+
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css" integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    <meta name="generator" content="Hugo 0.89.1" />
+  </head>
+
+  
+  
+    
+  
+  <body class="preload-transitions colorscheme-dark">
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/zh-cn">
+      郭超超的博客
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/zh-cn/about/">关于</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/zh-cn/posts/">博文</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/zh-cn/contact/">联系</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="https://blog.adminchao.com/">🇺🇸</a>
+              </li>
+            
+          
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://blog.adminchao.com/zh-cn/posts/rest-api-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B%E4%B9%8B-token-%E7%94%9F%E6%88%90/">
+              rest API 实例教程之 token 生成
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2017-06-21T16:42:09Z">
+                2017-06-21 16:42:09
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              阅读时间：4 分钟
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa fa-folder" aria-hidden="true"></i>
+    <a href="/zh-cn/categories/lumen/">Lumen</a></div>
+
+          <div class="tags">
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/zh-cn/tags/rest-api/">rest API</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/zh-cn/tags/api/">API</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/zh-cn/tags/lumen/">lumen</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/zh-cn/tags/php/">php</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/zh-cn/tags/token/">token</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/zh-cn/tags/bearer-token/">bearer token</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <h2 id="项目需求">
+  项目需求
+  <a class="heading-link" href="#%e9%a1%b9%e7%9b%ae%e9%9c%80%e6%b1%82">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<p>  实现登陆功能，获取 token</p>
+<p>  <strong>HttpMethod: Post</strong><br>
+  <strong>URI: /token</strong></p>
+<p>  <strong>Request Header</strong><br>
+  <strong>Content-Type: application/x-www-form-urlencoded</strong></p>
+<p>  <strong>Request Body</strong><br>
+  <strong>grant_type=password&amp;username=13012345678&amp;password=password123</strong></p>
+<p>  <strong>Response code:</strong></p>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>401</td>
+<td>无权限</td>
+</tr>
+<tr>
+<td>500</td>
+<td>其他错误</td>
+</tr>
+</tbody>
+</table>
+<p>  <strong>Response Body:(仅 200 时需要读)</strong></p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#ff79c6">&#34;access_token&#34;</span>:<span style="color:#f1fa8c">&#34;boQtj0SCGz2GFGz[...]&#34;</span>,
+    <span style="color:#ff79c6">&#34;token_type&#34;</span>:<span style="color:#f1fa8c">&#34;bearer&#34;</span>,
+  <span style="color:#ff79c6">&#34;expires_in&#34;</span>:<span style="color:#bd93f9">1209599</span>,
+  <span style="color:#ff79c6">&#34;uid&#34;</span>:<span style="color:#bd93f9">12345</span>,
+  <span style="color:#ff79c6">&#34;.issued&#34;</span>:<span style="color:#f1fa8c">&#34;Mon, 14 Oct 2013 06:53:32 GMT&#34;</span>,
+    <span style="color:#ff79c6">&#34;.expires&#34;</span>:<span style="color:#f1fa8c">&#34;Mon, 28 Oct 2013 06:53:32 GMT&#34;</span>
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="项目分析">
+  项目分析
+  <a class="heading-link" href="#%e9%a1%b9%e7%9b%ae%e5%88%86%e6%9e%90">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<p>  前端会提交一个 <code>POST</code> 请求，提交地址是 <code>/token</code> ，在类型为<code>application/x-www-form-urlencoded</code> 的 <code>Header</code> 发送。在 <code>Body</code> 中含有用户名与密码参数。</p>
+<p>  那么我们需要做的就是从 <code>/token</code> 的 <code>POST</code> 请求中收到这两个参数，对用户进行验证，如果通过验证就生成一个 <code>token</code> 就存于数据库中，并设置过期时间，到期自动删除这个 <code>token</code> ，如果已经获取过，也返回 <code>401</code> 状态码，如果全部正确并没有获取过，返回以上 <code>JSON</code> 。</p>
+<h2 id="项目开始">
+  项目开始
+  <a class="heading-link" href="#%e9%a1%b9%e7%9b%ae%e5%bc%80%e5%a7%8b">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<h3 id="模型及路由设置">
+  模型及路由设置
+  <a class="heading-link" href="#%e6%a8%a1%e5%9e%8b%e5%8f%8a%e8%b7%af%e7%94%b1%e8%ae%be%e7%bd%ae">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>  参考上一遍教程<a href="http://blog.adminchao.com/%E4%BD%BF%E7%94%A8-lumen-%E5%88%9B%E5%BB%BA-rest-API-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B.html">使用 lumen 创建 rest API 实例教程</a>,在此不再赘述。</p>
+<h3 id="数据库构建">
+  数据库构建
+  <a class="heading-link" href="#%e6%95%b0%e6%8d%ae%e5%ba%93%e6%9e%84%e5%bb%ba">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>  对项目进行分析后，决定创建以下字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>类型</th>
+<th>属性</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int</td>
+<td>主键</td>
+<td>便于操作</td>
+</tr>
+<tr>
+<td>uid</td>
+<td>int</td>
+<td>not null</td>
+<td>user 表用户的 id ，即为用户的 uid</td>
+</tr>
+<tr>
+<td>uesr_token</td>
+<td>varchar</td>
+<td>not null</td>
+<td>生成的 token 存放地</td>
+</tr>
+<tr>
+<td>issued_time</td>
+<td>timestamp</td>
+<td>not null ,CURRENT_TIMESTAMP</td>
+<td>插入记录时间,也可理解为上次获得 token 时间</td>
+</tr>
+<tr>
+<td>expire_time</td>
+<td>timestamp</td>
+<td>not null</td>
+<td>插入记录时间 + 1209599 , token 过期时间</td>
+</tr>
+</tbody>
+</table>
+<p>  以此创建 <code>&lt;date&gt;_create_table_token.php</code> ,并编写以下代码：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#ff79c6">&lt;?</span>php
+
+ <span style="color:#ff79c6">use</span> Illuminate\Support\Facades\Schema;
+ <span style="color:#ff79c6">use</span> Illuminate\Database\Schema\Blueprint;
+ <span style="color:#ff79c6">use</span> Illuminate\Database\Migrations\Migration;
+
+<span style="color:#ff79c6">class</span> <span style="color:#50fa7b">CreateTableToken</span> <span style="color:#ff79c6">extends</span> Migration
+{
+    <span style="color:#f1fa8c">/**
+</span><span style="color:#f1fa8c">      * Run the migrations.
+</span><span style="color:#f1fa8c">      *
+</span><span style="color:#f1fa8c">      * @return void
+</span><span style="color:#f1fa8c">      */</span>
+     <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">up</span>()
+     {
+         Schema<span style="color:#ff79c6">::</span><span style="color:#50fa7b">create</span>(<span style="color:#f1fa8c">&#39;token&#39;</span>, <span style="color:#ff79c6">function</span> (Blueprint <span style="color:#8be9fd;font-style:italic">$table</span>) {
+             <span style="color:#8be9fd;font-style:italic">$table</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">increments</span>(<span style="color:#f1fa8c">&#39;id&#39;</span>);
+             <span style="color:#8be9fd;font-style:italic">$table</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">integer</span>(<span style="color:#f1fa8c">&#39;uid&#39;</span>);
+             <span style="color:#8be9fd;font-style:italic">$table</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">string</span>(<span style="color:#f1fa8c">&#39;user_token&#39;</span>);
+             <span style="color:#8be9fd;font-style:italic">$table</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">timestamp</span>(<span style="color:#f1fa8c">&#39;issued_time&#39;</span>);
+             <span style="color:#8be9fd;font-style:italic">$table</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">timestamp</span>(<span style="color:#f1fa8c">&#39;expire_time&#39;</span>);
+
+         });
+     }
+
+     <span style="color:#f1fa8c">/**
+</span><span style="color:#f1fa8c">      * Reverse the migrations.
+</span><span style="color:#f1fa8c">      *
+</span><span style="color:#f1fa8c">      * @return void
+</span><span style="color:#f1fa8c">      */</span>
+     <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">down</span>()
+     {
+         Schema<span style="color:#ff79c6">::</span><span style="color:#50fa7b">dropIfExists</span>(<span style="color:#f1fa8c">&#39;token&#39;</span>);
+     }
+ }
+ <span style="color:#ff79c6">?&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="控制器编写">
+  控制器编写
+  <a class="heading-link" href="#%e6%8e%a7%e5%88%b6%e5%99%a8%e7%bc%96%e5%86%99">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>  创建 <code>TokenController.php</code> ，代码中我都加了实现过程的注释，注意看哦<br>
+  如下：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"> <span style="color:#ff79c6">&lt;?</span>php
+
+  <span style="color:#ff79c6">namespace</span> App\Http\Controllers;
+
+  <span style="color:#ff79c6">use</span> App\Token;
+  <span style="color:#ff79c6">use</span> Illuminate\Http\Response;
+  <span style="color:#ff79c6">use</span> Illuminate\Http\Request;
+  <span style="color:#ff79c6">use</span> Illuminate\Support\Facades\DB;
+  <span style="color:#ff79c6">use</span> Illuminate\Support\Facades\Crypt;
+
+ <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">TokenController</span> <span style="color:#ff79c6">extends</span> Controller
+ {
+     <span style="color:#ff79c6">public</span>  <span style="color:#8be9fd;font-style:italic">$username</span>;
+     <span style="color:#ff79c6">public</span>  <span style="color:#8be9fd;font-style:italic">$password</span>;
+
+     <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">function</span> __construct(Request <span style="color:#8be9fd;font-style:italic">$request</span>){
+       <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">username</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">input</span>(<span style="color:#f1fa8c">&#39;username&#39;</span>);
+       <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">password</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">input</span>(<span style="color:#f1fa8c">&#39;password&#39;</span>);
+     }
+     <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">get_token</span>(Request <span style="color:#8be9fd;font-style:italic">$request</span>)
+     {
+       <span style="color:#6272a4">//根据提交的查询
+</span><span style="color:#6272a4"></span>       <span style="color:#8be9fd;font-style:italic">$arr</span> <span style="color:#ff79c6">=</span> DB<span style="color:#ff79c6">::</span><span style="color:#50fa7b">select</span>(<span style="color:#f1fa8c">&#39;select * from user where phone=:username&#39;</span>,[<span style="color:#f1fa8c">&#39;username&#39;</span><span style="color:#ff79c6">=&gt;</span><span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">username</span>]);
+       <span style="color:#6272a4">//如果没有注册
+</span><span style="color:#6272a4"></span>       <span style="color:#ff79c6">if</span>(<span style="color:#ff79c6">!</span><span style="color:#8be9fd;font-style:italic">$arr</span>){
+         <span style="color:#ff79c6">return</span> response(<span style="color:#f1fa8c">&#39;&#39;</span>,<span style="color:#bd93f9">401</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">header</span>(<span style="color:#f1fa8c">&#39;Content-Type&#39;</span>,<span style="color:#f1fa8c">&#39;text/html;charset=utf-8&#39;</span>);
+       }
+       <span style="color:#6272a4">//注册过，对密码进行解密
+</span><span style="color:#6272a4"></span>       <span style="color:#8be9fd;font-style:italic">$depass</span> <span style="color:#ff79c6">=</span> Crypt<span style="color:#ff79c6">::</span><span style="color:#50fa7b">decrypt</span>(<span style="color:#8be9fd;font-style:italic">$arr</span>[<span style="color:#bd93f9">0</span>]<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">password</span>);
+       <span style="color:#6272a4">//如果提交的密码与解密后的密码一致
+</span><span style="color:#6272a4"></span>       <span style="color:#ff79c6">if</span>(<span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">password</span> <span style="color:#ff79c6">===</span> <span style="color:#8be9fd;font-style:italic">$depass</span>){
+         <span style="color:#6272a4">//查询token表，判断是否获取过token
+</span><span style="color:#6272a4"></span>         <span style="color:#8be9fd;font-style:italic">$ishave</span> <span style="color:#ff79c6">=</span> DB<span style="color:#ff79c6">::</span><span style="color:#50fa7b">select</span>(<span style="color:#f1fa8c">&#39;select * from token where uid=:uid&#39;</span>,[<span style="color:#f1fa8c">&#39;uid&#39;</span><span style="color:#ff79c6">=&gt;</span><span style="color:#8be9fd;font-style:italic">$arr</span>[<span style="color:#bd93f9">0</span>]<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">id</span>]);
+         <span style="color:#6272a4">//如果获取过
+</span><span style="color:#6272a4"></span>         <span style="color:#ff79c6">if</span>(<span style="color:#8be9fd;font-style:italic">$ishave</span>){
+           <span style="color:#ff79c6">return</span> response(<span style="color:#f1fa8c">&#39;&#39;</span>,<span style="color:#bd93f9">401</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">header</span>(<span style="color:#f1fa8c">&#39;Content-Type&#39;</span>,<span style="color:#f1fa8c">&#39;text/html;charset=utf-8&#39;</span>);
+         }
+         <span style="color:#6272a4">//否则
+</span><span style="color:#6272a4"></span>         <span style="color:#ff79c6">else</span>{
+           <span style="color:#6272a4">//生成token
+</span><span style="color:#6272a4"></span>           <span style="color:#8be9fd;font-style:italic">$token</span> <span style="color:#ff79c6">=</span> md5(md5(microtime(<span style="color:#ff79c6">true</span>)));
+           <span style="color:#6272a4">//插入uid,和token，其他两个字段在后边mysql有插入方法
+</span><span style="color:#6272a4"></span>           DB<span style="color:#ff79c6">::</span><span style="color:#50fa7b">insert</span>(<span style="color:#f1fa8c">&#39;insert into token (uid,user_token) values (:uid,:user_token)&#39;</span>,[<span style="color:#f1fa8c">&#39;uid&#39;</span><span style="color:#ff79c6">=&gt;</span><span style="color:#8be9fd;font-style:italic">$arr</span>[<span style="color:#bd93f9">0</span>]<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">id</span>,                      <span style="color:#f1fa8c">&#39;user_token&#39;</span><span style="color:#ff79c6">=&gt;</span><span style="color:#8be9fd;font-style:italic">$token</span>]);
+           <span style="color:#6272a4">//准备返回的数据
+</span><span style="color:#6272a4"></span>           <span style="color:#8be9fd;font-style:italic">$return_json</span> <span style="color:#ff79c6">=</span> DB<span style="color:#ff79c6">::</span><span style="color:#50fa7b">select</span>(<span style="color:#f1fa8c">&#39;select * from token where uid=:uid&#39;</span>,[<span style="color:#f1fa8c">&#39;uid&#39;</span><span style="color:#ff79c6">=&gt;</span><span style="color:#8be9fd;font-style:italic">$arr</span>[<span style="color:#bd93f9">0</span>]<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">id</span>]);
+           <span style="color:#6272a4">//时间差8小时，还原
+</span><span style="color:#6272a4"></span>           <span style="color:#8be9fd;font-style:italic">$issued_time</span> <span style="color:#ff79c6">=</span> strtotime(<span style="color:#8be9fd;font-style:italic">$return_json</span>[<span style="color:#bd93f9">0</span>]<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">issued_time</span>)<span style="color:#ff79c6">+</span><span style="color:#bd93f9">28800</span>;
+           <span style="color:#8be9fd;font-style:italic">$expire_time</span> <span style="color:#ff79c6">=</span> strtotime(<span style="color:#8be9fd;font-style:italic">$return_json</span>[<span style="color:#bd93f9">0</span>]<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">expire_time</span>)<span style="color:#ff79c6">+</span><span style="color:#bd93f9">28800</span>;
+           <span style="color:#6272a4">//返回json
+</span><span style="color:#6272a4"></span>           <span style="color:#ff79c6">return</span> response()<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">json</span>([<span style="color:#f1fa8c">&#39;access_token&#39;</span><span style="color:#ff79c6">=&gt;</span><span style="color:#8be9fd;font-style:italic">$return_json</span>[<span style="color:#bd93f9">0</span>]<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">user_token</span>,
+                                    <span style="color:#f1fa8c">&#39;token_type&#39;</span><span style="color:#ff79c6">=&gt;</span><span style="color:#f1fa8c">&#39;bearer&#39;</span>,
+                                    <span style="color:#f1fa8c">&#39;expires_in&#39;</span><span style="color:#ff79c6">=&gt;</span><span style="color:#f1fa8c">&#39;1209599&#39;</span>,
+                                    <span style="color:#f1fa8c">&#39;uid&#39;</span><span style="color:#ff79c6">=&gt;</span><span style="color:#8be9fd;font-style:italic">$return_json</span>[<span style="color:#bd93f9">0</span>]<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">uid</span>,
+                                    <span style="color:#f1fa8c">&#39;.issued&#39;</span><span style="color:#ff79c6">=&gt;</span>gmdate(DATE_RFC822,<span style="color:#8be9fd;font-style:italic">$issued_time</span>),
+                                    <span style="color:#f1fa8c">&#39;.expires&#39;</span><span style="color:#ff79c6">=&gt;</span>gmdate(DATE_RFC822,<span style="color:#8be9fd;font-style:italic">$expire_time</span>)],<span style="color:#bd93f9">200</span>);
+
+         }
+         <span style="color:#6272a4">//如果密码不一致
+</span><span style="color:#6272a4"></span>       }<span style="color:#ff79c6">else</span>{
+         <span style="color:#ff79c6">return</span> response(<span style="color:#f1fa8c">&#39;&#39;</span>,<span style="color:#bd93f9">401</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">header</span>(<span style="color:#f1fa8c">&#39;Content-Type&#39;</span>,<span style="color:#f1fa8c">&#39;text/html;charset=utf-8&#39;</span>);
+       }
+     }
+ }
+ <span style="color:#ff79c6">?&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="遇到的问题">
+  遇到的问题
+  <a class="heading-link" href="#%e9%81%87%e5%88%b0%e7%9a%84%e9%97%ae%e9%a2%98">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h4>
+<p>  在控制器编写过程中有几个问题要注意：</p>
+<h5 id="怎么访问-mysql-语句执行的结果">
+  怎么访问 Mysql 语句执行的结果
+  <a class="heading-link" href="#%e6%80%8e%e4%b9%88%e8%ae%bf%e9%97%ae-mysql-%e8%af%ad%e5%8f%a5%e6%89%a7%e8%a1%8c%e7%9a%84%e7%bb%93%e6%9e%9c">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h5>
+<p>  怎么访问 <code>Mysql</code> 语句的执行结果呢？官方文档没有详细说明，只是用了一个 <code>foreach</code> 来遍历。自己 <code>var_dump</code> 了一下，发现执行完成后结果为数组下包含对象，相当于二维数组，但是第二维是个对象，由此推断访问具体值应该是 <code>$array[0]-&gt;property</code> ，果然如此。</p>
+<h5 id="直接使用数据库中的加密密码查询不到数据">
+  直接使用数据库中的加密密码查询不到数据
+  <a class="heading-link" href="#%e7%9b%b4%e6%8e%a5%e4%bd%bf%e7%94%a8%e6%95%b0%e6%8d%ae%e5%ba%93%e4%b8%ad%e7%9a%84%e5%8a%a0%e5%af%86%e5%af%86%e7%a0%81%e6%9f%a5%e8%af%a2%e4%b8%8d%e5%88%b0%e6%95%b0%e6%8d%ae">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h5>
+<p>  项目过程中刚开始我直接使用用户提交的 <code>password</code> 加密过后进行数据库查询，匹配不到结果，后来测试发现 <code>lumen</code> 的加密函数 <code>Crypt::encrypt()</code> 可能封装有时间戳，每次加密过后的值都不一样，所以想到对数据的密码进行 <code>Crypt::decrypt()</code> 解密后，与用户输入的值进行对比。</p>
+<h5 id="数据库时间与-php-返回的时间不一致">
+  数据库时间与 PHP 返回的时间不一致
+  <a class="heading-link" href="#%e6%95%b0%e6%8d%ae%e5%ba%93%e6%97%b6%e9%97%b4%e4%b8%8e-php-%e8%bf%94%e5%9b%9e%e7%9a%84%e6%97%b6%e9%97%b4%e4%b8%8d%e4%b8%80%e8%87%b4">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h5>
+<p>  测试过程中发现数据库时间是正确的，但是返回到前端的 <code>json</code> 时间比数据库中的时间提前了 8 个小时由此想到是时区设置问题，用 <code>php</code> 自带日前字符串转为时间戳函数 <code>strtotime($str)</code> 来解决。</p>
+<h3 id="mysql-相关">
+  Mysql 相关
+  <a class="heading-link" href="#mysql-%e7%9b%b8%e5%85%b3">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<h4 id="触发器的编写">
+  触发器的编写
+  <a class="heading-link" href="#%e8%a7%a6%e5%8f%91%e5%99%a8%e7%9a%84%e7%bc%96%e5%86%99">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h4>
+<p>  在插入记录时，由于 <code>id</code> 、 <code>issued_time</code> 字段是自动插入的，并且 <code>expire_time</code> 字段与 <code>issued_time</code> 字段有必然联系，即：在 <code>issued_time</code> 的基础上增加 <code>1209599</code> 秒，所以想到了建立一个触发器，在 <code>insert</code> 之后更新 <code>expire_time</code> 字段为 <code>issued_time</code> 加 <code>1209599</code> 秒，在 <code>Mysql</code> 上测试不成功，原因可能是对刚刚插入的记录进行了 <code>update</code> ，造成了循环调用，那就用 <code>set</code> 来操作，但是 <code>set</code> 必须在 <code>insert</code> 之前来执行，换成 <code>set new.expire_time = date_add(new.issued_time,interval 1209599 second)</code> 后，还是提示错误，原因是 <code>new.issued_time</code> 没有不能参与运算，因为还没有成功插入这个值呢，那就使用 <code>Mysql</code> 的 <code>now()</code> 函数，最终代码如下：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">create</span> <span style="color:#ff79c6">trigger</span> expiretime <span style="color:#ff79c6">before</span> <span style="color:#ff79c6">insert</span>
+          <span style="color:#ff79c6">on</span> token <span style="color:#ff79c6">for</span> <span style="color:#ff79c6">each</span> <span style="color:#ff79c6">row</span>
+          <span style="color:#ff79c6">set</span> <span style="color:#ff79c6">new</span>.expire_time <span style="color:#ff79c6">=</span> date_add(now(),<span style="color:#8be9fd;font-style:italic">interval</span> <span style="color:#bd93f9">1209599</span> <span style="color:#ff79c6">second</span>);
+</code></pre></td></tr></table>
+</div>
+</div><p>  代码解释如下：</p>
+<p><strong>创建 触发器 <code>expiretime</code> 在插入之前<br>
+在 <code>token</code> 表上跟踪记录<br>
+设置 新增的 <code>expire_time</code> 值为 现在的时间增加 <code>1209599</code> 秒。</strong></p>
+<p>  <code>date_add</code> 函数是向日期添加指定的时间间隔。</p>
+<p>  测试只插入 <code>uid</code> 与 <code>user_token</code> 字段后，其他字段成功自动生成。</p>
+<h4 id="定时器的编写">
+  定时器的编写
+  <a class="heading-link" href="#%e5%ae%9a%e6%97%b6%e5%99%a8%e7%9a%84%e7%bc%96%e5%86%99">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h4>
+<p>  牵扯到 <code>token</code> 的有效期，所以要定时删除过期的记录，想到用定时器来实现。<br>
+  首先编写一个执行方法<br>
+  编写代码如下:</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">mysql<span style="color:#ff79c6">&gt;</span>  <span style="color:#ff79c6">delimiter</span> $
+        <span style="color:#ff79c6">create</span> <span style="color:#ff79c6">procedure</span> <span style="color:#ff79c6">`</span>delete_expires<span style="color:#ff79c6">`</span>()
+        <span style="color:#ff79c6">begin</span>
+
+          <span style="color:#ff79c6">delete</span> <span style="color:#ff79c6">from</span> token <span style="color:#ff79c6">where</span> expire_time <span style="color:#ff79c6">&lt;</span> now();
+
+        <span style="color:#ff79c6">end</span>; $
+        <span style="color:#ff79c6">delimiter</span> ;
+</code></pre></td></tr></table>
+</div>
+</div><p>  开启 <code>Mysql</code> 的 <code>event</code> :<br>
+  在 <code>/etc/mysql/my.cnf</code> 的 <code>[mysqld]</code> 中添加如下代码：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">event_scheduler = 1
+</code></pre></td></tr></table>
+</div>
+</div><p>  重启 <code>Mysql</code> 服务器。查看是否开启了 <code>event</code> 。</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">mysql<span style="color:#ff79c6">&gt;</span> <span style="color:#ff79c6">show</span> variables <span style="color:#ff79c6">like</span> <span style="color:#f1fa8c">&#39;event_scheduler&#39;</span>;
+<span style="color:#ff79c6">+</span><span style="color:#6272a4">-----------------+-------+
+</span><span style="color:#6272a4"></span><span style="color:#ff79c6">|</span> Variable_name   <span style="color:#ff79c6">|</span> Value <span style="color:#ff79c6">|</span>
+<span style="color:#ff79c6">+</span><span style="color:#6272a4">-----------------+-------+
+</span><span style="color:#6272a4"></span><span style="color:#ff79c6">|</span> event_scheduler <span style="color:#ff79c6">|</span> <span style="color:#ff79c6">ON</span>    <span style="color:#ff79c6">|</span>
+<span style="color:#ff79c6">+</span><span style="color:#6272a4">-----------------+-------+
+</span><span style="color:#6272a4"></span><span style="color:#bd93f9">1</span> <span style="color:#ff79c6">row</span> <span style="color:#ff79c6">in</span> <span style="color:#ff79c6">set</span> (<span style="color:#bd93f9">0</span>.<span style="color:#bd93f9">00</span> sec)
+</code></pre></td></tr></table>
+</div>
+</div><p>  编写 <code>event</code> 计划，如下：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">mysql<span style="color:#ff79c6">&gt;</span>    <span style="color:#ff79c6">create</span> event <span style="color:#ff79c6">`</span>delexp<span style="color:#ff79c6">`</span>
+                 <span style="color:#ff79c6">on</span> schedule <span style="color:#ff79c6">every</span> <span style="color:#bd93f9">30</span> <span style="color:#ff79c6">second</span>
+                 <span style="color:#ff79c6">on</span> <span style="color:#ff79c6">completion</span> <span style="color:#ff79c6">preserve</span>
+                 <span style="color:#ff79c6">do</span>
+                 <span style="color:#ff79c6">call</span> delete_expires();
+</code></pre></td></tr></table>
+</div>
+</div><p>  代码解释：</p>
+<p>  <code>on schedule</code> 调度时间：可以定义事件被触发的具体时间，也可以指定事件被触发的周期，如果指定周期性任务，还可以指定开始时间和结束时间。<br>
+  <code>on completion</code> 事件完成后的行为：默认为 <code>not preserve</code> ，即事件完成以后删除任务本身，注意：对于周期性的任务，不表示事件只做一次，而是指到达结束时间后，再删除这个事件。可以将它指定为 <code>preserve</code> 那么当事件完成以后，不会被删除。<br>
+  <code>do call</code> 事件体，就是事件具体需要做什么，定义方式和存储过程类似。</p>
+<p>  查看运行的 <code>event</code> 进程：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">mysql<span style="color:#ff79c6">&gt;</span> <span style="color:#ff79c6">show</span> processlist\<span style="color:#ff79c6">G</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="删除">
+  删除
+  <a class="heading-link" href="#%e5%88%a0%e9%99%a4">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h4>
+<p>  类似于删除表：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">mysql<span style="color:#ff79c6">&gt;</span> <span style="color:#ff79c6">drop</span> <span style="color:#ff79c6">procedure</span> delete_expires;
+Query OK, <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">rows</span> affected (<span style="color:#bd93f9">0</span>.<span style="color:#bd93f9">00</span> sec)
+
+mysql<span style="color:#ff79c6">&gt;</span> <span style="color:#ff79c6">drop</span> event delexp;
+Query OK, <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">rows</span> affected (<span style="color:#bd93f9">0</span>.<span style="color:#bd93f9">01</span> sec)
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="测试">
+  测试
+  <a class="heading-link" href="#%e6%b5%8b%e8%af%95">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<p>  使用 <code>Postman</code> 测试，成功！</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2022
+     郭超超 
+    ·
+    
+    技术支持 <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+      
+      <script src="/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js" integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NK08XEDHKZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NK08XEDHKZ');
+</script>
+  </body>
+
+</html>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>括号 on Ethan Kuo Blog</title>
+    <link>https://blog.adminchao.com/tags/%E6%8B%AC%E5%8F%B7/</link>
+    <description>Recent content in 括号 on Ethan Kuo Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 08 Jun 2018 12:36:54 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/tags/%E6%8B%AC%E5%8F%B7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Laravel Eloquent 括号查询</title>
+      <link>https://blog.adminchao.com/posts/laravel-eloquent-%E6%8B%AC%E5%8F%B7%E6%9F%A5%E8%AF%A2/</link>
+      <pubDate>Fri, 08 Jun 2018 12:36:54 +0000</pubDate>
+      
+      <guid>https://blog.adminchao.com/posts/laravel-eloquent-%E6%8B%AC%E5%8F%B7%E6%9F%A5%E8%AF%A2/</guid>
+      <description>相当于 select * from queue_second_sold where status=0 and (buy_user_id = 341 or (sell_user_id = 341 and buy_user_id != 0)) order by id desc,用法如下:
+/** * 交易大厅-定向交易 * @param Request $request * @return \Illuminate\Http\JsonResponse */ public function soldList(Request $request){ $type = $request-&amp;gt;get(&amp;#39;type&amp;#39;,0); //交易大厅  $limit = $request-&amp;gt;get(&amp;#39;limit&amp;#39;,10); $user = User::getUserInfo(); if($type == 1){ //定向交易  $results = QueueSecondSold::where(&amp;#39;status&amp;#39;,0) -&amp;gt;where(function($query) use ($user){ $query-&amp;gt;where(&amp;#39;sell_user_id&amp;#39;,$user-&amp;gt;id) -&amp;gt;where(&amp;#39;buy_user_id&amp;#39;,&amp;#39;!=&amp;#39;,0); })-&amp;gt;orWhere(&amp;#39;buy_user_id&amp;#39;,$user-&amp;gt;id) -&amp;gt;orderBy(&amp;#39;id&amp;#39;,&amp;#39;desc&amp;#39;)-&amp;gt;paginate($limit); }else{ $results = QueueSecondSold::where(&amp;#39;status&amp;#39;,0)-&amp;gt;where(&amp;#39;buy_user_id&amp;#39;,0)-&amp;gt;orderBy(&amp;#39;id&amp;#39;,&amp;#39;desc&amp;#39;)-&amp;gt;paginate($limit); } return $this-&amp;gt;success([&amp;#39;result&amp;#39;=&amp;gt;$results-&amp;gt;items(),&amp;#39;total&amp;#39;=&amp;gt;$results-&amp;gt;total(),&amp;#39;page&amp;#39;=&amp;gt;$results-&amp;gt;currentPage(),&amp;#39;pages&amp;#39;=&amp;gt;$results-&amp;gt;lastPage(),&amp;#39;user_id&amp;#39;=&amp;gt;$user-&amp;gt;id]); } </description>
+    </item>
+    
+  </channel>
+</rss>

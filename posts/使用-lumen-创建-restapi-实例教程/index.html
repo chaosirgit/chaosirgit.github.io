@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; block-all-mixed-content; default-src 'self'; child-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net/; form-action 'self'; frame-src 'self'; img-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/ https://cdn.jsdelivr.net/; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://cdn.jsdelivr.net/; prefetch-src 'self'; connect-src 'self' https://www.google-analytics.com;">
+
+    
+
+    <meta name="author" content="Ethan Kuo">
+    <meta name="description" content="项目需求    开发一个用户注册的 rest API 要求：
+HttpMethod: Post
+URI: api/account/register
+Request Body
+   字段 必选 类型及范围 说明     phone 是 string 注册手机号   password 是 string 密码   code 是 string 验证码   gender 是 enum 性别   nickname 否 string 昵称，不超过 20 字符   birthday 否 date 生日   height 否 int 身高   weight 否 int 体重   email 否 string 邮箱    Response code:">
+    <meta name="keywords" content="RestApi,Lumen,PHP框架,实例,教程">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用 Lumen 创建 RestApi 实例教程"/>
+<meta name="twitter:description" content="项目需求    开发一个用户注册的 rest API 要求：
+HttpMethod: Post
+URI: api/account/register
+Request Body
+   字段 必选 类型及范围 说明     phone 是 string 注册手机号   password 是 string 密码   code 是 string 验证码   gender 是 enum 性别   nickname 否 string 昵称，不超过 20 字符   birthday 否 date 生日   height 否 int 身高   weight 否 int 体重   email 否 string 邮箱    Response code:"/>
+
+    <meta property="og:title" content="使用 Lumen 创建 RestApi 实例教程" />
+<meta property="og:description" content="项目需求    开发一个用户注册的 rest API 要求：
+HttpMethod: Post
+URI: api/account/register
+Request Body
+   字段 必选 类型及范围 说明     phone 是 string 注册手机号   password 是 string 密码   code 是 string 验证码   gender 是 enum 性别   nickname 否 string 昵称，不超过 20 字符   birthday 否 date 生日   height 否 int 身高   weight 否 int 体重   email 否 string 邮箱    Response code:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.adminchao.com/posts/%E4%BD%BF%E7%94%A8-lumen-%E5%88%9B%E5%BB%BA-restapi-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2017-06-09T11:43:31+00:00" />
+<meta property="article:modified_time" content="2017-06-09T11:43:31+00:00" />
+
+
+
+    <title>
+  使用 Lumen 创建 RestApi 实例教程 · Ethan Kuo Blog
+</title>
+
+    
+      <link rel="canonical" href="https://blog.adminchao.com/posts/%E4%BD%BF%E7%94%A8-lumen-%E5%88%9B%E5%BB%BA-restapi-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/">
+    
+
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css" integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    <meta name="generator" content="Hugo 0.89.1" />
+  </head>
+
+  
+  
+    
+  
+  <body class="preload-transitions colorscheme-auto">
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Ethan Kuo Blog
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="https://blog.adminchao.com/zh-cn/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://blog.adminchao.com/posts/%E4%BD%BF%E7%94%A8-lumen-%E5%88%9B%E5%BB%BA-restapi-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/">
+              使用 Lumen 创建 RestApi 实例教程
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2017-06-09T11:43:31Z">
+                2017-06-09 11:43:31
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              4-minute read
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa fa-folder" aria-hidden="true"></i>
+    <a href="/categories/lumen/">Lumen</a></div>
+
+          <div class="tags">
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/restapi/">RestApi</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/lumen/">Lumen</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/php%E6%A1%86%E6%9E%B6/">PHP框架</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/">实例教程</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <h2 id="项目需求">
+  项目需求
+  <a class="heading-link" href="#%e9%a1%b9%e7%9b%ae%e9%9c%80%e6%b1%82">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<p>开发一个用户注册的 rest API 要求：</p>
+<p>HttpMethod: Post<br>
+URI: api/account/register<br>
+<strong>Request Body</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>必选</th>
+<th>类型及范围</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>phone</td>
+<td>是</td>
+<td>string</td>
+<td>注册手机号</td>
+</tr>
+<tr>
+<td>password</td>
+<td>是</td>
+<td>string</td>
+<td>密码</td>
+</tr>
+<tr>
+<td>code</td>
+<td>是</td>
+<td>string</td>
+<td>验证码</td>
+</tr>
+<tr>
+<td>gender</td>
+<td>是</td>
+<td>enum</td>
+<td>性别</td>
+</tr>
+<tr>
+<td>nickname</td>
+<td>否</td>
+<td>string</td>
+<td>昵称，不超过 20 字符</td>
+</tr>
+<tr>
+<td>birthday</td>
+<td>否</td>
+<td>date</td>
+<td>生日</td>
+</tr>
+<tr>
+<td>height</td>
+<td>否</td>
+<td>int</td>
+<td>身高</td>
+</tr>
+<tr>
+<td>weight</td>
+<td>否</td>
+<td>int</td>
+<td>体重</td>
+</tr>
+<tr>
+<td>email</td>
+<td>否</td>
+<td>string</td>
+<td>邮箱</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Response code:</strong></p>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>400</td>
+<td>失败</td>
+</tr>
+<tr>
+<td>500</td>
+<td>其他未处理错误</td>
+</tr>
+</tbody>
+</table>
+<h2 id="项目开始">
+  项目开始
+  <a class="heading-link" href="#%e9%a1%b9%e7%9b%ae%e5%bc%80%e5%a7%8b">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<h3 id="配置数据库">
+  配置数据库
+  <a class="heading-link" href="#%e9%85%8d%e7%bd%ae%e6%95%b0%e6%8d%ae%e5%ba%93">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>在 lumen 项目根目录下找到 .env.example 拷贝为 .env</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cp ./.env.example ./.env
+</code></pre></div><p>打开 .env 文件 , 配置数据库连接信息(数据库名等不加引号)</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">DB_DATABASE=&lt;db_name&gt;
+DB_USERNAME=&lt;db_username&gt;
+DB_PASSWORD=&lt;db_password&gt;
+</code></pre></div><p>然后在 bootstrap/app.php 中取消下面两行之前的注释：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$app-&gt;withFacades();
+$app-&gt;withEloquent();
+</code></pre></div><h3 id="数据库迁移">
+  数据库迁移
+  <a class="heading-link" href="#%e6%95%b0%e6%8d%ae%e5%ba%93%e8%bf%81%e7%a7%bb">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>接下来我们来创建数据表。<br>
+项目根目录下运行如下命令：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">php artisan make:migration create_table_user --create=user
+</code></pre></div><p>该命令将会在 <code>database/migrations</code> 目录下创建一个迁移文件 <code>&lt;date&gt;_create_table_user.php</code><br>
+接下来我们来编辑这个文件来定义数据表。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+<span style="font-weight:bold">use</span> Illuminate\Support\Facades\Schema;
+<span style="font-weight:bold">use</span> Illuminate\Database\Schema\Blueprint;
+<span style="font-weight:bold">use</span> Illuminate\Database\Migrations\Migration;
+<span style="font-weight:bold">class</span> <span style="font-weight:bold">CreateTableUser</span> <span style="font-weight:bold">extends</span> Migration
+{
+     <span style="font-style:italic">/**
+</span><span style="font-style:italic">      * Run the migrations.
+</span><span style="font-style:italic">      *
+</span><span style="font-style:italic">      * @return void
+</span><span style="font-style:italic">      */</span>
+     <span style="font-weight:bold">public</span> <span style="font-weight:bold">function</span> up()
+     {
+       <span style="font-style:italic">//以下为自定义修改，其他代码自动生成
+</span><span style="font-style:italic"></span>         Schema::create(<span style="font-style:italic">&#39;user&#39;</span>, <span style="font-weight:bold">function</span> (Blueprint $table) {
+             $table-&gt;increments(<span style="font-style:italic">&#39;id&#39;</span>);
+             $table-&gt;timestamps();<span style="font-style:italic">//该方法会自动在表里建立 created_at 与 updated_at;
+</span><span style="font-style:italic"></span>             $table-&gt;string(<span style="font-style:italic">&#39;phone&#39;</span>);
+             $table-&gt;string(<span style="font-style:italic">&#39;password&#39;</span>);
+             $table-&gt;enum(<span style="font-style:italic">&#39;gender&#39;</span>,[<span style="font-style:italic">&#39;male&#39;</span>,<span style="font-style:italic">&#39;female&#39;</span>]);
+             $table-&gt;string(<span style="font-style:italic">&#39;nickname&#39;</span>)-&gt;nullable();
+             $table-&gt;date(<span style="font-style:italic">&#39;birthday&#39;</span>)-&gt;nullable();<span style="font-style:italic">//使用列修改器设置允许为null;
+</span><span style="font-style:italic"></span>             $table-&gt;integer(<span style="font-style:italic">&#39;height&#39;</span>)-&gt;nullable();
+             $table-&gt;integer(<span style="font-style:italic">&#39;weight&#39;</span>)-&gt;nullable();
+             $table-&gt;string(<span style="font-style:italic">&#39;email&#39;</span>)-&gt;nullable();
+         });
+      <span style="font-style:italic">//以上为自定义修改，其他代码自动生成
+</span><span style="font-style:italic"></span>     }
+     <span style="font-style:italic">/**
+</span><span style="font-style:italic">      * Reverse the migrations.
+</span><span style="font-style:italic">      *
+</span><span style="font-style:italic">      * @return void
+</span><span style="font-style:italic">      */</span>
+     <span style="font-weight:bold">public</span> <span style="font-weight:bold">function</span> down()
+     {
+         Schema::dropIfExists(<span style="font-style:italic">&#39;user&#39;</span>);
+     }
+ }
+ <span style="">?&gt;</span><span style="">
+</span></code></pre></div><h4 id="列修改器">
+  列修改器
+  <a class="heading-link" href="#%e5%88%97%e4%bf%ae%e6%94%b9%e5%99%a8">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h4>
+<p>把必选为否的字段用列修改器设置允许为 <code>null</code> ，列修改器列表：</p>
+<table>
+<thead>
+<tr>
+<th>修改器</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-&gt;first()</td>
+<td>将该列置为表中第一个列 (仅适用于MySQL)</td>
+</tr>
+<tr>
+<td>-&gt;after(‘column’)</td>
+<td>将该列置于另一个列之后 (仅适用于MySQL)</td>
+</tr>
+<tr>
+<td>-&gt;nullable()</td>
+<td>允许该列的值为NULL</td>
+</tr>
+<tr>
+<td>-&gt;default($value)</td>
+<td>指定列的默认值</td>
+</tr>
+<tr>
+<td>-&gt;unsigned()</td>
+<td>设置 integer 列为 UNSIGNED</td>
+</tr>
+</tbody>
+</table>
+<p>现在我们来运行这个迁移：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">php artisan migrate
+</code></pre></div><p>这样，就会在数据库中创建对应的表。<br>
+查询这个表的字段看看:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">mysql&gt; show columns from user;
++------------+-----------------------+------+-----+---------+----------------+
+| Field      | Type                  | Null | Key | Default | Extra          |
++------------+-----------------------+------+-----+---------+----------------+
+| id         | int(10) unsigned      | NO   | PRI | NULL    | auto_increment |
+| created_at | timestamp             | YES  |     | NULL    |                |
+| updated_at | timestamp             | YES  |     | NULL    |                |
+| phone      | varchar(255)          | NO   |     | NULL    |                |
+| password   | varchar(255)          | NO   |     | NULL    |                |
+| gender     | enum(&#39;male&#39;,&#39;female&#39;) | NO   |     | NULL    |                |
+| nickname   | varchar(255)          | YES  |     | NULL    |                |
+| birthday   | date                  | YES  |     | NULL    |                |
+| height     | int(11)               | YES  |     | NULL    |                |
+| weight     | int(11)               | YES  |     | NULL    |                |
+| email      | varchar(255)          | YES  |     | NULL    |                |
++------------+-----------------------+------+-----+---------+----------------+
+11 rows in set (0.00 sec)
+</code></pre></div><h4 id="常用的字段类型">
+  常用的字段类型
+  <a class="heading-link" href="#%e5%b8%b8%e7%94%a8%e7%9a%84%e5%ad%97%e6%ae%b5%e7%b1%bb%e5%9e%8b">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h4>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$table-&gt;bigIncrements(‘id’)</td>
+<td>递增 ID（主键），相当于「UNSIGNED BIG INTEGER」型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;boolean(‘confirmed’)</td>
+<td>相当于 BOOLEAN 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;char(‘name’, 4)</td>
+<td>相当于 CHAR 型态，并带有长度。</td>
+</tr>
+<tr>
+<td>$table-&gt;date(‘created_at’)</td>
+<td>相当于 DATE 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;dateTime(‘created_at’)</td>
+<td>相当于 DATETIME 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;dateTimeTz(‘created_at’)</td>
+<td>DATETIME (带时区) 形态</td>
+</tr>
+<tr>
+<td>$table-&gt;decimal(‘amount’, 5, 2)</td>
+<td>相当于 DECIMAL 型态，并带有精度与基数。</td>
+</tr>
+<tr>
+<td>$table-&gt;double(‘column’, 15, 8)</td>
+<td>相当于 DOUBLE 型态，总共有 15 位数，在小数点后面有 8 位数。</td>
+</tr>
+<tr>
+<td>$table-&gt;enum(‘choices’, [‘foo’, ‘bar’])</td>
+<td>相当于 ENUM 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;float(‘amount’, 8, 2)</td>
+<td>相当于 FLOAT 型态，总共有 8 位数，在小数点后面有 2 位数。</td>
+</tr>
+<tr>
+<td>$table-&gt;increments(‘id’)</td>
+<td>递增的 ID (主键)，使用相当于「UNSIGNED INTEGER」的型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;integer(‘votes’)</td>
+<td>相当于 INTEGER 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;ipAddress(‘visitor’)</td>
+<td>相当于 IP 地址形态。</td>
+</tr>
+<tr>
+<td>$table-&gt;json(‘options’)</td>
+<td>相当于 JSON 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;jsonb(‘options’)</td>
+<td>相当于 JSONB 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;longText(‘description’)</td>
+<td>相当于 LONGTEXT 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;mediumIncrements(‘id’)</td>
+<td>递增 ID (主键) ，相当于「UNSIGNED MEDIUM INTEGER」型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;mediumInteger(‘numbers’)</td>
+<td>相当于 MEDIUMINT 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;mediumText(‘description’)</td>
+<td>相当于 MEDIUMTEXT 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;nullableTimestamps()</td>
+<td>与 timestamps() 相同，但允许为 NULL。</td>
+</tr>
+<tr>
+<td>$table-&gt;rememberToken()</td>
+<td>加入 remember_token 并使用 VARCHAR(100) NULL。</td>
+</tr>
+<tr>
+<td>$table-&gt;smallIncrements(‘id’)</td>
+<td>递增 ID (主键) ，相当于「UNSIGNED SMALL INTEGER」型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;smallInteger(‘votes’)</td>
+<td>相当于 SMALLINT 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;softDeletes()</td>
+<td>加入 deleted_at 字段用于软删除操作。</td>
+</tr>
+<tr>
+<td>$table-&gt;string(‘email’)</td>
+<td>相当于 VARCHAR 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;string(‘name’, 100)</td>
+<td>相当于 VARCHAR 型态，并带有长度。</td>
+</tr>
+<tr>
+<td>$table-&gt;text(‘description’)</td>
+<td>相当于 TEXT 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;time(‘sunrise’)</td>
+<td>相当于 TIME 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;timeTz(‘sunrise’)</td>
+<td>相当于 TIME (带时区) 形态。</td>
+</tr>
+<tr>
+<td>$table-&gt;tinyInteger(‘numbers’)</td>
+<td>相当于 TINYINT 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;timestamp(‘added_on’)</td>
+<td>相当于 TIMESTAMP 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;timestamps()</td>
+<td>加入 created_at 和 updated_at 字段。</td>
+</tr>
+<tr>
+<td>$table-&gt;unsignedInteger(‘votes’)</td>
+<td>相当于 Unsigned INT 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;unsignedMediumInteger(‘votes’)</td>
+<td>相当于 Unsigned MEDIUMINT 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;unsignedSmallInteger(‘votes’)</td>
+<td>相当于 Unsigned SMALLINT 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;unsignedTinyInteger(‘votes’)</td>
+<td>相当于 Unsigned TINYINT 型态。</td>
+</tr>
+<tr>
+<td>$table-&gt;uuid(‘id’)</td>
+<td>相当于 UUID 型态。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="创建模型">
+  创建模型
+  <a class="heading-link" href="#%e5%88%9b%e5%bb%ba%e6%a8%a1%e5%9e%8b">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>接下来我们在 <code>app</code> 目录下创建模型文件 <code>User.php</code>，并编写代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+ <span style="font-weight:bold">namespace</span> App;
+ <span style="font-weight:bold">use</span> Illuminate\Database\Eloquent\Model;
+ <span style="font-weight:bold">class</span> <span style="font-weight:bold">User</span> <span style="font-weight:bold">extends</span> Model
+ {
+         <span style="font-weight:bold">protected</span> $fillable =
+          [<span style="font-style:italic">&#39;phone&#39;</span>,<span style="font-style:italic">&#39;password&#39;</span>,<span style="font-style:italic">&#39;gender&#39;</span>,<span style="font-style:italic">&#39;nickname&#39;</span>,<span style="font-style:italic">&#39;birthday&#39;</span>,<span style="font-style:italic">&#39;height&#39;</span>,<span style="font-style:italic">&#39;weight&#39;</span>,<span style="font-style:italic">&#39;email&#39;</span>];
+ }
+ <span style="">?&gt;</span><span style="">
+</span></code></pre></div><h3 id="创建控制器">
+  创建控制器
+  <a class="heading-link" href="#%e5%88%9b%e5%bb%ba%e6%8e%a7%e5%88%b6%e5%99%a8">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>然后创建控制器文件 <code>app/Http/Controllers/UserController.php</code> :</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+<span style="font-weight:bold">namespace</span> App\Http\Controllers;
+<span style="font-weight:bold">use</span> App\User;
+<span style="font-weight:bold">use</span> Illuminate\Http\Request;
+<span style="font-weight:bold">use</span> Illuminate\Http\Response; <span style="font-style:italic">//这个会自动引用
+</span><span style="font-style:italic"></span><span style="font-weight:bold">use</span> Illuminate\Support\Facades\Crypt;<span style="font-style:italic">//加密所需门面
+</span><span style="font-style:italic"></span><span style="font-weight:bold">use</span> Illuminate\Support\Facades\DB;<span style="font-style:italic">//引入数据库操作门面
+</span><span style="font-style:italic"></span><span style="font-weight:bold">class</span> <span style="font-weight:bold">UserController</span> <span style="font-weight:bold">extends</span> Controller
+{
+         <span style="font-weight:bold">public</span> <span style="font-weight:bold">function</span> register (Request $request){
+         $phone = $request-&gt;input(<span style="font-style:italic">&#39;phone&#39;</span>);
+         $password = $request-&gt;input(<span style="font-style:italic">&#39;password&#39;</span>);
+         $code= $request-&gt;input(<span style="font-style:italic">&#39;code&#39;</span>);
+         $gender= $request-&gt;input(<span style="font-style:italic">&#39;gender&#39;</span>);
+         $nickname= $request-&gt;input(<span style="font-style:italic">&#39;nickname&#39;</span>) ?? <span style="font-weight:bold">null</span>;
+         $birthday= $request-&gt;input(<span style="font-style:italic">&#39;birthday&#39;</span>) ?? <span style="font-weight:bold">null</span>;
+         $height= $request-&gt;input(<span style="font-style:italic">&#39;height&#39;</span>) ?? <span style="font-weight:bold">null</span>;
+         $weight= $request-&gt;input(<span style="font-style:italic">&#39;weight&#39;</span>) ?? <span style="font-weight:bold">null</span>;
+         $email= $request-&gt;input(<span style="font-style:italic">&#39;email&#39;</span>) ?? <span style="font-weight:bold">null</span>;
+         <span style="font-style:italic">//如果验证码正确
+</span><span style="font-style:italic"></span>         <span style="font-weight:bold">if</span>($code == <span style="font-style:italic">&#39;888888&#39;</span>){
+                 <span style="font-weight:bold">if</span>(!preg_match(<span style="font-style:italic">&#39;/^\d{11}$/&#39;</span>,$phone)){
+                 <span style="font-style:italic">//return &#39;phone flase &lt;br&gt;&#39;;}
+</span><span style="font-style:italic"></span>                 <span style="font-weight:bold">return</span> response(<span style="font-style:italic">&#39;请填写正确的手机号&#39;</span>,400)-&gt;header(<span style="font-style:italic">&#39;Content-Type&#39;</span>,<span style="font-style:italic">&#39;text/html;charset=utf-8&#39;</span>);}
+                 <span style="font-weight:bold">if</span>(!preg_match(<span style="font-style:italic">&#39;/^[0-9a-zA-Z\S]{6,16}$/&#39;</span>,$password)){
+                 <span style="font-style:italic">//return &#39;password is 6-16 &lt;br&gt;&#39;;}
+</span><span style="font-style:italic"></span>                 <span style="font-weight:bold">return</span> response(<span style="font-style:italic">&#39;密码必须是6-16位字母or数字or符号&#39;</span>,400)-&gt;header(<span style="font-style:italic">&#39;Content-Type&#39;</span>,<span style="font-style:italic">&#39;text/html;charset=utf-8&#39;</span>);}
+                 <span style="font-weight:bold">if</span>($gender == <span style="font-weight:bold">null</span>){
+                 <span style="font-style:italic">//return &#39;select gender &lt;br&gt;&#39;;}
+</span><span style="font-style:italic"></span>                 <span style="font-weight:bold">return</span> response(<span style="font-style:italic">&#39;性别不能为空&#39;</span>,400)-&gt;header(<span style="font-style:italic">&#39;Content-Type&#39;</span>,<span style="font-style:italic">&#39;text/html;charset=utf-8&#39;</span>);}
+                 <span style="font-weight:bold">if</span>($nickname != <span style="font-weight:bold">null</span> &amp;&amp; !preg_match(<span style="font-style:italic">&#39;/^[\x{4e00}-\x{9fa5}A-Za-z0-9]{1,20}$/u&#39;</span>,$nickname)){
+         <span style="font-style:italic">//      return &#39;nickname mast &lt;=20 &lt;br&gt;&#39;;}
+</span><span style="font-style:italic"></span>                 <span style="font-weight:bold">return</span> response(<span style="font-style:italic">&#39;昵称不能超过20个字符且不能含有符号&#39;</span>,400)-&gt;header(<span style="font-style:italic">&#39;Content-Type&#39;</span>,<span style="font-style:italic">&#39;text/html;charset=utf-8&#39;</span>);}
+                 <span style="font-weight:bold">if</span>($birthday != <span style="font-weight:bold">null</span> &amp;&amp; !preg_match(<span style="font-style:italic">&#39;/\d{4}-\d{2}-\d{2}/&#39;</span>,$birthday)){
+                 <span style="font-style:italic">//return &#39;birthday: yyyy-mm-dd &lt;br&gt;&#39;;}
+</span><span style="font-style:italic"></span>                 <span style="font-weight:bold">return</span> response(<span style="font-style:italic">&#39;请填写正确的生日格式&#39;</span>,400)-&gt;header(<span style="font-style:italic">&#39;Content-Type&#39;</span>,<span style="font-style:italic">&#39;text/html;charset=utf-8&#39;</span>);}
+                 <span style="font-weight:bold">if</span>($height != <span style="font-weight:bold">null</span> &amp;&amp; !preg_match(<span style="font-style:italic">&#39;/^\d{2,3}$/&#39;</span>,$height)){
+                 <span style="font-style:italic">//return &#39;height is 2-3bit number &lt;br&gt;&#39;;}
+</span><span style="font-style:italic"></span>                 <span style="font-weight:bold">return</span> response(<span style="font-style:italic">&#39;请填写正确的身高&#39;</span>,400)-&gt;header(<span style="font-style:italic">&#39;Content-Type&#39;</span>,<span style="font-style:italic">&#39;text/html;charset=utf-8&#39;</span>);}
+                 <span style="font-weight:bold">if</span>($weight != <span style="font-weight:bold">null</span> &amp;&amp; !preg_match(<span style="font-style:italic">&#39;/^\d{2,3}$/&#39;</span>,$weight)){
+                 <span style="font-style:italic">//return &#39;weight is 2-3bit number &lt;br&gt;&#39;;}
+</span><span style="font-style:italic"></span>                 <span style="font-weight:bold">return</span> response(<span style="font-style:italic">&#39;请填写正确的体重&#39;</span>,400)-&gt;header(<span style="font-style:italic">&#39;Content-Type&#39;</span>,<span style="font-style:italic">&#39;text/html;charset=utf-8&#39;</span>);}
+                 <span style="font-weight:bold">if</span>($email != <span style="font-weight:bold">null</span> &amp;&amp; !preg_match(<span style="font-style:italic">&#39;/\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/&#39;</span>,$email)){
+                 <span style="font-weight:bold">return</span> response(<span style="font-style:italic">&#39;请填写正确的电子邮箱&#39;</span>,400)-&gt;header(<span style="font-style:italic">&#39;Content-Type&#39;</span>,<span style="font-style:italic">&#39;text/html;charset=utf-8&#39;</span>);}
+                 <span style="font-style:italic">//是否存在重复的
+</span><span style="font-style:italic"></span>                 $userlist = DB::select(<span style="font-style:italic">&#39;select id,phone,email from user where phone = :phone or email = :email&#39;</span>,[<span style="font-style:italic">&#39;phone&#39;</span> =&gt; $phone,<span style="font-style:italic">&#39;email&#39;</span> =&gt; $email]);
+                 <span style="font-weight:bold">if</span>($userlist){
+                         <span style="font-weight:bold">return</span> response(<span style="font-style:italic">&#39;您的手机号或邮箱已注册&#39;</span>,400)-&gt;header(<span style="font-style:italic">&#39;Content-Type&#39;</span>,<span style="font-style:italic">&#39;text/html;charset=utf-8&#39;</span>);
+                 }<span style="font-weight:bold">else</span>{
+                 DB::insert(<span style="font-style:italic">&#39;insert into user (created_at,phone,password,gender,nickname,birthday,height,weight,email) values (:created_at,:phone,:            password,:gender,:nickname,:birthday,:height,:weight,:email)&#39;</span>,[<span style="font-style:italic">&#39;created_at&#39;</span>=&gt;date(<span style="font-style:italic">&#39;Y-m-d H:i:s&#39;</span>),<span style="font-style:italic">&#39;phone&#39;</span>=&gt;$phone,<span style="font-style:italic">&#39;password&#39;</span>=&gt;Crypt::encrypt($password),       <span style="font-style:italic">&#39;gender&#39;</span>=&gt;$gender,<span style="font-style:italic">&#39;nickname&#39;</span>=&gt;$nickname,<span style="font-style:italic">&#39;birthday&#39;</span>=&gt;$birthday,<span style="font-style:italic">&#39;height&#39;</span>=&gt;$height,<span style="font-style:italic">&#39;weight&#39;</span>=&gt;$weight,<span style="font-style:italic">&#39;email&#39;</span>=&gt;$email]);
+                 <span style="font-weight:bold">return</span> response(<span style="font-style:italic">&#39;注册成功&#39;</span>,200)-&gt;header(<span style="font-style:italic">&#39;Content-Type&#39;</span>,<span style="font-style:italic">&#39;text/html;charset=utf-8&#39;</span>);
+         <span style="font-style:italic">//      return &#39;oK&#39;;
+</span><span style="font-style:italic"></span>                 }
+         }<span style="font-weight:bold">else</span>{
+         <span style="font-style:italic">//      return &#39;验证码错误&#39;;
+</span><span style="font-style:italic"></span>                 <span style="font-weight:bold">return</span> response(<span style="font-style:italic">&#39;验证码错误&#39;</span>,400)-&gt;header(<span style="font-style:italic">&#39;Content-Type&#39;</span>,<span style="font-style:italic">&#39;text/html;charset=utf-8&#39;</span>);
+         }
+         }
+}
+<span style="">?&gt;</span><span style="">
+</span></code></pre></div><h4 id="遇到的问题">
+  遇到的问题
+  <a class="heading-link" href="#%e9%81%87%e5%88%b0%e7%9a%84%e9%97%ae%e9%a2%98">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h4>
+<p>response 的使用方法</p>
+<p>单个:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="font-weight:bold">return</span> response(<span style="font-style:italic">&#39;失败&#39;</span>,400)-&gt;header(<span style="font-style:italic">&#39;Content-Type&#39;</span>,<span style="font-style:italic">&#39;text/html;charset=utf-8&#39;</span>);
+</code></pre></div><p>多个:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="font-weight:bold">return</span> response($content)
+            -&gt;header(<span style="font-style:italic">&#39;Content-Type&#39;</span>, $type)
+            -&gt;header(<span style="font-style:italic">&#39;X-Header-One&#39;</span>, <span style="font-style:italic">&#39;Header Value&#39;</span>)
+            -&gt;header(<span style="font-style:italic">&#39;X-Header-Two&#39;</span>, <span style="font-style:italic">&#39;Header Value&#39;</span>);
+
+</code></pre></div><p>json:<br>
+<code>json</code> 方法会自动将标头的 <code>Content-Type</code> 设置为 <code>application/json</code>，
+并通过 <code>PHP</code> 的 <code>json_encode</code> 函数将指定的数组转换为 <code>JSON</code>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="font-weight:bold">return</span> response()-&gt;json([<span style="font-style:italic">&#39;name&#39;</span> =&gt; <span style="font-style:italic">&#39;chaosir&#39;</span>, <span style="font-style:italic">&#39;age&#39;</span> =&gt; <span style="font-style:italic">&#39;30&#39;</span>]);
+</code></pre></div><p>DB 操作问题
+在使用 <code>DB</code> 类来操作数据库时报错，原因是没有引入数据库操作门面：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="font-weight:bold">use</span> Illuminate\Support\Facades\DB;
+</code></pre></div><p>并且打开 <code>bootstrap\app.php</code> 取消 <code>$app-&gt;withFacades();</code> 之前的注释</p>
+<p>使用实例:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$userlist = DB::select(<span style="font-style:italic">&#39;select id,phone,email from user where phone = :phone or email = :email&#39;</span>,
+[<span style="font-style:italic">&#39;phone&#39;</span> =&gt; $phone,<span style="font-style:italic">&#39;email&#39;</span> =&gt; $email]);
+</code></pre></div><h3 id="定义路由">
+  定义路由
+  <a class="heading-link" href="#%e5%ae%9a%e4%b9%89%e8%b7%af%e7%94%b1">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>打开 <code>/routes/web.php</code> 设置如下路由：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$app-&gt;post(<span style="font-style:italic">&#39;api/account/register&#39;</span>,<span style="font-style:italic">&#39;UserController@register&#39;</span>);
+</code></pre></div><h2 id="项目完成">
+  项目完成
+  <a class="heading-link" href="#%e9%a1%b9%e7%9b%ae%e5%ae%8c%e6%88%90">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2022
+     Ethan Kuo 
+    ·
+    
+    Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+      
+      <script src="/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js" integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </body>
+
+</html>

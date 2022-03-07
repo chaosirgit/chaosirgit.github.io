@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JS on 郭超超的博客</title>
+    <link>https://blog.adminchao.com/zh-cn/tags/js/</link>
+    <description>Recent content in JS on 郭超超的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 08 Aug 2017 20:54:56 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/tags/js/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JavaScript 学习笔记</title>
+      <link>https://blog.adminchao.com/zh-cn/posts/javascript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Tue, 08 Aug 2017 20:54:56 +0000</pubDate>
+      
+      <guid>https://blog.adminchao.com/zh-cn/posts/javascript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <description>&lt;h2 id=&#34;前言&#34;&gt;
+  前言
+  &lt;a class=&#34;heading-link&#34; href=&#34;#%e5%89%8d%e8%a8%80&#34;&gt;
+    &lt;i class=&#34;fa fa-link&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;
+  &lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;基本理论了解，只是为了记住JS众多的函数&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

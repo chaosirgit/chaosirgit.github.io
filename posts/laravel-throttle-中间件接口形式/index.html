@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; block-all-mixed-content; default-src 'self'; child-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net/; form-action 'self'; frame-src 'self'; img-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/ https://cdn.jsdelivr.net/; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://cdn.jsdelivr.net/; prefetch-src 'self'; connect-src 'self' https://www.google-analytics.com;">
+
+    
+
+    <meta name="author" content="Ethan Kuo">
+    <meta name="description" content="前言    Laravel 自带请求频率限制中间件,但是这个中间件返回的并不是信息,在日常工作总可能需要以接口的形式返回
+步骤    生成中间件文件    php artisan make:middleware ThrottleRequests 拷贝代码到 app\Http\Middleware\ThrottleRequests.php    &lt;?php namespace App\Http\Middleware; use Closure; use RuntimeException; use Illuminate\Support\Str; use Illuminate\Cache\RateLimiter; use Illuminate\Support\InteractsWithTime; use Symfony\Component\HttpFoundation\Response; use Symfony\Component\HttpKernel\Exception\HttpException; class ThrottleRequests { use InteractsWithTime; /** * The rate limiter instance. * * @var \Illuminate\Cache\RateLimiter */ protected $limiter; /** * Create a new request throttler. * * @param \Illuminate\Cache\RateLimiter $limiter * @return void */ public function __construct(RateLimiter $limiter) { $this-&gt;limiter = $limiter; } /** * Handle an incoming request.">
+    <meta name="keywords" content="Laravel,PHP,中间件,Throttle">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Laravel Throttle 中间件接口形式"/>
+<meta name="twitter:description" content="前言    Laravel 自带请求频率限制中间件,但是这个中间件返回的并不是信息,在日常工作总可能需要以接口的形式返回
+步骤    生成中间件文件    php artisan make:middleware ThrottleRequests 拷贝代码到 app\Http\Middleware\ThrottleRequests.php    &lt;?php namespace App\Http\Middleware; use Closure; use RuntimeException; use Illuminate\Support\Str; use Illuminate\Cache\RateLimiter; use Illuminate\Support\InteractsWithTime; use Symfony\Component\HttpFoundation\Response; use Symfony\Component\HttpKernel\Exception\HttpException; class ThrottleRequests { use InteractsWithTime; /** * The rate limiter instance. * * @var \Illuminate\Cache\RateLimiter */ protected $limiter; /** * Create a new request throttler. * * @param \Illuminate\Cache\RateLimiter $limiter * @return void */ public function __construct(RateLimiter $limiter) { $this-&gt;limiter = $limiter; } /** * Handle an incoming request."/>
+
+    <meta property="og:title" content="Laravel Throttle 中间件接口形式" />
+<meta property="og:description" content="前言    Laravel 自带请求频率限制中间件,但是这个中间件返回的并不是信息,在日常工作总可能需要以接口的形式返回
+步骤    生成中间件文件    php artisan make:middleware ThrottleRequests 拷贝代码到 app\Http\Middleware\ThrottleRequests.php    &lt;?php namespace App\Http\Middleware; use Closure; use RuntimeException; use Illuminate\Support\Str; use Illuminate\Cache\RateLimiter; use Illuminate\Support\InteractsWithTime; use Symfony\Component\HttpFoundation\Response; use Symfony\Component\HttpKernel\Exception\HttpException; class ThrottleRequests { use InteractsWithTime; /** * The rate limiter instance. * * @var \Illuminate\Cache\RateLimiter */ protected $limiter; /** * Create a new request throttler. * * @param \Illuminate\Cache\RateLimiter $limiter * @return void */ public function __construct(RateLimiter $limiter) { $this-&gt;limiter = $limiter; } /** * Handle an incoming request." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.adminchao.com/posts/laravel-throttle-%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%8E%A5%E5%8F%A3%E5%BD%A2%E5%BC%8F/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-07-25T18:33:53+00:00" />
+<meta property="article:modified_time" content="2019-07-25T18:33:53+00:00" />
+
+
+
+    <title>
+  Laravel Throttle 中间件接口形式 · Ethan Kuo Blog
+</title>
+
+    
+      <link rel="canonical" href="https://blog.adminchao.com/posts/laravel-throttle-%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%8E%A5%E5%8F%A3%E5%BD%A2%E5%BC%8F/">
+    
+
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css" integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    <meta name="generator" content="Hugo 0.89.1" />
+  </head>
+
+  
+  
+    
+  
+  <body class="preload-transitions colorscheme-auto">
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Ethan Kuo Blog
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="https://blog.adminchao.com/zh-cn/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://blog.adminchao.com/posts/laravel-throttle-%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%8E%A5%E5%8F%A3%E5%BD%A2%E5%BC%8F/">
+              Laravel Throttle 中间件接口形式
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2019-07-25T18:33:53Z">
+                2019-07-25 18:33:53
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              3-minute read
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa fa-folder" aria-hidden="true"></i>
+    <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></div>
+
+          <div class="tags">
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/laravel/">Laravel</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/php/">PHP</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <h2 id="前言">
+  前言
+  <a class="heading-link" href="#%e5%89%8d%e8%a8%80">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<p>Laravel 自带请求频率限制中间件,但是这个中间件返回的并不是信息,在日常工作总可能需要以接口的形式返回</p>
+<h2 id="步骤">
+  步骤
+  <a class="heading-link" href="#%e6%ad%a5%e9%aa%a4">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<h3 id="生成中间件文件">
+  生成中间件文件
+  <a class="heading-link" href="#%e7%94%9f%e6%88%90%e4%b8%ad%e9%97%b4%e4%bb%b6%e6%96%87%e4%bb%b6">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">php artisan make:middleware ThrottleRequests
+</code></pre></div><h3 id="拷贝代码到-apphttpmiddlewarethrottlerequestsphp">
+  拷贝代码到 <code>app\Http\Middleware\ThrottleRequests.php</code>
+  <a class="heading-link" href="#%e6%8b%b7%e8%b4%9d%e4%bb%a3%e7%a0%81%e5%88%b0-apphttpmiddlewarethrottlerequestsphp">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+
+<span style="font-weight:bold">namespace</span> App\Http\Middleware;
+
+<span style="font-weight:bold">use</span> Closure;
+<span style="font-weight:bold">use</span> RuntimeException;
+<span style="font-weight:bold">use</span> Illuminate\Support\Str;
+<span style="font-weight:bold">use</span> Illuminate\Cache\RateLimiter;
+<span style="font-weight:bold">use</span> Illuminate\Support\InteractsWithTime;
+<span style="font-weight:bold">use</span> Symfony\Component\HttpFoundation\Response;
+<span style="font-weight:bold">use</span> Symfony\Component\HttpKernel\Exception\HttpException;
+
+<span style="font-weight:bold">class</span> <span style="font-weight:bold">ThrottleRequests</span>
+{
+    <span style="font-weight:bold">use</span> InteractsWithTime;
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * The rate limiter instance.
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @var \Illuminate\Cache\RateLimiter
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">protected</span> $limiter;
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * Create a new request throttler.
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @param  \Illuminate\Cache\RateLimiter  $limiter
+</span><span style="font-style:italic">     * @return void
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">public</span> <span style="font-weight:bold">function</span> __construct(RateLimiter $limiter)
+    {
+        $this-&gt;limiter = $limiter;
+    }
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * Handle an incoming request.
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @param  \Illuminate\Http\Request  $request
+</span><span style="font-style:italic">     * @param  \Closure  $next
+</span><span style="font-style:italic">     * @param  int|string  $maxAttempts
+</span><span style="font-style:italic">     * @param  float|int  $decayMinutes
+</span><span style="font-style:italic">     * @return mixed
+</span><span style="font-style:italic">     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">public</span> <span style="font-weight:bold">function</span> handle($request, Closure $next, $maxAttempts = 60, $decayMinutes = 1)
+    {
+        $key = $this-&gt;resolveRequestSignature($request);
+
+        $maxAttempts = $this-&gt;resolveMaxAttempts($request, $maxAttempts);
+
+        <span style="font-weight:bold">if</span> ($this-&gt;limiter-&gt;tooManyAttempts($key, $maxAttempts, $decayMinutes)) {
+            <span style="font-weight:bold">if</span>($this-&gt;buildException($key, $maxAttempts)){
+                <span style="font-weight:bold">return</span> response()-&gt;json([<span style="font-style:italic">&#39;code&#39;</span>=&gt;429,<span style="font-style:italic">&#39;data&#39;</span>=&gt;<span style="font-style:italic">&#39;请求太频繁了&#39;</span>]);
+            }
+
+        }
+
+        $this-&gt;limiter-&gt;hit($key, $decayMinutes);
+
+        $response = $next($request);
+
+        <span style="font-weight:bold">return</span> $this-&gt;addHeaders(
+            $response, $maxAttempts,
+            $this-&gt;calculateRemainingAttempts($key, $maxAttempts)
+        );
+    }
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * Resolve the number of attempts if the user is authenticated or not.
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @param  \Illuminate\Http\Request  $request
+</span><span style="font-style:italic">     * @param  int|string  $maxAttempts
+</span><span style="font-style:italic">     * @return int
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">protected</span> <span style="font-weight:bold">function</span> resolveMaxAttempts($request, $maxAttempts)
+    {
+        <span style="font-weight:bold">if</span> (Str::contains($maxAttempts, <span style="font-style:italic">&#39;|&#39;</span>)) {
+            $maxAttempts = explode(<span style="font-style:italic">&#39;|&#39;</span>, $maxAttempts, 2)[$request-&gt;user() ? 1 : 0];
+        }
+
+        <span style="font-weight:bold">return</span> (int) $maxAttempts;
+    }
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * Resolve request signature.
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @param  \Illuminate\Http\Request  $request
+</span><span style="font-style:italic">     * @return string
+</span><span style="font-style:italic">     * @throws \RuntimeException
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">protected</span> <span style="font-weight:bold">function</span> resolveRequestSignature($request)
+    {
+        <span style="font-weight:bold">if</span> ($user = $request-&gt;user()) {
+            <span style="font-weight:bold">return</span> sha1($user-&gt;getAuthIdentifier());
+        }
+
+        <span style="font-weight:bold">if</span> ($route = $request-&gt;route()) {
+            <span style="font-weight:bold">return</span> sha1($route-&gt;getDomain().<span style="font-style:italic">&#39;|&#39;</span>.$request-&gt;ip());
+        }
+
+        <span style="font-weight:bold">throw</span> <span style="font-weight:bold">new</span> RuntimeException(
+            <span style="font-style:italic">&#39;Unable to generate the request signature. Route unavailable.&#39;</span>
+        );
+    }
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * Create a &#39;too many attempts&#39; exception.
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @param  string  $key
+</span><span style="font-style:italic">     * @param  int  $maxAttempts
+</span><span style="font-style:italic">     * @return \Symfony\Component\HttpKernel\Exception\HttpException
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">protected</span> <span style="font-weight:bold">function</span> buildException($key, $maxAttempts)
+    {
+        $retryAfter = $this-&gt;getTimeUntilNextRetry($key);
+
+        $headers = $this-&gt;getHeaders(
+            $maxAttempts,
+            $this-&gt;calculateRemainingAttempts($key, $maxAttempts, $retryAfter),
+            $retryAfter
+        );
+
+<span style="font-style:italic">//        return new HttpException(
+</span><span style="font-style:italic">//            429, &#39;Too Many Attempts.&#39;, null, $headers
+</span><span style="font-style:italic">//        );
+</span><span style="font-style:italic"></span>        <span style="font-weight:bold">return</span> 1;
+    }
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * Get the number of seconds until the next retry.
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @param  string  $key
+</span><span style="font-style:italic">     * @return int
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">protected</span> <span style="font-weight:bold">function</span> getTimeUntilNextRetry($key)
+    {
+        <span style="font-weight:bold">return</span> $this-&gt;limiter-&gt;availableIn($key);
+    }
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * Add the limit header information to the given response.
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @param  \Symfony\Component\HttpFoundation\Response  $response
+</span><span style="font-style:italic">     * @param  int  $maxAttempts
+</span><span style="font-style:italic">     * @param  int  $remainingAttempts
+</span><span style="font-style:italic">     * @param  int|null  $retryAfter
+</span><span style="font-style:italic">     * @return \Symfony\Component\HttpFoundation\Response
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">protected</span> <span style="font-weight:bold">function</span> addHeaders(Response $response, $maxAttempts, $remainingAttempts, $retryAfter = <span style="font-weight:bold">null</span>)
+    {
+        $response-&gt;headers-&gt;add(
+            $this-&gt;getHeaders($maxAttempts, $remainingAttempts, $retryAfter)
+        );
+
+        <span style="font-weight:bold">return</span> $response;
+    }
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * Get the limit headers information.
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @param  int  $maxAttempts
+</span><span style="font-style:italic">     * @param  int  $remainingAttempts
+</span><span style="font-style:italic">     * @param  int|null  $retryAfter
+</span><span style="font-style:italic">     * @return array
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">protected</span> <span style="font-weight:bold">function</span> getHeaders($maxAttempts, $remainingAttempts, $retryAfter = <span style="font-weight:bold">null</span>)
+    {
+        $headers = [
+            <span style="font-style:italic">&#39;X-RateLimit-Limit&#39;</span> =&gt; $maxAttempts,
+            <span style="font-style:italic">&#39;X-RateLimit-Remaining&#39;</span> =&gt; $remainingAttempts,
+        ];
+
+        <span style="font-weight:bold">if</span> (! is_null($retryAfter)) {
+            $headers[<span style="font-style:italic">&#39;Retry-After&#39;</span>] = $retryAfter;
+            $headers[<span style="font-style:italic">&#39;X-RateLimit-Reset&#39;</span>] = $this-&gt;availableAt($retryAfter);
+        }
+
+        <span style="font-weight:bold">return</span> $headers;
+    }
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * Calculate the number of remaining attempts.
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @param  string  $key
+</span><span style="font-style:italic">     * @param  int  $maxAttempts
+</span><span style="font-style:italic">     * @param  int|null  $retryAfter
+</span><span style="font-style:italic">     * @return int
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">protected</span> <span style="font-weight:bold">function</span> calculateRemainingAttempts($key, $maxAttempts, $retryAfter = <span style="font-weight:bold">null</span>)
+    {
+        <span style="font-weight:bold">if</span> (is_null($retryAfter)) {
+            <span style="font-weight:bold">return</span> $this-&gt;limiter-&gt;retriesLeft($key, $maxAttempts);
+        }
+
+        <span style="font-weight:bold">return</span> 0;
+    }
+}
+
+</code></pre></div><h3 id="打开-apphttpkernelphp-在-routemiddleware-数组下添加如下">
+  打开 <code>app\Http\Kernel.php</code> 在 <code>$routeMiddleware</code> 数组下添加如下
+  <a class="heading-link" href="#%e6%89%93%e5%bc%80-apphttpkernelphp-%e5%9c%a8-routemiddleware-%e6%95%b0%e7%bb%84%e4%b8%8b%e6%b7%bb%e5%8a%a0%e5%a6%82%e4%b8%8b">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="font-style:italic">&#39;throttle&#39;</span> =&gt; \App\Http\Middleware\ThrottleRequests::class,
+</code></pre></div><h2 id="使用">
+  使用
+  <a class="heading-link" href="#%e4%bd%bf%e7%94%a8">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<p>路由中使用</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">    Route::post(<span style="font-style:italic">&#39;api/test&#39;</span>,[<span style="font-style:italic">&#39;uses&#39;</span>=&gt;<span style="font-style:italic">&#39;TestController@test&#39;</span>,<span style="font-style:italic">&#39;middleware&#39;</span>=&gt;[<span style="font-style:italic">&#39;throttle:1&#39;</span>]]);
+</code></pre></div>
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2022
+     Ethan Kuo 
+    ·
+    
+    Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+      
+      <script src="/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js" integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </body>
+
+</html>

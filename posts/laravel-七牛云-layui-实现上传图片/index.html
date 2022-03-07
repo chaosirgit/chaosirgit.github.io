@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; block-all-mixed-content; default-src 'self'; child-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net/; form-action 'self'; frame-src 'self'; img-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/ https://cdn.jsdelivr.net/; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://cdn.jsdelivr.net/; prefetch-src 'self'; connect-src 'self' https://www.google-analytics.com;">
+
+    
+
+    <meta name="author" content="Ethan Kuo">
+    <meta name="description" content="安装    composer require qiniu/php-sdk 使用    PHP 返回上传 token    &lt;?php namespace App\Http\Controllers\Admin; use App\Setting; use Illuminate\Http\Request; use App\Http\Controllers\Controller; use Qiniu\Auth; class DefaultController extends Controller { public function upload(){ $accessKey = Setting::getValueByKey(&#39;qn_accessKey&#39;); $secretKey = Setting::getValueByKey(&#39;qn_secretKey&#39;); $bucket = Setting::getValueByKey(&#39;qn_bucket_static&#39;); $baseUrl = Setting::getValueByKey(&#39;qn_static_url&#39;); //构建鉴权对象  $auth = new Auth($accessKey,$secretKey); //生成上传 token  $token = $auth-&gt;uploadToken($bucket); return $token; } } layui 携带 token 请求七牛云上传接口    layui HTML 代码    &lt;div class=&#34;layui-form-item&#34;&gt; &lt;label class=&#34;layui-form-label&#34; for=&#34;fileInput&#34;&gt;缩略图&lt;/label&gt; &lt;div class=&#34;layui-input-block&#34;&gt; &lt;button type=&#34;button&#34; class=&#34;layui-btn&#34; id=&#34;thum&#34;&gt;上传图片&lt;/button&gt; &lt;div class=&#34;layui-upload-list&#34;&gt; &lt;div id=&#34;thum_img&#34;&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;div class=&#34;layui-form-item&#34;&gt; &lt;label class=&#34;layui-form-label&#34; for=&#34;fileInput&#34;&gt;详细图&lt;/label&gt; &lt;div class=&#34;layui-input-block&#34;&gt; &lt;button type=&#34;button&#34; class=&#34;layui-btn&#34; id=&#34;imgs&#34;&gt; 上传 &lt;/button&gt; &lt;div class=&#34;layui-upload-list&#34;&gt; &lt;div id=&#34;imgs_list&#34;&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; layui JS 代码    function uploadInsts(elem,multiple,number,imgDiv){ if(multiple == null){ multiple = false; } if(number == null){ number = 0; } layui.">
+    <meta name="keywords" content="phper,goer,php,golang,php/go">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Laravel 七牛云 layui 实现上传图片"/>
+<meta name="twitter:description" content="安装    composer require qiniu/php-sdk 使用    PHP 返回上传 token    &lt;?php namespace App\Http\Controllers\Admin; use App\Setting; use Illuminate\Http\Request; use App\Http\Controllers\Controller; use Qiniu\Auth; class DefaultController extends Controller { public function upload(){ $accessKey = Setting::getValueByKey(&#39;qn_accessKey&#39;); $secretKey = Setting::getValueByKey(&#39;qn_secretKey&#39;); $bucket = Setting::getValueByKey(&#39;qn_bucket_static&#39;); $baseUrl = Setting::getValueByKey(&#39;qn_static_url&#39;); //构建鉴权对象  $auth = new Auth($accessKey,$secretKey); //生成上传 token  $token = $auth-&gt;uploadToken($bucket); return $token; } } layui 携带 token 请求七牛云上传接口    layui HTML 代码    &lt;div class=&#34;layui-form-item&#34;&gt; &lt;label class=&#34;layui-form-label&#34; for=&#34;fileInput&#34;&gt;缩略图&lt;/label&gt; &lt;div class=&#34;layui-input-block&#34;&gt; &lt;button type=&#34;button&#34; class=&#34;layui-btn&#34; id=&#34;thum&#34;&gt;上传图片&lt;/button&gt; &lt;div class=&#34;layui-upload-list&#34;&gt; &lt;div id=&#34;thum_img&#34;&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;div class=&#34;layui-form-item&#34;&gt; &lt;label class=&#34;layui-form-label&#34; for=&#34;fileInput&#34;&gt;详细图&lt;/label&gt; &lt;div class=&#34;layui-input-block&#34;&gt; &lt;button type=&#34;button&#34; class=&#34;layui-btn&#34; id=&#34;imgs&#34;&gt; 上传 &lt;/button&gt; &lt;div class=&#34;layui-upload-list&#34;&gt; &lt;div id=&#34;imgs_list&#34;&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; layui JS 代码    function uploadInsts(elem,multiple,number,imgDiv){ if(multiple == null){ multiple = false; } if(number == null){ number = 0; } layui."/>
+
+    <meta property="og:title" content="Laravel 七牛云 layui 实现上传图片" />
+<meta property="og:description" content="安装    composer require qiniu/php-sdk 使用    PHP 返回上传 token    &lt;?php namespace App\Http\Controllers\Admin; use App\Setting; use Illuminate\Http\Request; use App\Http\Controllers\Controller; use Qiniu\Auth; class DefaultController extends Controller { public function upload(){ $accessKey = Setting::getValueByKey(&#39;qn_accessKey&#39;); $secretKey = Setting::getValueByKey(&#39;qn_secretKey&#39;); $bucket = Setting::getValueByKey(&#39;qn_bucket_static&#39;); $baseUrl = Setting::getValueByKey(&#39;qn_static_url&#39;); //构建鉴权对象  $auth = new Auth($accessKey,$secretKey); //生成上传 token  $token = $auth-&gt;uploadToken($bucket); return $token; } } layui 携带 token 请求七牛云上传接口    layui HTML 代码    &lt;div class=&#34;layui-form-item&#34;&gt; &lt;label class=&#34;layui-form-label&#34; for=&#34;fileInput&#34;&gt;缩略图&lt;/label&gt; &lt;div class=&#34;layui-input-block&#34;&gt; &lt;button type=&#34;button&#34; class=&#34;layui-btn&#34; id=&#34;thum&#34;&gt;上传图片&lt;/button&gt; &lt;div class=&#34;layui-upload-list&#34;&gt; &lt;div id=&#34;thum_img&#34;&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;div class=&#34;layui-form-item&#34;&gt; &lt;label class=&#34;layui-form-label&#34; for=&#34;fileInput&#34;&gt;详细图&lt;/label&gt; &lt;div class=&#34;layui-input-block&#34;&gt; &lt;button type=&#34;button&#34; class=&#34;layui-btn&#34; id=&#34;imgs&#34;&gt; 上传 &lt;/button&gt; &lt;div class=&#34;layui-upload-list&#34;&gt; &lt;div id=&#34;imgs_list&#34;&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; layui JS 代码    function uploadInsts(elem,multiple,number,imgDiv){ if(multiple == null){ multiple = false; } if(number == null){ number = 0; } layui." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.adminchao.com/posts/laravel-%E4%B8%83%E7%89%9B%E4%BA%91-layui-%E5%AE%9E%E7%8E%B0%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-06-08T12:47:33+00:00" />
+<meta property="article:modified_time" content="2018-06-08T12:47:33+00:00" />
+
+
+
+    <title>
+  Laravel 七牛云 layui 实现上传图片 · Ethan Kuo Blog
+</title>
+
+    
+      <link rel="canonical" href="https://blog.adminchao.com/posts/laravel-%E4%B8%83%E7%89%9B%E4%BA%91-layui-%E5%AE%9E%E7%8E%B0%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/">
+    
+
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css" integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    <meta name="generator" content="Hugo 0.89.1" />
+  </head>
+
+  
+  
+    
+  
+  <body class="preload-transitions colorscheme-auto">
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Ethan Kuo Blog
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="https://blog.adminchao.com/zh-cn/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://blog.adminchao.com/posts/laravel-%E4%B8%83%E7%89%9B%E4%BA%91-layui-%E5%AE%9E%E7%8E%B0%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/">
+              Laravel 七牛云 layui 实现上传图片
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2018-06-08T12:47:33Z">
+                2018-06-08 12:47:33
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              4-minute read
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa fa-folder" aria-hidden="true"></i>
+    <a href="/categories/laravel/">Laravel</a></div>
+
+          <div class="tags">
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/laravel/">Laravel</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/php/">PHP</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/%E4%B8%83%E7%89%9B%E4%BA%91/">七牛云</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/layui/">layui</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/%E4%B8%8A%E4%BC%A0/">上传</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/%E5%9B%BE%E7%89%87/">图片</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <h3 id="安装">
+  安装
+  <a class="heading-link" href="#%e5%ae%89%e8%a3%85">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">composer <span style="font-weight:bold">require</span> qiniu/php-sdk
+</code></pre></div><h3 id="使用">
+  使用
+  <a class="heading-link" href="#%e4%bd%bf%e7%94%a8">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<h4 id="php-返回上传-token">
+  PHP 返回上传 token
+  <a class="heading-link" href="#php-%e8%bf%94%e5%9b%9e%e4%b8%8a%e4%bc%a0-token">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+
+<span style="font-weight:bold">namespace</span> App\Http\Controllers\Admin;
+
+<span style="font-weight:bold">use</span> App\Setting;
+<span style="font-weight:bold">use</span> Illuminate\Http\Request;
+<span style="font-weight:bold">use</span> App\Http\Controllers\Controller;
+<span style="font-weight:bold">use</span> Qiniu\Auth;
+
+<span style="font-weight:bold">class</span> <span style="font-weight:bold">DefaultController</span> <span style="font-weight:bold">extends</span> Controller
+{
+    <span style="font-weight:bold">public</span> <span style="font-weight:bold">function</span> upload(){
+        $accessKey = Setting::getValueByKey(<span style="font-style:italic">&#39;qn_accessKey&#39;</span>);
+        $secretKey = Setting::getValueByKey(<span style="font-style:italic">&#39;qn_secretKey&#39;</span>);
+        $bucket = Setting::getValueByKey(<span style="font-style:italic">&#39;qn_bucket_static&#39;</span>);
+        $baseUrl = Setting::getValueByKey(<span style="font-style:italic">&#39;qn_static_url&#39;</span>);
+        
+        <span style="font-style:italic">//构建鉴权对象
+</span><span style="font-style:italic"></span>        $auth = <span style="font-weight:bold">new</span> Auth($accessKey,$secretKey);
+        
+        <span style="font-style:italic">//生成上传 token
+</span><span style="font-style:italic"></span>        $token = $auth-&gt;uploadToken($bucket);
+
+        <span style="font-weight:bold">return</span> $token;
+    }
+}
+</code></pre></div><h4 id="layui-携带-token-请求七牛云上传接口">
+  layui 携带 token 请求七牛云上传接口
+  <a class="heading-link" href="#layui-%e6%90%ba%e5%b8%a6-token-%e8%af%b7%e6%b1%82%e4%b8%83%e7%89%9b%e4%ba%91%e4%b8%8a%e4%bc%a0%e6%8e%a5%e5%8f%a3">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h4>
+<h5 id="layui-html-代码">
+  layui HTML 代码
+  <a class="heading-link" href="#layui-html-%e4%bb%a3%e7%a0%81">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h5>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="font-weight:bold">div</span> class=<span style="font-style:italic">&#34;layui-form-item&#34;</span>&gt;
+            &lt;<span style="font-weight:bold">label</span> class=<span style="font-style:italic">&#34;layui-form-label&#34;</span> for=<span style="font-style:italic">&#34;fileInput&#34;</span>&gt;缩略图&lt;/<span style="font-weight:bold">label</span>&gt;
+            &lt;<span style="font-weight:bold">div</span> class=<span style="font-style:italic">&#34;layui-input-block&#34;</span>&gt;
+                &lt;<span style="font-weight:bold">button</span> type=<span style="font-style:italic">&#34;button&#34;</span> class=<span style="font-style:italic">&#34;layui-btn&#34;</span> id=<span style="font-style:italic">&#34;thum&#34;</span>&gt;上传图片&lt;/<span style="font-weight:bold">button</span>&gt;
+                &lt;<span style="font-weight:bold">div</span> class=<span style="font-style:italic">&#34;layui-upload-list&#34;</span>&gt;
+                    &lt;<span style="font-weight:bold">div</span>  id=<span style="font-style:italic">&#34;thum_img&#34;</span>&gt;&lt;/<span style="font-weight:bold">div</span>&gt;
+                &lt;/<span style="font-weight:bold">div</span>&gt;
+            &lt;/<span style="font-weight:bold">div</span>&gt;
+        &lt;/<span style="font-weight:bold">div</span>&gt;
+
+
+        &lt;<span style="font-weight:bold">div</span> class=<span style="font-style:italic">&#34;layui-form-item&#34;</span>&gt;
+            &lt;<span style="font-weight:bold">label</span> class=<span style="font-style:italic">&#34;layui-form-label&#34;</span> for=<span style="font-style:italic">&#34;fileInput&#34;</span>&gt;详细图&lt;/<span style="font-weight:bold">label</span>&gt;
+            &lt;<span style="font-weight:bold">div</span> class=<span style="font-style:italic">&#34;layui-input-block&#34;</span>&gt;
+                &lt;<span style="font-weight:bold">button</span> type=<span style="font-style:italic">&#34;button&#34;</span> class=<span style="font-style:italic">&#34;layui-btn&#34;</span> id=<span style="font-style:italic">&#34;imgs&#34;</span>&gt;
+                    上传
+                &lt;/<span style="font-weight:bold">button</span>&gt;
+                &lt;<span style="font-weight:bold">div</span> class=<span style="font-style:italic">&#34;layui-upload-list&#34;</span>&gt;
+                    &lt;<span style="font-weight:bold">div</span> id=<span style="font-style:italic">&#34;imgs_list&#34;</span>&gt;&lt;/<span style="font-weight:bold">div</span>&gt;
+                &lt;/<span style="font-weight:bold">div</span>&gt;
+            &lt;/<span style="font-weight:bold">div</span>&gt;
+        &lt;/<span style="font-weight:bold">div</span>&gt;
+</code></pre></div><h5 id="layui-js-代码">
+  layui JS 代码
+  <a class="heading-link" href="#layui-js-%e4%bb%a3%e7%a0%81">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h5>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">     <span style="font-weight:bold">function</span> uploadInsts(elem,multiple,number,imgDiv){
+            <span style="font-weight:bold">if</span>(multiple == <span style="font-weight:bold">null</span>){
+                multiple = <span style="font-weight:bold">false</span>;
+            }
+            <span style="font-weight:bold">if</span>(number == <span style="font-weight:bold">null</span>){
+                number = 0;
+            }
+            layui.use([<span style="font-style:italic">&#39;upload&#39;</span>],<span style="font-weight:bold">function</span> () {
+                <span style="font-weight:bold">var</span> $ = layui.jquery
+                    ,upload = layui.upload;
+                upload.render({
+
+                    elem: elem                      <span style="font-style:italic">//上传按钮ID
+</span><span style="font-style:italic"></span>                    ,url: <span style="font-style:italic">&#39;https://up.qbox.me/&#39;</span>     <span style="font-style:italic">//七牛云上传接口
+</span><span style="font-style:italic"></span>                    ,data:{<span style="font-style:italic">&#39;token&#39;</span>:<span style="font-style:italic">&#39;{{$token ?? null}}&#39;</span>}    <span style="font-style:italic">//携带 token
+</span><span style="font-style:italic"></span>                    ,multiple:multiple              <span style="font-style:italic">//是否多个图片
+</span><span style="font-style:italic"></span>                    ,number:number                  <span style="font-style:italic">//最多上传图片数量
+</span><span style="font-style:italic"></span>                    <span style="font-style:italic">// ,before: function(obj){
+</span><span style="font-style:italic"></span>                    <span style="font-style:italic">//     //预读本地文件示例，不支持ie8
+</span><span style="font-style:italic"></span>                    <span style="font-style:italic">//     obj.preview(function(index, file, result){
+</span><span style="font-style:italic"></span>                    <span style="font-style:italic">//         $(&#39;#demo1&#39;).attr(&#39;src&#39;, result); //图片链接（base64）
+</span><span style="font-style:italic"></span>                    <span style="font-style:italic">//     });
+</span><span style="font-style:italic"></span>                    <span style="font-style:italic">// }
+</span><span style="font-style:italic"></span>                    ,done: <span style="font-weight:bold">function</span>(res){
+                        <span style="font-style:italic">//res 上传成功后七牛云返回数据 
+</span><span style="font-style:italic"></span>                        $.ajax({
+                            url:<span style="font-style:italic">&#34;{{url(&#39;admin/upload_save&#39;)}}&#34;</span>      <span style="font-style:italic">//请求 php 接口
+</span><span style="font-style:italic"></span>                            ,data:{<span style="font-style:italic">&#39;key&#39;</span>:res.key,<span style="font-style:italic">&#39;multiple&#39;</span>:multiple,<span style="font-style:italic">&#39;num&#39;</span>:number} <span style="font-style:italic">//res.key图片名
+</span><span style="font-style:italic"></span>                            ,type:<span style="font-style:italic">&#39;post&#39;</span>
+                            ,success:<span style="font-weight:bold">function</span>(result){
+                                <span style="font-weight:bold">if</span>(result.error &gt; 0){           <span style="font-style:italic">//失败
+</span><span style="font-style:italic"></span>                                    layer.msg(result.msg);
+                                }<span style="font-weight:bold">else</span>{                          <span style="font-style:italic">//成功 拿到拼接后的图片url展示
+</span><span style="font-style:italic"></span>                                    $(imgDiv).append(<span style="font-style:italic">&#34;&lt;img class=&#39;layui-upload-img&#39; style=&#39;width:150px;height:150px;margin-right:3px;&#39; src=&#39;&#34;</span>+result.msg+<span style="font-style:italic">&#34;&#39;&gt;&#34;</span>);
+                                }
+                            }
+                        });
+                    }
+                    ,error: <span style="font-weight:bold">function</span>(){     <span style="font-style:italic">//上传失败
+</span><span style="font-style:italic"></span>                        layer.msg(<span style="font-style:italic">&#39;请刷新重试&#39;</span>);
+                        <span style="font-weight:bold">return</span> <span style="font-weight:bold">false</span>;
+                    }
+                });
+            });
+    }
+    
+                uploadInsts(<span style="font-style:italic">&#39;#thum&#39;</span>,<span style="font-weight:bold">false</span>,0,<span style="font-style:italic">&#39;#thum_img&#39;</span>);<span style="font-style:italic">//单图片
+</span><span style="font-style:italic"></span>                uploadInsts(<span style="font-style:italic">&#39;#imgs&#39;</span>,<span style="font-weight:bold">true</span>,5,<span style="font-style:italic">&#39;#imgs_list&#39;</span>);<span style="font-style:italic">//多图片
+</span></code></pre></div><h5 id="php-接收七牛云-key-拼接图片地址">
+  PHP 接收七牛云 key 拼接图片地址
+  <a class="heading-link" href="#php-%e6%8e%a5%e6%94%b6%e4%b8%83%e7%89%9b%e4%ba%91-key-%e6%8b%bc%e6%8e%a5%e5%9b%be%e7%89%87%e5%9c%b0%e5%9d%80">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h5>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+
+<span style="font-weight:bold">public</span> <span style="font-weight:bold">function</span> uploadSave(Request $request){
+        $key = $request-&gt;get(<span style="font-style:italic">&#39;key&#39;</span>,<span style="font-weight:bold">null</span>);
+        $multiple = $request-&gt;get(<span style="font-style:italic">&#39;multiple&#39;</span>,<span style="font-weight:bold">false</span>);
+        $num = $request-&gt;get(<span style="font-style:italic">&#39;number&#39;</span>,1);
+        <span style="font-weight:bold">if</span>(<span style="font-weight:bold">empty</span>($key)){
+            <span style="font-weight:bold">return</span> $this-&gt;error(<span style="font-style:italic">&#39;上传图片错误请重试&#39;</span>);
+        }
+        $type = <span style="font-style:italic">&#39;image&#39;</span>;
+        $user_id = User::getAdminId();
+        $uploads = <span style="font-weight:bold">new</span> Uploads();
+        $uploads-&gt;type = $type;
+        $uploads-&gt;user_id = $user_id;
+        $uploads-&gt;key = $key;
+        $uploads-&gt;time = time();
+        <span style="font-weight:bold">try</span>{
+            $uploads-&gt;save();
+            $result = Setting::getValueByKey(<span style="font-style:italic">&#39;qn_static_url&#39;</span>).<span style="font-style:italic">&#39;/&#39;</span>.$key;
+            <span style="font-weight:bold">return</span> $this-&gt;success($result);
+        }<span style="font-weight:bold">catch</span> (\Exception $exception){
+            <span style="font-weight:bold">return</span> $this-&gt;error($exception-&gt;getMessage());
+        }
+    }
+    
+<span style="">?&gt;</span><span style="">
+</span></code></pre></div><h5 id="layui--php--七牛云-实现单个多个图片上传单选多选图片设计">
+  layui + PHP + 七牛云 实现单个多个图片上传单选多选图片设计
+  <a class="heading-link" href="#layui--php--%e4%b8%83%e7%89%9b%e4%ba%91-%e5%ae%9e%e7%8e%b0%e5%8d%95%e4%b8%aa%e5%a4%9a%e4%b8%aa%e5%9b%be%e7%89%87%e4%b8%8a%e4%bc%a0%e5%8d%95%e9%80%89%e5%a4%9a%e9%80%89%e5%9b%be%e7%89%87%e8%ae%be%e8%ae%a1">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h5>
+<ol>
+<li>点击上传图片按钮公共弹出层函数</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="font-weight:bold">function</span> layer_show(title,url,w,h) {
+            <span style="font-weight:bold">var</span> width = w || <span style="font-weight:bold">null</span>;
+            <span style="font-weight:bold">var</span> height = h || <span style="font-weight:bold">null</span>;
+            <span style="font-weight:bold">var</span> areaValue;
+            <span style="font-weight:bold">if</span> (width != <span style="font-weight:bold">null</span>) {
+                areaValue = width + <span style="font-style:italic">&#39;px&#39;</span>;
+                <span style="font-weight:bold">if</span> (height != <span style="font-weight:bold">null</span>) {
+                    areaValue = [width + <span style="font-style:italic">&#39;px&#39;</span>, height + <span style="font-style:italic">&#39;px&#39;</span>];
+                }
+            }<span style="font-weight:bold">else</span>{
+                areaValue = [<span style="font-style:italic">&#39;100%&#39;</span>,<span style="font-style:italic">&#39;100%&#39;</span>];
+            }
+                layui.use(<span style="font-style:italic">&#39;layer&#39;</span>, <span style="font-weight:bold">function</span> () { <span style="font-style:italic">//独立版的layer无需执行这一句
+</span><span style="font-style:italic"></span>                    <span style="font-weight:bold">var</span> $ = layui.jquery, layer = layui.layer; <span style="font-style:italic">//独立版的layer无需执行这一句
+</span><span style="font-style:italic"></span>                    layer.open({
+                        type: 2 <span style="font-style:italic">//此处以iframe举例
+</span><span style="font-style:italic"></span>                        , title: title
+                        , area: areaValue
+                        , shade: 0
+                        , maxmin: <span style="font-weight:bold">true</span>
+                        , content: url
+                        , offset: <span style="font-style:italic">&#39;10px&#39;</span>
+
+                    });
+                });
+        }
+</code></pre></div><ol start="2">
+<li>PHP 接收 url 中的参数，并显示弹出层视图，要有回调函数</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+<span style="font-weight:bold">public</span> <span style="font-weight:bold">function</span> uploadShow(Request $request){
+        $limit = $request-&gt;get(<span style="font-style:italic">&#39;limit&#39;</span>,9);
+        $type = $request-&gt;get(<span style="font-style:italic">&#39;type&#39;</span>,<span style="font-style:italic">&#39;radio&#39;</span>);          <span style="font-style:italic">//图片选择是单选还是多选
+</span><span style="font-style:italic"></span>        $callback = $request-&gt;get(<span style="font-style:italic">&#39;callback&#39;</span>,<span style="font-weight:bold">null</span>);     <span style="font-style:italic">//回调函数名
+</span><span style="font-style:italic"></span>
+        $user_id = User::getAdminId();
+        $results = Uploads::where(<span style="font-style:italic">&#39;user_id&#39;</span>,$user_id)-&gt;orderBy(<span style="font-style:italic">&#39;id&#39;</span>,<span style="font-style:italic">&#39;desc&#39;</span>)-&gt;paginate($limit);
+        $token = Uploads::getQiniuUpToken();            <span style="font-style:italic">//七牛云上传 token
+</span><span style="font-style:italic"></span>        <span style="font-weight:bold">return</span> view(<span style="font-style:italic">&#39;admin.upload.show&#39;</span>)-&gt;with([<span style="font-style:italic">&#39;results&#39;</span>=&gt;$results-&gt;items(),<span style="font-style:italic">&#39;type&#39;</span>=&gt;$type,<span style="font-style:italic">&#39;callback&#39;</span>=&gt;$callback,<span style="font-style:italic">&#39;token&#39;</span>=&gt;$token]);
+    }
+    <span style="">?&gt;</span><span style="">
+</span></code></pre></div><ol start="3">
+<li>上传图片弹出层视图</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;form class=&#34;layui-form&#34; action=&#34;&#34;&gt;
+        &lt;div class=&#34;layui-form-item&#34;&gt;
+            &lt;div class=&#34;layui-input-block&#34;&gt;
+        &lt;div class=&#34;layui-upload&#34;&gt;
+            &lt;button type=&#34;button&#34; class=&#34;layui-btn&#34; id=&#34;upload_img&#34;&gt;&lt;i class=&#34;layui-icon&#34;&gt;&lt;/i&gt;上传图片&lt;/button&gt;
+        &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&#34;layui-form-item&#34; pane=&#34;&#34;&gt;
+            &lt;label class=&#34;layui-form-label&#34;&gt;选择图片&lt;/label&gt;
+            &lt;div class=&#34;layui-input-block&#34;&gt;
+            &lt;!--type 为单选框还是多选框--&gt;
+                @foreach($results as $result)
+                &lt;input class=&#34;layui-inline&#34; type=&#34;{{$type}}&#34; name=&#34;like[]&#34; lay-skin=&#34;primary&#34; title=&#34;&lt;img style=&#39;width:150px;height:150px;&#39; src=&#39;{{$result-&gt;img_url}}&#39; class=&#39;imgs&#39;&gt;&#34; value=&#34;{{$result-&gt;img_url}}&#34;&gt;
+                @endforeach
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&#34;layui-form-item&#34;&gt;
+            &lt;div class=&#34;layui-input-block&#34;&gt;
+                &lt;button class=&#34;layui-btn&#34; lay-submit=&#34;&#34; lay-filter=&#34;demo1&#34;&gt;确定&lt;/button&gt;
+                &lt;button type=&#34;reset&#34; class=&#34;layui-btn layui-btn-primary&#34;&gt;重置&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/form&gt;
+</code></pre></div><ol start="4">
+<li>弹出层-上传图片按钮</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="font-style:italic">//elem          jQuery ID 选择器  
+</span><span style="font-style:italic">//multiple      单图 or 多图上传 
+</span><span style="font-style:italic">//number        多图上传最大可选图片数量
+</span><span style="font-style:italic"></span> <span style="font-weight:bold">function</span> uploadInsts(elem,multiple,number){
+            <span style="font-weight:bold">if</span>(multiple == <span style="font-weight:bold">null</span>){
+                multiple = <span style="font-weight:bold">false</span>;
+            }
+            <span style="font-weight:bold">if</span>(number == <span style="font-weight:bold">null</span>){
+                number = 0;
+            }
+            layui.use([<span style="font-style:italic">&#39;upload&#39;</span>],<span style="font-weight:bold">function</span> () {
+                <span style="font-weight:bold">var</span> $ = layui.jquery
+                    ,upload = layui.upload;
+                upload.render({
+
+                    elem: elem
+                    ,url: <span style="font-style:italic">&#39;https://up.qbox.me/&#39;</span>         <span style="font-style:italic">//七牛云上传接口
+</span><span style="font-style:italic"></span>                    ,data:{<span style="font-style:italic">&#39;token&#39;</span>:<span style="font-style:italic">&#39;{{$token ?? null}}&#39;</span>}    <span style="font-style:italic">//携带上传 token
+</span><span style="font-style:italic"></span>                    ,multiple:multiple
+                    ,number:number
+                    <span style="font-style:italic">// ,before: function(obj){
+</span><span style="font-style:italic"></span>                    <span style="font-style:italic">//     //预读本地文件示例，不支持ie8
+</span><span style="font-style:italic"></span>                    <span style="font-style:italic">//     obj.preview(function(index, file, result){
+</span><span style="font-style:italic"></span>                    <span style="font-style:italic">//         $(&#39;#demo1&#39;).attr(&#39;src&#39;, result); //图片链接（base64）
+</span><span style="font-style:italic"></span>                    <span style="font-style:italic">//     });
+</span><span style="font-style:italic"></span>                    <span style="font-style:italic">// }
+</span><span style="font-style:italic"></span>                    ,done: <span style="font-weight:bold">function</span>(res){
+                        <span style="font-style:italic">//上传成功后七牛云返回 key 提交到后端接口保存图片地址及其他信息
+</span><span style="font-style:italic"></span>                        $.ajax({
+                            url:<span style="font-style:italic">&#34;{{url(&#39;admin/upload_save&#39;)}}&#34;</span>      
+                            ,data:{<span style="font-style:italic">&#39;key&#39;</span>:res.key,<span style="font-style:italic">&#39;multiple&#39;</span>:multiple,<span style="font-style:italic">&#39;num&#39;</span>:number}
+                            ,type:<span style="font-style:italic">&#39;post&#39;</span>
+                            ,success:<span style="font-weight:bold">function</span>(result){
+                                <span style="font-weight:bold">if</span>(result.error &gt; 0){
+                                    layer.msg(result.msg);
+                                }<span style="font-weight:bold">else</span>{                      <span style="font-style:italic">//后端保存成功后重载此页面
+</span><span style="font-style:italic"></span>                                    location.reload();      
+                                }
+                            }
+                        });
+                        <span style="font-style:italic">//上传成功
+</span><span style="font-style:italic"></span>                    }
+                    ,error: <span style="font-weight:bold">function</span>(){
+                        layer.msg(<span style="font-style:italic">&#39;请刷新重试&#39;</span>);
+                        <span style="font-weight:bold">return</span> <span style="font-weight:bold">false</span>;
+                    }
+                });
+            });
+        }
+</code></pre></div><ol start="5">
+<li>弹出层-确定按钮</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="font-style:italic">//点击确定后给执行父级页面传入的回调函数名,并关闭此页面
+</span><span style="font-style:italic"></span>        <span style="font-weight:bold">function</span> backParent() {
+            layui.use(<span style="font-style:italic">&#39;form&#39;</span>, <span style="font-weight:bold">function</span> () {
+                <span style="font-weight:bold">var</span> $ = layui.jquery
+                    , form = layui.form;
+
+                <span style="font-style:italic">//注意：parent 是 JS 自带的全局对象，可用于操作父页面
+</span><span style="font-style:italic"></span>                <span style="font-weight:bold">var</span> index = parent.layer.getFrameIndex(window.name); <span style="font-style:italic">//获取窗口索引
+</span><span style="font-style:italic"></span>
+                <span style="font-style:italic">//监听提交
+</span><span style="font-style:italic"></span>                form.on(<span style="font-style:italic">&#39;submit(demo1)&#39;</span>, <span style="font-weight:bold">function</span> (data) {
+                    <span style="font-style:italic">//给父页面传值
+</span><span style="font-style:italic"></span>                    <span style="font-weight:bold">var</span> s = 0;
+                    <span style="font-weight:bold">var</span> res = <span style="font-weight:bold">new</span> Array();
+                    <span style="font-weight:bold">for</span> (<span style="font-weight:bold">var</span> i <span style="font-weight:bold">in</span> data.field) {
+                        res.push(data.field[<span style="font-style:italic">&#39;like[&#39;</span> + s + <span style="font-style:italic">&#39;]&#39;</span>]);
+                        s++;
+                    }
+                    <span style="font-style:italic">//把构建好的数据传入回调函数
+</span><span style="font-style:italic"></span>                    parent.{{$callback}}(res);      <span style="font-style:italic">//调用父级页面传入的回调函数名，这里的回调函数名是从 php 返回的.
+</span><span style="font-style:italic"></span>                    parent.layer.close(index);      <span style="font-style:italic">//关闭此页面
+</span><span style="font-style:italic"></span>
+                    <span style="font-weight:bold">return</span> <span style="font-weight:bold">false</span>;
+                });
+            });
+        }
+</code></pre></div><ol start="6">
+<li>父级页面-定义回调函数</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">        <span style="font-weight:bold">function</span> imgsList(res){
+            layui.use(<span style="font-style:italic">&#39;element&#39;</span>,<span style="font-weight:bold">function</span>(){
+                <span style="font-weight:bold">var</span> $ = layui.jquery;
+                <span style="font-weight:bold">for</span>(<span style="font-weight:bold">var</span> i=0;i&lt;res.length;i++){
+                    <span style="font-weight:bold">if</span>(res[i] != <span style="font-weight:bold">undefined</span>){
+                        <span style="font-weight:bold">var</span> html = <span style="font-style:italic">&#39;&#39;</span>;
+                        html += <span style="font-style:italic">&#39;&lt;img src=&#34;&#39;</span>+res[i]+<span style="font-style:italic">&#39;&#34; style=&#34;width:150px;height:150px;&#34;&gt;&#39;</span>;
+                        html += <span style="font-style:italic">&#39;&lt;button class=&#34;layui-btn img_delete&#34; type=&#34;button&#34; &gt;删除&lt;/button&gt;&#39;</span>;
+
+                        $(<span style="font-style:italic">&#39;#imgs_list&#39;</span>).append(html);
+                    }
+
+                }
+            });
+        }
+</code></pre></div><ol start="7">
+<li>事件实例</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;button type=&#34;button&#34; class=&#34;layui-btn&#34; onclick=&#34;layer_show(&#39;上传图片&#39;,&#39;{{url(&#39;admin/upload_select&#39;)}}?type=checkbox&amp;callback=imgsList&#39;,800,600)&#34; &gt;
+</code></pre></div>
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2022
+     Ethan Kuo 
+    ·
+    
+    Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+      
+      <script src="/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js" integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </body>
+
+</html>

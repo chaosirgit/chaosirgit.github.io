@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Laradock on 郭超超的博客</title>
+    <link>https://blog.adminchao.com/zh-cn/tags/laradock/</link>
+    <description>Recent content in Laradock on 郭超超的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 30 Jun 2021 23:31:29 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/tags/laradock/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Laradock 安装 GRPC 扩展</title>
+      <link>https://blog.adminchao.com/zh-cn/posts/laradock-%E5%AE%89%E8%A3%85-grpc-%E6%89%A9%E5%B1%95/</link>
+      <pubDate>Wed, 30 Jun 2021 23:31:29 +0000</pubDate>
+      
+      <guid>https://blog.adminchao.com/zh-cn/posts/laradock-%E5%AE%89%E8%A3%85-grpc-%E6%89%A9%E5%B1%95/</guid>
+      <description>前言    在 Laradock 环境下安装不常用的 PHP 扩展，不止用与 GRPC 扩展，其他依此类推即可
+步骤    修改配置文件:    laradock/docker-compose.yml
+在 workspace 配置参数段
+1 2 3 4  workspace: build: context: ./workspace args:   添加
+1  - INSTALL_PHPGRPC=${WORKSPACE_INSTALL_PHPGRPC}   修改启动配置文件    laradock/.env
+增加两个配置项
+1 2  PHP_FPM_INSTALL_PHPGRPC=true WORKSPACE_INSTALL_PHPGRPC=true   修改 PHP-FPM 配置文件    laradock/php-fpm/Dockerfile
+1 2 3 4 5 6 7 8 9 10  ########################################################################### # php grpc extension ########################################################################### ARG INSTALL_PHPGRPC=false RUN if [ ${INSTALL_PHPGRPC} = true ]; then \  printf &amp;#34;\n&amp;#34; | pecl install -o -f grpc \  &amp;amp;&amp;amp; rm -rf /tmp/pear \  &amp;amp;&amp;amp; docker-php-ext-enable grpc \ ;fi   修改 WORKSPACE 配置文件    laradock/workspace/Dockerfile</description>
+    </item>
+    
+    <item>
+      <title>Docker 使用笔记</title>
+      <link>https://blog.adminchao.com/zh-cn/posts/docker-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Mon, 20 Jul 2020 15:39:19 +0000</pubDate>
+      
+      <guid>https://blog.adminchao.com/zh-cn/posts/docker-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</guid>
+      <description>前言    在 Docker 的学习及使用过程中作一些笔记。
+命令    检查安装后的 Docker 版本
+1 2 3 4  $ docker --version Docker version 19.03.8, build afacb8b $ docker-compose --version docker-compose version 1.25.5, build 8a1c60f6   尝试运行一个 Nginx 服务器：
+1 2 3 4 5  $ docker run -d -p 80:80 --name webserver nginx # -p 参数指定 本机端口:容器端口 # -d 在后台运行容器 # --name 给容器设置别名 # 此时访问本地 http://localhost 出现 Welcome to Nginx   停止 Nginx 服务器并删除容器：</description>
+    </item>
+    
+  </channel>
+</rss>

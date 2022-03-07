@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Artisan on 郭超超的博客</title>
+    <link>https://blog.adminchao.com/zh-cn/tags/artisan/</link>
+    <description>Recent content in Artisan on 郭超超的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 15 Oct 2018 10:04:39 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/tags/artisan/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Laravel Artisan 后台调用</title>
+      <link>https://blog.adminchao.com/zh-cn/posts/laravel-artisan-%E5%90%8E%E5%8F%B0%E8%B0%83%E7%94%A8/</link>
+      <pubDate>Mon, 15 Oct 2018 10:04:39 +0000</pubDate>
+      
+      <guid>https://blog.adminchao.com/zh-cn/posts/laravel-artisan-%E5%90%8E%E5%8F%B0%E8%B0%83%E7%94%A8/</guid>
+      <description>前言    在项目中需要以编程方式后台执行脚本，以官方 Artisan::call() 调用的话，如果脚本时间过长，会进程中断，导致脚本执行不成功，所以需要后台挂起执行。
+Artisan 命令行工具    请参照官方文档
+以编程方式调用    1 2 3 4 5  &amp;lt;?php use Illuminate\Support\Facades\Artisan; Artisan::call(&amp;#39;command&amp;#39;,[&amp;#39;id&amp;#39;=&amp;gt;1]);   这里注意，如果在代码有事务，Artisan::call() 需要在 commit 或 rollback 后调用。
+后台调用    直接上代码
+1 2 3 4 5 6 7  &amp;lt;?php use Symfony\Component\Process\Process; $process = new Process(&amp;#39;nohup php artisan command &amp;#39;.$id .&amp;#39; &amp;gt;/var/www/html/crowd/nohup.log 2&amp;gt;&amp;amp;1 &amp;amp;&amp;#39;,&amp;#39;path/to/artisan&amp;#39;); //第一个参数是运行的命令,命令方式跟 Linux 一致，第二个参数是可以执行此条命令的路径  $process-&amp;gt;start(); ?&amp;gt;   </description>
+    </item>
+    
+  </channel>
+</rss>

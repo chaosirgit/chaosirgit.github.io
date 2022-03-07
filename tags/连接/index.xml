@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>连接 on Ethan Kuo Blog</title>
+    <link>https://blog.adminchao.com/tags/%E8%BF%9E%E6%8E%A5/</link>
+    <description>Recent content in 连接 on Ethan Kuo Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 08 Jun 2018 12:38:16 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/tags/%E8%BF%9E%E6%8E%A5/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Laravel Eloquent 连接查询</title>
+      <link>https://blog.adminchao.com/posts/laravel-eloquent-%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2/</link>
+      <pubDate>Fri, 08 Jun 2018 12:38:16 +0000</pubDate>
+      
+      <guid>https://blog.adminchao.com/posts/laravel-eloquent-%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2/</guid>
+      <description>相当于 select count(*) from user as a left join chunk as b on a.id=b.user_id where a.parent_id = 341
+$chunk_count = User::leftJoin(&amp;#39;chunk&amp;#39;,&amp;#39;user.id&amp;#39;,&amp;#39;=&amp;#39;,&amp;#39;chunk.user_id&amp;#39;)-&amp;gt;where(&amp;#39;user.parent_id&amp;#39;,$user-&amp;gt;parent_id)-&amp;gt;count(); </description>
+    </item>
+    
+  </channel>
+</rss>

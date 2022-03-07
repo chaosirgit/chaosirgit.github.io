@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Online Discs on Ethan Kuo Blog</title>
+    <link>https://blog.adminchao.com/tags/online-discs/</link>
+    <description>Recent content in Online Discs on Ethan Kuo Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 27 Apr 2019 16:36:20 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/tags/online-discs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mac Aria2 Usage</title>
+      <link>https://blog.adminchao.com/posts/mac-aria2-usage/</link>
+      <pubDate>Sat, 27 Apr 2019 16:36:20 +0000</pubDate>
+      
+      <guid>https://blog.adminchao.com/posts/mac-aria2-usage/</guid>
+      <description>Preface    Every time you download a file you have to pay a protection fee, not to pay the download speed is simply to make the times backwards. Luckily, I found Aria2 by accident. Thank you, gods.
+Installation    Installing Aria2 on Mac is easy
+1  brew install aria2   Usage     Download the file to the default directory aria2c running directory, in this case /Users/your username for Mac  1  aria2c [Download file address]    Download the file to the specified directory  1  aria2c -d [directory] [download file address]    Download file renaming  1  aria2c -o [filename] [download file address]    Download files in segments, between 1 and 5 parts  1  aria2c -s [parts] [download file address]    Breakpoint download  1  aria2c -c [download file address]    Background download  1  aria2c -D [download file address]   Download Baidu cloud file    You need to install a BaiduPan Explorer extension on your Chrome browser to get the real address of your Baidu cloud files</description>
+    </item>
+    
+  </channel>
+</rss>

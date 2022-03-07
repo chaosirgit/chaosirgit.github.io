@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; block-all-mixed-content; default-src 'self'; child-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net/; form-action 'self'; frame-src 'self'; img-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/ https://cdn.jsdelivr.net/; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://cdn.jsdelivr.net/; prefetch-src 'self'; connect-src 'self' https://www.google-analytics.com;">
+
+    
+
+    <meta name="author" content="Ethan Kuo">
+    <meta name="description" content="Preface    Document the process of using WorkerMan or GateWay in Laravel.
+Begin    Installation    1  composer require workerman/gateway-worker   Create command    Use artisan to create a command tool to start WorkerMan because WorkerMan can only be started from the command line.
+1  php artisan make:command WorkerMan   Change the /app/Console/Commands/WorkerMan.php file    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122  &lt;?">
+    <meta name="keywords" content="Laravel,WorkerMan,GateWay,PHP">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Laravel Using WorkerMan(GateWay)"/>
+<meta name="twitter:description" content="Preface    Document the process of using WorkerMan or GateWay in Laravel.
+Begin    Installation    1  composer require workerman/gateway-worker   Create command    Use artisan to create a command tool to start WorkerMan because WorkerMan can only be started from the command line.
+1  php artisan make:command WorkerMan   Change the /app/Console/Commands/WorkerMan.php file    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122  &lt;?"/>
+
+    <meta property="og:title" content="Laravel Using WorkerMan(GateWay)" />
+<meta property="og:description" content="Preface    Document the process of using WorkerMan or GateWay in Laravel.
+Begin    Installation    1  composer require workerman/gateway-worker   Create command    Use artisan to create a command tool to start WorkerMan because WorkerMan can only be started from the command line.
+1  php artisan make:command WorkerMan   Change the /app/Console/Commands/WorkerMan.php file    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122  &lt;?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.adminchao.com/posts/laravel-using-workermangateway/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-07-22T16:30:53+00:00" />
+<meta property="article:modified_time" content="2019-07-22T16:30:53+00:00" />
+
+
+
+    <title>
+  Laravel Using WorkerMan(GateWay) · Ethan Kuo Blog
+</title>
+
+    
+      <link rel="canonical" href="https://blog.adminchao.com/posts/laravel-using-workermangateway/">
+    
+
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css" integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    <meta name="generator" content="Hugo 0.89.1" />
+  </head>
+
+  
+  
+    
+  
+  <body class="preload-transitions colorscheme-dark">
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Ethan Kuo Blog
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="https://blog.adminchao.com/zh-cn/">🇨🇳</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://blog.adminchao.com/posts/laravel-using-workermangateway/">
+              Laravel Using WorkerMan(GateWay)
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2019-07-22T16:30:53Z">
+                2019-07-22 16:30:53
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              10-minute read
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa fa-folder" aria-hidden="true"></i>
+    <a href="/categories/technology/">Technology</a></div>
+
+          <div class="tags">
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/laravel/">Laravel</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/workerman/">WorkerMan</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/gateway/">GateWay</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/php/">PHP</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <h2 id="preface">
+  Preface
+  <a class="heading-link" href="#preface">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<p>Document the process of using WorkerMan or GateWay in Laravel.</p>
+<h2 id="begin">
+  Begin
+  <a class="heading-link" href="#begin">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<h3 id="installation">
+  Installation
+  <a class="heading-link" href="#installation">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">composer require workerman/gateway-worker
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="create-command">
+  Create command
+  <a class="heading-link" href="#create-command">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>Use artisan to create a command tool to start WorkerMan because WorkerMan can only be started from the command line.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">php artisan make:command WorkerMan
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="change-the-appconsolecommandsworkermanphp-file">
+  Change the <code>/app/Console/Commands/WorkerMan.php</code> file
+  <a class="heading-link" href="#change-the-appconsolecommandsworkermanphp-file">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">103
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">104
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">105
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">106
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">107
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">121
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">122
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#ff79c6">&lt;?</span>php
+
+<span style="color:#ff79c6">namespace</span> App\Console\Commands;
+
+<span style="color:#ff79c6">use</span> GatewayWorker\BusinessWorker;
+<span style="color:#ff79c6">use</span> GatewayWorker\Gateway;
+<span style="color:#ff79c6">use</span> GatewayWorker\Register;
+<span style="color:#ff79c6">use</span> Illuminate\Console\Command;
+<span style="color:#ff79c6">use</span> Workerman\Worker;
+
+<span style="color:#ff79c6">class</span> <span style="color:#50fa7b">WorkerMan</span> <span style="color:#ff79c6">extends</span> Command
+{
+    <span style="color:#f1fa8c">/**
+</span><span style="color:#f1fa8c">     * The name and signature of the console command.
+</span><span style="color:#f1fa8c">     *
+</span><span style="color:#f1fa8c">     * @var string
+</span><span style="color:#f1fa8c">     */</span>
+    <span style="color:#ff79c6">protected</span> <span style="color:#8be9fd;font-style:italic">$signature</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;workerman {action} {--d}&#39;</span>;
+
+    <span style="color:#f1fa8c">/**
+</span><span style="color:#f1fa8c">     * The console command description.
+</span><span style="color:#f1fa8c">     *
+</span><span style="color:#f1fa8c">     * @var string
+</span><span style="color:#f1fa8c">     */</span>
+    <span style="color:#ff79c6">protected</span> <span style="color:#8be9fd;font-style:italic">$description</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;Start a Workerman server&#39;</span>;
+
+    <span style="color:#f1fa8c">/**
+</span><span style="color:#f1fa8c">     * Create a new command instance.
+</span><span style="color:#f1fa8c">     *
+</span><span style="color:#f1fa8c">     * @return void
+</span><span style="color:#f1fa8c">     */</span>
+    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">function</span> __construct()
+    {
+        <span style="color:#ff79c6">parent</span><span style="color:#ff79c6">::</span><span style="color:#50fa7b">__construct</span>();
+    }
+
+    <span style="color:#f1fa8c">/**
+</span><span style="color:#f1fa8c">     * Execute the console command.
+</span><span style="color:#f1fa8c">     *
+</span><span style="color:#f1fa8c">     * @return mixed
+</span><span style="color:#f1fa8c">     */</span>
+    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">handle</span>()
+    {
+        <span style="color:#ff79c6">global</span> <span style="color:#8be9fd;font-style:italic">$argv</span>;
+        <span style="color:#8be9fd;font-style:italic">$action</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">argument</span>(<span style="color:#f1fa8c">&#39;action&#39;</span>);
+
+        <span style="color:#8be9fd;font-style:italic">$argv</span>[<span style="color:#bd93f9">0</span>] <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;wk&#39;</span>;
+        <span style="color:#8be9fd;font-style:italic">$argv</span>[<span style="color:#bd93f9">1</span>] <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$action</span>;
+        <span style="color:#8be9fd;font-style:italic">$argv</span>[<span style="color:#bd93f9">2</span>] <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">option</span>(<span style="color:#f1fa8c">&#39;d&#39;</span>) <span style="color:#ff79c6">?</span> <span style="color:#f1fa8c">&#39;-d&#39;</span> <span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;&#39;</span>;
+
+        <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">start</span>();
+    }
+
+    <span style="color:#ff79c6">private</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">start</span>()
+    {
+        <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">startGateWay</span>();
+        <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">startBusinessWorker</span>();
+        <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">startRegister</span>();
+        Worker<span style="color:#ff79c6">::</span><span style="color:#50fa7b">runAll</span>();
+    }
+
+    <span style="color:#6272a4">//BusinessWorker is the process that runs the business logic. BusinessWorker will call onConnect onMessage in Events.php by default when it receives events and requests forwarded by Gateway.
+</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">private</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">startBusinessWorker</span>()
+    {
+        <span style="color:#8be9fd;font-style:italic">$worker</span>                  <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> BusinessWorker();
+        <span style="color:#8be9fd;font-style:italic">$worker</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">name</span>            <span style="color:#ff79c6">=</span> config(<span style="color:#f1fa8c">&#39;gateway.business.name&#39;</span>);        <span style="color:#6272a4">// Set the name of the BusinessWorker process
+</span><span style="color:#6272a4"></span>        <span style="color:#8be9fd;font-style:italic">$worker</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">count</span>           <span style="color:#ff79c6">=</span> config(<span style="color:#f1fa8c">&#39;gateway.business.count&#39;</span>);       <span style="color:#6272a4">// Set the number of BusinessWorker processes
+</span><span style="color:#6272a4"></span>        <span style="color:#8be9fd;font-style:italic">$worker</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">registerAddress</span> <span style="color:#ff79c6">=</span> config(<span style="color:#f1fa8c">&#39;gateway.business.register_address&#39;</span>);  <span style="color:#6272a4">// Register service address - Register with Register process - Internal communication use
+</span><span style="color:#6272a4"></span>        <span style="color:#8be9fd;font-style:italic">$worker</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">eventHandler</span>    <span style="color:#ff79c6">=</span> config(<span style="color:#f1fa8c">&#39;gateway.business.event&#39;</span>);        <span style="color:#6272a4">// Set which class to use to handle the business, the business class should at least implement the onMessage static method, onConnect and onClose static methods can be implemented without
+</span><span style="color:#6272a4"></span>    }
+
+    <span style="color:#ff79c6">private</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">startGateWay</span>()
+    {
+        <span style="color:#8be9fd;font-style:italic">$address</span> <span style="color:#ff79c6">=</span> config(<span style="color:#f1fa8c">&#39;gateway.gateway.address&#39;</span>);
+        <span style="color:#8be9fd;font-style:italic">$port</span>    <span style="color:#ff79c6">=</span> config(<span style="color:#f1fa8c">&#39;gateway.gateway.port&#39;</span>);
+        <span style="color:#6272a4">//Open wss:Certificate preferably applied certificate
+</span><span style="color:#6272a4"></span>        <span style="color:#ff79c6">if</span> (config(<span style="color:#f1fa8c">&#39;gateway.gateway.ssl_open&#39;</span>)) {
+            <span style="color:#f1fa8c">/**
+</span><span style="color:#f1fa8c">             * Workerman version &gt;= 3.3.7
+</span><span style="color:#f1fa8c">             * PHP has the openssl extension installed
+</span><span style="color:#f1fa8c">             * A certificate (pem/crt file and key file) has been applied for and placed in a directory on the disk (location is arbitrary)
+</span><span style="color:#f1fa8c">             * */</span>
+            <span style="color:#8be9fd;font-style:italic">$context</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">array</span>(
+                <span style="color:#6272a4">// For more ssl options, please refer to the manual at http://php.net/manual/zh/context.ssl.php
+</span><span style="color:#6272a4"></span>                <span style="color:#f1fa8c">&#39;ssl&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">array</span>(
+                    <span style="color:#6272a4">// Please use absolute paths
+</span><span style="color:#6272a4"></span>                    <span style="color:#f1fa8c">&#39;local_cert&#39;</span>        <span style="color:#ff79c6">=&gt;</span> config(<span style="color:#f1fa8c">&#39;gateway.gateway.ssl.local_cert&#39;</span>), <span style="color:#6272a4">// It can also be a crt file
+</span><span style="color:#6272a4"></span>                    <span style="color:#f1fa8c">&#39;local_pk&#39;</span>          <span style="color:#ff79c6">=&gt;</span> config(<span style="color:#f1fa8c">&#39;gateway.gateway.ssl.local_pk&#39;</span>),
+                    <span style="color:#f1fa8c">&#39;verify_peer&#39;</span>       <span style="color:#ff79c6">=&gt;</span> config(<span style="color:#f1fa8c">&#39;gateway.gateway.ssl.verify_peer&#39;</span>),
+                    <span style="color:#f1fa8c">&#39;allow_self_signed&#39;</span> <span style="color:#ff79c6">=&gt;</span> config(<span style="color:#f1fa8c">&#39;gateway.gateway.ssl.allow_self_signed&#39;</span>), <span style="color:#6272a4">// This option needs to be turned on if it is a self-signed certificate
+</span><span style="color:#6272a4"></span>                )
+            );
+
+            <span style="color:#6272a4">// Enable SSL, websocket+SSL that is wss websocket protocol (any port, as long as it is not occupied by other programs)
+</span><span style="color:#6272a4"></span>
+            <span style="color:#8be9fd;font-style:italic">$gateway</span>            <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Gateway(<span style="color:#8be9fd;font-style:italic">$address</span> <span style="color:#ff79c6">.</span> <span style="color:#f1fa8c">&#39;:&#39;</span> <span style="color:#ff79c6">.</span> <span style="color:#8be9fd;font-style:italic">$port</span>, <span style="color:#8be9fd;font-style:italic">$context</span>);
+            <span style="color:#8be9fd;font-style:italic">$gateway</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">transport</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;ssl&#39;</span>;
+            <span style="color:#6272a4">//  $gateway = new Gateway(&#34;websocket://0.0.0.0:443&#34;, $context);
+</span><span style="color:#6272a4"></span>        } <span style="color:#ff79c6">else</span> {
+            <span style="color:#8be9fd;font-style:italic">$gateway</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Gateway(<span style="color:#8be9fd;font-style:italic">$address</span> <span style="color:#ff79c6">.</span> <span style="color:#f1fa8c">&#39;:&#39;</span> <span style="color:#ff79c6">.</span> <span style="color:#8be9fd;font-style:italic">$port</span>);
+        }
+
+        <span style="color:#8be9fd;font-style:italic">$gateway</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">name</span>                 <span style="color:#ff79c6">=</span> config(<span style="color:#f1fa8c">&#39;gateway.gateway.name&#39;</span>);    <span style="color:#6272a4">//Set the name of the Gateway process for viewing statistics in the status command
+</span><span style="color:#6272a4"></span>        <span style="color:#8be9fd;font-style:italic">$gateway</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">count</span>                <span style="color:#ff79c6">=</span> config(<span style="color:#f1fa8c">&#39;gateway.gateway.count&#39;</span>);     <span style="color:#6272a4">// Number of processes
+</span><span style="color:#6272a4"></span>        <span style="color:#8be9fd;font-style:italic">$gateway</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">lanIp</span>                <span style="color:#ff79c6">=</span> config(<span style="color:#f1fa8c">&#39;gateway.gateway.lan_ip&#39;</span>);       <span style="color:#6272a4">// intranet ip, you need to fill in the real intranet ip for multi-server distributed deployment
+</span><span style="color:#6272a4"></span>        <span style="color:#8be9fd;font-style:italic">$gateway</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">startPort</span>            <span style="color:#ff79c6">=</span> config(<span style="color:#f1fa8c">&#39;gateway.gateway.start_port&#39;</span>);      <span style="color:#6272a4">//Listen to the start port of the local port
+</span><span style="color:#6272a4"></span>        <span style="color:#8be9fd;font-style:italic">$gateway</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">pingInterval</span>         <span style="color:#ff79c6">=</span> config(<span style="color:#f1fa8c">&#39;gateway.gateway.heart_ping&#39;</span>);        <span style="color:#6272a4">// Heartbeat detection interval Unit: second. If set to 0 means don&#39;t do any heartbeat detection.
+</span><span style="color:#6272a4"></span>        <span style="color:#8be9fd;font-style:italic">$gateway</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">pingNotResponseLimit</span> <span style="color:#ff79c6">=</span> config(<span style="color:#f1fa8c">&#39;gateway.gateway.ping_not&#39;</span>);     <span style="color:#6272a4">// The client does not send any data within $pingNotResponseLimit $pingInterval time in a row, then the link is broken and onClose is triggered. If set to 0, the client does not need to send heartbeat data.
+</span><span style="color:#6272a4"></span>
+        <span style="color:#8be9fd;font-style:italic">$gateway</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">pingData</span>        <span style="color:#ff79c6">=</span> config(<span style="color:#f1fa8c">&#39;gateway.gateway.ping_data&#39;</span>);      <span style="color:#6272a4">// When the server needs to send heartbeat data to the client at regular intervals, $gateway-&gt;pingData is set to the heartbeat request data to be sent by the server, the heartbeat data is arbitrary as long as the client can recognize it.
+</span><span style="color:#6272a4"></span>        <span style="color:#8be9fd;font-style:italic">$gateway</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">registerAddress</span> <span style="color:#ff79c6">=</span> config(<span style="color:#f1fa8c">&#39;gateway.gateway.register_address&#39;</span>);      <span style="color:#6272a4">// Register service address - Register with Register process - Internal communication use
+</span><span style="color:#6272a4"></span>    }
+
+    <span style="color:#f1fa8c">/**
+</span><span style="color:#f1fa8c">     * After the Gateway process and the BusinessWorker process start, they register their communication addresses with the Register process, and after the Gateway process and the BusinessWorker get their communication addresses through the Register process, they can establish a connection and communicate.
+</span><span style="color:#f1fa8c">     */</span>
+    <span style="color:#ff79c6">private</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">startRegister</span>()
+    {
+        <span style="color:#ff79c6">new</span> Register(config(<span style="color:#f1fa8c">&#39;gateway.start.address&#39;</span>));
+    }
+}
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="create-configgatewayphp-file">
+  Create <code>config/gateway.php</code> file
+  <a class="heading-link" href="#create-configgatewayphp-file">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#ff79c6">&lt;?</span>php
+
+
+<span style="color:#ff79c6">return</span> [
+    <span style="color:#6272a4">//BusinessWorker is the process that runs the business logic. BusinessWorker will call onConnect onMessage in Events.php by default when it receives events and requests forwarded by Gateway.
+</span><span style="color:#6272a4"></span>    <span style="color:#f1fa8c">&#39;business&#39;</span> <span style="color:#ff79c6">=&gt;</span> [
+        <span style="color:#6272a4">// Register service address - Register with Register process - Internal communication use
+</span><span style="color:#6272a4"></span>        <span style="color:#f1fa8c">&#39;register_address&#39;</span> <span style="color:#ff79c6">=&gt;</span> env(<span style="color:#f1fa8c">&#39;BUSINESS_REGISTER_ADDRESS&#39;</span>, <span style="color:#f1fa8c">&#39;127.0.0.1:2020&#39;</span>),
+        <span style="color:#6272a4">// Set the name of the BusinessWorker process
+</span><span style="color:#6272a4"></span>        <span style="color:#f1fa8c">&#39;name&#39;</span>             <span style="color:#ff79c6">=&gt;</span> env(<span style="color:#f1fa8c">&#39;BUSINESS_NAME&#39;</span>, <span style="color:#f1fa8c">&#39;BusinessWorker&#39;</span>),
+        <span style="color:#6272a4">// Set the number of BusinessWorker processes
+</span><span style="color:#6272a4"></span>        <span style="color:#f1fa8c">&#39;count&#39;</span>            <span style="color:#ff79c6">=&gt;</span> env(<span style="color:#f1fa8c">&#39;BUSINESS_COUNT&#39;</span>, <span style="color:#bd93f9">2</span>),
+        <span style="color:#6272a4">// Set which class to use to handle the business, the business class should at least implement the onMessage static method, onConnect and onClose static methods can be implemented without
+</span><span style="color:#6272a4"></span>        <span style="color:#f1fa8c">&#39;event&#39;</span>            <span style="color:#ff79c6">=&gt;</span> env(<span style="color:#f1fa8c">&#39;BUSINESS_EVENT&#39;</span>, \App\Workerman\Events<span style="color:#ff79c6">::</span><span style="color:#50fa7b">class</span>),
+    ],
+    <span style="color:#f1fa8c">&#39;gateway&#39;</span>  <span style="color:#ff79c6">=&gt;</span> [
+        <span style="color:#f1fa8c">/**
+</span><span style="color:#f1fa8c">         * Workerman version &gt;= 3.3.7
+</span><span style="color:#f1fa8c">         * PHP has the openssl extension installed
+</span><span style="color:#f1fa8c">         * A certificate (pem/crt file and key file) has been applied for and placed in a directory on the disk (location is arbitrary)
+</span><span style="color:#f1fa8c">         * For more ssl options, please refer to the manual at http://php.net/manual/zh/context.ssl.php
+</span><span style="color:#f1fa8c">         */</span>
+
+        <span style="color:#6272a4">//Default off SSL, on need to configure ssl content
+</span><span style="color:#6272a4"></span>        <span style="color:#f1fa8c">&#39;ssl_open&#39;</span> <span style="color:#ff79c6">=&gt;</span> env(<span style="color:#f1fa8c">&#39;GATEWAY_SSL&#39;</span>, <span style="color:#ff79c6">false</span>),
+        <span style="color:#f1fa8c">&#39;ssl&#39;</span>      <span style="color:#ff79c6">=&gt;</span> [
+            <span style="color:#6272a4">// The disk path /server.pem can also be a crt file
+</span><span style="color:#6272a4"></span>            <span style="color:#f1fa8c">&#39;local_cert&#39;</span> <span style="color:#ff79c6">=&gt;</span> env(<span style="color:#f1fa8c">&#39;GATEWAY_SSL_LOCAL_CERT&#39;</span>, <span style="color:#f1fa8c">&#39;&#39;</span>),
+            <span style="color:#6272a4">// Disk path /server.key
+</span><span style="color:#6272a4"></span>            <span style="color:#f1fa8c">&#39;local_pk&#39;</span>   <span style="color:#ff79c6">=&gt;</span> env(<span style="color:#f1fa8c">&#39;GATEWAY_SSL_LOCAL_PK&#39;</span>, <span style="color:#f1fa8c">&#39;&#39;</span>),
+
+            <span style="color:#f1fa8c">&#39;verify_peer&#39;</span>       <span style="color:#ff79c6">=&gt;</span> env(<span style="color:#f1fa8c">&#39;GATEWAY_VERIFY_PEER&#39;</span>, <span style="color:#ff79c6">false</span>),
+            <span style="color:#6272a4">//If it is a self-signed certificate, you need to turn on this option
+</span><span style="color:#6272a4"></span>            <span style="color:#f1fa8c">&#39;allow_self_signed&#39;</span> <span style="color:#ff79c6">=&gt;</span> env(<span style="color:#f1fa8c">&#39;GATEWAY_SELF_SIGNED&#39;</span>, <span style="color:#ff79c6">false</span>),
+        ],
+
+        <span style="color:#f1fa8c">&#39;address&#39;</span>          <span style="color:#ff79c6">=&gt;</span> env(<span style="color:#f1fa8c">&#39;GATEWAY_ADDRESS&#39;</span>, <span style="color:#f1fa8c">&#39;websocket://0.0.0.0&#39;</span>),
+        <span style="color:#6272a4">//websocket protocol Port
+</span><span style="color:#6272a4"></span>        <span style="color:#f1fa8c">&#39;port&#39;</span>             <span style="color:#ff79c6">=&gt;</span> env(<span style="color:#f1fa8c">&#39;GATEWAY_PORT&#39;</span>, <span style="color:#f1fa8c">&#39;2021&#39;</span>),
+        <span style="color:#6272a4">//Enable SSL, websocket+SSL that is wss websocket protocol (any port, as long as it is not occupied by other programs)
+</span><span style="color:#6272a4"></span>        <span style="color:#6272a4">//&#39;address&#39; =&gt; env(&#39;GATEWAY_ADDRESS&#39;,&#39;websocket://0.0.0.0:443&#39;)
+</span><span style="color:#6272a4"></span>
+        <span style="color:#6272a4">//Set the name of the Gateway process for viewing statistics in the status command
+</span><span style="color:#6272a4"></span>        <span style="color:#f1fa8c">&#39;name&#39;</span>             <span style="color:#ff79c6">=&gt;</span> env(<span style="color:#f1fa8c">&#39;GATEWAY_NAME&#39;</span>, <span style="color:#f1fa8c">&#39;Gateway&#39;</span>),
+        <span style="color:#6272a4">//Number of processes
+</span><span style="color:#6272a4"></span>        <span style="color:#f1fa8c">&#39;count&#39;</span>            <span style="color:#ff79c6">=&gt;</span> env(<span style="color:#f1fa8c">&#39;GATEWAY_COUNT&#39;</span>, <span style="color:#bd93f9">2</span>),
+        <span style="color:#6272a4">//Internal network ip, when multi-server distributed deployment need to fill in the real internal network ip
+</span><span style="color:#6272a4"></span>        <span style="color:#f1fa8c">&#39;lan_ip&#39;</span>           <span style="color:#ff79c6">=&gt;</span> env(<span style="color:#f1fa8c">&#39;GATEWAY_LAN_IP&#39;</span>, <span style="color:#f1fa8c">&#39;127.0.0.1&#39;</span>),
+        <span style="color:#6272a4">//Start port for listening to the local port
+</span><span style="color:#6272a4"></span>        <span style="color:#f1fa8c">&#39;start_port&#39;</span>       <span style="color:#ff79c6">=&gt;</span> env(<span style="color:#f1fa8c">&#39;GATEWAY_START_PORT&#39;</span>, <span style="color:#bd93f9">2010</span>),
+        <span style="color:#6272a4">//Heartbeat detection interval Unit: second. If set to 0 means don&#39;t do any heartbeat detection.
+</span><span style="color:#6272a4"></span>        <span style="color:#f1fa8c">&#39;heart_ping&#39;</span>       <span style="color:#ff79c6">=&gt;</span> env(<span style="color:#f1fa8c">&#39;GATEWAY_HEART_PING&#39;</span>, <span style="color:#bd93f9">30</span>),
+        <span style="color:#6272a4">//If the client does not send any data for a consecutive ping_not times heart_ping time, the link is disconnected and onClose is triggered. If set to 0, the client does not need to send heartbeat data.
+</span><span style="color:#6272a4"></span>        <span style="color:#f1fa8c">&#39;ping_not&#39;</span>         <span style="color:#ff79c6">=&gt;</span> env(<span style="color:#f1fa8c">&#39;GATEWAY_PING_NOT&#39;</span>, <span style="color:#bd93f9">0</span>),
+        <span style="color:#6272a4">//When the server needs to send heartbeat data to the client at regular intervals, $gateway-&gt;pingData is set to the heartbeat request data to be sent by the server, and the heartbeat data is arbitrary as long as the client can recognize it.
+</span><span style="color:#6272a4"></span>        <span style="color:#f1fa8c">&#39;ping_data&#39;</span>        <span style="color:#ff79c6">=&gt;</span> env(<span style="color:#f1fa8c">&#39;GATEWAY_PING_DATA&#39;</span>, <span style="color:#f1fa8c">&#39;{&#34;type&#34;:&#34;@heart@&#34;}&#39;</span>),
+        <span style="color:#6272a4">//Register service address - Register with Register process - Internal communication use
+</span><span style="color:#6272a4"></span>        <span style="color:#f1fa8c">&#39;register_address&#39;</span> <span style="color:#ff79c6">=&gt;</span> env(<span style="color:#f1fa8c">&#39;GATEWAY_REGISTER_ADDRESS&#39;</span>, <span style="color:#f1fa8c">&#39;127.0.0.1:2020&#39;</span>),
+    ],
+    <span style="color:#f1fa8c">&#39;start&#39;</span>    <span style="color:#ff79c6">=&gt;</span> [
+        <span style="color:#6272a4">//After the Gateway process and the BusinessWorker process start, they register their communication addresses with the Register process, and after the Gateway process and the BusinessWorker get their communication addresses through the Register process, they can establish a connection and communicate.
+</span><span style="color:#6272a4"></span>        <span style="color:#f1fa8c">&#39;address&#39;</span> <span style="color:#ff79c6">=&gt;</span> env(<span style="color:#f1fa8c">&#39;GATEWAY_START_ADDRESS&#39;</span>, <span style="color:#f1fa8c">&#39;text://0.0.0.0:2020&#39;</span>),
+    ],
+];
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="create-listening-file">
+  Create Listening File
+  <a class="heading-link" href="#create-listening-file">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>Create the \App\Workerman\Events.php` file</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">66
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#ff79c6">&lt;?</span>php
+
+<span style="color:#ff79c6">namespace</span> App\Workerman;
+
+
+<span style="color:#ff79c6">use</span> GatewayWorker\Lib\Gateway;
+<span style="color:#ff79c6">use</span> Illuminate\Support\Facades\Log;
+<span style="color:#ff79c6">use</span> Workerman\Lib\Timer;
+
+<span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Events</span>
+{
+    <span style="color:#f1fa8c">/**
+</span><span style="color:#f1fa8c">     * Triggered when the businessWorker process starts. It will only be triggered once during the life of each process.
+</span><span style="color:#f1fa8c">     * @param $businessWorker businessWorker 
+</span><span style="color:#f1fa8c">     */</span>
+    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">static</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">onWorkerStart</span>(<span style="color:#8be9fd;font-style:italic">$businessWorker</span>)
+    {
+    }
+
+    <span style="color:#f1fa8c">/**
+</span><span style="color:#f1fa8c">     * Callback function triggered when the client connects to the gateway process (when the three TCP handshakes are completed).
+</span><span style="color:#f1fa8c"> * @param $client_id A fixed 20-character string used to globally mark a socket connection, each client connection is assigned a globally unique client_id.
+</span><span style="color:#f1fa8c">     * If the client_id is disconnected, then the client_id is invalid. When the client connects to Gateway again, it will be given a new client_id.
+</span><span style="color:#f1fa8c">     * client_id and the client socket connection lifecycle are the same.
+</span><span style="color:#f1fa8c">     * Once the client_id has been used, it will not be used again, meaning that the client_id will not be duplicated, even in distributed deployments.
+</span><span style="color:#f1fa8c">     * As long as the client_id is available and the corresponding client is online, you can call methods such as Gateway::sendToClient($client_id, $data) to send data to this client.
+</span><span style="color:#f1fa8c">     */</span>
+    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">static</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">onConnect</span>(<span style="color:#8be9fd;font-style:italic">$client_id</span>)
+    {
+<span style="color:#6272a4">//        Gateway::sendToCurrentClient(&#34;Your client_id is $client_id&#34;);
+</span><span style="color:#6272a4"></span>        Gateway<span style="color:#ff79c6">::</span><span style="color:#50fa7b">sendToClient</span>(<span style="color:#8be9fd;font-style:italic">$client_id</span>, json_encode(<span style="color:#ff79c6">array</span>(
+            <span style="color:#f1fa8c">&#39;type&#39;</span>      <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;init&#39;</span>,
+            <span style="color:#f1fa8c">&#39;client_id&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#8be9fd;font-style:italic">$client_id</span>
+        )));
+    }
+
+    <span style="color:#f1fa8c">/**
+</span><span style="color:#f1fa8c">     * Callback function triggered when the client connects to the gateway to complete the websocket handshake.
+</span><span style="color:#f1fa8c">     * Note: This callback is only valid if gateway is websocket protocol and gateway is not set onWebSocketConnect.
+</span><span style="color:#f1fa8c">     * @param $client_id Fixed 20-character string to globally mark a socket connection, each client connection will be assigned a globally unique client_id.
+</span><span style="color:#f1fa8c">     * @param $data http header data for websocket handshake, contains variables like get, server, etc.
+</span><span style="color:#f1fa8c">     */</span>
+    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">static</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">onWebSocketConnect</span>(<span style="color:#8be9fd;font-style:italic">$client_id</span>, <span style="color:#8be9fd;font-style:italic">$data</span>)
+    {
+    }
+
+    <span style="color:#f1fa8c">/**
+</span><span style="color:#f1fa8c">     * Callback function triggered when the client sends data (and the Gateway process receives it)
+</span><span style="color:#f1fa8c">     * @param $client_id Global unique client socket connection identifier
+</span><span style="color:#f1fa8c">     * @param $message complete client request data, the data type depends on the type of return value returned by the decode method of the protocol Gateway uses
+</span><span style="color:#f1fa8c">     */</span>
+    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">static</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">onMessage</span>(<span style="color:#8be9fd;font-style:italic">$client_id</span>, <span style="color:#8be9fd;font-style:italic">$message</span>)
+    {
+        
+    }
+
+    <span style="color:#f1fa8c">/**
+</span><span style="color:#f1fa8c">     * Triggered when the connection between the client and the Gateway process is disconnected. This callback is triggered whether the disconnection is initiated by the client or by the server. Usually some data cleanup is done here.
+</span><span style="color:#f1fa8c">     * Note: you can&#39;t use Gateway::getSession() to get the session data of the current user in onClose callback, but you can still use $_SESSION variable to get it.
+</span><span style="color:#f1fa8c">     * Note: you cannot use Gateway::getUidByClientId() interface to get uid in onClose callback. The solution is to record a $_SESSION[&#39;uid&#39;] in Gateway::bindUid() and use $_SESSION[&#39;uid&#39;] when onClose to get uid.
+</span><span style="color:#f1fa8c">     * Note: Extreme cases such as network disconnection and power failure may not trigger the onClose callback in time, because in this case the client is too late to send the disconnection packet (fin packet) to the server, and the server will not know that the connection has been disconnected. To detect this extreme case, heartbeat detection is required and $gateway-&gt;pingNotResponseLimit&gt;0 must be set. This extreme case of disconnection and power loss will delay the onClose callback to a time less than $gateway-&gt;pingInterval*$gateway-&gt;pingNotResponseLimit&gt;0. pingNotResponseLimit seconds, or possibly infinite if either $gateway-&gt;pingInterval and $gateway-&gt;pingNotResponseLimit is 0.
+</span><span style="color:#f1fa8c">     * @param $client_id Globally unique client_id
+</span><span style="color:#f1fa8c">     */</span>
+    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">static</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">onClose</span>(<span style="color:#8be9fd;font-style:italic">$client_id</span>)
+    {
+
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="start-the-workerman-server">
+  Start the WorkerMan server
+  <a class="heading-link" href="#start-the-workerman-server">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>The supported commands are start|stop|restart, where -d means daemon mode.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">php artisan workman start -d
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="test">
+  Test
+  <a class="heading-link" href="#test">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>Open debug mode in your browser at F12 and type in the Console</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#6272a4">// Open a WebSocket:
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">var</span> ws <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> WebSocket(<span style="color:#f1fa8c">&#39;ws://localhost:2020&#39;</span>);
+<span style="color:#6272a4">// Respond to the onmessage event:
+</span><span style="color:#6272a4"></span>ws.onmessage <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">function</span>(msg) {
+                    console.log(msg); 
+               };
+<span style="color:#6272a4">// Send a string to the server:
+</span><span style="color:#6272a4"></span>ws.send(<span style="color:#f1fa8c">&#39;Hello!&#39;</span>);
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="the-code-uses">
+  The code uses
+  <a class="heading-link" href="#the-code-uses">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#ff79c6">&lt;?</span>php
+    <span style="color:#ff79c6">use</span> GatewayWorker\Lib\Gateway;
+    
+            Gateway<span style="color:#ff79c6">::</span><span style="color:#8be9fd;font-style:italic">$registerAddress</span> <span style="color:#ff79c6">=</span> config(<span style="color:#f1fa8c">&#39;gateway.gateway.register_address&#39;</span>);
+            Gateway<span style="color:#ff79c6">::</span><span style="color:#50fa7b">bindUid</span>(<span style="color:#8be9fd;font-style:italic">$client_id</span>,<span style="color:#8be9fd;font-style:italic">$user_id</span>);
+            
+            
+</code></pre></td></tr></table>
+</div>
+</div>
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2022
+     Ethan Kuo 
+    ·
+    
+    Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+      
+      <script src="/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js" integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NK08XEDHKZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NK08XEDHKZ');
+</script>
+  </body>
+
+</html>

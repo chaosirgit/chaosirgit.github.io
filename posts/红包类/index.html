@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; block-all-mixed-content; default-src 'self'; child-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net/; form-action 'self'; frame-src 'self'; img-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/ https://cdn.jsdelivr.net/; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://cdn.jsdelivr.net/; prefetch-src 'self'; connect-src 'self' https://www.google-analytics.com;">
+
+    
+
+    <meta name="author" content="Ethan Kuo">
+    <meta name="description" content="前言    照搬了别人写的红包类，感觉挺好用。原文地址在注释里。特此记录
+代码    &lt;?php namespace App\Utils; /** * 红包分配算法 * * example * $coupon = new Coupon(200, 5); * $res = $coupon-&gt;handle(); * print_r($res); * * @author Flc &lt;2018-04-06 20:09:53&gt; * @see http://flc.ren | http://flc.io | https://github.com/flc1125 */ class Coupon { /** * 红包金额 * * @var float */ protected $amount; /** * 红包个数 * * @var int */ protected $num; /** * 领取的红包最小金额 * * @var float */ protected $coupon_min; /** * 红包分配结果 * * @var array */ protected $items = []; /** * 初始化 * * @param float $amount 红包金额（单位：元）最多保留2位小数 * @param int $num 红包个数 * @param float $coupon_min 每个至少领取的红包金额 */ public function __construct($amount, $num = 1, $coupon_min = 0.">
+    <meta name="keywords" content="php,红包">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="红包类"/>
+<meta name="twitter:description" content="前言    照搬了别人写的红包类，感觉挺好用。原文地址在注释里。特此记录
+代码    &lt;?php namespace App\Utils; /** * 红包分配算法 * * example * $coupon = new Coupon(200, 5); * $res = $coupon-&gt;handle(); * print_r($res); * * @author Flc &lt;2018-04-06 20:09:53&gt; * @see http://flc.ren | http://flc.io | https://github.com/flc1125 */ class Coupon { /** * 红包金额 * * @var float */ protected $amount; /** * 红包个数 * * @var int */ protected $num; /** * 领取的红包最小金额 * * @var float */ protected $coupon_min; /** * 红包分配结果 * * @var array */ protected $items = []; /** * 初始化 * * @param float $amount 红包金额（单位：元）最多保留2位小数 * @param int $num 红包个数 * @param float $coupon_min 每个至少领取的红包金额 */ public function __construct($amount, $num = 1, $coupon_min = 0."/>
+
+    <meta property="og:title" content="红包类" />
+<meta property="og:description" content="前言    照搬了别人写的红包类，感觉挺好用。原文地址在注释里。特此记录
+代码    &lt;?php namespace App\Utils; /** * 红包分配算法 * * example * $coupon = new Coupon(200, 5); * $res = $coupon-&gt;handle(); * print_r($res); * * @author Flc &lt;2018-04-06 20:09:53&gt; * @see http://flc.ren | http://flc.io | https://github.com/flc1125 */ class Coupon { /** * 红包金额 * * @var float */ protected $amount; /** * 红包个数 * * @var int */ protected $num; /** * 领取的红包最小金额 * * @var float */ protected $coupon_min; /** * 红包分配结果 * * @var array */ protected $items = []; /** * 初始化 * * @param float $amount 红包金额（单位：元）最多保留2位小数 * @param int $num 红包个数 * @param float $coupon_min 每个至少领取的红包金额 */ public function __construct($amount, $num = 1, $coupon_min = 0." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.adminchao.com/posts/%E7%BA%A2%E5%8C%85%E7%B1%BB/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-03-16T10:39:09+00:00" />
+<meta property="article:modified_time" content="2019-03-16T10:39:09+00:00" />
+
+
+
+    <title>
+  红包类 · Ethan Kuo Blog
+</title>
+
+    
+      <link rel="canonical" href="https://blog.adminchao.com/posts/%E7%BA%A2%E5%8C%85%E7%B1%BB/">
+    
+
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css" integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    <meta name="generator" content="Hugo 0.89.1" />
+  </head>
+
+  
+  
+    
+  
+  <body class="preload-transitions colorscheme-auto">
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Ethan Kuo Blog
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="https://blog.adminchao.com/zh-cn/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://blog.adminchao.com/posts/%E7%BA%A2%E5%8C%85%E7%B1%BB/">
+              红包类
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2019-03-16T10:39:09Z">
+                2019-03-16 10:39:09
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              2-minute read
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa fa-folder" aria-hidden="true"></i>
+    <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></div>
+
+          <div class="tags">
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/php/">php</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/%E7%BA%A2%E5%8C%85/">红包</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <h2 id="前言">
+  前言
+  <a class="heading-link" href="#%e5%89%8d%e8%a8%80">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<p>照搬了别人写的红包类，感觉挺好用。原文地址在注释里。特此记录</p>
+<h2 id="代码">
+  代码
+  <a class="heading-link" href="#%e4%bb%a3%e7%a0%81">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+
+<span style="font-weight:bold">namespace</span> App\Utils;
+<span style="font-style:italic">/**
+</span><span style="font-style:italic"> * 红包分配算法
+</span><span style="font-style:italic"> *
+</span><span style="font-style:italic"> * example
+</span><span style="font-style:italic"> *      $coupon = new Coupon(200, 5);
+</span><span style="font-style:italic"> *      $res = $coupon-&gt;handle();
+</span><span style="font-style:italic"> *      print_r($res);
+</span><span style="font-style:italic"> *
+</span><span style="font-style:italic"> * @author Flc &lt;2018-04-06 20:09:53&gt;
+</span><span style="font-style:italic"> * @see http://flc.ren | http://flc.io | https://github.com/flc1125
+</span><span style="font-style:italic"> */</span>
+<span style="font-weight:bold">class</span> <span style="font-weight:bold">Coupon</span>
+{
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * 红包金额
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @var float
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">protected</span> $amount;
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * 红包个数
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @var int
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">protected</span> $num;
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * 领取的红包最小金额
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @var float
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">protected</span> $coupon_min;
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * 红包分配结果
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @var array
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">protected</span> $items = [];
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * 初始化
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @param float $amount     红包金额（单位：元）最多保留2位小数
+</span><span style="font-style:italic">     * @param int   $num        红包个数
+</span><span style="font-style:italic">     * @param float $coupon_min 每个至少领取的红包金额
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">public</span> <span style="font-weight:bold">function</span> __construct($amount, $num = 1, $coupon_min = 0.01)
+    {
+        $this-&gt;amount = $amount;
+        $this-&gt;num = $num;
+        $this-&gt;coupon_min = $coupon_min;
+    }
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * 处理返回
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @return array
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">public</span> <span style="font-weight:bold">function</span> handle()
+    {
+        <span style="font-style:italic">// A. 验证
+</span><span style="font-style:italic"></span>        <span style="font-weight:bold">if</span> ($this-&gt;amount &lt; $validAmount = $this-&gt;coupon_min * $this-&gt;num) {
+            <span style="font-weight:bold">throw</span> <span style="font-weight:bold">new</span> \Exception(<span style="font-style:italic">&#39;红包总金额必须≥&#39;</span>.$validAmount.<span style="font-style:italic">&#39;元&#39;</span>);
+        }
+
+        <span style="font-style:italic">// B. 分配红包
+</span><span style="font-style:italic"></span>        $this-&gt;apportion();
+
+        <span style="font-weight:bold">return</span> [
+            <span style="font-style:italic">&#39;items&#39;</span> =&gt; $this-&gt;items,
+        ];
+    }
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * 分配红包
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">protected</span> <span style="font-weight:bold">function</span> apportion()
+    {
+        $num = $this-&gt;num;  <span style="font-style:italic">// 剩余可分配的红包个数
+</span><span style="font-style:italic"></span>        $amount = $this-&gt;amount;  <span style="font-style:italic">//剩余可领取的红包金额
+</span><span style="font-style:italic"></span>
+        <span style="font-weight:bold">while</span> ($num &gt;= 1) {
+            <span style="font-style:italic">// 剩余一个的时候，直接取剩余红包
+</span><span style="font-style:italic"></span>            <span style="font-weight:bold">if</span> ($num == 1) {
+                $coupon_amount = $this-&gt;decimal_number($amount);
+            } <span style="font-weight:bold">else</span> {
+                $avg_amount = $this-&gt;decimal_number($amount / $num);  <span style="font-style:italic">// 剩余的红包的平均金额
+</span><span style="font-style:italic"></span>
+                $coupon_amount = $this-&gt;decimal_number(
+                    $this-&gt;calcCouponAmount($avg_amount, $amount, $num)
+                );
+            }
+
+            $this-&gt;items[] = $coupon_amount; <span style="font-style:italic">// 追加分配
+</span><span style="font-style:italic"></span>
+            $amount -= $coupon_amount;
+            --$num;
+        }
+
+        shuffle($this-&gt;items);  <span style="font-style:italic">//随机打乱
+</span><span style="font-style:italic"></span>    }
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * 计算分配的红包金额
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @param float $avg_amount 每次计算的平均金额
+</span><span style="font-style:italic">     * @param float $amount     剩余可领取金额
+</span><span style="font-style:italic">     * @param int   $num        剩余可领取的红包个数
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @return float
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">protected</span> <span style="font-weight:bold">function</span> calcCouponAmount($avg_amount, $amount, $num)
+    {
+        <span style="font-style:italic">// 如果平均金额小于等于最低金额，则直接返回最低金额
+</span><span style="font-style:italic"></span>        <span style="font-weight:bold">if</span> ($avg_amount &lt;= $this-&gt;coupon_min) {
+            <span style="font-weight:bold">return</span> $this-&gt;coupon_min;
+        }
+
+        <span style="font-style:italic">// 浮动计算
+</span><span style="font-style:italic"></span>        $coupon_amount = $this-&gt;decimal_number($avg_amount * (1 + $this-&gt;apportionRandRatio()));
+
+        <span style="font-style:italic">// 如果低于最低金额或超过可领取的最大金额，则重新获取
+</span><span style="font-style:italic"></span>        <span style="font-weight:bold">if</span> ($coupon_amount &lt; $this-&gt;coupon_min
+            || $coupon_amount &gt; $this-&gt;calcCouponAmountMax($amount, $num)
+        ) {
+            <span style="font-weight:bold">return</span> $this-&gt;calcCouponAmount($avg_amount, $amount, $num);
+        }
+
+        <span style="font-weight:bold">return</span> $coupon_amount;
+    }
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * 计算分配的红包金额-可领取的最大金额
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @param float $amount
+</span><span style="font-style:italic">     * @param int   $num
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">protected</span> <span style="font-weight:bold">function</span> calcCouponAmountMax($amount, $num)
+    {
+        <span style="font-weight:bold">return</span> $this-&gt;coupon_min + $amount - $num * $this-&gt;coupon_min;
+    }
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * 红包金额浮动比例
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">protected</span> <span style="font-weight:bold">function</span> apportionRandRatio()
+    {
+        <span style="font-style:italic">// 60%机率获取剩余平均值的大幅度红包（可能正数、可能负数）
+</span><span style="font-style:italic"></span>        <span style="font-weight:bold">if</span> (rand(1, 100) &lt;= 60) {
+            <span style="font-weight:bold">return</span> rand(-70, 70) / 100; <span style="font-style:italic">// 上下幅度70%
+</span><span style="font-style:italic"></span>        }
+
+        <span style="font-weight:bold">return</span> rand(-30, 30) / 100; <span style="font-style:italic">// 其他情况，上下浮动30%；
+</span><span style="font-style:italic"></span>    }
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * 格式化金额，保留2位
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @param float $amount
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @return float
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">protected</span> <span style="font-weight:bold">function</span> decimal_number($amount)
+    {
+        <span style="font-weight:bold">return</span> sprintf(<span style="font-style:italic">&#39;%01.2f&#39;</span>, round($amount, 2));
+    }
+}
+
+<span style="font-style:italic">// 例子
+</span><span style="font-style:italic">//$coupon = new Coupon(200, 5, 30);
+</span><span style="font-style:italic">//$res = $coupon-&gt;handle();
+</span><span style="font-style:italic">//print_r($res);
+</span></code></pre></div>
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2022
+     Ethan Kuo 
+    ·
+    
+    Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+      
+      <script src="/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js" integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </body>
+
+</html>

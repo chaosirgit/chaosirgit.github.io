@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; block-all-mixed-content; default-src 'self'; child-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net/; form-action 'self'; frame-src 'self'; img-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/ https://cdn.jsdelivr.net/; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://cdn.jsdelivr.net/; prefetch-src 'self'; connect-src 'self' https://www.google-analytics.com;">
+
+    
+
+    <meta name="author" content="Ethan Kuo">
+    <meta name="description" content="前言    修改百度编辑器多图上传为七牛云 百度编辑器版本为 1.4.3
+开始    修改 ueditor/1.4.3/php/config.json 配置文件    { /* 上传图片配置项 */ &#34;imageUrl&#34;: &#34;https://up-z2.qiniup.com/&#34;, /* 七牛云上传接口 */ &#34;imageActionName&#34;: &#34;uploadimage&#34;, /* 执行上传图片的action名称 */ &#34;imageFieldName&#34;: &#34;file&#34;, /* 提交的图片表单名称 这里修改为file 七牛云接收参数名不是file报错 */ &#34;imageMaxSize&#34;: 5242880, /* 上传大小限制，单位B */ &#34;imageAllowFiles&#34;: [&#34;.png&#34;, &#34;.jpg&#34;, &#34;.jpeg&#34;, &#34;.gif&#34;, &#34;.bmp&#34;], /* 上传图片格式显示 */ &#34;imageCompressEnable&#34;: true, /* 是否压缩图片,默认是true */ &#34;imageCompressBorder&#34;: 1600, /* 图片压缩最长边限制 */ &#34;imageInsertAlign&#34;: &#34;none&#34;, /* 插入的图片浮动方式 */ &#34;imageUrlPrefix&#34;: &#34;&#34;, /* 图片访问路径前缀 */ &#34;imagePathFormat&#34;: &#34;/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}&#34; /* 上传保存路径,可以自定义保存路径和文件名格式 */ } 修改 ueditor/1.">
+    <meta name="keywords" content="UEditor,qiniu,图片上传,百度编辑器">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="百度编辑器多图上传改为七牛云"/>
+<meta name="twitter:description" content="前言    修改百度编辑器多图上传为七牛云 百度编辑器版本为 1.4.3
+开始    修改 ueditor/1.4.3/php/config.json 配置文件    { /* 上传图片配置项 */ &#34;imageUrl&#34;: &#34;https://up-z2.qiniup.com/&#34;, /* 七牛云上传接口 */ &#34;imageActionName&#34;: &#34;uploadimage&#34;, /* 执行上传图片的action名称 */ &#34;imageFieldName&#34;: &#34;file&#34;, /* 提交的图片表单名称 这里修改为file 七牛云接收参数名不是file报错 */ &#34;imageMaxSize&#34;: 5242880, /* 上传大小限制，单位B */ &#34;imageAllowFiles&#34;: [&#34;.png&#34;, &#34;.jpg&#34;, &#34;.jpeg&#34;, &#34;.gif&#34;, &#34;.bmp&#34;], /* 上传图片格式显示 */ &#34;imageCompressEnable&#34;: true, /* 是否压缩图片,默认是true */ &#34;imageCompressBorder&#34;: 1600, /* 图片压缩最长边限制 */ &#34;imageInsertAlign&#34;: &#34;none&#34;, /* 插入的图片浮动方式 */ &#34;imageUrlPrefix&#34;: &#34;&#34;, /* 图片访问路径前缀 */ &#34;imagePathFormat&#34;: &#34;/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}&#34; /* 上传保存路径,可以自定义保存路径和文件名格式 */ } 修改 ueditor/1."/>
+
+    <meta property="og:title" content="百度编辑器多图上传改为七牛云" />
+<meta property="og:description" content="前言    修改百度编辑器多图上传为七牛云 百度编辑器版本为 1.4.3
+开始    修改 ueditor/1.4.3/php/config.json 配置文件    { /* 上传图片配置项 */ &#34;imageUrl&#34;: &#34;https://up-z2.qiniup.com/&#34;, /* 七牛云上传接口 */ &#34;imageActionName&#34;: &#34;uploadimage&#34;, /* 执行上传图片的action名称 */ &#34;imageFieldName&#34;: &#34;file&#34;, /* 提交的图片表单名称 这里修改为file 七牛云接收参数名不是file报错 */ &#34;imageMaxSize&#34;: 5242880, /* 上传大小限制，单位B */ &#34;imageAllowFiles&#34;: [&#34;.png&#34;, &#34;.jpg&#34;, &#34;.jpeg&#34;, &#34;.gif&#34;, &#34;.bmp&#34;], /* 上传图片格式显示 */ &#34;imageCompressEnable&#34;: true, /* 是否压缩图片,默认是true */ &#34;imageCompressBorder&#34;: 1600, /* 图片压缩最长边限制 */ &#34;imageInsertAlign&#34;: &#34;none&#34;, /* 插入的图片浮动方式 */ &#34;imageUrlPrefix&#34;: &#34;&#34;, /* 图片访问路径前缀 */ &#34;imagePathFormat&#34;: &#34;/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}&#34; /* 上传保存路径,可以自定义保存路径和文件名格式 */ } 修改 ueditor/1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.adminchao.com/posts/%E7%99%BE%E5%BA%A6%E7%BC%96%E8%BE%91%E5%99%A8%E5%A4%9A%E5%9B%BE%E4%B8%8A%E4%BC%A0%E6%94%B9%E4%B8%BA%E4%B8%83%E7%89%9B%E4%BA%91/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-05-22T13:00:10+00:00" />
+<meta property="article:modified_time" content="2019-05-22T13:00:10+00:00" />
+
+
+
+    <title>
+  百度编辑器多图上传改为七牛云 · Ethan Kuo Blog
+</title>
+
+    
+      <link rel="canonical" href="https://blog.adminchao.com/posts/%E7%99%BE%E5%BA%A6%E7%BC%96%E8%BE%91%E5%99%A8%E5%A4%9A%E5%9B%BE%E4%B8%8A%E4%BC%A0%E6%94%B9%E4%B8%BA%E4%B8%83%E7%89%9B%E4%BA%91/">
+    
+
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css" integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    <meta name="generator" content="Hugo 0.89.1" />
+  </head>
+
+  
+  
+    
+  
+  <body class="preload-transitions colorscheme-auto">
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Ethan Kuo Blog
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="https://blog.adminchao.com/zh-cn/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://blog.adminchao.com/posts/%E7%99%BE%E5%BA%A6%E7%BC%96%E8%BE%91%E5%99%A8%E5%A4%9A%E5%9B%BE%E4%B8%8A%E4%BC%A0%E6%94%B9%E4%B8%BA%E4%B8%83%E7%89%9B%E4%BA%91/">
+              百度编辑器多图上传改为七牛云
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2019-05-22T13:00:10Z">
+                2019-05-22 13:00:10
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              2-minute read
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa fa-folder" aria-hidden="true"></i>
+    <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></div>
+
+          <div class="tags">
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/ueditor/">UEditor</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/qiniu/">qiniu</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0/">图片上传</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <h2 id="前言">
+  前言
+  <a class="heading-link" href="#%e5%89%8d%e8%a8%80">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<p>修改百度编辑器多图上传为七牛云 百度编辑器版本为 1.4.3</p>
+<h2 id="开始">
+  开始
+  <a class="heading-link" href="#%e5%bc%80%e5%a7%8b">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<h3 id="修改-ueditor143phpconfigjson-配置文件">
+  修改 <code>ueditor/1.4.3/php/config.json</code> 配置文件
+  <a class="heading-link" href="#%e4%bf%ae%e6%94%b9-ueditor143phpconfigjson-%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="">/*</span> <span style="">上传图片配置项</span> <span style="">*/</span>
+    <span style="font-weight:bold">&#34;imageUrl&#34;</span>: <span style="font-style:italic">&#34;https://up-z2.qiniup.com/&#34;</span>,  <span style="">/*</span> <span style="">七牛云上传接口</span> <span style="">*/</span>
+    <span style="font-weight:bold">&#34;imageActionName&#34;</span>: <span style="font-style:italic">&#34;uploadimage&#34;</span>, <span style="">/*</span> <span style="">执行上传图片的action名称</span> <span style="">*/</span>
+    <span style="font-weight:bold">&#34;imageFieldName&#34;</span>: <span style="font-style:italic">&#34;file&#34;</span>, <span style="">/*</span> <span style="">提交的图片表单名称</span> <span style="">这里修改为file</span> <span style="">七牛云接收参数名不是file报错</span> <span style="">*/</span>
+    <span style="font-weight:bold">&#34;imageMaxSize&#34;</span>: 5242880, <span style="">/*</span> <span style="">上传大小限制，单位B</span> <span style="">*/</span>
+    <span style="font-weight:bold">&#34;imageAllowFiles&#34;</span>: [<span style="font-style:italic">&#34;.png&#34;</span>, <span style="font-style:italic">&#34;.jpg&#34;</span>, <span style="font-style:italic">&#34;.jpeg&#34;</span>, <span style="font-style:italic">&#34;.gif&#34;</span>, <span style="font-style:italic">&#34;.bmp&#34;</span>], <span style="">/*</span> <span style="">上传图片格式显示</span> <span style="">*/</span>
+    <span style="font-weight:bold">&#34;imageCompressEnable&#34;</span>: <span style="font-weight:bold">true</span>, <span style="">/*</span> <span style="">是否压缩图片,默认是true</span> <span style="">*/</span>
+    <span style="font-weight:bold">&#34;imageCompressBorder&#34;</span>: 1600, <span style="">/*</span> <span style="">图片压缩最长边限制</span> <span style="">*/</span>
+    <span style="font-weight:bold">&#34;imageInsertAlign&#34;</span>: <span style="font-style:italic">&#34;none&#34;</span>, <span style="">/*</span> <span style="">插入的图片浮动方式</span> <span style="">*/</span>
+    <span style="font-weight:bold">&#34;imageUrlPrefix&#34;</span>: <span style="font-style:italic">&#34;&#34;</span>, <span style="">/*</span> <span style="">图片访问路径前缀</span> <span style="">*/</span>
+    <span style="font-weight:bold">&#34;imagePathFormat&#34;</span>: <span style="font-style:italic">&#34;/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}&#34;</span> <span style="">/*</span> <span style="">上传保存路径</span>,<span style="">可以自定义保存路径和文件名格式</span> <span style="">*/</span>
+}
+</code></pre></div><h3 id="修改-ueditor143ueditoralljs-文件">
+  修改 <code>ueditor/1.4.3/ueditor.all.js</code> 文件
+  <a class="heading-link" href="#%e4%bf%ae%e6%94%b9-ueditor143ueditoralljs-%e6%96%87%e4%bb%b6">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>找到 getActionUrl 函数</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
+Editor.prototype = {
+        getActionUrl: <span style="font-weight:bold">function</span>(action){
+            <span style="font-weight:bold">var</span> actionName = <span style="font-weight:bold">this</span>.getOpt(action) || action,
+                imageUrl = <span style="font-weight:bold">this</span>.getOpt(<span style="font-style:italic">&#39;imageUrl&#39;</span>),
+                serverUrl = <span style="font-weight:bold">this</span>.getOpt(<span style="font-style:italic">&#39;serverUrl&#39;</span>);
+            <span style="font-style:italic">//add code start
+</span><span style="font-style:italic"></span>            <span style="font-weight:bold">if</span> (action == <span style="font-style:italic">&#39;uploadimage&#39;</span>){
+                <span style="font-weight:bold">return</span> imageUrl;
+            }
+            <span style="font-style:italic">//add code end
+</span><span style="font-style:italic"></span>            <span style="font-weight:bold">if</span>(!serverUrl &amp;&amp; imageUrl) {
+                serverUrl = imageUrl.replace(<span style="font-style:italic">/^(.*[\/]).+([\.].+)$/</span>, <span style="font-style:italic">&#39;$1controller$2&#39;</span>);
+            }
+
+            <span style="font-weight:bold">if</span>(serverUrl) {
+                serverUrl = serverUrl + (serverUrl.indexOf(<span style="font-style:italic">&#39;?&#39;</span>) == -1 ? <span style="font-style:italic">&#39;?&#39;</span>:<span style="font-style:italic">&#39;&amp;&#39;</span>) + <span style="font-style:italic">&#39;action=&#39;</span> + (actionName || <span style="font-style:italic">&#39;&#39;</span>);
+                <span style="font-weight:bold">return</span> utils.formatUrl(serverUrl);
+            } <span style="font-weight:bold">else</span> {
+                <span style="font-weight:bold">return</span> <span style="font-style:italic">&#39;&#39;</span>;
+            }
+        }
+}
+</code></pre></div><h3 id="修改-ueditor143dialogsimageimagejs-文件">
+  修改 <code>ueditor/1.4.3/dialogs/image/image.js</code> 文件
+  <a class="heading-link" href="#%e4%bf%ae%e6%94%b9-ueditor143dialogsimageimagejs-%e6%96%87%e4%bb%b6">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>找到 <code>uploadBeforeSend</code> 事件,添加获取七牛云 <code>token</code> 代码</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">            uploader.on(<span style="font-style:italic">&#39;uploadBeforeSend&#39;</span>, <span style="font-weight:bold">function</span> (file, data, header) {
+                <span style="font-style:italic">//这里可以通过data对象添加POST参数
+</span><span style="font-style:italic"></span>                header[<span style="font-style:italic">&#39;X_Requested_With&#39;</span>] = <span style="font-style:italic">&#39;XMLHttpRequest&#39;</span>;
+                <span style="font-style:italic">//add code start
+</span><span style="font-style:italic"></span>                $.ajax({
+                    dataType:<span style="font-style:italic">&#39;json&#39;</span>,
+                    <span style="font-weight:bold">async</span>:<span style="font-weight:bold">false</span>, <span style="font-style:italic">//同步方式
+</span><span style="font-style:italic"></span>                    url:<span style="font-style:italic">&#39;/api/qiniu_token&#39;</span>,<span style="font-style:italic">//七牛云 token 接口
+</span><span style="font-style:italic"></span>                    success:<span style="font-weight:bold">function</span>(res){
+                        console.log(res);
+                        data[<span style="font-style:italic">&#39;token&#39;</span>] = res.data;
+                    }
+                });
+                <span style="font-style:italic">//add code end
+</span><span style="font-style:italic"></span>            });
+</code></pre></div><h3 id="修改后端七牛云生成-token-方法加入百度七牛云编辑器必要返回数据">
+  修改后端七牛云生成 <code>token</code> 方法加入百度七牛云编辑器必要返回数据
+  <a class="heading-link" href="#%e4%bf%ae%e6%94%b9%e5%90%8e%e7%ab%af%e4%b8%83%e7%89%9b%e4%ba%91%e7%94%9f%e6%88%90-token-%e6%96%b9%e6%b3%95%e5%8a%a0%e5%85%a5%e7%99%be%e5%ba%a6%e4%b8%83%e7%89%9b%e4%ba%91%e7%bc%96%e8%be%91%e5%99%a8%e5%bf%85%e8%a6%81%e8%bf%94%e5%9b%9e%e6%95%b0%e6%8d%ae">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+
+<span style="font-style:italic">//构建鉴权对象
+</span><span style="font-style:italic"></span>        $auth = <span style="font-weight:bold">new</span> Auth($accessKey,$secretKey);
+        <span style="font-style:italic">//百度编辑器二次开发图片上传规范数据
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">//{
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">//   &#34;state&#34;: &#34;SUCCESS&#34;,
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">//   &#34;url&#34;: &#34;upload/demo.jpg&#34;,
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">//   &#34;title&#34;: &#34;demo.jpg&#34;,
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">//   &#34;original&#34;: &#34;demo.jpg&#34;
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">//}
+</span><span style="font-style:italic"></span>        $returnBody = <span style="font-style:italic">&#39;{&#34;key&#34;:&#34;$(key)&#34;,&#34;hash&#34;:&#34;$(etag)&#34;,&#34;fsize&#34;:$(fsize),&#34;bucket&#34;:&#34;$(bucket)&#34;,&#34;ext&#34;:&#34;$(ext)&#34;,&#34;fname&#34;:&#34;$(fname)&#34;,&#34;state&#34;:&#34;SUCCESS&#34;,&#34;url&#34;:&#34;http://image.xxx.com/$(key)&#34;,&#34;title&#34;:&#34;$(fname)&#34;,&#34;original&#34;:&#34;http://image.xxx.com/$(key)&#34;}&#39;</span>;
+        $policy = <span style="font-weight:bold">array</span>(
+            <span style="font-style:italic">&#39;returnBody&#39;</span> =&gt; $returnBody
+        );
+        <span style="font-style:italic">//生成上传 token
+</span><span style="font-style:italic"></span>        $token = $auth-&gt;uploadToken($bucket,<span style="font-weight:bold">null</span>,3600,$policy,<span style="font-weight:bold">true</span>);
+        <span style="font-weight:bold">return</span> $token;
+</code></pre></div>
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2022
+     Ethan Kuo 
+    ·
+    
+    Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+      
+      <script src="/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js" integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </body>
+
+</html>

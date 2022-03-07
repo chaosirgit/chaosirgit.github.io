@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; block-all-mixed-content; default-src 'self'; child-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net/; form-action 'self'; frame-src 'self'; img-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/ https://cdn.jsdelivr.net/; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://cdn.jsdelivr.net/; prefetch-src 'self'; connect-src 'self' https://www.google-analytics.com;">
+
+    
+
+    <meta name="author" content="Ethan Kuo">
+    <meta name="description" content="前言    Laravel 框架中 Validator 验证类用法实例。
+用法    /** * 修改用户信息 * @route api/user/modify * @method post * @param Request $request * @return \Illuminate\Http\JsonResponse */ use Illuminate\Support\Facades\Validator; public function modifyUserInfo(Request $request) { //自定义验证错误信息  $messages = [ &#39;password.regex&#39; =&gt; &#39;密码必须为6-25位&#39;, &#39;avatar.url&#39; =&gt; &#39;头像必须为有效的url地址&#39;, &#39;birthday.date_format&#39; =&gt; &#39;生日必须为 YYYY-mm-dd 格式&#39;, ]; //验证  $validator = Validator::make($request-&gt;all(), [ &#39;password&#39; =&gt; &#39;regex:/^.{6,25}$/&#39;, //正则验证 如有多条不能用| 必须是数组 [&#39;required&#39;,&#39;regex:/^[a-zA-Z0-9]$/&#39;]  &#39;avatar&#39; =&gt; &#39;url&#39;, &#39;birthday&#39; =&gt; &#39;date_format:Y-m-d&#39;, ], $messages); //以上验证通过后 继续验证  $validator-&gt;after(function ($validator) use ($request) { //use ($request) 后,在这个闭包里可以用 $request  $user = User::getUserByphone($request-&gt;mobile); if (!">
+    <meta name="keywords" content="phper,goer,php,golang,php/go">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Laravel Validator 类用法实例"/>
+<meta name="twitter:description" content="前言    Laravel 框架中 Validator 验证类用法实例。
+用法    /** * 修改用户信息 * @route api/user/modify * @method post * @param Request $request * @return \Illuminate\Http\JsonResponse */ use Illuminate\Support\Facades\Validator; public function modifyUserInfo(Request $request) { //自定义验证错误信息  $messages = [ &#39;password.regex&#39; =&gt; &#39;密码必须为6-25位&#39;, &#39;avatar.url&#39; =&gt; &#39;头像必须为有效的url地址&#39;, &#39;birthday.date_format&#39; =&gt; &#39;生日必须为 YYYY-mm-dd 格式&#39;, ]; //验证  $validator = Validator::make($request-&gt;all(), [ &#39;password&#39; =&gt; &#39;regex:/^.{6,25}$/&#39;, //正则验证 如有多条不能用| 必须是数组 [&#39;required&#39;,&#39;regex:/^[a-zA-Z0-9]$/&#39;]  &#39;avatar&#39; =&gt; &#39;url&#39;, &#39;birthday&#39; =&gt; &#39;date_format:Y-m-d&#39;, ], $messages); //以上验证通过后 继续验证  $validator-&gt;after(function ($validator) use ($request) { //use ($request) 后,在这个闭包里可以用 $request  $user = User::getUserByphone($request-&gt;mobile); if (!"/>
+
+    <meta property="og:title" content="Laravel Validator 类用法实例" />
+<meta property="og:description" content="前言    Laravel 框架中 Validator 验证类用法实例。
+用法    /** * 修改用户信息 * @route api/user/modify * @method post * @param Request $request * @return \Illuminate\Http\JsonResponse */ use Illuminate\Support\Facades\Validator; public function modifyUserInfo(Request $request) { //自定义验证错误信息  $messages = [ &#39;password.regex&#39; =&gt; &#39;密码必须为6-25位&#39;, &#39;avatar.url&#39; =&gt; &#39;头像必须为有效的url地址&#39;, &#39;birthday.date_format&#39; =&gt; &#39;生日必须为 YYYY-mm-dd 格式&#39;, ]; //验证  $validator = Validator::make($request-&gt;all(), [ &#39;password&#39; =&gt; &#39;regex:/^.{6,25}$/&#39;, //正则验证 如有多条不能用| 必须是数组 [&#39;required&#39;,&#39;regex:/^[a-zA-Z0-9]$/&#39;]  &#39;avatar&#39; =&gt; &#39;url&#39;, &#39;birthday&#39; =&gt; &#39;date_format:Y-m-d&#39;, ], $messages); //以上验证通过后 继续验证  $validator-&gt;after(function ($validator) use ($request) { //use ($request) 后,在这个闭包里可以用 $request  $user = User::getUserByphone($request-&gt;mobile); if (!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.adminchao.com/posts/laravel-validator-%E7%B1%BB%E7%94%A8%E6%B3%95%E5%AE%9E%E4%BE%8B/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-02-08T11:10:44+00:00" />
+<meta property="article:modified_time" content="2018-02-08T11:10:44+00:00" />
+
+
+
+    <title>
+  Laravel Validator 类用法实例 · Ethan Kuo Blog
+</title>
+
+    
+      <link rel="canonical" href="https://blog.adminchao.com/posts/laravel-validator-%E7%B1%BB%E7%94%A8%E6%B3%95%E5%AE%9E%E4%BE%8B/">
+    
+
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css" integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    <meta name="generator" content="Hugo 0.89.1" />
+  </head>
+
+  
+  
+    
+  
+  <body class="preload-transitions colorscheme-auto">
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Ethan Kuo Blog
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="https://blog.adminchao.com/zh-cn/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://blog.adminchao.com/posts/laravel-validator-%E7%B1%BB%E7%94%A8%E6%B3%95%E5%AE%9E%E4%BE%8B/">
+              Laravel Validator 类用法实例
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2018-02-08T11:10:44Z">
+                2018-02-08 11:10:44
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              One-minute read
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa fa-folder" aria-hidden="true"></i>
+    <a href="/categories/laravel/">Laravel</a></div>
+
+          <div class="tags">
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/laravel/">laravel</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/php/">PHP</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/validator/">Validator</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/%E9%AA%8C%E8%AF%81/">验证</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/%E5%AE%9E%E4%BE%8B/">实例</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <h2 id="前言">
+  前言
+  <a class="heading-link" href="#%e5%89%8d%e8%a8%80">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<p>Laravel 框架中 Validator 验证类用法实例。</p>
+<h2 id="用法">
+  用法
+  <a class="heading-link" href="#%e7%94%a8%e6%b3%95">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * 修改用户信息
+</span><span style="font-style:italic">     * @route   api/user/modify
+</span><span style="font-style:italic">     * @method  post
+</span><span style="font-style:italic">     * @param   Request $request
+</span><span style="font-style:italic">     * @return \Illuminate\Http\JsonResponse
+</span><span style="font-style:italic">     */</span>
+     
+<span style="font-weight:bold">use</span> Illuminate\Support\Facades\Validator;
+
+    <span style="font-weight:bold">public</span> <span style="font-weight:bold">function</span> modifyUserInfo(Request $request)
+    {
+        <span style="font-style:italic">//自定义验证错误信息
+</span><span style="font-style:italic"></span>        $messages  = [
+            <span style="font-style:italic">&#39;password.regex&#39;</span>       =&gt; <span style="font-style:italic">&#39;密码必须为6-25位&#39;</span>,
+            <span style="font-style:italic">&#39;avatar.url&#39;</span>           =&gt; <span style="font-style:italic">&#39;头像必须为有效的url地址&#39;</span>,
+            <span style="font-style:italic">&#39;birthday.date_format&#39;</span> =&gt; <span style="font-style:italic">&#39;生日必须为 YYYY-mm-dd 格式&#39;</span>,
+        ];
+        
+        <span style="font-style:italic">//验证
+</span><span style="font-style:italic"></span>        $validator = Validator::make($request-&gt;all(), [
+            <span style="font-style:italic">&#39;password&#39;</span> =&gt; <span style="font-style:italic">&#39;regex:/^.{6,25}$/&#39;</span>, <span style="font-style:italic">//正则验证 如有多条不能用| 必须是数组 [&#39;required&#39;,&#39;regex:/^[a-zA-Z0-9]$/&#39;]
+</span><span style="font-style:italic"></span>            <span style="font-style:italic">&#39;avatar&#39;</span>   =&gt; <span style="font-style:italic">&#39;url&#39;</span>,
+            <span style="font-style:italic">&#39;birthday&#39;</span> =&gt; <span style="font-style:italic">&#39;date_format:Y-m-d&#39;</span>,
+        ], $messages);
+
+        <span style="font-style:italic">//以上验证通过后 继续验证
+</span><span style="font-style:italic"></span>        $validator-&gt;after(<span style="font-weight:bold">function</span> ($validator) <span style="font-weight:bold">use</span> ($request) { <span style="font-style:italic">//use ($request) 后,在这个闭包里可以用 $request
+</span><span style="font-style:italic"></span>                    $user = User::getUserByphone($request-&gt;mobile);
+                    <span style="font-weight:bold">if</span> (!$user) {
+                        $validator-&gt;errors()-&gt;add(<span style="font-style:italic">&#39;isUser&#39;</span>, <span style="font-style:italic">&#39;此用户不存在&#39;</span>);<span style="font-style:italic">//添加错误信息
+</span><span style="font-style:italic"></span>                    }
+                });
+
+        <span style="font-style:italic">//如果验证不通过
+</span><span style="font-style:italic"></span>        <span style="font-weight:bold">if</span> ($validator-&gt;fails()) {
+            <span style="font-weight:bold">return</span> $this-&gt;error($validator-&gt;errors()-&gt;first());
+        }
+
+        $user           = User::find($user_id);
+        $user-&gt;nickname = $request-&gt;nickname;
+        $user-&gt;password = User::generatePassword($request-&gt;password);
+        $user-&gt;avatar   = $request-&gt;avatar;
+        $user-&gt;birthday = $request-&gt;birthday;
+
+        <span style="font-weight:bold">try</span> {
+            $user-&gt;save();
+            <span style="font-weight:bold">return</span> $this-&gt;success(<span style="font-style:italic">&#34;操作成功&#34;</span>);
+        } <span style="font-weight:bold">catch</span> (\Exception $ex) {                  <span style="font-style:italic">//\Exception 捕获所有异常
+</span><span style="font-style:italic"></span>            <span style="font-weight:bold">return</span> $this-&gt;error($ex-&gt;getMessage()); <span style="font-style:italic">// getMessage() 异常信息
+</span><span style="font-style:italic"></span>        }
+
+    }
+
+</code></pre></div>
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2022
+     Ethan Kuo 
+    ·
+    
+    Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+      
+      <script src="/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js" integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </body>
+
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; block-all-mixed-content; default-src 'self'; child-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net/; form-action 'self'; frame-src 'self'; img-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/ https://cdn.jsdelivr.net/; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://cdn.jsdelivr.net/; prefetch-src 'self'; connect-src 'self' https://www.google-analytics.com;">
+
+    
+
+    <meta name="author" content="Ethan Kuo">
+    <meta name="description" content="前言    在 Laradock 环境下安装不常用的 PHP 扩展，不止用与 GRPC 扩展，其他依此类推即可
+步骤    修改配置文件:    laradock/docker-compose.yml
+在 workspace 配置参数段
+workspace: build: context: ./workspace args: 添加
+- INSTALL_PHPGRPC=${WORKSPACE_INSTALL_PHPGRPC} 修改启动配置文件    laradock/.env
+增加两个配置项
+PHP_FPM_INSTALL_PHPGRPC=true WORKSPACE_INSTALL_PHPGRPC=true 修改 PHP-FPM 配置文件    laradock/php-fpm/Dockerfile
+############################################################################ php grpc extension###########################################################################ARG INSTALL_PHPGRPC=false RUN if [ ${INSTALL_PHPGRPC} = true ]; then \  printf &#34;\n&#34; | pecl install -o -f grpc \  &amp;&amp; rm -rf /tmp/pear \  &amp;&amp; docker-php-ext-enable grpc \ ;fi修改 WORKSPACE 配置文件    laradock/workspace/Dockerfile">
+    <meta name="keywords" content="laravel,docker,laradock,扩展,extension,grpc">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Laradock 安装 GRPC 扩展"/>
+<meta name="twitter:description" content="前言    在 Laradock 环境下安装不常用的 PHP 扩展，不止用与 GRPC 扩展，其他依此类推即可
+步骤    修改配置文件:    laradock/docker-compose.yml
+在 workspace 配置参数段
+workspace: build: context: ./workspace args: 添加
+- INSTALL_PHPGRPC=${WORKSPACE_INSTALL_PHPGRPC} 修改启动配置文件    laradock/.env
+增加两个配置项
+PHP_FPM_INSTALL_PHPGRPC=true WORKSPACE_INSTALL_PHPGRPC=true 修改 PHP-FPM 配置文件    laradock/php-fpm/Dockerfile
+############################################################################ php grpc extension###########################################################################ARG INSTALL_PHPGRPC=false RUN if [ ${INSTALL_PHPGRPC} = true ]; then \  printf &#34;\n&#34; | pecl install -o -f grpc \  &amp;&amp; rm -rf /tmp/pear \  &amp;&amp; docker-php-ext-enable grpc \ ;fi修改 WORKSPACE 配置文件    laradock/workspace/Dockerfile"/>
+
+    <meta property="og:title" content="Laradock 安装 GRPC 扩展" />
+<meta property="og:description" content="前言    在 Laradock 环境下安装不常用的 PHP 扩展，不止用与 GRPC 扩展，其他依此类推即可
+步骤    修改配置文件:    laradock/docker-compose.yml
+在 workspace 配置参数段
+workspace: build: context: ./workspace args: 添加
+- INSTALL_PHPGRPC=${WORKSPACE_INSTALL_PHPGRPC} 修改启动配置文件    laradock/.env
+增加两个配置项
+PHP_FPM_INSTALL_PHPGRPC=true WORKSPACE_INSTALL_PHPGRPC=true 修改 PHP-FPM 配置文件    laradock/php-fpm/Dockerfile
+############################################################################ php grpc extension###########################################################################ARG INSTALL_PHPGRPC=false RUN if [ ${INSTALL_PHPGRPC} = true ]; then \  printf &#34;\n&#34; | pecl install -o -f grpc \  &amp;&amp; rm -rf /tmp/pear \  &amp;&amp; docker-php-ext-enable grpc \ ;fi修改 WORKSPACE 配置文件    laradock/workspace/Dockerfile" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.adminchao.com/posts/laradock-%E5%AE%89%E8%A3%85-grpc-%E6%89%A9%E5%B1%95/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-06-30T23:31:29+00:00" />
+<meta property="article:modified_time" content="2021-06-30T23:31:29+00:00" />
+
+
+
+    <title>
+  Laradock 安装 GRPC 扩展 · Ethan Kuo Blog
+</title>
+
+    
+      <link rel="canonical" href="https://blog.adminchao.com/posts/laradock-%E5%AE%89%E8%A3%85-grpc-%E6%89%A9%E5%B1%95/">
+    
+
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css" integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    <meta name="generator" content="Hugo 0.89.1" />
+  </head>
+
+  
+  
+    
+  
+  <body class="preload-transitions colorscheme-auto">
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Ethan Kuo Blog
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="https://blog.adminchao.com/zh-cn/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://blog.adminchao.com/posts/laradock-%E5%AE%89%E8%A3%85-grpc-%E6%89%A9%E5%B1%95/">
+              Laradock 安装 GRPC 扩展
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2021-06-30T23:31:29Z">
+                2021-06-30 23:31:29
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              One-minute read
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa fa-folder" aria-hidden="true"></i>
+    <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></div>
+
+          <div class="tags">
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/laravel/">laravel</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/docker/">docker</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/laradock/">laradock</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/%E6%89%A9%E5%B1%95/">扩展</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/extension/">extension</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/grpc/">grpc</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <h3 id="前言">
+  前言
+  <a class="heading-link" href="#%e5%89%8d%e8%a8%80">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>在 Laradock 环境下安装不常用的 PHP 扩展，不止用与 GRPC 扩展，其他依此类推即可</p>
+<h3 id="步骤">
+  步骤
+  <a class="heading-link" href="#%e6%ad%a5%e9%aa%a4">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<h4 id="修改配置文件">
+  修改配置文件:
+  <a class="heading-link" href="#%e4%bf%ae%e6%94%b9%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h4>
+<p><code>laradock/docker-compose.yml</code></p>
+<p>在 <code>workspace</code> 配置参数段</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="font-weight:bold">workspace</span>:
+      <span style="font-weight:bold">build</span>:
+        <span style="font-weight:bold">context</span>: ./workspace
+        <span style="font-weight:bold">args</span>:
+</code></pre></div><p>添加</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- INSTALL_PHPGRPC=${WORKSPACE_INSTALL_PHPGRPC}
+</code></pre></div><h4 id="修改启动配置文件">
+  修改启动配置文件
+  <a class="heading-link" href="#%e4%bf%ae%e6%94%b9%e5%90%af%e5%8a%a8%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h4>
+<p><code>laradock/.env</code></p>
+<p>增加两个配置项</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini">PHP_FPM_INSTALL_PHPGRPC=<span style="font-style:italic">true</span>
+WORKSPACE_INSTALL_PHPGRPC=<span style="font-style:italic">true</span>
+</code></pre></div><h4 id="修改-php-fpm-配置文件">
+  修改 PHP-FPM 配置文件
+  <a class="heading-link" href="#%e4%bf%ae%e6%94%b9-php-fpm-%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h4>
+<p><code>laradock/php-fpm/Dockerfile</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dockerfile" data-lang="dockerfile"><span style="font-style:italic">###########################################################################</span><span style="">
+</span><span style=""></span><span style="font-style:italic"># php grpc extension</span><span style="">
+</span><span style=""></span><span style="font-style:italic">###########################################################################</span><span style="">
+</span><span style=""></span><span style="font-weight:bold">ARG</span> INSTALL_PHPGRPC=false
+
+<span style="font-weight:bold">RUN</span> <span style="font-weight:bold">if</span> [ <span style="font-weight:bold;font-style:italic">${</span>INSTALL_PHPGRPC<span style="font-weight:bold;font-style:italic">}</span> = true ]; <span style="font-weight:bold">then</span> <span style="font-weight:bold;font-style:italic">\
+</span><span style="font-weight:bold;font-style:italic"></span>  printf <span style="font-style:italic">&#34;\n&#34;</span> | pecl install -o -f grpc <span style="font-weight:bold;font-style:italic">\
+</span><span style="font-weight:bold;font-style:italic"></span>  &amp;&amp; rm -rf /tmp/pear <span style="font-weight:bold;font-style:italic">\
+</span><span style="font-weight:bold;font-style:italic"></span>  &amp;&amp; docker-php-ext-enable grpc <span style="font-weight:bold;font-style:italic">\
+</span><span style="font-weight:bold;font-style:italic"></span>;<span style="font-weight:bold">fi</span><span style="">
+</span></code></pre></div><h4 id="修改-workspace-配置文件">
+  修改 WORKSPACE 配置文件
+  <a class="heading-link" href="#%e4%bf%ae%e6%94%b9-workspace-%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h4>
+<p><code>laradock/workspace/Dockerfile</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dockerfile" data-lang="dockerfile"><span style="font-style:italic">###########################################################################</span><span style="">
+</span><span style=""></span><span style="font-style:italic"># PHP GRPC EXTENSION</span><span style="">
+</span><span style=""></span><span style="font-style:italic">###########################################################################</span><span style="">
+</span><span style="">
+</span><span style=""></span><span style="font-weight:bold">ARG</span> INSTALL_PHPGRPC=false
+
+<span style="font-weight:bold">RUN</span> <span style="font-weight:bold">if</span> [ <span style="font-weight:bold;font-style:italic">${</span>INSTALL_PHPGRPC<span style="font-weight:bold;font-style:italic">}</span> = true ]; <span style="font-weight:bold">then</span> <span style="font-weight:bold;font-style:italic">\
+</span><span style="font-weight:bold;font-style:italic"></span>    apt-get install zlib1g-dev &amp;&amp; <span style="font-weight:bold;font-style:italic">\
+</span><span style="font-weight:bold;font-style:italic"></span>    pecl install grpc &amp;&amp; <span style="font-weight:bold;font-style:italic">\
+</span><span style="font-weight:bold;font-style:italic"></span>    echo <span style="font-style:italic">&#34;extension=grpc.so&#34;</span> &gt;&gt; /etc/php/<span style="font-weight:bold;font-style:italic">${</span>LARADOCK_PHP_VERSION<span style="font-weight:bold;font-style:italic">}</span>/mods-available/grpc.ini &amp;&amp; <span style="font-weight:bold;font-style:italic">\
+</span><span style="font-weight:bold;font-style:italic"></span>    ln -s /etc/php/<span style="font-weight:bold;font-style:italic">${</span>LARADOCK_PHP_VERSION<span style="font-weight:bold;font-style:italic">}</span>/mods-available/grpc.ini /etc/php/<span style="font-weight:bold;font-style:italic">${</span>LARADOCK_PHP_VERSION<span style="font-weight:bold;font-style:italic">}</span>/cli/conf.d/20-grpc.ini <span style="font-weight:bold;font-style:italic">\
+</span><span style="font-weight:bold;font-style:italic"></span>    &amp;&amp; php -m | grep -q <span style="font-style:italic">&#39;grpc&#39;</span> <span style="font-weight:bold;font-style:italic">\
+</span><span style="font-weight:bold;font-style:italic"></span>;<span style="font-weight:bold">fi</span><span style="">
+</span></code></pre></div><h4 id="重新构建">
+  重新构建
+  <a class="heading-link" href="#%e9%87%8d%e6%96%b0%e6%9e%84%e5%bb%ba">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h4>
+<p><code>docker-compose build workspace php-fpm</code></p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2022
+     Ethan Kuo 
+    ·
+    
+    Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+      
+      <script src="/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js" integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </body>
+
+</html>

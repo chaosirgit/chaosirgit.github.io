@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; block-all-mixed-content; default-src 'self'; child-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net/; form-action 'self'; frame-src 'self'; img-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/ https://cdn.jsdelivr.net/; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://cdn.jsdelivr.net/; prefetch-src 'self'; connect-src 'self' https://www.google-analytics.com;">
+
+    
+
+    <meta name="author" content="Ethan Kuo">
+    <meta name="description" content="前言    Laravel 的 Eloquent 是一个很棒的ORM，Eloquent 是独立的模块，我们也可以在自己的项目里通过composer来使用Eloquent，本文就详细讲解如何在自己的项目集成 Eloquent。
+安装    在项目目录下执行
+composer require illuminate/database:^5.0 或直接在 composer.json 文件里添加:
+{ &#34;require&#34;: { &#34;illuminate/database&#34;: &#34;^5.0&#34;, &#34;illuminate/pagination&#34;: &#34;^5.0&#34; }, &#34;repositories&#34;: { &#34;packagist&#34;: { &#34;type&#34;: &#34;composer&#34;, &#34;url&#34;: &#34;https://packagist.phpcomposer.com&#34; //中国镜像站  } } } 这样 Eloquent 就安装好了。
+配置    在项目入口文件加入
+// 载入 composer 的 autoload 文件  require_once IA_ROOT . &#39;/addons/guangqian_shop/vendor/autoload.php&#39;; $db_config=$_W[&#39;config&#39;][&#39;db&#39;]; //数据库配置  $database = [ &#39;driver&#39; =&gt; &#39;mysql&#39;, &#39;host&#39; =&gt; &#39;127.">
+    <meta name="keywords" content="Eloquent,教程,Laravel,PHP">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="独立使用 Eloquent"/>
+<meta name="twitter:description" content="前言    Laravel 的 Eloquent 是一个很棒的ORM，Eloquent 是独立的模块，我们也可以在自己的项目里通过composer来使用Eloquent，本文就详细讲解如何在自己的项目集成 Eloquent。
+安装    在项目目录下执行
+composer require illuminate/database:^5.0 或直接在 composer.json 文件里添加:
+{ &#34;require&#34;: { &#34;illuminate/database&#34;: &#34;^5.0&#34;, &#34;illuminate/pagination&#34;: &#34;^5.0&#34; }, &#34;repositories&#34;: { &#34;packagist&#34;: { &#34;type&#34;: &#34;composer&#34;, &#34;url&#34;: &#34;https://packagist.phpcomposer.com&#34; //中国镜像站  } } } 这样 Eloquent 就安装好了。
+配置    在项目入口文件加入
+// 载入 composer 的 autoload 文件  require_once IA_ROOT . &#39;/addons/guangqian_shop/vendor/autoload.php&#39;; $db_config=$_W[&#39;config&#39;][&#39;db&#39;]; //数据库配置  $database = [ &#39;driver&#39; =&gt; &#39;mysql&#39;, &#39;host&#39; =&gt; &#39;127."/>
+
+    <meta property="og:title" content="独立使用 Eloquent" />
+<meta property="og:description" content="前言    Laravel 的 Eloquent 是一个很棒的ORM，Eloquent 是独立的模块，我们也可以在自己的项目里通过composer来使用Eloquent，本文就详细讲解如何在自己的项目集成 Eloquent。
+安装    在项目目录下执行
+composer require illuminate/database:^5.0 或直接在 composer.json 文件里添加:
+{ &#34;require&#34;: { &#34;illuminate/database&#34;: &#34;^5.0&#34;, &#34;illuminate/pagination&#34;: &#34;^5.0&#34; }, &#34;repositories&#34;: { &#34;packagist&#34;: { &#34;type&#34;: &#34;composer&#34;, &#34;url&#34;: &#34;https://packagist.phpcomposer.com&#34; //中国镜像站  } } } 这样 Eloquent 就安装好了。
+配置    在项目入口文件加入
+// 载入 composer 的 autoload 文件  require_once IA_ROOT . &#39;/addons/guangqian_shop/vendor/autoload.php&#39;; $db_config=$_W[&#39;config&#39;][&#39;db&#39;]; //数据库配置  $database = [ &#39;driver&#39; =&gt; &#39;mysql&#39;, &#39;host&#39; =&gt; &#39;127." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.adminchao.com/posts/%E7%8B%AC%E7%AB%8B%E4%BD%BF%E7%94%A8-eloquent/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-07-04T14:14:22+00:00" />
+<meta property="article:modified_time" content="2018-07-04T14:14:22+00:00" />
+
+
+
+    <title>
+  独立使用 Eloquent · Ethan Kuo Blog
+</title>
+
+    
+      <link rel="canonical" href="https://blog.adminchao.com/posts/%E7%8B%AC%E7%AB%8B%E4%BD%BF%E7%94%A8-eloquent/">
+    
+
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css" integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    <meta name="generator" content="Hugo 0.89.1" />
+  </head>
+
+  
+  
+    
+  
+  <body class="preload-transitions colorscheme-auto">
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Ethan Kuo Blog
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="https://blog.adminchao.com/zh-cn/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://blog.adminchao.com/posts/%E7%8B%AC%E7%AB%8B%E4%BD%BF%E7%94%A8-eloquent/">
+              独立使用 Eloquent
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2018-07-04T14:14:22Z">
+                2018-07-04 14:14:22
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              One-minute read
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa fa-folder" aria-hidden="true"></i>
+    <a href="/categories/laravel/">Laravel</a></div>
+
+          <div class="tags">
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/eloquent/">Eloquent</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/laravel/">Laravel</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/php/">PHP</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <h2 id="前言">
+  前言
+  <a class="heading-link" href="#%e5%89%8d%e8%a8%80">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<p>Laravel 的 Eloquent 是一个很棒的ORM，Eloquent 是独立的模块，我们也可以在自己的项目里通过composer来使用Eloquent，本文就详细讲解如何在自己的项目集成 Eloquent。</p>
+<h2 id="安装">
+  安装
+  <a class="heading-link" href="#%e5%ae%89%e8%a3%85">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<p>在项目目录下执行</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">composer <span style="font-weight:bold">require</span> illuminate/database:^5.0
+</code></pre></div><p>或直接在 <code>composer.json</code> 文件里添加:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">{
+  <span style="font-style:italic">&#34;require&#34;</span>: {
+    <span style="font-style:italic">&#34;illuminate/database&#34;</span>: <span style="font-style:italic">&#34;^5.0&#34;</span>,
+    <span style="font-style:italic">&#34;illuminate/pagination&#34;</span>: <span style="font-style:italic">&#34;^5.0&#34;</span>
+  },
+  <span style="font-style:italic">&#34;repositories&#34;</span>: {
+    <span style="font-style:italic">&#34;packagist&#34;</span>: {
+      <span style="font-style:italic">&#34;type&#34;</span>: <span style="font-style:italic">&#34;composer&#34;</span>,
+      <span style="font-style:italic">&#34;url&#34;</span>: <span style="font-style:italic">&#34;https://packagist.phpcomposer.com&#34;</span>    <span style="font-style:italic">//中国镜像站
+</span><span style="font-style:italic"></span>    }
+  }
+}
+</code></pre></div><p>这样 Eloquent 就安装好了。</p>
+<h2 id="配置">
+  配置
+  <a class="heading-link" href="#%e9%85%8d%e7%bd%ae">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<p>在项目入口文件加入</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">        
+        <span style="font-style:italic">// 载入 composer 的 autoload 文件
+</span><span style="font-style:italic"></span>        <span style="font-weight:bold">require_once</span> IA_ROOT . <span style="font-style:italic">&#39;/addons/guangqian_shop/vendor/autoload.php&#39;</span>;
+        
+        $db_config=$_W[<span style="font-style:italic">&#39;config&#39;</span>][<span style="font-style:italic">&#39;db&#39;</span>];
+        <span style="font-style:italic">//数据库配置
+</span><span style="font-style:italic"></span>        $database = [
+            <span style="font-style:italic">&#39;driver&#39;</span>    =&gt; <span style="font-style:italic">&#39;mysql&#39;</span>,
+            <span style="font-style:italic">&#39;host&#39;</span>      =&gt; <span style="font-style:italic">&#39;127.0.0.1&#39;</span>,
+            <span style="font-style:italic">&#39;database&#39;</span>  =&gt; <span style="font-style:italic">&#39;test&#39;</span>,
+            <span style="font-style:italic">&#39;username&#39;</span>  =&gt; <span style="font-style:italic">&#39;test&#39;</span>,
+            <span style="font-style:italic">&#39;password&#39;</span>  =&gt; <span style="font-style:italic">&#39;123456&#39;</span>,
+            <span style="font-style:italic">&#39;charset&#39;</span>   =&gt; <span style="font-style:italic">&#39;utf8&#39;</span>,
+            <span style="font-style:italic">&#39;collation&#39;</span> =&gt; <span style="font-style:italic">&#39;utf8_unicode_ci&#39;</span>,
+            <span style="font-style:italic">&#39;prefix&#39;</span>    =&gt; $db_config[<span style="font-style:italic">&#39;tablepre&#39;</span>],
+        ];
+
+        $Capsule = <span style="font-weight:bold">new</span> Capsule;
+        <span style="font-style:italic">//创建数据库链接
+</span><span style="font-style:italic"></span>        $Capsule-&gt;addConnection($database);
+        <span style="font-style:italic">// 设置全局静态可访问
+</span><span style="font-style:italic"></span>        $Capsule-&gt;setAsGlobal();
+        <span style="font-style:italic">// 启动Eloquent
+</span><span style="font-style:italic"></span>        $Capsule-&gt;bootEloquent();
+
+</code></pre></div><p>至此 Eloquent 就配置完成了</p>
+<h2 id="使用">
+  使用
+  <a class="heading-link" href="#%e4%bd%bf%e7%94%a8">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<h3 id="db-使用">
+  DB 使用
+  <a class="heading-link" href="#db-%e4%bd%bf%e7%94%a8">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>在使用处</p>
+<ul>
+<li>确保 Eloquent 的初始化文件已被引入</li>
+<li><code>use Illuminate\Database\Capsule\Manager as DB;</code><br>
+即可使用
+如:
+<code>db.php</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+<span style="font-style:italic">//在入口处已经引入过初始化文件
+</span><span style="font-style:italic"></span><span style="font-weight:bold">use</span> Illuminate\Database\Capsule\Manager <span style="font-weight:bold">as</span> DB;
+
+<span style="font-weight:bold">class</span> <span style="font-weight:bold">DbGqModel</span> <span style="font-weight:bold">extends</span> DB{
+
+}
+</code></pre></div><p><code>controller.php</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+<span style="font-weight:bold">use</span> \DbGqModel;
+
+$users = DbGqModel::select(<span style="font-style:italic">&#39;select * from user&#39;</span>);
+
+</code></pre></div><h3 id="model-使用">
+  Model 使用
+  <a class="heading-link" href="#model-%e4%bd%bf%e7%94%a8">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>只要你的模型继承 Eloquent 的 Model 类，就好了：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="font-weight:bold">use</span>  Illuminate\Database\Eloquent\Model  <span style="font-weight:bold">as</span> Eloquent; 
+
+<span style="font-weight:bold">class</span> <span style="font-weight:bold">User</span> <span style="font-weight:bold">extends</span>  Eloquent 
+{
+    <span style="font-weight:bold">protected</span> $table = <span style="font-style:italic">&#39;users&#39;</span>;
+}
+
+</code></pre></div><p>那么你就可以很方便的像在 Laravel 框架里一样使用 Eloquent 了：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="font-style:italic">// 查询id为2的
+</span><span style="font-style:italic"></span>$users = User::find(2);
+
+<span style="font-style:italic">// 查询全部
+</span><span style="font-style:italic"></span>$users = User::all();
+
+<span style="font-style:italic">// 创建数据
+</span><span style="font-style:italic"></span>$user = <span style="font-weight:bold">new</span> User;
+$user-&gt;username = <span style="font-style:italic">&#39;someone&#39;</span>;
+$user-&gt;email = <span style="font-style:italic">&#39;some@overtrue.me&#39;</span>;
+$user-&gt;save();
+
+<span style="font-style:italic">// ... 更多
+</span></code></pre></div><h2 id="后记">
+  后记
+  <a class="heading-link" href="#%e5%90%8e%e8%ae%b0">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<p>参考了安正超写的<a href="https://www.golaravel.com/post/zai-laravelwai-du-li-shi-yong-eloquent/">在 Laravel 外独立使用 Eloquent</a></p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2022
+     Ethan Kuo 
+    ·
+    
+    Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+      
+      <script src="/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js" integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </body>
+
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Flex on Ethan Kuo Blog</title>
+    <link>https://blog.adminchao.com/tags/flex/</link>
+    <description>Recent content in Flex on Ethan Kuo Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 27 May 2020 11:07:29 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/tags/flex/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Flex 手册</title>
+      <link>https://blog.adminchao.com/posts/flex-%E6%89%8B%E5%86%8C/</link>
+      <pubDate>Wed, 27 May 2020 11:07:29 +0000</pubDate>
+      
+      <guid>https://blog.adminchao.com/posts/flex-%E6%89%8B%E5%86%8C/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PHP框架 on 郭超超的博客</title>
+    <link>https://blog.adminchao.com/zh-cn/tags/php%E6%A1%86%E6%9E%B6/</link>
+    <description>Recent content in PHP框架 on 郭超超的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 09 Jun 2017 11:43:31 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/tags/php%E6%A1%86%E6%9E%B6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用 Lumen 创建 RestApi 实例教程</title>
+      <link>https://blog.adminchao.com/zh-cn/posts/%E4%BD%BF%E7%94%A8-lumen-%E5%88%9B%E5%BB%BA-restapi-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/</link>
+      <pubDate>Fri, 09 Jun 2017 11:43:31 +0000</pubDate>
+      
+      <guid>https://blog.adminchao.com/zh-cn/posts/%E4%BD%BF%E7%94%A8-lumen-%E5%88%9B%E5%BB%BA-restapi-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/</guid>
+      <description>项目需求    开发一个用户注册的 rest API 要求：
+HttpMethod: Post
+URI: api/account/register
+Request Body
+   字段 必选 类型及范围 说明     phone 是 string 注册手机号   password 是 string 密码   code 是 string 验证码   gender 是 enum 性别   nickname 否 string 昵称，不超过 20 字符   birthday 否 date 生日   height 否 int 身高   weight 否 int 体重   email 否 string 邮箱    Response code:</description>
+    </item>
+    
+    <item>
+      <title>Lumen 的结构与配置</title>
+      <link>https://blog.adminchao.com/zh-cn/posts/lumen-%E7%9A%84%E7%BB%93%E6%9E%84%E4%B8%8E%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Wed, 07 Jun 2017 11:37:19 +0000</pubDate>
+      
+      <guid>https://blog.adminchao.com/zh-cn/posts/lumen-%E7%9A%84%E7%BB%93%E6%9E%84%E4%B8%8E%E9%85%8D%E7%BD%AE/</guid>
+      <description>Lumen 的目录结构    app 项目有关的类 bootstrap 项目启动时需要的 database 数据库结构及内容
+public 整个项目的入口 vendor 第三方包 routes 存放路由文件
+配置    在 nginx 配置文件里添加这段代码：
+1 2 3  location / { try_files $uri $uri/ /index.php?$query_string; }   server 的 root 放在 lumen 的 public 文件夹上：
+1  root /var/www/lumen/public;   重启 nginx 访问你的网址，可以看到 lumen 的版本号，配置成功。</description>
+    </item>
+    
+    <item>
+      <title>Lumen 的安装与部署</title>
+      <link>https://blog.adminchao.com/zh-cn/posts/lumen-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Wed, 07 Jun 2017 11:14:01 +0000</pubDate>
+      
+      <guid>https://blog.adminchao.com/zh-cn/posts/lumen-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%83%A8%E7%BD%B2/</guid>
+      <description>前言     lumen 是一个 php 微型框架，使用 composer 来管理代码依赖，composer 是 php 的包管理工具。 运行环境：
+ PHP &amp;gt;= 5.5.9 Openssl PHP Extension –Openssl php 扩展 PDO PHP Extension –PDO php 扩展 Mbstring PHP Extension –mb 字符串 PHP 扩展  打开 php 扩展    Linux 系统直接运行安装扩展命令即可    1 2 3 4  sudo apt-get update sudo apt-get install php7.0-mcrypt sudo apt-get install php-mbstring ...   Windows 系统 打开 php.</description>
+    </item>
+    
+  </channel>
+</rss>

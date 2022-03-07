@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; block-all-mixed-content; default-src 'self'; child-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net/; form-action 'self'; frame-src 'self'; img-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/ https://cdn.jsdelivr.net/; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://cdn.jsdelivr.net/; prefetch-src 'self'; connect-src 'self' https://www.google-analytics.com;">
+
+    
+
+    <meta name="author" content="Ethan Kuo">
+    <meta name="description" content="前言    在使用 Laravel Eloquent 模型时，深刻体会到什么是优雅！虽然在业务逻辑中可以使用模型链式调用DB模型的操作方法来解决，但是始终少了优雅！这里专门记录去 DB 模型的操作方法，使代码优雅化。
+目标    leftJoin where    目标 SQL    select * from user_second left join user on user_second.user_id = user.id where user.status = 1 解决方案    &lt;?php UserSecond::leftJoin(&#39;user&#39;,&#39;user_second.user_id&#39;,&#39;=&#39;,&#39;user.id&#39;)-&gt;where(&#39;user.status&#39;,1)-&gt;get(); 但是这样的缺点在于
+ 得到的结果两个表的字段如果相同，右表会覆盖左表的值。 得到的结果不能使用模型精确控制。  { &#34;id&#34;: 11, //其实左表也就是`user_second`表的 id 为 9 这里被 `user` 表的 id 覆盖了  &#34;user_id&#34;: 11, //这里是 `user_second` 表的 `user_id`  &#34;enlist_currency&#34;: &#34;256.">
+    <meta name="keywords" content="Laravel,Eloquent,高级,联表,计数">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Laravel Eloquent 高级"/>
+<meta name="twitter:description" content="前言    在使用 Laravel Eloquent 模型时，深刻体会到什么是优雅！虽然在业务逻辑中可以使用模型链式调用DB模型的操作方法来解决，但是始终少了优雅！这里专门记录去 DB 模型的操作方法，使代码优雅化。
+目标    leftJoin where    目标 SQL    select * from user_second left join user on user_second.user_id = user.id where user.status = 1 解决方案    &lt;?php UserSecond::leftJoin(&#39;user&#39;,&#39;user_second.user_id&#39;,&#39;=&#39;,&#39;user.id&#39;)-&gt;where(&#39;user.status&#39;,1)-&gt;get(); 但是这样的缺点在于
+ 得到的结果两个表的字段如果相同，右表会覆盖左表的值。 得到的结果不能使用模型精确控制。  { &#34;id&#34;: 11, //其实左表也就是`user_second`表的 id 为 9 这里被 `user` 表的 id 覆盖了  &#34;user_id&#34;: 11, //这里是 `user_second` 表的 `user_id`  &#34;enlist_currency&#34;: &#34;256."/>
+
+    <meta property="og:title" content="Laravel Eloquent 高级" />
+<meta property="og:description" content="前言    在使用 Laravel Eloquent 模型时，深刻体会到什么是优雅！虽然在业务逻辑中可以使用模型链式调用DB模型的操作方法来解决，但是始终少了优雅！这里专门记录去 DB 模型的操作方法，使代码优雅化。
+目标    leftJoin where    目标 SQL    select * from user_second left join user on user_second.user_id = user.id where user.status = 1 解决方案    &lt;?php UserSecond::leftJoin(&#39;user&#39;,&#39;user_second.user_id&#39;,&#39;=&#39;,&#39;user.id&#39;)-&gt;where(&#39;user.status&#39;,1)-&gt;get(); 但是这样的缺点在于
+ 得到的结果两个表的字段如果相同，右表会覆盖左表的值。 得到的结果不能使用模型精确控制。  { &#34;id&#34;: 11, //其实左表也就是`user_second`表的 id 为 9 这里被 `user` 表的 id 覆盖了  &#34;user_id&#34;: 11, //这里是 `user_second` 表的 `user_id`  &#34;enlist_currency&#34;: &#34;256." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.adminchao.com/posts/laravel-eloquent-%E9%AB%98%E7%BA%A7/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-08-22T11:02:10+00:00" />
+<meta property="article:modified_time" content="2018-08-22T11:02:10+00:00" />
+
+
+
+    <title>
+  Laravel Eloquent 高级 · Ethan Kuo Blog
+</title>
+
+    
+      <link rel="canonical" href="https://blog.adminchao.com/posts/laravel-eloquent-%E9%AB%98%E7%BA%A7/">
+    
+
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css" integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    <meta name="generator" content="Hugo 0.89.1" />
+  </head>
+
+  
+  
+    
+  
+  <body class="preload-transitions colorscheme-auto">
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Ethan Kuo Blog
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="https://blog.adminchao.com/zh-cn/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://blog.adminchao.com/posts/laravel-eloquent-%E9%AB%98%E7%BA%A7/">
+              Laravel Eloquent 高级
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2018-08-22T11:02:10Z">
+                2018-08-22 11:02:10
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              2-minute read
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa fa-folder" aria-hidden="true"></i>
+    <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></div>
+
+          <div class="tags">
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/laravel/">Laravel</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/eloquent/">Eloquent</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/%E9%AB%98%E7%BA%A7/">高级</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/%E8%81%94%E8%A1%A8/">联表</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/%E8%AE%A1%E6%95%B0/">计数</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <h2 id="前言">
+  前言
+  <a class="heading-link" href="#%e5%89%8d%e8%a8%80">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<p>在使用 Laravel Eloquent 模型时，深刻体会到什么是优雅！虽然在业务逻辑中可以使用模型链式调用DB模型的操作方法来解决，但是始终少了优雅！这里专门记录去 DB 模型的操作方法，使代码优雅化。</p>
+<h2 id="目标">
+  目标
+  <a class="heading-link" href="#%e7%9b%ae%e6%a0%87">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<h3 id="leftjoin-where">
+  leftJoin where
+  <a class="heading-link" href="#leftjoin-where">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<h4 id="目标-sql">
+  目标 SQL
+  <a class="heading-link" href="#%e7%9b%ae%e6%a0%87-sql">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="font-weight:bold">select</span> * <span style="font-weight:bold">from</span> user_second <span style="font-weight:bold">left</span> <span style="font-weight:bold">join</span> <span style="font-weight:bold">user</span> <span style="font-weight:bold">on</span> user_second.user_id = <span style="font-weight:bold">user</span>.id <span style="font-weight:bold">where</span> <span style="font-weight:bold">user</span>.status = 1
+</code></pre></div><h4 id="解决方案">
+  解决方案
+  <a class="heading-link" href="#%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+UserSecond::leftJoin(<span style="font-style:italic">&#39;user&#39;</span>,<span style="font-style:italic">&#39;user_second.user_id&#39;</span>,<span style="font-style:italic">&#39;=&#39;</span>,<span style="font-style:italic">&#39;user.id&#39;</span>)-&gt;where(<span style="font-style:italic">&#39;user.status&#39;</span>,1)-&gt;get();
+</code></pre></div><p>但是这样的缺点在于</p>
+<ol>
+<li>得到的结果两个表的字段如果相同，右表会覆盖左表的值。</li>
+<li>得到的结果不能使用模型精确控制。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+            <span style="font-weight:bold">&#34;id&#34;</span>: 11,       <span style="font-style:italic">//其实左表也就是`user_second`表的 id 为 9 这里被 `user` 表的 id 覆盖了
+</span><span style="font-style:italic"></span>            <span style="font-weight:bold">&#34;user_id&#34;</span>: 11, <span style="font-style:italic">//这里是 `user_second` 表的 `user_id`
+</span><span style="font-style:italic"></span>            <span style="font-weight:bold">&#34;enlist_currency&#34;</span>: <span style="font-style:italic">&#34;256.00000&#34;</span>,
+            <span style="font-weight:bold">&#34;create_time&#34;</span>: <span style="font-style:italic">&#34;2018-08-21 17:10:43&#34;</span>,
+            <span style="font-weight:bold">&#34;repeat&#34;</span>: 0,
+            <span style="font-weight:bold">&#34;parent_id&#34;</span>: 0, <span style="font-style:italic">//这个是 `user` 表里才有的字段，但是 UserSecond 模型并不期望得到这个结果,但是被添加出来了
+</span><span style="font-style:italic"></span>            <span style="font-weight:bold">&#34;crowd_id&#34;</span>: 1
+        }
+</code></pre></div><p>优化后得到</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+UserSecond::leftJoin(<span style="font-style:italic">&#39;user&#39;</span>,<span style="font-style:italic">&#39;user_second.user_id&#39;</span>,<span style="font-style:italic">&#39;=&#39;</span>,<span style="font-style:italic">&#39;user.id&#39;</span>)-&gt;where(<span style="font-style:italic">&#39;user.status&#39;</span>,1)-&gt;selectRaw(<span style="font-style:italic">&#39;user_second.*&#39;</span>)-&gt;get();
+</code></pre></div><p>等同于</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+UserSecond::leftJoin(<span style="font-style:italic">&#39;user&#39;</span>,<span style="font-style:italic">&#39;user_second.user_id&#39;</span>,<span style="font-style:italic">&#39;=&#39;</span>,<span style="font-style:italic">&#39;user.id&#39;</span>)-&gt;where(<span style="font-style:italic">&#39;user.status&#39;</span>,1)-&gt;get([<span style="font-style:italic">&#39;user_second.*&#39;</span>]);
+</code></pre></div><p>结果</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">        {
+            <span style="font-weight:bold">&#34;id&#34;</span>: 9,
+            <span style="font-weight:bold">&#34;user_id&#34;</span>: 11,
+            <span style="font-weight:bold">&#34;enlist_currency&#34;</span>: <span style="font-style:italic">&#34;256.00000&#34;</span>,
+            <span style="font-weight:bold">&#34;create_time&#34;</span>: <span style="font-style:italic">&#34;2018-08-21 17:10:43&#34;</span>,
+            <span style="font-weight:bold">&#34;repeat&#34;</span>: 0,
+            <span style="font-weight:bold">&#34;crowd_id&#34;</span>: 1
+        }
+</code></pre></div><p>但是这样还得写 <code>leftJoin</code> 中的一大段代码，并且 <code>leftJoin</code> 其实是 DB 模型的方法被 UserSecond 继承了过来，并不是真正意义上的 Eloquent。仔细查阅资料后得到</p>
+<ol>
+<li>首先在 Model 中做好关联关系 <code>App\UserSecond.php</code></li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+<span style="font-weight:bold">public</span> <span style="font-weight:bold">function</span> user(){
+        <span style="font-weight:bold">return</span> $this-&gt;hasOne(<span style="font-style:italic">&#39;App\User&#39;</span>,<span style="font-style:italic">&#39;id&#39;</span>,<span style="font-style:italic">&#39;user_id&#39;</span>);
+}
+    
+    <span style="font-style:italic">//下边会用到    
+</span><span style="font-style:italic"></span><span style="font-weight:bold">public</span> <span style="font-weight:bold">function</span> order(){
+        <span style="font-weight:bold">return</span> $this-&gt;belongsTo(<span style="font-style:italic">&#39;App\Order&#39;</span>,<span style="font-style:italic">&#39;order_id&#39;</span>,<span style="font-style:italic">&#39;id&#39;</span>);
+} 
+</code></pre></div><p>等同于</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+<span style="font-weight:bold">public</span> <span style="font-weight:bold">function</span> user(){
+        <span style="font-weight:bold">return</span> $this-&gt;belongsTo(<span style="font-style:italic">&#39;App\User&#39;</span>,<span style="font-style:italic">&#39;user_id&#39;</span>,<span style="font-style:italic">&#39;id&#39;</span>);
+}
+<span style="font-style:italic">//下边会用到    
+</span><span style="font-style:italic"></span><span style="font-weight:bold">public</span> <span style="font-weight:bold">function</span> order(){
+        <span style="font-weight:bold">return</span> $this-&gt;hasOne(<span style="font-style:italic">&#39;App\Order&#39;</span>,<span style="font-style:italic">&#39;id&#39;</span>,<span style="font-style:italic">&#39;order_id&#39;</span>);
+}    
+</code></pre></div><ol start="2">
+<li>使用</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+UserSecond::whereHas(<span style="font-style:italic">&#39;user&#39;</span>,<span style="font-weight:bold">function</span> ($query){
+                            $query-&gt;where(<span style="font-style:italic">&#39;status&#39;</span>,1);
+                    })-&gt;get();
+</code></pre></div><p>结果</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">       {
+            <span style="font-weight:bold">&#34;id&#34;</span>: 9,
+            <span style="font-weight:bold">&#34;user_id&#34;</span>: 11,
+            <span style="font-weight:bold">&#34;enlist_currency&#34;</span>: <span style="font-style:italic">&#34;256.00000&#34;</span>,
+            <span style="font-weight:bold">&#34;create_time&#34;</span>: <span style="font-style:italic">&#34;2018-08-21 17:10:43&#34;</span>,
+            <span style="font-weight:bold">&#34;repeat&#34;</span>: 0,
+            <span style="font-weight:bold">&#34;crowd_id&#34;</span>: 1
+        }
+</code></pre></div><p>得到期望的结果。</p>
+<h3 id="关联相关">
+  关联相关
+  <a class="heading-link" href="#%e5%85%b3%e8%81%94%e7%9b%b8%e5%85%b3">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>所有的关联，你只需在模型中加入类似上边的提到的一个关联关系即可:</p>
+<h4 id="关联计数">
+  关联计数
+  <a class="heading-link" href="#%e5%85%b3%e8%81%94%e8%ae%a1%e6%95%b0">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h4>
+<p>可以关联计数，可以加上关联限定条件计数，默认在结果集合里是 <code>关联名_count</code> 字段。但可以用 <code>as</code> 改名。如下</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+UserSecond::whereHas(<span style="font-style:italic">&#39;user&#39;</span>,<span style="font-weight:bold">function</span> ($query){
+                            $query-&gt;where(<span style="font-style:italic">&#39;status&#39;</span>,1);
+                    })-&gt;withCount([<span style="font-style:italic">&#39;order&#39;</span>,<span style="font-style:italic">&#39;user as total&#39;</span>=&gt;<span style="font-weight:bold">function</span>($query){
+                        <span style="font-style:italic">//user_second.order_id = order.id 时,order 表有几条记录
+</span><span style="font-style:italic"></span>                        <span style="font-style:italic">//user_second.user_id = user.id 时,user 表的 money &gt; 20 的有几条记录
+</span><span style="font-style:italic"></span>                        $query-&gt;where(<span style="font-style:italic">&#39;money&#39;</span>,<span style="font-style:italic">&#39;&gt;&#39;</span>,20);
+                    }])-&gt;get();
+</code></pre></div><p>结果:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"> {
+            <span style="font-weight:bold">&#34;id&#34;</span>: 9,
+            <span style="font-weight:bold">&#34;user_id&#34;</span>: 11,
+            <span style="font-weight:bold">&#34;enlist_currency&#34;</span>: <span style="font-style:italic">&#34;256.00000&#34;</span>,
+            <span style="font-weight:bold">&#34;create_time&#34;</span>: <span style="font-style:italic">&#34;2018-08-21 17:10:43&#34;</span>,
+            <span style="font-weight:bold">&#34;repeat&#34;</span>: 0,
+            <span style="font-weight:bold">&#34;crowd_id&#34;</span>: 1,
+            <span style="font-weight:bold">&#34;order_count&#34;</span>: 15,
+            <span style="font-weight:bold">&#34;total&#34;</span>: 1
+        }
+</code></pre></div><h4 id="关联模型">
+  关联模型
+  <a class="heading-link" href="#%e5%85%b3%e8%81%94%e6%a8%a1%e5%9e%8b">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h4>
+<p>关联模型，在结果集中添加 <code>{关联名}</code> 字段，也可以用 <code>as</code> 改名，里面是关联模型的结果集：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+UserSecond::whereHas(<span style="font-style:italic">&#39;user&#39;</span>,<span style="font-weight:bold">function</span> ($query){
+                            $query-&gt;where(<span style="font-style:italic">&#39;status&#39;</span>,1);
+                    })-&gt;withCount([<span style="font-style:italic">&#39;order&#39;</span>,<span style="font-style:italic">&#39;user as total&#39;</span>=&gt;<span style="font-weight:bold">function</span>($query){
+                        <span style="font-style:italic">//user_second.order_id = order.id 时,order 表有几条记录
+</span><span style="font-style:italic"></span>                        <span style="font-style:italic">//user_second.user_id = user.id 时,user 表的 money &gt; 20 的有几条记录
+</span><span style="font-style:italic"></span>                        $query-&gt;where(<span style="font-style:italic">&#39;money&#39;</span>,<span style="font-style:italic">&#39;&gt;&#39;</span>,20);
+                    }])-&gt;with(<span style="font-style:italic">&#39;user&#39;</span>)-&gt;get();
+</code></pre></div><p>结果:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"> {
+            <span style="font-weight:bold">&#34;id&#34;</span>: 9,
+            <span style="font-weight:bold">&#34;user_id&#34;</span>: 11,
+            <span style="font-weight:bold">&#34;enlist_currency&#34;</span>: <span style="font-style:italic">&#34;256.00000&#34;</span>,
+            <span style="font-weight:bold">&#34;create_time&#34;</span>: <span style="font-style:italic">&#34;2018-08-21 17:10:43&#34;</span>,
+            <span style="font-weight:bold">&#34;repeat&#34;</span>: 0,
+            <span style="font-weight:bold">&#34;crowd_id&#34;</span>: 1,
+            <span style="font-weight:bold">&#34;order_count&#34;</span>: 15,
+            <span style="font-weight:bold">&#34;total&#34;</span>: 1,
+            <span style="font-weight:bold">&#34;user&#34;</span>:{
+                <span style="font-weight:bold">&#34;id&#34;</span>:11,
+                <span style="font-weight:bold">&#34;money&#34;</span>:<span style="font-style:italic">&#34;21.00&#34;</span>,
+                <span style="font-weight:bold">&#34;name&#34;</span>:<span style="font-style:italic">&#34;my&#34;</span>
+            }
+ }
+</code></pre></div><h3 id="状态名">
+  状态名
+  <a class="heading-link" href="#%e7%8a%b6%e6%80%81%e5%90%8d">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>得到每条记录的状态名以前的写法在模型中是</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+<span style="font-weight:bold">protected</span> $appends = [<span style="font-style:italic">&#39;status_name&#39;</span>];
+
+<span style="font-weight:bold">public</span> <span style="font-weight:bold">function</span> getStatusNameAttribute(){
+    <span style="font-weight:bold">if</span> ($this-&gt;attributes[<span style="font-style:italic">&#39;status&#39;</span>] == 0){
+        <span style="font-weight:bold">return</span> <span style="font-style:italic">&#39;关闭&#39;</span>;
+    }<span style="font-weight:bold">elseif</span>($this-&gt;attributes[<span style="font-style:italic">&#39;status&#39;</span>] == 1){
+        <span style="font-weight:bold">return</span> <span style="font-style:italic">&#39;开启&#39;</span>;
+    }
+}
+</code></pre></div><p>还是那句话，不优雅。
+优化后</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+<span style="font-weight:bold">protected</span> $appends = [<span style="font-style:italic">&#39;status_name&#39;</span>];
+
+<span style="font-weight:bold">protected</span> <span style="font-weight:bold">static</span> $status = [
+        0=&gt;<span style="font-style:italic">&#39;关闭&#39;</span>,
+        1=&gt;<span style="font-style:italic">&#39;开启&#39;</span>,
+    ];
+
+    
+<span style="font-weight:bold">public</span> <span style="font-weight:bold">function</span> getStatusNameAttribute(){
+    <span style="font-weight:bold">return</span> self::$status[$this-&gt;attributes[<span style="font-style:italic">&#39;status&#39;</span>]];
+}
+
+
+</code></pre></div><p>再加状态只需要加数组上就可以了</p>
+<h3 id="获取未评价的商品">
+  获取未评价的商品
+  <a class="heading-link" href="#%e8%8e%b7%e5%8f%96%e6%9c%aa%e8%af%84%e4%bb%b7%e7%9a%84%e5%95%86%e5%93%81">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+    <span style="font-style:italic">//获取未评价的商品
+</span><span style="font-style:italic"></span>    <span style="font-weight:bold">public</span> <span style="font-weight:bold">function</span> getEvaluateProduct(Request $request){
+        $order_id = $request-&gt;get(<span style="font-style:italic">&#39;order_id&#39;</span>,<span style="font-weight:bold">null</span>);
+        <span style="font-weight:bold">if</span> (<span style="font-weight:bold">empty</span>($order_id)){
+            <span style="font-weight:bold">return</span> $this-&gt;error(<span style="font-style:italic">&#39;参数错误&#39;</span>);
+        }
+        $results = OrderProduct::where(<span style="font-style:italic">&#39;order_id&#39;</span>,$order_id)-&gt;doesntHave(<span style="font-style:italic">&#39;productEvaluate&#39;</span>)-&gt;get();
+        <span style="font-weight:bold">return</span> $this-&gt;success($results);
+    }
+
+</code></pre></div>
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2022
+     Ethan Kuo 
+    ·
+    
+    Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+      
+      <script src="/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js" integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </body>
+
+</html>

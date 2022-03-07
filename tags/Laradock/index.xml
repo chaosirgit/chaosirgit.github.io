@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Laradock on Ethan Kuo Blog</title>
+    <link>https://blog.adminchao.com/tags/laradock/</link>
+    <description>Recent content in Laradock on Ethan Kuo Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 30 Jun 2021 23:31:29 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/tags/laradock/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Laradock Install GRPC Extension</title>
+      <link>https://blog.adminchao.com/posts/laradock-install-grpc-extension/</link>
+      <pubDate>Wed, 30 Jun 2021 23:31:29 +0000</pubDate>
+      
+      <guid>https://blog.adminchao.com/posts/laradock-install-grpc-extension/</guid>
+      <description>Preface    Installing uncommon PHP extensions in a Laradock environment, this method can be used to install GRPC extensions as well as other uncommon extensions.
+Step    Modify configuration file:    laradock/docker-compose.yml
+In the workspace configuration parameter field
+1 2 3 4  workspace: build: context: ./workspace args:   Add
+1  - INSTALL_PHPGRPC=${WORKSPACE_INSTALL_PHPGRPC}   Modify the startup configuration file    laradock/.</description>
+    </item>
+    
+    <item>
+      <title>Docker Usage Notes</title>
+      <link>https://blog.adminchao.com/posts/docker-usage-notes/</link>
+      <pubDate>Mon, 20 Jul 2020 15:39:19 +0000</pubDate>
+      
+      <guid>https://blog.adminchao.com/posts/docker-usage-notes/</guid>
+      <description>Preface    Take some notes in the process of learning and using Docker.
+Command    Check the version of Docker after installation
+1 2 3 4  $ docker --version Docker version 19.03.8, build afacb8b $ docker-compose --version docker-compose version 1.25.5, build 8a1c60f6   Try running an Nginx server：
+1 2 3 4 5  $ docker run -d -p 80:80 --name webserver nginx # -p Specifies the local port:container port  # -d Running container in the background # --name Set alias for container # When you access your local http://localhost, Welcome to Nginx appears   Stop the Nginx server and delete the container:</description>
+    </item>
+    
+  </channel>
+</rss>

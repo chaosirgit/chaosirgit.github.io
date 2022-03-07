@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; block-all-mixed-content; default-src 'self'; child-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net/; form-action 'self'; frame-src 'self'; img-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/ https://cdn.jsdelivr.net/; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://cdn.jsdelivr.net/; prefetch-src 'self'; connect-src 'self' https://www.google-analytics.com;">
+
+    
+
+    <meta name="author" content="Ethan Kuo">
+    <meta name="description" content="ElasticSearch 问题及用法    出现 index.max_result_window 报错的解决办法    curl -XPUT &#34;http://localhost:9200/my_index/_settings&#34; -d &#39;{ &#34;index&#34; : { &#34;max_result_window&#34; : 100000000 } }&#39; 搜索封装    public static function SearchAccountLogEs($must = array(),$must_not = array(),$should = array(),$aggs = array(),$size = 10,$page = 1,$sort = array(),$debug = false){ $index = Config::get(&#39;elasticsearch.index&#39;); $type = &#39;accountlog&#39;; $must = $must ?? array(); $must_not = $must_not ?? array(); $should = $should ?? array(); $aggs = $aggs ?">
+    <meta name="keywords" content="phper,goer,php,golang,php/go">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Laravel ElasticSearch 插件"/>
+<meta name="twitter:description" content="ElasticSearch 问题及用法    出现 index.max_result_window 报错的解决办法    curl -XPUT &#34;http://localhost:9200/my_index/_settings&#34; -d &#39;{ &#34;index&#34; : { &#34;max_result_window&#34; : 100000000 } }&#39; 搜索封装    public static function SearchAccountLogEs($must = array(),$must_not = array(),$should = array(),$aggs = array(),$size = 10,$page = 1,$sort = array(),$debug = false){ $index = Config::get(&#39;elasticsearch.index&#39;); $type = &#39;accountlog&#39;; $must = $must ?? array(); $must_not = $must_not ?? array(); $should = $should ?? array(); $aggs = $aggs ?"/>
+
+    <meta property="og:title" content="Laravel ElasticSearch 插件" />
+<meta property="og:description" content="ElasticSearch 问题及用法    出现 index.max_result_window 报错的解决办法    curl -XPUT &#34;http://localhost:9200/my_index/_settings&#34; -d &#39;{ &#34;index&#34; : { &#34;max_result_window&#34; : 100000000 } }&#39; 搜索封装    public static function SearchAccountLogEs($must = array(),$must_not = array(),$should = array(),$aggs = array(),$size = 10,$page = 1,$sort = array(),$debug = false){ $index = Config::get(&#39;elasticsearch.index&#39;); $type = &#39;accountlog&#39;; $must = $must ?? array(); $must_not = $must_not ?? array(); $should = $should ?? array(); $aggs = $aggs ?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.adminchao.com/posts/laravel-elasticsearch-%E6%8F%92%E4%BB%B6/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-06-08T12:43:00+00:00" />
+<meta property="article:modified_time" content="2018-06-08T12:43:00+00:00" />
+
+
+
+    <title>
+  Laravel ElasticSearch 插件 · Ethan Kuo Blog
+</title>
+
+    
+      <link rel="canonical" href="https://blog.adminchao.com/posts/laravel-elasticsearch-%E6%8F%92%E4%BB%B6/">
+    
+
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css" integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    <meta name="generator" content="Hugo 0.89.1" />
+  </head>
+
+  
+  
+    
+  
+  <body class="preload-transitions colorscheme-auto">
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Ethan Kuo Blog
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="https://blog.adminchao.com/zh-cn/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://blog.adminchao.com/posts/laravel-elasticsearch-%E6%8F%92%E4%BB%B6/">
+              Laravel ElasticSearch 插件
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2018-06-08T12:43:00Z">
+                2018-06-08 12:43:00
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              2-minute read
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa fa-folder" aria-hidden="true"></i>
+    <a href="/categories/laravel/">Laravel</a></div>
+
+          <div class="tags">
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/laravel/">Laravel</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/php/">PHP</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/elasticsearch/">ElasticSearch</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <h2 id="elasticsearch-问题及用法">
+  ElasticSearch 问题及用法
+  <a class="heading-link" href="#elasticsearch-%e9%97%ae%e9%a2%98%e5%8f%8a%e7%94%a8%e6%b3%95">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<h3 id="出现-indexmax_result_window-报错的解决办法">
+  出现 index.max_result_window 报错的解决办法
+  <a class="heading-link" href="#%e5%87%ba%e7%8e%b0-indexmax_result_window-%e6%8a%a5%e9%94%99%e7%9a%84%e8%a7%a3%e5%86%b3%e5%8a%9e%e6%b3%95">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">curl -XPUT <span style="font-style:italic">&#34;http://localhost:9200/my_index/_settings&#34;</span> -d <span style="font-style:italic">&#39;{ &#34;index&#34; : { &#34;max_result_window&#34; : 100000000 } }&#39;</span>
+</code></pre></div><h3 id="搜索封装">
+  搜索封装
+  <a class="heading-link" href="#%e6%90%9c%e7%b4%a2%e5%b0%81%e8%a3%85">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="font-weight:bold">public</span> <span style="font-weight:bold">static</span> <span style="font-weight:bold">function</span> SearchAccountLogEs($must = <span style="font-weight:bold">array</span>(),$must_not = <span style="font-weight:bold">array</span>(),$should = <span style="font-weight:bold">array</span>(),$aggs = <span style="font-weight:bold">array</span>(),$size = 10,$page = 1,$sort = <span style="font-weight:bold">array</span>(),$debug = <span style="font-weight:bold">false</span>){
+        $index = Config::get(<span style="font-style:italic">&#39;elasticsearch.index&#39;</span>);
+        $type = <span style="font-style:italic">&#39;accountlog&#39;</span>;
+        $must = $must ?? <span style="font-weight:bold">array</span>();
+        $must_not = $must_not ?? <span style="font-weight:bold">array</span>();
+        $should = $should ?? <span style="font-weight:bold">array</span>();
+        $aggs = $aggs ?? <span style="font-weight:bold">array</span>();
+        $sort = $sort ?? <span style="font-weight:bold">array</span>();
+        $from = ($page - 1) * $size;
+        $params = [
+            <span style="font-style:italic">&#39;index&#39;</span>=&gt;$index,
+            <span style="font-style:italic">&#39;type&#39;</span> =&gt; $type,
+            <span style="font-style:italic">&#39;body&#39;</span>=&gt;[
+                <span style="font-style:italic">&#39;query&#39;</span>=&gt;[
+                    <span style="font-style:italic">&#39;bool&#39;</span>=&gt;[
+                        <span style="font-style:italic">&#39;must&#39;</span>=&gt;$must,
+                        <span style="font-style:italic">&#39;must_not&#39;</span>=&gt;$must_not,
+<span style="font-style:italic">//                        &#39;should&#39; =&gt; $should
+</span><span style="font-style:italic"></span>                        ]
+                    ]
+<span style="font-style:italic">//                &#39;aggs&#39;=&gt;$aggs,
+</span><span style="font-style:italic"></span>                ],
+            <span style="font-style:italic">&#39;size&#39;</span> =&gt; $size,
+            <span style="font-style:italic">&#39;from&#39;</span> =&gt; $from
+        ];
+        
+        $client = ClientBuilder::create()
+            -&gt;setHosts( Config::get( <span style="font-style:italic">&#39;elasticsearch.hosts&#39;</span> ) )
+            -&gt;setRetries( 2 )
+            -&gt;build();
+        <span style="font-weight:bold">if</span>(!<span style="font-weight:bold">empty</span>($aggs)){
+            $params[<span style="font-style:italic">&#39;body&#39;</span>][<span style="font-style:italic">&#39;aggs&#39;</span>] = $aggs;
+        }
+        <span style="font-weight:bold">if</span>(!<span style="font-weight:bold">empty</span>($should)){
+            $params[<span style="font-style:italic">&#39;body&#39;</span>][<span style="font-style:italic">&#39;query&#39;</span>][<span style="font-style:italic">&#34;bool&#34;</span>][<span style="font-style:italic">&#34;should&#34;</span>] = $should;
+            $params[<span style="font-style:italic">&#39;body&#39;</span>][<span style="font-style:italic">&#39;query&#39;</span>][<span style="font-style:italic">&#34;bool&#34;</span>][<span style="font-style:italic">&#34;minimum_should_match&#34;</span>] = 1;
+        }
+        <span style="font-weight:bold">if</span>(!<span style="font-weight:bold">empty</span>($sort)){
+            $params[<span style="font-style:italic">&#39;body&#39;</span>][<span style="font-style:italic">&#39;sort&#39;</span>] = <span style="font-weight:bold">array</span>($sort);
+        }
+        <span style="font-weight:bold">if</span>($debug == <span style="font-weight:bold">true</span>)
+            <span style="font-weight:bold">return</span> $params;
+        $response = $client-&gt;search($params);
+        $results = <span style="font-weight:bold">array</span>(
+          <span style="font-style:italic">&#39;total&#39;</span> =&gt; $response[<span style="font-style:italic">&#39;hits&#39;</span>][<span style="font-style:italic">&#39;total&#39;</span>],
+<span style="font-style:italic">//            key($aggs) =&gt; $response[&#39;aggregations&#39;][key($aggs)][&#39;value&#39;]
+</span><span style="font-style:italic"></span>        );
+        <span style="font-weight:bold">if</span> (!<span style="font-weight:bold">empty</span>($aggs)){
+            $results[key($aggs)] = $response[<span style="font-style:italic">&#39;aggregations&#39;</span>][key($aggs)][<span style="font-style:italic">&#39;value&#39;</span>];
+        }
+        $results[<span style="font-style:italic">&#39;data&#39;</span>] = [];
+        <span style="font-weight:bold">foreach</span> ($response[<span style="font-style:italic">&#39;hits&#39;</span>][<span style="font-style:italic">&#39;hits&#39;</span>] <span style="font-weight:bold">as</span> $key =&gt; $value){
+            $results[<span style="font-style:italic">&#39;data&#39;</span>][] = $value[<span style="font-style:italic">&#39;_source&#39;</span>];
+        }
+
+        <span style="font-weight:bold">return</span> $results;
+    }
+</code></pre></div><h3 id="更新封装">
+  更新封装
+  <a class="heading-link" href="#%e6%9b%b4%e6%96%b0%e5%b0%81%e8%a3%85">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="font-weight:bold">public</span> <span style="font-weight:bold">static</span> <span style="font-weight:bold">function</span> updateAccountLogEs($log)
+    {
+        $other = User::find($log-&gt;user_id);
+        <span style="font-style:italic">//更新ES索引
+</span><span style="font-style:italic"></span>        $client = ClientBuilder::create()
+            -&gt;setHosts(Config::get(<span style="font-style:italic">&#39;elasticsearch.hosts&#39;</span>))
+            -&gt;setRetries(2)
+            -&gt;build();
+        $index = Config::get(<span style="font-style:italic">&#39;elasticsearch.index&#39;</span>);
+        $type = <span style="font-style:italic">&#39;accountlog&#39;</span>;
+
+        $params = [
+            <span style="font-style:italic">&#39;index&#39;</span> =&gt; $index,
+            <span style="font-style:italic">&#39;type&#39;</span>  =&gt; $type,
+            <span style="font-style:italic">&#39;id&#39;</span>    =&gt; $log-&gt;id
+        ];
+
+        <span style="font-weight:bold">try</span> {
+            $client-&gt;delete($params);
+        }<span style="font-weight:bold">catch</span> (\Exception $ex){}
+
+        $params = [
+            <span style="font-style:italic">&#39;index&#39;</span> =&gt; $index,
+            <span style="font-style:italic">&#39;type&#39;</span> =&gt; $type,
+            <span style="font-style:italic">&#39;id&#39;</span> =&gt; $log-&gt;id,
+            <span style="font-style:italic">&#39;body&#39;</span> =&gt; [
+                <span style="font-style:italic">&#39;id&#39;</span> =&gt; $log-&gt;id,
+                <span style="font-style:italic">&#39;user_id&#39;</span> =&gt; $log-&gt;user_id,
+                <span style="font-style:italic">&#39;user_money&#39;</span> =&gt; $log-&gt;user_money,
+                <span style="font-style:italic">&#39;user_money1&#39;</span> =&gt; $log-&gt;user_money1,
+                <span style="font-style:italic">&#39;user_money3&#39;</span> =&gt; $log-&gt;user_money3,
+                <span style="font-style:italic">&#39;frozen_money&#39;</span> =&gt; $log-&gt;frozen_money,
+                <span style="font-style:italic">&#39;letter_of_credit&#39;</span> =&gt; $log-&gt;letter_of_credit,
+                <span style="font-style:italic">&#39;shop_letter_credit&#39;</span> =&gt; $log-&gt;shop_letter_credit,
+                <span style="font-style:italic">&#39;rank_points&#39;</span> =&gt; $log-&gt;rank_points,
+                <span style="font-style:italic">&#39;pay_points&#39;</span> =&gt; $log-&gt;pay_points,
+                <span style="font-style:italic">&#39;created_time&#39;</span> =&gt; $log-&gt;time,
+                <span style="font-style:italic">&#39;info&#39;</span> =&gt; $log-&gt;info,
+                <span style="font-style:italic">&#39;province_id&#39;</span> =&gt; $other-&gt;province_id,
+                <span style="font-style:italic">&#39;city_id&#39;</span> =&gt; $other-&gt;city_id,
+                <span style="font-style:italic">&#39;county_id&#39;</span> =&gt; $other-&gt;county_id,
+                <span style="font-style:italic">&#39;industry_id&#39;</span> =&gt; $other-&gt;industry_id,
+                <span style="font-style:italic">&#39;parent_id&#39;</span> =&gt; $other-&gt;parent_id,
+                <span style="font-style:italic">&#39;type&#39;</span> =&gt; $log-&gt;type
+            ]
+        ];
+
+        $client-&gt;index($params);
+    }
+
+</code></pre></div>
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2022
+     Ethan Kuo 
+    ·
+    
+    Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+      
+      <script src="/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js" integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </body>
+
+</html>

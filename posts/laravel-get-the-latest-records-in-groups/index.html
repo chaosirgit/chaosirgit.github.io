@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; block-all-mixed-content; default-src 'self'; child-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net/; form-action 'self'; frame-src 'self'; img-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/ https://cdn.jsdelivr.net/; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://cdn.jsdelivr.net/; prefetch-src 'self'; connect-src 'self' https://www.google-analytics.com;">
+
+    
+
+    <meta name="author" content="Ethan Kuo">
+    <meta name="description" content="Preface    Today&rsquo;s project requires the business logic of querying the latest records based on grouping, and I want to use Eloquent to query out and make a record.
+Realization    Table Contents       id name user_id value     1 Project 1 61 test 1   2 Project 2 61 test 2   3 Project 3 61 test 3   4 Project 1 61 test 123    Raw SQL is:    1  select * from (select * from project where user_id = :user_id order by id desc) as a group by a.">
+    <meta name="keywords" content="Laravel,GroupBy,Select,SubQuery">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Laravel Get The Latest Records In Groups"/>
+<meta name="twitter:description" content="Preface    Today&rsquo;s project requires the business logic of querying the latest records based on grouping, and I want to use Eloquent to query out and make a record.
+Realization    Table Contents       id name user_id value     1 Project 1 61 test 1   2 Project 2 61 test 2   3 Project 3 61 test 3   4 Project 1 61 test 123    Raw SQL is:    1  select * from (select * from project where user_id = :user_id order by id desc) as a group by a."/>
+
+    <meta property="og:title" content="Laravel Get The Latest Records In Groups" />
+<meta property="og:description" content="Preface    Today&rsquo;s project requires the business logic of querying the latest records based on grouping, and I want to use Eloquent to query out and make a record.
+Realization    Table Contents       id name user_id value     1 Project 1 61 test 1   2 Project 2 61 test 2   3 Project 3 61 test 3   4 Project 1 61 test 123    Raw SQL is:    1  select * from (select * from project where user_id = :user_id order by id desc) as a group by a." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.adminchao.com/posts/laravel-get-the-latest-records-in-groups/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-11-14T14:35:10+00:00" />
+<meta property="article:modified_time" content="2018-11-14T14:35:10+00:00" />
+
+
+
+    <title>
+  Laravel Get The Latest Records In Groups · Ethan Kuo Blog
+</title>
+
+    
+      <link rel="canonical" href="https://blog.adminchao.com/posts/laravel-get-the-latest-records-in-groups/">
+    
+
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css" integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    <meta name="generator" content="Hugo 0.89.1" />
+  </head>
+
+  
+  
+    
+  
+  <body class="preload-transitions colorscheme-dark">
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Ethan Kuo Blog
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="https://blog.adminchao.com/zh-cn/">🇨🇳</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://blog.adminchao.com/posts/laravel-get-the-latest-records-in-groups/">
+              Laravel Get The Latest Records In Groups
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2018-11-14T14:35:10Z">
+                2018-11-14 14:35:10
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              2-minute read
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa fa-folder" aria-hidden="true"></i>
+    <a href="/categories/laravel/">Laravel</a></div>
+
+          <div class="tags">
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/laravel/">Laravel</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/groupby/">GroupBy</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/select/">Select</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/subquery/">SubQuery</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <h2 id="preface">
+  Preface
+  <a class="heading-link" href="#preface">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<p>Today&rsquo;s project requires the business logic of querying the latest records based on grouping, and I want to use Eloquent to query out and make a record.</p>
+<h2 id="realization">
+  Realization
+  <a class="heading-link" href="#realization">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<h3 id="table-contents">
+  Table Contents
+  <a class="heading-link" href="#table-contents">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>user_id</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Project 1</td>
+<td>61</td>
+<td>test 1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Project 2</td>
+<td>61</td>
+<td>test 2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Project 3</td>
+<td>61</td>
+<td>test 3</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Project 1</td>
+<td>61</td>
+<td>test 123</td>
+</tr>
+</tbody>
+</table>
+<h3 id="raw-sql-is">
+  Raw SQL is:
+  <a class="heading-link" href="#raw-sql-is">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">select</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">from</span> (<span style="color:#ff79c6">select</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">from</span> project <span style="color:#ff79c6">where</span> user_id <span style="color:#ff79c6">=</span> :user_id <span style="color:#ff79c6">order</span> <span style="color:#ff79c6">by</span> id <span style="color:#ff79c6">desc</span>) <span style="color:#ff79c6">as</span> a <span style="color:#ff79c6">group</span> <span style="color:#ff79c6">by</span> a.name <span style="color:#ff79c6">order</span> <span style="color:#ff79c6">by</span> id <span style="color:#ff79c6">desc</span>;
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="mysql-57-result-as">
+  Mysql 5.7 result as
+  <a class="heading-link" href="#mysql-57-result-as">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>user_id</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>Project 3</td>
+<td>61</td>
+<td>test 3</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Project 2</td>
+<td>61</td>
+<td>test 2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Project 1</td>
+<td>61</td>
+<td>test 1</td>
+</tr>
+</tbody>
+</table>
+<p>The reason is that the 5.7 version of ORDER BY without LIMIT, less a DERIVED operation, it is estimated that the internal optimization, that ORDER BY in this syntax can be ignored, there is a LIMIT restriction involves sorting the results after the ORDER BY will not be ignored, you can achieve the expected.</p>
+<h3 id="optimized-to-get">
+  Optimized to get
+  <a class="heading-link" href="#optimized-to-get">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">select</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">from</span> (<span style="color:#ff79c6">select</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">from</span> project <span style="color:#ff79c6">where</span> user_id <span style="color:#ff79c6">=</span> :user_id <span style="color:#ff79c6">order</span> <span style="color:#ff79c6">by</span> id <span style="color:#ff79c6">desc</span> <span style="color:#ff79c6">limit</span> <span style="color:#bd93f9">10000</span>) <span style="color:#ff79c6">as</span> a <span style="color:#ff79c6">group</span> <span style="color:#ff79c6">by</span> a.name <span style="color:#ff79c6">order</span> <span style="color:#ff79c6">by</span> id <span style="color:#ff79c6">desc</span>;
+</code></pre></td></tr></table>
+</div>
+</div><p>Result as</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>user_id</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Project 1</td>
+<td>61</td>
+<td>test 123</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Project 3</td>
+<td>61</td>
+<td>test 3</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Project 2</td>
+<td>61</td>
+<td>test 2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="eloquent-subquery-syntax">
+  Eloquent Subquery Syntax
+  <a class="heading-link" href="#eloquent-subquery-syntax">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#ff79c6">&lt;?</span>php
+
+<span style="color:#ff79c6">public</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">projectList</span>(Request <span style="color:#8be9fd;font-style:italic">$request</span>){
+        <span style="color:#8be9fd;font-style:italic">$limit</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">get</span>(<span style="color:#f1fa8c">&#39;limit&#39;</span>,<span style="color:#bd93f9">10</span>);
+        <span style="color:#8be9fd;font-style:italic">$user_id</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">get</span>(<span style="color:#f1fa8c">&#39;user_id&#39;</span>,<span style="color:#ff79c6">null</span>);
+        
+        <span style="color:#8be9fd;font-style:italic">$sub_query</span> <span style="color:#ff79c6">=</span> Project<span style="color:#ff79c6">::</span><span style="color:#50fa7b">where</span>(<span style="color:#f1fa8c">&#39;user_id&#39;</span>,<span style="color:#8be9fd;font-style:italic">$user_id</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">orderBy</span>(<span style="color:#f1fa8c">&#39;id&#39;</span>,<span style="color:#f1fa8c">&#39;desc&#39;</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">limit</span>(<span style="color:#bd93f9">1000</span>);<span style="color:#6272a4">//Subquery
+</span><span style="color:#6272a4"></span>        
+        <span style="color:#8be9fd;font-style:italic">$results</span> <span style="color:#ff79c6">=</span> Project<span style="color:#ff79c6">::</span><span style="color:#50fa7b">select</span>(<span style="color:#f1fa8c">&#39;*&#39;</span>)
+                <span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">from</span>(DB<span style="color:#ff79c6">::</span><span style="color:#50fa7b">raw</span>(<span style="color:#f1fa8c">&#39;(&#39;</span><span style="color:#ff79c6">.</span><span style="color:#8be9fd;font-style:italic">$sub_query</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">toSql</span>()<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">&#39;) as a&#39;</span>)) <span style="color:#6272a4">//from() is similar to DB::table(), toSql() gets the sql statement with ? sql statement
+</span><span style="color:#6272a4"></span>                <span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">mergeBindings</span>(<span style="color:#8be9fd;font-style:italic">$sub_query</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">getQuery</span>())<span style="color:#6272a4">//mergeBindings() merges the binding parameters, getQuery() gets the specific values
+</span><span style="color:#6272a4"></span>                <span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">groupBy</span>(<span style="color:#f1fa8c">&#39;name&#39;</span>)
+                <span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">orderBy</span>(<span style="color:#f1fa8c">&#39;id&#39;</span>,<span style="color:#f1fa8c">&#39;desc&#39;</span>)
+                <span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">paginate</span>(<span style="color:#8be9fd;font-style:italic">$limit</span>);
+        
+        <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">pageDate</span>(<span style="color:#8be9fd;font-style:italic">$results</span>);
+    }
+<span style="color:#ff79c6">?&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2022
+     Ethan Kuo 
+    ·
+    
+    Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+      
+      <script src="/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js" integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NK08XEDHKZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NK08XEDHKZ');
+</script>
+  </body>
+
+</html>

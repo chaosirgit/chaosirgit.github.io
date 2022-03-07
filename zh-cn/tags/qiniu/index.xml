@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>qiniu on 郭超超的博客</title>
+    <link>https://blog.adminchao.com/zh-cn/tags/qiniu/</link>
+    <description>Recent content in qiniu on 郭超超的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 22 May 2019 13:00:10 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/tags/qiniu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>百度编辑器多图上传改为七牛云</title>
+      <link>https://blog.adminchao.com/zh-cn/posts/%E7%99%BE%E5%BA%A6%E7%BC%96%E8%BE%91%E5%99%A8%E5%A4%9A%E5%9B%BE%E4%B8%8A%E4%BC%A0%E6%94%B9%E4%B8%BA%E4%B8%83%E7%89%9B%E4%BA%91/</link>
+      <pubDate>Wed, 22 May 2019 13:00:10 +0000</pubDate>
+      
+      <guid>https://blog.adminchao.com/zh-cn/posts/%E7%99%BE%E5%BA%A6%E7%BC%96%E8%BE%91%E5%99%A8%E5%A4%9A%E5%9B%BE%E4%B8%8A%E4%BC%A0%E6%94%B9%E4%B8%BA%E4%B8%83%E7%89%9B%E4%BA%91/</guid>
+      <description>前言    修改百度编辑器多图上传为七牛云 百度编辑器版本为 1.4.3
+开始    修改 ueditor/1.4.3/php/config.json 配置文件    1 2 3 4 5 6 7 8 9 10 11 12 13  { /* 上传图片配置项 */ &amp;#34;imageUrl&amp;#34;: &amp;#34;https://up-z2.qiniup.com/&amp;#34;, /* 七牛云上传接口 */ &amp;#34;imageActionName&amp;#34;: &amp;#34;uploadimage&amp;#34;, /* 执行上传图片的action名称 */ &amp;#34;imageFieldName&amp;#34;: &amp;#34;file&amp;#34;, /* 提交的图片表单名称 这里修改为file 七牛云接收参数名不是file报错 */ &amp;#34;imageMaxSize&amp;#34;: 5242880, /* 上传大小限制，单位B */ &amp;#34;imageAllowFiles&amp;#34;: [&amp;#34;.png&amp;#34;, &amp;#34;.jpg&amp;#34;, &amp;#34;.jpeg&amp;#34;, &amp;#34;.gif&amp;#34;, &amp;#34;.bmp&amp;#34;], /* 上传图片格式显示 */ &amp;#34;imageCompressEnable&amp;#34;: true, /* 是否压缩图片,默认是true */ &amp;#34;imageCompressBorder&amp;#34;: 1600, /* 图片压缩最长边限制 */ &amp;#34;imageInsertAlign&amp;#34;: &amp;#34;none&amp;#34;, /* 插入的图片浮动方式 */ &amp;#34;imageUrlPrefix&amp;#34;: &amp;#34;&amp;#34;, /* 图片访问路径前缀 */ &amp;#34;imagePathFormat&amp;#34;: &amp;#34;/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}&amp;#34; /* 上传保存路径,可以自定义保存路径和文件名格式 */ }   修改 ueditor/1.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>红包 on Ethan Kuo Blog</title>
+    <link>https://blog.adminchao.com/tags/%E7%BA%A2%E5%8C%85/</link>
+    <description>Recent content in 红包 on Ethan Kuo Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 16 Mar 2019 10:39:09 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/tags/%E7%BA%A2%E5%8C%85/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>红包类</title>
+      <link>https://blog.adminchao.com/posts/%E7%BA%A2%E5%8C%85%E7%B1%BB/</link>
+      <pubDate>Sat, 16 Mar 2019 10:39:09 +0000</pubDate>
+      
+      <guid>https://blog.adminchao.com/posts/%E7%BA%A2%E5%8C%85%E7%B1%BB/</guid>
+      <description>前言    照搬了别人写的红包类，感觉挺好用。原文地址在注释里。特此记录
+代码    &amp;lt;?php namespace App\Utils; /** * 红包分配算法 * * example * $coupon = new Coupon(200, 5); * $res = $coupon-&amp;gt;handle(); * print_r($res); * * @author Flc &amp;lt;2018-04-06 20:09:53&amp;gt; * @see http://flc.ren | http://flc.io | https://github.com/flc1125 */ class Coupon { /** * 红包金额 * * @var float */ protected $amount; /** * 红包个数 * * @var int */ protected $num; /** * 领取的红包最小金额 * * @var float */ protected $coupon_min; /** * 红包分配结果 * * @var array */ protected $items = []; /** * 初始化 * * @param float $amount 红包金额（单位：元）最多保留2位小数 * @param int $num 红包个数 * @param float $coupon_min 每个至少领取的红包金额 */ public function __construct($amount, $num = 1, $coupon_min = 0.</description>
+    </item>
+    
+  </channel>
+</rss>

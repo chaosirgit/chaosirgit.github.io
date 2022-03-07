@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; block-all-mixed-content; default-src 'self'; child-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net/; form-action 'self'; frame-src 'self'; img-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/ https://cdn.jsdelivr.net/; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://cdn.jsdelivr.net/; prefetch-src 'self'; connect-src 'self' https://www.google-analytics.com;">
+
+    
+
+    <meta name="author" content="Ethan Kuo">
+    <meta name="description" content="前言    记录在 Laravel 中使用 WorkerMan 或 GateWay 过程。
+开始    安装    composer require workerman/gateway-worker 创建命令行    使用 artisan 创建一个命令行工具来启动 WorkerMan 因为 WorkerMan 只能在命令行中启动。
+php artisan make:command WorkerMan 更改 /app/Console/Commands/WorkerMan.php 文件    &lt;?php namespace App\Console\Commands; use GatewayWorker\BusinessWorker; use GatewayWorker\Gateway; use GatewayWorker\Register; use Illuminate\Console\Command; use Workerman\Worker; class WorkerMan extends Command { /** * The name and signature of the console command.">
+    <meta name="keywords" content="Laravel,WorkerMan,GateWay,PHP">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Laravel 使用WorkerMan(GateWay)"/>
+<meta name="twitter:description" content="前言    记录在 Laravel 中使用 WorkerMan 或 GateWay 过程。
+开始    安装    composer require workerman/gateway-worker 创建命令行    使用 artisan 创建一个命令行工具来启动 WorkerMan 因为 WorkerMan 只能在命令行中启动。
+php artisan make:command WorkerMan 更改 /app/Console/Commands/WorkerMan.php 文件    &lt;?php namespace App\Console\Commands; use GatewayWorker\BusinessWorker; use GatewayWorker\Gateway; use GatewayWorker\Register; use Illuminate\Console\Command; use Workerman\Worker; class WorkerMan extends Command { /** * The name and signature of the console command."/>
+
+    <meta property="og:title" content="Laravel 使用WorkerMan(GateWay)" />
+<meta property="og:description" content="前言    记录在 Laravel 中使用 WorkerMan 或 GateWay 过程。
+开始    安装    composer require workerman/gateway-worker 创建命令行    使用 artisan 创建一个命令行工具来启动 WorkerMan 因为 WorkerMan 只能在命令行中启动。
+php artisan make:command WorkerMan 更改 /app/Console/Commands/WorkerMan.php 文件    &lt;?php namespace App\Console\Commands; use GatewayWorker\BusinessWorker; use GatewayWorker\Gateway; use GatewayWorker\Register; use Illuminate\Console\Command; use Workerman\Worker; class WorkerMan extends Command { /** * The name and signature of the console command." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.adminchao.com/posts/laravel-%E4%BD%BF%E7%94%A8workerman-gateway/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-07-22T16:30:53+00:00" />
+<meta property="article:modified_time" content="2019-07-22T16:30:53+00:00" />
+
+
+
+    <title>
+  Laravel 使用WorkerMan(GateWay) · Ethan Kuo Blog
+</title>
+
+    
+      <link rel="canonical" href="https://blog.adminchao.com/posts/laravel-%E4%BD%BF%E7%94%A8workerman-gateway/">
+    
+
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css" integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    <meta name="generator" content="Hugo 0.89.1" />
+  </head>
+
+  
+  
+    
+  
+  <body class="preload-transitions colorscheme-auto">
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Ethan Kuo Blog
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="https://blog.adminchao.com/zh-cn/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://blog.adminchao.com/posts/laravel-%E4%BD%BF%E7%94%A8workerman-gateway/">
+              Laravel 使用WorkerMan(GateWay)
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2019-07-22T16:30:53Z">
+                2019-07-22 16:30:53
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              4-minute read
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa fa-folder" aria-hidden="true"></i>
+    <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></div>
+
+          <div class="tags">
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/laravel/">Laravel</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/workerman/">WorkerMan</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/gateway/">GateWay</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/php/">PHP</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <h2 id="前言">
+  前言
+  <a class="heading-link" href="#%e5%89%8d%e8%a8%80">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<p>记录在 Laravel 中使用 WorkerMan 或 GateWay 过程。</p>
+<h2 id="开始">
+  开始
+  <a class="heading-link" href="#%e5%bc%80%e5%a7%8b">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<h3 id="安装">
+  安装
+  <a class="heading-link" href="#%e5%ae%89%e8%a3%85">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">composer require workerman/gateway-worker
+</code></pre></div><h3 id="创建命令行">
+  创建命令行
+  <a class="heading-link" href="#%e5%88%9b%e5%bb%ba%e5%91%bd%e4%bb%a4%e8%a1%8c">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>使用 artisan 创建一个命令行工具来启动 WorkerMan 因为 WorkerMan 只能在命令行中启动。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">php artisan make:command WorkerMan
+</code></pre></div><h3 id="更改-appconsolecommandsworkermanphp-文件">
+  更改 <code>/app/Console/Commands/WorkerMan.php</code> 文件
+  <a class="heading-link" href="#%e6%9b%b4%e6%94%b9-appconsolecommandsworkermanphp-%e6%96%87%e4%bb%b6">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+
+<span style="font-weight:bold">namespace</span> App\Console\Commands;
+
+<span style="font-weight:bold">use</span> GatewayWorker\BusinessWorker;
+<span style="font-weight:bold">use</span> GatewayWorker\Gateway;
+<span style="font-weight:bold">use</span> GatewayWorker\Register;
+<span style="font-weight:bold">use</span> Illuminate\Console\Command;
+<span style="font-weight:bold">use</span> Workerman\Worker;
+
+<span style="font-weight:bold">class</span> <span style="font-weight:bold">WorkerMan</span> <span style="font-weight:bold">extends</span> Command
+{
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * The name and signature of the console command.
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @var string
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">protected</span> $signature = <span style="font-style:italic">&#39;workerman {action} {--d}&#39;</span>;
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * The console command description.
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @var string
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">protected</span> $description = <span style="font-style:italic">&#39;Start a Workerman server&#39;</span>;
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * Create a new command instance.
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @return void
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">public</span> <span style="font-weight:bold">function</span> __construct()
+    {
+        <span style="font-weight:bold">parent</span>::__construct();
+    }
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * Execute the console command.
+</span><span style="font-style:italic">     *
+</span><span style="font-style:italic">     * @return mixed
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">public</span> <span style="font-weight:bold">function</span> handle()
+    {
+        <span style="font-weight:bold">global</span> $argv;
+        $action = $this-&gt;argument(<span style="font-style:italic">&#39;action&#39;</span>);
+
+        $argv[0] = <span style="font-style:italic">&#39;wk&#39;</span>;
+        $argv[1] = $action;
+        $argv[2] = $this-&gt;option(<span style="font-style:italic">&#39;d&#39;</span>) ? <span style="font-style:italic">&#39;-d&#39;</span> : <span style="font-style:italic">&#39;&#39;</span>;
+
+        $this-&gt;start();
+    }
+
+    <span style="font-weight:bold">private</span> <span style="font-weight:bold">function</span> start()
+    {
+        $this-&gt;startGateWay();
+        $this-&gt;startBusinessWorker();
+        $this-&gt;startRegister();
+        Worker::runAll();
+    }
+
+    <span style="font-style:italic">//BusinessWorker是运行业务逻辑的进程，BusinessWorker收到Gateway转发来的事件及请求时会默认调用Events.php中的onConnect onMessage
+</span><span style="font-style:italic"></span>    <span style="font-weight:bold">private</span> <span style="font-weight:bold">function</span> startBusinessWorker()
+    {
+        $worker                  = <span style="font-weight:bold">new</span> BusinessWorker();
+        $worker-&gt;name            = config(<span style="font-style:italic">&#39;gateway.business.name&#39;</span>);        <span style="font-style:italic">//设置BusinessWorker进程的名称
+</span><span style="font-style:italic"></span>        $worker-&gt;count           = config(<span style="font-style:italic">&#39;gateway.business.count&#39;</span>);       <span style="font-style:italic">//设置BusinessWorker进程的数量
+</span><span style="font-style:italic"></span>        $worker-&gt;registerAddress = config(<span style="font-style:italic">&#39;gateway.business.register_address&#39;</span>);        <span style="font-style:italic">//注册服务地址-向Register进程注册-内部通讯使用
+</span><span style="font-style:italic"></span>        $worker-&gt;eventHandler    = config(<span style="font-style:italic">&#39;gateway.business.event&#39;</span>);        <span style="font-style:italic">//设置使用哪个类来处理业务,业务类至少要实现onMessage静态方法，onConnect和onClose静态方法可以不用实现
+</span><span style="font-style:italic"></span>    }
+
+    <span style="font-weight:bold">private</span> <span style="font-weight:bold">function</span> startGateWay()
+    {
+        $address = config(<span style="font-style:italic">&#39;gateway.gateway.address&#39;</span>);
+        $port    = config(<span style="font-style:italic">&#39;gateway.gateway.port&#39;</span>);
+        <span style="font-weight:bold">if</span> (config(<span style="font-style:italic">&#39;gateway.gateway.ssl_open&#39;</span>)) {
+            <span style="font-style:italic">// 证书最好是申请的证书-开启wss 打开注释
+</span><span style="font-style:italic"></span>            <span style="font-style:italic">/**
+</span><span style="font-style:italic">             * Workerman版本不小于3.3.7
+</span><span style="font-style:italic">             * PHP安装了openssl扩展
+</span><span style="font-style:italic">             * 已经申请了证书（pem/crt文件及key文件）放在磁盘某个目录(位置任意)
+</span><span style="font-style:italic">             * */</span>
+            $context = <span style="font-weight:bold">array</span>(
+                <span style="font-style:italic">// 更多ssl选项请参考手册 http://php.net/manual/zh/context.ssl.php
+</span><span style="font-style:italic"></span>                <span style="font-style:italic">&#39;ssl&#39;</span> =&gt; <span style="font-weight:bold">array</span>(
+                    <span style="font-style:italic">// 请使用绝对路径
+</span><span style="font-style:italic"></span>                    <span style="font-style:italic">&#39;local_cert&#39;</span>        =&gt; config(<span style="font-style:italic">&#39;gateway.gateway.ssl.local_cert&#39;</span>), <span style="font-style:italic">// 也可以是crt文件
+</span><span style="font-style:italic"></span>                    <span style="font-style:italic">&#39;local_pk&#39;</span>          =&gt; config(<span style="font-style:italic">&#39;gateway.gateway.ssl.local_pk&#39;</span>),
+                    <span style="font-style:italic">&#39;verify_peer&#39;</span>       =&gt; config(<span style="font-style:italic">&#39;gateway.gateway.ssl.verify_peer&#39;</span>),
+                    <span style="font-style:italic">&#39;allow_self_signed&#39;</span> =&gt; config(<span style="font-style:italic">&#39;gateway.gateway.ssl.allow_self_signed&#39;</span>), <span style="font-style:italic">//如果是自签名证书需要开启此选项
+</span><span style="font-style:italic"></span>                )
+            );
+
+            <span style="font-style:italic">// 开启SSL，websocket+SSL 即wss websocket协议(端口任意，只要没有被其它程序占用就行)
+</span><span style="font-style:italic"></span>
+            $gateway            = <span style="font-weight:bold">new</span> Gateway($address . <span style="font-style:italic">&#39;:&#39;</span> . $port, $context);
+            $gateway-&gt;transport = <span style="font-style:italic">&#39;ssl&#39;</span>;
+            <span style="font-style:italic">//  $gateway = new Gateway(&#34;websocket://0.0.0.0:443&#34;, $context);
+</span><span style="font-style:italic"></span>        } <span style="font-weight:bold">else</span> {
+            $gateway = <span style="font-weight:bold">new</span> Gateway($address . <span style="font-style:italic">&#39;:&#39;</span> . $port);
+        }
+
+        $gateway-&gt;name                 = config(<span style="font-style:italic">&#39;gateway.gateway.name&#39;</span>);     <span style="font-style:italic">//设置Gateway进程的名称，方便status命令中查看统计
+</span><span style="font-style:italic"></span>        $gateway-&gt;count                = config(<span style="font-style:italic">&#39;gateway.gateway.count&#39;</span>);     <span style="font-style:italic">//进程的数量
+</span><span style="font-style:italic"></span>        $gateway-&gt;lanIp                = config(<span style="font-style:italic">&#39;gateway.gateway.lan_ip&#39;</span>);       <span style="font-style:italic">//内网ip,多服务器分布式部署的时候需要填写真实的内网ip
+</span><span style="font-style:italic"></span>        $gateway-&gt;startPort            = config(<span style="font-style:italic">&#39;gateway.gateway.start_port&#39;</span>);      <span style="font-style:italic">//监听本机端口的起始端口
+</span><span style="font-style:italic"></span>        $gateway-&gt;pingInterval         = config(<span style="font-style:italic">&#39;gateway.gateway.heart_ping&#39;</span>);        <span style="font-style:italic">//心跳检测时间间隔 单位：秒。如果设置为0代表不做任何心跳检测。
+</span><span style="font-style:italic"></span>        $gateway-&gt;pingNotResponseLimit = config(<span style="font-style:italic">&#39;gateway.gateway.ping_not&#39;</span>);     <span style="font-style:italic">//客户端连续$pingNotResponseLimit次$pingInterval时间内不发送任何数据则断开链接，并触发onClose。 如果设置为0代表客户端不用发送心跳数据
+</span><span style="font-style:italic"></span>
+        $gateway-&gt;pingData        = config(<span style="font-style:italic">&#39;gateway.gateway.ping_data&#39;</span>);      <span style="font-style:italic">//当需要服务端定时给客户端发送心跳数据时， $gateway-&gt;pingData设置为服务端要发送的心跳请求数据，心跳数据是任意的，只要客户端能识别即可。
+</span><span style="font-style:italic"></span>        $gateway-&gt;registerAddress = config(<span style="font-style:italic">&#39;gateway.gateway.register_address&#39;</span>);      <span style="font-style:italic">//注册服务地址-向Register进程注册-内部通讯使用
+</span><span style="font-style:italic"></span>    }
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * Gateway进程和BusinessWorker进程启动后分别向Register进程注册自己的通讯地址，Gateway进程和BusinessWorker通过Register进程得到通讯地址后，就可以建立起连接并通讯了。
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">private</span> <span style="font-weight:bold">function</span> startRegister()
+    {
+        <span style="font-weight:bold">new</span> Register(config(<span style="font-style:italic">&#39;gateway.start.address&#39;</span>));
+    }
+}
+
+</code></pre></div><h3 id="创建-configgatewayphp-文件">
+  创建 <code>config/gateway.php</code> 文件
+  <a class="heading-link" href="#%e5%88%9b%e5%bb%ba-configgatewayphp-%e6%96%87%e4%bb%b6">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+
+
+<span style="font-weight:bold">return</span> [
+    <span style="font-style:italic">//BusinessWorker是运行业务逻辑的进程，BusinessWorker收到Gateway转发来的事件及请求时会默认调用Events.php中的onConnect onMessage
+</span><span style="font-style:italic"></span>    <span style="font-style:italic">&#39;business&#39;</span> =&gt; [
+        <span style="font-style:italic">//注册服务地址-向Register进程注册-内部通讯使用
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">&#39;register_address&#39;</span> =&gt; env(<span style="font-style:italic">&#39;BUSINESS_REGISTER_ADDRESS&#39;</span>, <span style="font-style:italic">&#39;127.0.0.1:2020&#39;</span>),
+        <span style="font-style:italic">//设置BusinessWorker进程的名称
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">&#39;name&#39;</span>             =&gt; env(<span style="font-style:italic">&#39;BUSINESS_NAME&#39;</span>, <span style="font-style:italic">&#39;BusinessWorker&#39;</span>),
+        <span style="font-style:italic">//设置BusinessWorker进程的数量
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">&#39;count&#39;</span>            =&gt; env(<span style="font-style:italic">&#39;BUSINESS_COUNT&#39;</span>, 2),
+        <span style="font-style:italic">//设置使用哪个类来处理业务,业务类至少要实现onMessage静态方法，onConnect和onClose静态方法可以不用实现
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">&#39;event&#39;</span>            =&gt; env(<span style="font-style:italic">&#39;BUSINESS_EVENT&#39;</span>, \App\Workerman\Events::class),
+    ],
+    <span style="font-style:italic">&#39;gateway&#39;</span>  =&gt; [
+        <span style="font-style:italic">/**
+</span><span style="font-style:italic">         * Workerman版本不小于3.3.7
+</span><span style="font-style:italic">         * PHP安装了openssl扩展
+</span><span style="font-style:italic">         * 已经申请了证书（pem/crt文件及key文件）放在磁盘某个目录(位置任意)
+</span><span style="font-style:italic">         * 更多ssl选项请参考手册 http://php.net/manual/zh/context.ssl.php
+</span><span style="font-style:italic">         */</span>
+
+        <span style="font-style:italic">//默认关闭 SSL,开启 需要配置 ssl内容
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">&#39;ssl_open&#39;</span> =&gt; env(<span style="font-style:italic">&#39;GATEWAY_SSL&#39;</span>, <span style="font-weight:bold">false</span>),
+        <span style="font-style:italic">&#39;ssl&#39;</span>      =&gt; [
+            <span style="font-style:italic">// 磁盘路径/server.pem 也可以是crt文件
+</span><span style="font-style:italic"></span>            <span style="font-style:italic">&#39;local_cert&#39;</span> =&gt; env(<span style="font-style:italic">&#39;GATEWAY_SSL_LOCAL_CERT&#39;</span>, <span style="font-style:italic">&#39;&#39;</span>),
+            <span style="font-style:italic">// 磁盘路径/server.key
+</span><span style="font-style:italic"></span>            <span style="font-style:italic">&#39;local_pk&#39;</span>   =&gt; env(<span style="font-style:italic">&#39;GATEWAY_SSL_LOCAL_PK&#39;</span>, <span style="font-style:italic">&#39;&#39;</span>),
+
+            <span style="font-style:italic">&#39;verify_peer&#39;</span>       =&gt; env(<span style="font-style:italic">&#39;GATEWAY_VERIFY_PEER&#39;</span>, <span style="font-weight:bold">false</span>),
+            <span style="font-style:italic">//如果是自签名证书需要开启此选项
+</span><span style="font-style:italic"></span>            <span style="font-style:italic">&#39;allow_self_signed&#39;</span> =&gt; env(<span style="font-style:italic">&#39;GATEWAY_SELF_SIGNED&#39;</span>, <span style="font-weight:bold">false</span>),
+        ],
+
+        <span style="font-style:italic">&#39;address&#39;</span>          =&gt; env(<span style="font-style:italic">&#39;GATEWAY_ADDRESS&#39;</span>, <span style="font-style:italic">&#39;websocket://0.0.0.0&#39;</span>),
+        <span style="font-style:italic">//websocket协议 端口
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">&#39;port&#39;</span>             =&gt; env(<span style="font-style:italic">&#39;GATEWAY_PORT&#39;</span>, <span style="font-style:italic">&#39;2021&#39;</span>),
+        <span style="font-style:italic">//开启SSL，websocket+SSL 即wss websocket协议(端口任意，只要没有被其它程序占用就行)
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">//&#39;address&#39; =&gt; env(&#39;GATEWAY_ADDRESS&#39;,&#39;websocket://0.0.0.0:443&#39;)
+</span><span style="font-style:italic"></span>
+        <span style="font-style:italic">//设置Gateway进程的名称，方便status命令中查看统计
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">&#39;name&#39;</span>             =&gt; env(<span style="font-style:italic">&#39;GATEWAY_NAME&#39;</span>, <span style="font-style:italic">&#39;Gateway&#39;</span>),
+        <span style="font-style:italic">//进程的数量
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">&#39;count&#39;</span>            =&gt; env(<span style="font-style:italic">&#39;GATEWAY_COUNT&#39;</span>, 2),
+        <span style="font-style:italic">//内网ip,多服务器分布式部署的时候需要填写真实的内网ip
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">&#39;lan_ip&#39;</span>           =&gt; env(<span style="font-style:italic">&#39;GATEWAY_LAN_IP&#39;</span>, <span style="font-style:italic">&#39;127.0.0.1&#39;</span>),
+        <span style="font-style:italic">//监听本机端口的起始端口
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">&#39;start_port&#39;</span>       =&gt; env(<span style="font-style:italic">&#39;GATEWAY_START_PORT&#39;</span>, 2010),
+        <span style="font-style:italic">//心跳检测时间间隔 单位：秒。如果设置为0代表不做任何心跳检测。
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">&#39;heart_ping&#39;</span>       =&gt; env(<span style="font-style:italic">&#39;GATEWAY_HEART_PING&#39;</span>, 30),
+        <span style="font-style:italic">//客户端连续 ping_not 次 heart_ping 时间内不发送任何数据则断开链接，并触发onClose。 如果设置为0代表客户端不用发送心跳数据
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">&#39;ping_not&#39;</span>         =&gt; env(<span style="font-style:italic">&#39;GATEWAY_PING_NOT&#39;</span>, 0),
+        <span style="font-style:italic">//当需要服务端定时给客户端发送心跳数据时， $gateway-&gt;pingData设置为服务端要发送的心跳请求数据，心跳数据是任意的，只要客户端能识别即可。
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">&#39;ping_data&#39;</span>        =&gt; env(<span style="font-style:italic">&#39;GATEWAY_PING_DATA&#39;</span>, <span style="font-style:italic">&#39;{&#34;type&#34;:&#34;@heart@&#34;}&#39;</span>),
+        <span style="font-style:italic">//注册服务地址-向Register进程注册-内部通讯使用
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">&#39;register_address&#39;</span> =&gt; env(<span style="font-style:italic">&#39;GATEWAY_REGISTER_ADDRESS&#39;</span>, <span style="font-style:italic">&#39;127.0.0.1:2020&#39;</span>),
+    ],
+    <span style="font-style:italic">&#39;start&#39;</span>    =&gt; [
+        <span style="font-style:italic">//Gateway进程和BusinessWorker进程启动后分别向Register进程注册自己的通讯地址，Gateway进程和BusinessWorker通过Register进程得到通讯地址后，就可以建立起连接并通讯了。
+</span><span style="font-style:italic"></span>        <span style="font-style:italic">&#39;address&#39;</span> =&gt; env(<span style="font-style:italic">&#39;GATEWAY_START_ADDRESS&#39;</span>, <span style="font-style:italic">&#39;text://0.0.0.0:2020&#39;</span>),
+    ],
+];
+
+</code></pre></div><h3 id="创建监听文件">
+  创建监听文件
+  <a class="heading-link" href="#%e5%88%9b%e5%bb%ba%e7%9b%91%e5%90%ac%e6%96%87%e4%bb%b6">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>创建 <code>\App\Workerman\Events.php</code> 文件</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+
+<span style="font-weight:bold">namespace</span> App\Workerman;
+
+
+<span style="font-weight:bold">use</span> GatewayWorker\Lib\Gateway;
+<span style="font-weight:bold">use</span> Illuminate\Support\Facades\Log;
+<span style="font-weight:bold">use</span> Workerman\Lib\Timer;
+
+<span style="font-weight:bold">class</span> <span style="font-weight:bold">Events</span>
+{
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * 当businessWorker进程启动时触发。每个进程生命周期内都只会触发一次。
+</span><span style="font-style:italic">     * @param $businessWorker businessWorker进程实例
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">public</span> <span style="font-weight:bold">static</span> <span style="font-weight:bold">function</span> onWorkerStart($businessWorker)
+    {
+    }
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * 当客户端连接上gateway进程时(TCP三次握手完毕时)触发的回调函数。
+</span><span style="font-style:italic">     * @param $client_id 固定为20个字符的字符串，用来全局标记一个socket连接，每个客户端连接都会被分配一个全局唯一的client_id。如果client_id对应的客
+</span><span style="font-style:italic">     *                   户端连接断开了，那么这个client_id也就失效了。当这个客户端再次连接到Gateway时，将会获得一个新的client_id。也就是说
+</span><span style="font-style:italic">     *                   client_id和客户端的socket连接生命周期是一致的。
+</span><span style="font-style:italic">     *                   client_id一旦被使用过，将不会被再次使用，也就是说client_id是不会重复的，即使分布式部署也不会重复。
+</span><span style="font-style:italic">     *                   只要有client_id，并且对应的客户端在线，就可以调用Gateway::sendToClient($client_id, $data)等方法向这个客户端发送数据。
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">public</span> <span style="font-weight:bold">static</span> <span style="font-weight:bold">function</span> onConnect($client_id)
+    {
+<span style="font-style:italic">//        Gateway::sendToCurrentClient(&#34;Your client_id is $client_id&#34;);
+</span><span style="font-style:italic"></span>        Gateway::sendToClient($client_id, json_encode(<span style="font-weight:bold">array</span>(
+            <span style="font-style:italic">&#39;type&#39;</span>      =&gt; <span style="font-style:italic">&#39;init&#39;</span>,
+            <span style="font-style:italic">&#39;client_id&#39;</span> =&gt; $client_id
+        )));
+    }
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * 当客户端连接上gateway完成websocket握手时触发的回调函数。
+</span><span style="font-style:italic">     * 注意：此回调只有gateway为websocket协议并且gateway没有设置onWebSocketConnect时才有效。
+</span><span style="font-style:italic">     * @param $client_id 固定为20个字符的字符串，用来全局标记一个socket连接，每个客户端连接都会被分配一个全局唯一的client_id。
+</span><span style="font-style:italic">     * @param $data websocket握手时的http头数据，包含get、server等变量
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">public</span> <span style="font-weight:bold">static</span> <span style="font-weight:bold">function</span> onWebSocketConnect($client_id, $data)
+    {
+    }
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * 当客户端发来数据(Gateway进程收到数据)后触发的回调函数
+</span><span style="font-style:italic">     * @param $client_id 全局唯一的客户端socket连接标识
+</span><span style="font-style:italic">     * @param $message 完整的客户端请求数据，数据类型取决于Gateway所使用协议的decode方法返的回值类型
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">public</span> <span style="font-weight:bold">static</span> <span style="font-weight:bold">function</span> onMessage($client_id, $message)
+    {
+        
+    }
+
+    <span style="font-style:italic">/**
+</span><span style="font-style:italic">     * 客户端与Gateway进程的连接断开时触发。不管是客户端主动断开还是服务端主动断开，都会触发这个回调。一般在这里做一些数据清理工作。
+</span><span style="font-style:italic">     * 注意：onClose回调里无法使用Gateway::getSession()来获得当前用户的session数据，但是仍然可以使用$_SESSION变量获得。
+</span><span style="font-style:italic">     * 注意：onClose回调里无法使用Gateway::getUidByClientId()接口来获得uid，解决办法是在Gateway::bindUid()时记录一个$_SESSION[&#39;uid&#39;]，onClose的时候用$_SESSION[&#39;uid&#39;]来获得uid。
+</span><span style="font-style:italic">     * 注意：断网断电等极端情况可能无法及时触发onClose回调，因为这种情况客户端来不及给服务端发送断开连接的包(fin包)，服务端就无法得知连接已经断开。检测这种极端情况需要心跳检测，并且必须设置$gateway-&gt;pingNotResponseLimit&gt;0。这种断网断电的极端情况onClose将被延迟触发，延迟时间为小于$gateway-&gt;pingInterval*$gateway-&gt;pingNotResponseLimit秒，如果$gateway-&gt;pingInterval 和 $gateway-&gt;pingNotResponseLimit 中任何一个为0，则可能会无限延迟。
+</span><span style="font-style:italic">     * @param $client_id 全局唯一的client_id
+</span><span style="font-style:italic">     */</span>
+    <span style="font-weight:bold">public</span> <span style="font-weight:bold">static</span> <span style="font-weight:bold">function</span> onClose($client_id)
+    {
+
+    }
+}
+</code></pre></div><h3 id="启动-workerman-服务端">
+  启动 WorkerMan 服务端
+  <a class="heading-link" href="#%e5%90%af%e5%8a%a8-workerman-%e6%9c%8d%e5%8a%a1%e7%ab%af">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>在命令行里面执行，支持的命令大概有 start|stop|restart，其中 -d 的意思是 daemon 模式。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">php artisan workman start -d
+</code></pre></div><h3 id="测试">
+  测试
+  <a class="heading-link" href="#%e6%b5%8b%e8%af%95">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>在浏览器 F12 打开调试模式，在 Console 里输入</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="font-style:italic">// 打开一个WebSocket:
+</span><span style="font-style:italic"></span><span style="font-weight:bold">var</span> ws = <span style="font-weight:bold">new</span> WebSocket(<span style="font-style:italic">&#39;ws://localhost:2020&#39;</span>);
+<span style="font-style:italic">// 响应onmessage事件:
+</span><span style="font-style:italic"></span>ws.onmessage = <span style="font-weight:bold">function</span>(msg) {
+                    console.log(msg); 
+               };
+<span style="font-style:italic">// 给服务器发送一个字符串:
+</span><span style="font-style:italic"></span>ws.send(<span style="font-style:italic">&#39;Hello!&#39;</span>);
+</code></pre></div><h3 id="代码中使用">
+  代码中使用
+  <a class="heading-link" href="#%e4%bb%a3%e7%a0%81%e4%b8%ad%e4%bd%bf%e7%94%a8">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+    <span style="font-weight:bold">use</span> GatewayWorker\Lib\Gateway;
+    
+            Gateway::$registerAddress = config(<span style="font-style:italic">&#39;gateway.gateway.register_address&#39;</span>);
+            Gateway::bindUid($client_id,$user_id);
+            
+            
+</code></pre></div>
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2022
+     Ethan Kuo 
+    ·
+    
+    Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+      
+      <script src="/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js" integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </body>
+
+</html>
