@@ -13,8 +13,8 @@
       <pubDate>Wed, 22 May 2019 13:00:10 +0000</pubDate>
       
       <guid>https://blog.adminchao.com/posts/ueditor-multi-image-upload-changed-to-qiniu-cloud/</guid>
-      <description>Preface    Modify UEditor to upload multiple images to Qiniu-cloud UEditor version is 1.4.3
-Begin    Modify the ueditor/1.4.3/php/config.json configuration file    1 2 3 4 5 6 7 8 9 10 11 12 13  { /* Upload image configuration item */ &amp;#34;imageUrl&amp;#34;: &amp;#34;https://up-z2.qiniup.com/&amp;#34;, /* Qiniu-cloud upload interface */ &amp;#34;imageActionName&amp;#34;: &amp;#34;uploadimage&amp;#34;, /* Name of the action to execute the upload image */ &amp;#34;imageFieldName&amp;#34;: &amp;#34;file&amp;#34;, /* The name of the submitted image form is modified to file here.</description>
+      <description>Preface Modify UEditor to upload multiple images to Qiniu-cloud UEditor version is 1.4.3
+Begin Modify the ueditor/1.4.3/php/config.json configuration file 1 2 3 4 5 6 7 8 9 10 11 12 13  { /* Upload image configuration item */ &amp;#34;imageUrl&amp;#34;: &amp;#34;https://up-z2.qiniup.com/&amp;#34;, /* Qiniu-cloud upload interface */ &amp;#34;imageActionName&amp;#34;: &amp;#34;uploadimage&amp;#34;, /* Name of the action to execute the upload image */ &amp;#34;imageFieldName&amp;#34;: &amp;#34;file&amp;#34;, /* The name of the submitted image form is modified to file here.</description>
     </item>
     
   </channel>

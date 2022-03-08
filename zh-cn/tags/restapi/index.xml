@@ -13,7 +13,7 @@
       <pubDate>Fri, 09 Jun 2017 11:43:31 +0000</pubDate>
       
       <guid>https://blog.adminchao.com/zh-cn/posts/%E4%BD%BF%E7%94%A8-lumen-%E5%88%9B%E5%BB%BA-restapi-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/</guid>
-      <description>项目需求    开发一个用户注册的 rest API 要求：
+      <description>项目需求 开发一个用户注册的 rest API 要求：
 HttpMethod: Post
 URI: api/account/register
 Request Body

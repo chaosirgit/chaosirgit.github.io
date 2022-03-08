@@ -13,11 +13,13 @@
       <pubDate>Wed, 30 Jun 2021 23:31:29 +0000</pubDate>
       
       <guid>https://blog.adminchao.com/posts/laradock-install-grpc-extension/</guid>
-      <description>Preface    Installing uncommon PHP extensions in a Laradock environment, this method can be used to install GRPC extensions as well as other uncommon extensions.
-Step    Modify configuration file:    laradock/docker-compose.yml
+      <description>Preface Installing uncommon PHP extensions in a Laradock environment, this method can be used to install GRPC extensions as well as other uncommon extensions.
+Step Modify configuration file: laradock/docker-compose.yml
 In the workspace configuration parameter field
 1 2 3 4  workspace: build: context: ./workspace args:   Add
-1  - INSTALL_PHPGRPC=${WORKSPACE_INSTALL_PHPGRPC}   Modify the startup configuration file    laradock/.</description>
+1  - INSTALL_PHPGRPC=${WORKSPACE_INSTALL_PHPGRPC}   Modify the startup configuration file laradock/.env
+Add two configuration items
+1 2  PHP_FPM_INSTALL_PHPGRPC=true WORKSPACE_INSTALL_PHPGRPC=true   Modify the PHP-FPM configuration file laradock/php-fpm/Dockerfile</description>
     </item>
     
   </channel>

@@ -13,10 +13,11 @@
       <pubDate>Fri, 22 Sep 2017 12:55:39 +0000</pubDate>
       
       <guid>https://blog.adminchao.com/posts/my-phpstorm-configuration/</guid>
-      <description>Preface    I felt that phpstorm was cool, so I ditched my beloved atom and turned to phpstorm to make notes on my phpstorm configuration for use in different environments.
-Download    Search for phpstorm in Google and download it.
-Installation    This is installed directly by default in the next step.
-Configuration    Visual Beautification Configuration      ⌘+,` to open configuration items</description>
+      <description>Preface I felt that phpstorm was cool, so I ditched my beloved atom and turned to phpstorm to make notes on my phpstorm configuration for use in different environments.
+Download Search for phpstorm in Google and download it.
+Installation This is installed directly by default in the next step.
+Configuration Visual Beautification Configuration   ⌘+,` to open configuration items
+  Select Appearance &amp;amp; Behavior -&amp;gt; Appearance ，Set Theme in UI Options to Darcula ，Open Override default fonts by ， Name is set to Fira Code Medium ，Size is set to 15</description>
     </item>
     
   </channel>

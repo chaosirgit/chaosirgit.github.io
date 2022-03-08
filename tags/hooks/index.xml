@@ -13,8 +13,8 @@
       <pubDate>Fri, 01 Dec 2017 13:24:34 +0000</pubDate>
       
       <guid>https://blog.adminchao.com/posts/automating-code-deployment-with-git/</guid>
-      <description>Preface    After building an LNMP environment, you need to deploy the project code on the server, but using git to pull on the server side is too troublesome, so you need to make a git auto-deploy code feature, so that the project directory is automatically updated to the latest code after developers push on it. We need to use hooks.
-Build a Git server    Installing Git    1  sudo apt-get install git   Create a Git user to run the Git service    1  sudo adduser git   Create certificate login    Put the developer&amp;rsquo;s public key, id_rsa.</description>
+      <description>Preface After building an LNMP environment, you need to deploy the project code on the server, but using git to pull on the server side is too troublesome, so you need to make a git auto-deploy code feature, so that the project directory is automatically updated to the latest code after developers push on it. We need to use hooks.
+Build a Git server Installing Git 1  sudo apt-get install git   Create a Git user to run the Git service 1  sudo adduser git   Create certificate login Put the developer&amp;rsquo;s public key, id_rsa.</description>
     </item>
     
   </channel>

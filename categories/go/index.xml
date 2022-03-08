@@ -13,7 +13,8 @@
       <pubDate>Sun, 01 Mar 2020 14:17:47 +0000</pubDate>
       
       <guid>https://blog.adminchao.com/posts/iris-i-love-she-i/</guid>
-      <description>Preface    Golang is popular all over the world, such as Google, AWS, Cloudflare, CoreOS, etc., have started to use Golang to develop their cloud computing related products on a large scale. In the process of learning Golang, I was also deeply impressed by Golang. The Golang natively supports high concurrency and strong performance, and if you are skilled, the development efficiency is no worse than Python and other languages.</description>
+      <description>Preface Golang is popular all over the world, such as Google, AWS, Cloudflare, CoreOS, etc., have started to use Golang to develop their cloud computing related products on a large scale. In the process of learning Golang, I was also deeply impressed by Golang. The Golang natively supports high concurrency and strong performance, and if you are skilled, the development efficiency is no worse than Python and other languages.
+Now that we are plagued by viruses, we can finally settle down and experience the charm of GO seriously.</description>
     </item>
     
   </channel>

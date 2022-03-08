@@ -13,7 +13,7 @@
       <pubDate>Thu, 02 May 2019 17:39:49 +0000</pubDate>
       
       <guid>https://blog.adminchao.com/posts/change-alfred-default-shell-to-iterm/</guid>
-      <description>Change alfred default shell to iTerm2    Code Record
+      <description>Change alfred default shell to iTerm2 Code Record
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  on alfred_script(q) run script &amp;#34; on run {q} tell application \&amp;#34;:Applications:iTerm.app\&amp;#34; activate try select first window on error create window with default profile select first window end try tell the first window tell current session to write text q end tell end tell end run &amp;#34; with parameters {q} end alfred_script   </description>
     </item>
     
@@ -23,9 +23,9 @@
       <pubDate>Sat, 27 Apr 2019 16:36:20 +0000</pubDate>
       
       <guid>https://blog.adminchao.com/posts/mac-aria2-usage/</guid>
-      <description>Preface    Every time you download a file you have to pay a protection fee, not to pay the download speed is simply to make the times backwards. Luckily, I found Aria2 by accident. Thank you, gods.
-Installation    Installing Aria2 on Mac is easy
-1  brew install aria2   Usage     Download the file to the default directory aria2c running directory, in this case /Users/your username for Mac  1  aria2c [Download file address]    Download the file to the specified directory  1  aria2c -d [directory] [download file address]    Download file renaming  1  aria2c -o [filename] [download file address]    Download files in segments, between 1 and 5 parts  1  aria2c -s [parts] [download file address]    Breakpoint download  1  aria2c -c [download file address]    Background download  1  aria2c -D [download file address]   Download Baidu cloud file    You need to install a BaiduPan Explorer extension on your Chrome browser to get the real address of your Baidu cloud files</description>
+      <description>Preface Every time you download a file you have to pay a protection fee, not to pay the download speed is simply to make the times backwards. Luckily, I found Aria2 by accident. Thank you, gods.
+Installation Installing Aria2 on Mac is easy
+1  brew install aria2   Usage  Download the file to the default directory aria2c running directory, in this case /Users/your username for Mac  1  aria2c [Download file address]    Download the file to the specified directory  1  aria2c -d [directory] [download file address]    Download file renaming  1  aria2c -o [filename] [download file address]    Download files in segments, between 1 and 5 parts  1  aria2c -s [parts] [download file address]    Breakpoint download  1  aria2c -c [download file address]    Background download  1  aria2c -D [download file address]   Download Baidu cloud file You need to install a BaiduPan Explorer extension on your Chrome browser to get the real address of your Baidu cloud files</description>
     </item>
     
   </channel>

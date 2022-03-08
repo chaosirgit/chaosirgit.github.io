@@ -13,9 +13,9 @@
       <pubDate>Sun, 08 Oct 2017 13:08:09 +0000</pubDate>
       
       <guid>https://blog.adminchao.com/posts/building-lnmp-from-scratch-tutorial/</guid>
-      <description>Connect to the server via ssh    Server System Version Ubuntu 16.04
-1  ssh root@127.0.0.1   Create a general account    1  adduser username   Grant sudo privileges to the general account    Go to /etc/sudoers.d/ and create a new file with any name you want. Add username ALL=(ALL:ALL) ALL and you&amp;rsquo;re done.
-Upgrade software source    1  sudo apt-get update   Installing Mysql    1  sudo apt-get install mysql-server mysql-client   mysql-server: MySQL server, the core program of mysql, is responsible for generating database instances and providing related interfaces for different clients to call.</description>
+      <description>Connect to the server via ssh Server System Version Ubuntu 16.04
+1  ssh root@127.0.0.1   Create a general account 1  adduser username   Grant sudo privileges to the general account Go to /etc/sudoers.d/ and create a new file with any name you want. Add username ALL=(ALL:ALL) ALL and you&amp;rsquo;re done.
+Upgrade software source 1  sudo apt-get update   Installing Mysql 1  sudo apt-get install mysql-server mysql-client   mysql-server: MySQL server, the core program of mysql, is responsible for generating database instances and providing related interfaces for different clients to call.</description>
     </item>
     
   </channel>

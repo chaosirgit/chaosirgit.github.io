@@ -13,8 +13,8 @@
       <pubDate>Wed, 04 Jul 2018 14:14:22 +0000</pubDate>
       
       <guid>https://blog.adminchao.com/posts/standalone-use-of-eloquent/</guid>
-      <description>Preface    Laravel&amp;rsquo;s Eloquent is a great ORM, Eloquent is a standalone module, we can also use Eloquent in our own projects through composer, this article will explain in detail how to integrate Eloquent in your own projects.
-Installation    In the project directory, execute
+      <description>Preface Laravel&amp;rsquo;s Eloquent is a great ORM, Eloquent is a standalone module, we can also use Eloquent in our own projects through composer, this article will explain in detail how to integrate Eloquent in your own projects.
+Installation In the project directory, execute
 1  composer require illuminate/database:^5.0   Or add it directly to the composer.json file:
 1 2 3 4 5 6 7 8 9 10 11  { &amp;#34;require&amp;#34;: { &amp;#34;illuminate/database&amp;#34;: &amp;#34;^5.</description>
     </item>
