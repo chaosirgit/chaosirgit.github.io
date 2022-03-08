@@ -1,715 +1,598 @@
-<!DOCTYPE html>
-<html lang="en">
-
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="light dark">
-
-    
-
-    <meta name="author" content="Ethan Kuo">
-    <meta name="description" content="Preface    Laravel comes with a request frequency limitation middleware, but this middleware does not return JSON, which is always needed in the form of JSON in daily work.
-Step    Generate middleware file    1  php artisan make:middleware ThrottleRequests   Copy the code to app\Http\Middleware\ThrottleRequests.php    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198  &lt;?">
-    <meta name="keywords" content="Laravel,PHP,Middleware,Throttle">
-
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Laravel Throttle Middleware Response With JSON"/>
-<meta name="twitter:description" content="Preface    Laravel comes with a request frequency limitation middleware, but this middleware does not return JSON, which is always needed in the form of JSON in daily work.
-Step    Generate middleware file    1  php artisan make:middleware ThrottleRequests   Copy the code to app\Http\Middleware\ThrottleRequests.php    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198  &lt;?"/>
-
-    <meta property="og:title" content="Laravel Throttle Middleware Response With JSON" />
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=color-scheme content="light dark">
+<meta name=author content="Ethan Kuo">
+<meta name=description content="Preface    Laravel comes with a request frequency limitation middleware, but this middleware does not return JSON, which is always needed in the form of JSON in daily work.
+Step    Generate middleware file    1  php artisan make:middleware ThrottleRequests   Copy the code to app\Http\Middleware\ThrottleRequests.php    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198  <?">
+<meta name=keywords content="Laravel,PHP,Middleware,Throttle">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Laravel Throttle Middleware Response With JSON">
+<meta name=twitter:description content="Preface    Laravel comes with a request frequency limitation middleware, but this middleware does not return JSON, which is always needed in the form of JSON in daily work.
+Step    Generate middleware file    1  php artisan make:middleware ThrottleRequests   Copy the code to app\Http\Middleware\ThrottleRequests.php    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198  <?">
+<meta property="og:title" content="Laravel Throttle Middleware Response With JSON">
 <meta property="og:description" content="Preface    Laravel comes with a request frequency limitation middleware, but this middleware does not return JSON, which is always needed in the form of JSON in daily work.
-Step    Generate middleware file    1  php artisan make:middleware ThrottleRequests   Copy the code to app\Http\Middleware\ThrottleRequests.php    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198  &lt;?" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.adminchao.com/posts/laravel-throttle-middleware-response-with-json/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2019-07-25T18:33:53+00:00" />
-<meta property="article:modified_time" content="2019-07-25T18:33:53+00:00" />
-
-
-
-    <title>
-  Laravel Throttle Middleware Response With JSON · Ethan Kuo Blog
+Step    Generate middleware file    1  php artisan make:middleware ThrottleRequests   Copy the code to app\Http\Middleware\ThrottleRequests.php    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198  <?">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.adminchao.com/posts/laravel-throttle-middleware-response-with-json/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2019-07-25T18:33:53+00:00">
+<meta property="article:modified_time" content="2019-07-25T18:33:53+00:00">
+<title>
+Laravel Throttle Middleware Response With JSON · Ethan Kuo Blog
 </title>
-
-    
-      <link rel="canonical" href="https://blog.adminchao.com/posts/laravel-throttle-middleware-response-with-json/">
-    
-
-    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
-
-    
-      
-      
-      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
-    
-
-    
-
-    
-      
-        
-        
-        <link rel="stylesheet" href="/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css" integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin="anonymous" media="screen" />
-      
-    
-
-    
-
-    
-
-    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
-
-    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-
-    <meta name="generator" content="Hugo 0.89.1" />
-  </head>
-
-  
-  
-    
-  
-  <body class="preload-transitions colorscheme-dark">
-    
-<div class="float-container">
-    <a id="dark-mode-toggle" class="colorscheme-toggle">
-        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
-    </a>
+<link rel=canonical href=https://blog.adminchao.com/posts/laravel-throttle-middleware-response-with-json/>
+<link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin>
+<link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen>
+<link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen>
+<link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32>
+<link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16>
+<link rel=apple-touch-icon href=/images/apple-touch-icon.png>
+<link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png>
+<meta name=generator content="Hugo 0.89.1">
+</head>
+<body class="preload-transitions colorscheme-dark">
+<div class=float-container>
+<a id=dark-mode-toggle class=colorscheme-toggle>
+<i class="fa fa-adjust fa-fw" aria-hidden=true></i>
+</a>
 </div>
-
-
-    <main class="wrapper">
-      <nav class="navigation">
-  <section class="container">
-    <a class="navigation-title" href="/">
-      Ethan Kuo Blog
-    </a>
-    
-      <input type="checkbox" id="menu-toggle" />
-      <label class="menu-button float-right" for="menu-toggle">
-        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
-      </label>
-      <ul class="navigation-list">
-        
-          
-            <li class="navigation-item">
-              <a class="navigation-link" href="/about/">About</a>
-            </li>
-          
-            <li class="navigation-item">
-              <a class="navigation-link" href="/posts/">Blog</a>
-            </li>
-          
-            <li class="navigation-item">
-              <a class="navigation-link" href="/contact/">Contact me</a>
-            </li>
-          
-        
-        
-          
-          
-          
-            
-          
-            
-              
-                <li class="navigation-item menu-separator">
-                  <span>|</span>
-                </li>
-                
-              
-              <li class="navigation-item">
-                <a href="https://blog.adminchao.com/zh-cn/">🇨🇳</a>
-              </li>
-            
-          
-        
-      </ul>
-    
-  </section>
+<main class=wrapper>
+<nav class=navigation>
+<section class=container>
+<a class=navigation-title href=/>
+Ethan Kuo Blog
+</a>
+<input type=checkbox id=menu-toggle>
+<label class="menu-button float-right" for=menu-toggle>
+<i class="fa fa-bars fa-fw" aria-hidden=true></i>
+</label>
+<ul class=navigation-list>
+<li class=navigation-item>
+<a class=navigation-link href=/about/>About</a>
+</li>
+<li class=navigation-item>
+<a class=navigation-link href=/posts/>Blog</a>
+</li>
+<li class=navigation-item>
+<a class=navigation-link href=/contact/>Contact me</a>
+</li>
+<li class="navigation-item menu-separator">
+<span>|</span>
+</li>
+<li class=navigation-item>
+<a href=https://blog.adminchao.com/zh-cn/>🇨🇳</a>
+</li>
+</ul>
+</section>
 </nav>
-
-
-      <div class="content">
-        
-  <section class="container post">
-    <article>
-      <header>
-        <div class="post-title">
-          <h1 class="title">
-            <a class="title-link" href="https://blog.adminchao.com/posts/laravel-throttle-middleware-response-with-json/">
-              Laravel Throttle Middleware Response With JSON
-            </a>
-          </h1>
-        </div>
-        <div class="post-meta">
-          <div class="date">
-            <span class="posted-on">
-              <i class="fa fa-calendar" aria-hidden="true"></i>
-              <time datetime="2019-07-25T18:33:53Z">
-                2019-07-25 18:33:53
-              </time>
-            </span>
-            <span class="reading-time">
-              <i class="fa fa-clock-o" aria-hidden="true"></i>
-              4-minute read
-            </span>
-          </div>
-          
-          <div class="categories">
-  <i class="fa fa-folder" aria-hidden="true"></i>
-    <a href="/categories/technology/">Technology</a></div>
-
-          <div class="tags">
-  <i class="fa fa-tag" aria-hidden="true"></i>
-    <span class="tag">
-      <a href="/tags/laravel/">Laravel</a>
-    </span>
-      <span class="separator">•</span>
-    <span class="tag">
-      <a href="/tags/php/">PHP</a>
-    </span>
-      <span class="separator">•</span>
-    <span class="tag">
-      <a href="/tags/middleware/">Middleware</a>
-    </span></div>
-
-        </div>
-      </header>
-
-      <div>
-        
-        <h2 id="preface">
-  Preface
-  <a class="heading-link" href="#preface">
-    <i class="fa fa-link" aria-hidden="true"></i>
-  </a>
+<div class=content>
+<section class="container post">
+<article>
+<header>
+<div class=post-title>
+<h1 class=title>
+<a class=title-link href=https://blog.adminchao.com/posts/laravel-throttle-middleware-response-with-json/>
+Laravel Throttle Middleware Response With JSON
+</a>
+</h1>
+</div>
+<div class=post-meta>
+<div class=date>
+<span class=posted-on>
+<i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2019-07-25T18:33:53Z>
+2019-07-25 18:33:53
+</time>
+</span>
+<span class=reading-time>
+<i class="fa fa-clock-o" aria-hidden=true></i>
+4-minute read
+</span>
+</div>
+<div class=categories>
+<i class="fa fa-folder" aria-hidden=true></i>
+<a href=/categories/technology/>Technology</a></div>
+<div class=tags>
+<i class="fa fa-tag" aria-hidden=true></i>
+<span class=tag>
+<a href=/tags/laravel/>Laravel</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/tags/php/>PHP</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/tags/middleware/>Middleware</a>
+</span></div>
+</div>
+</header>
+<div>
+<h2 id=preface>
+Preface
+<a class=heading-link href=#preface>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
 </h2>
 <p>Laravel comes with a request frequency limitation middleware, but this middleware does not return JSON, which is always needed in the form of JSON in daily work.</p>
-<h2 id="step">
-  Step
-  <a class="heading-link" href="#step">
-    <i class="fa fa-link" aria-hidden="true"></i>
-  </a>
+<h2 id=step>
+Step
+<a class=heading-link href=#step>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
 </h2>
-<h3 id="generate-middleware-file">
-  Generate middleware file
-  <a class="heading-link" href="#generate-middleware-file">
-    <i class="fa fa-link" aria-hidden="true"></i>
-  </a>
+<h3 id=generate-middleware-file>
+Generate middleware file
+<a class=heading-link href=#generate-middleware-file>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
 </h3>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">php artisan make:middleware ThrottleRequests
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>php artisan make:middleware ThrottleRequests
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="copy-the-code-to-apphttpmiddlewarethrottlerequestsphp">
-  Copy the code to <code>app\Http\Middleware\ThrottleRequests.php</code>
-  <a class="heading-link" href="#copy-the-code-to-apphttpmiddlewarethrottlerequestsphp">
-    <i class="fa fa-link" aria-hidden="true"></i>
-  </a>
+</div><h3 id=copy-the-code-to-apphttpmiddlewarethrottlerequestsphp>
+Copy the code to <code>app\Http\Middleware\ThrottleRequests.php</code>
+<a class=heading-link href=#copy-the-code-to-apphttpmiddlewarethrottlerequestsphp>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
 </h3>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">103
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">104
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">105
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">106
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">107
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">121
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">122
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">123
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">124
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">125
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">126
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">127
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">128
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">129
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">130
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">131
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">132
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">133
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">134
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">135
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">136
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">137
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">138
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">139
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">140
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">141
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">142
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">143
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">144
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">145
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">146
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">147
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">148
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">149
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">150
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">151
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">152
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">153
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">154
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">155
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">156
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">157
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">158
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">159
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">160
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">161
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">162
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">163
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">164
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">165
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">166
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">167
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">168
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">169
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">170
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">171
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">172
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">173
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">174
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">175
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">176
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">177
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">178
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">179
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">180
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">181
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">182
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">183
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">184
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">185
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">186
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">187
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">188
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">189
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">190
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">191
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">192
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">193
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">194
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">195
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">196
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">197
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">198
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 52
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 53
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 54
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 55
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 56
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 57
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 58
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 59
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 60
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 61
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 62
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 63
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 64
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 65
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 66
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 67
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 68
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 69
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 70
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 71
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 72
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 73
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 74
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 75
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 76
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 77
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 78
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 79
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 80
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 81
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 82
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 83
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 84
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 85
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 86
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 87
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 88
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 89
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 90
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 91
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 92
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 93
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 94
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 95
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 96
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 97
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 98
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 99
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">100
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">101
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">102
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">103
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">104
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">105
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">106
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">107
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">108
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">109
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">110
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">111
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">112
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">113
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">114
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">115
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">116
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">117
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">118
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">119
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">120
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">121
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">122
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">123
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">124
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">125
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">126
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">127
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">128
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">129
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">130
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">131
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">132
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">133
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">134
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">135
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">136
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">137
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">138
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">139
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">140
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">141
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">142
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">143
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">144
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">145
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">146
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">147
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">148
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">149
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">150
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">151
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">152
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">153
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">154
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">155
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">156
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">157
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">158
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">159
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">160
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">161
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">162
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">163
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">164
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">165
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">166
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">167
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">168
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">169
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">170
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">171
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">172
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">173
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">174
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">175
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">176
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">177
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">178
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">179
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">180
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">181
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">182
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">183
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">184
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">185
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">186
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">187
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">188
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">189
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">190
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">191
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">192
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">193
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">194
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">195
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">196
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">197
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">198
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#ff79c6">&lt;?</span>php
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#ff79c6>&lt;?</span>php
 
-<span style="color:#ff79c6">namespace</span> App\Http\Middleware;
+<span style=color:#ff79c6>namespace</span> App\Http\Middleware;
 
-<span style="color:#ff79c6">use</span> Closure;
-<span style="color:#ff79c6">use</span> RuntimeException;
-<span style="color:#ff79c6">use</span> Illuminate\Support\Str;
-<span style="color:#ff79c6">use</span> Illuminate\Cache\RateLimiter;
-<span style="color:#ff79c6">use</span> Illuminate\Support\InteractsWithTime;
-<span style="color:#ff79c6">use</span> Symfony\Component\HttpFoundation\Response;
-<span style="color:#ff79c6">use</span> Symfony\Component\HttpKernel\Exception\HttpException;
+<span style=color:#ff79c6>use</span> Closure;
+<span style=color:#ff79c6>use</span> RuntimeException;
+<span style=color:#ff79c6>use</span> Illuminate\Support\Str;
+<span style=color:#ff79c6>use</span> Illuminate\Cache\RateLimiter;
+<span style=color:#ff79c6>use</span> Illuminate\Support\InteractsWithTime;
+<span style=color:#ff79c6>use</span> Symfony\Component\HttpFoundation\Response;
+<span style=color:#ff79c6>use</span> Symfony\Component\HttpKernel\Exception\HttpException;
 
-<span style="color:#ff79c6">class</span> <span style="color:#50fa7b">ThrottleRequests</span>
+<span style=color:#ff79c6>class</span> <span style=color:#50fa7b>ThrottleRequests</span>
 {
-    <span style="color:#ff79c6">use</span> InteractsWithTime;
+    <span style=color:#ff79c6>use</span> InteractsWithTime;
 
-    <span style="color:#f1fa8c">/**
-</span><span style="color:#f1fa8c">     * The rate limiter instance.
-</span><span style="color:#f1fa8c">     *
-</span><span style="color:#f1fa8c">     * @var \Illuminate\Cache\RateLimiter
-</span><span style="color:#f1fa8c">     */</span>
-    <span style="color:#ff79c6">protected</span> <span style="color:#8be9fd;font-style:italic">$limiter</span>;
+    <span style=color:#f1fa8c>/**
+</span><span style=color:#f1fa8c>     * The rate limiter instance.
+</span><span style=color:#f1fa8c>     *
+</span><span style=color:#f1fa8c>     * @var \Illuminate\Cache\RateLimiter
+</span><span style=color:#f1fa8c>     */</span>
+    <span style=color:#ff79c6>protected</span> <span style=color:#8be9fd;font-style:italic>$limiter</span>;
 
-    <span style="color:#f1fa8c">/**
-</span><span style="color:#f1fa8c">     * Create a new request throttler.
-</span><span style="color:#f1fa8c">     *
-</span><span style="color:#f1fa8c">     * @param  \Illuminate\Cache\RateLimiter  $limiter
-</span><span style="color:#f1fa8c">     * @return void
-</span><span style="color:#f1fa8c">     */</span>
-    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">function</span> __construct(RateLimiter <span style="color:#8be9fd;font-style:italic">$limiter</span>)
+    <span style=color:#f1fa8c>/**
+</span><span style=color:#f1fa8c>     * Create a new request throttler.
+</span><span style=color:#f1fa8c>     *
+</span><span style=color:#f1fa8c>     * @param  \Illuminate\Cache\RateLimiter  $limiter
+</span><span style=color:#f1fa8c>     * @return void
+</span><span style=color:#f1fa8c>     */</span>
+    <span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> __construct(RateLimiter <span style=color:#8be9fd;font-style:italic>$limiter</span>)
     {
-        <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">limiter</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$limiter</span>;
+        <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>limiter</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$limiter</span>;
     }
 
-    <span style="color:#f1fa8c">/**
-</span><span style="color:#f1fa8c">     * Handle an incoming request.
-</span><span style="color:#f1fa8c">     *
-</span><span style="color:#f1fa8c">     * @param  \Illuminate\Http\Request  $request
-</span><span style="color:#f1fa8c">     * @param  \Closure  $next
-</span><span style="color:#f1fa8c">     * @param  int|string  $maxAttempts
-</span><span style="color:#f1fa8c">     * @param  float|int  $decayMinutes
-</span><span style="color:#f1fa8c">     * @return mixed
-</span><span style="color:#f1fa8c">     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
-</span><span style="color:#f1fa8c">     */</span>
-    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">handle</span>(<span style="color:#8be9fd;font-style:italic">$request</span>, Closure <span style="color:#8be9fd;font-style:italic">$next</span>, <span style="color:#8be9fd;font-style:italic">$maxAttempts</span> <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">60</span>, <span style="color:#8be9fd;font-style:italic">$decayMinutes</span> <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>)
+    <span style=color:#f1fa8c>/**
+</span><span style=color:#f1fa8c>     * Handle an incoming request.
+</span><span style=color:#f1fa8c>     *
+</span><span style=color:#f1fa8c>     * @param  \Illuminate\Http\Request  $request
+</span><span style=color:#f1fa8c>     * @param  \Closure  $next
+</span><span style=color:#f1fa8c>     * @param  int|string  $maxAttempts
+</span><span style=color:#f1fa8c>     * @param  float|int  $decayMinutes
+</span><span style=color:#f1fa8c>     * @return mixed
+</span><span style=color:#f1fa8c>     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+</span><span style=color:#f1fa8c>     */</span>
+    <span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>handle</span>(<span style=color:#8be9fd;font-style:italic>$request</span>, Closure <span style=color:#8be9fd;font-style:italic>$next</span>, <span style=color:#8be9fd;font-style:italic>$maxAttempts</span> <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>60</span>, <span style=color:#8be9fd;font-style:italic>$decayMinutes</span> <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>1</span>)
     {
-        <span style="color:#8be9fd;font-style:italic">$key</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">resolveRequestSignature</span>(<span style="color:#8be9fd;font-style:italic">$request</span>);
+        <span style=color:#8be9fd;font-style:italic>$key</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>resolveRequestSignature</span>(<span style=color:#8be9fd;font-style:italic>$request</span>);
 
-        <span style="color:#8be9fd;font-style:italic">$maxAttempts</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">resolveMaxAttempts</span>(<span style="color:#8be9fd;font-style:italic">$request</span>, <span style="color:#8be9fd;font-style:italic">$maxAttempts</span>);
+        <span style=color:#8be9fd;font-style:italic>$maxAttempts</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>resolveMaxAttempts</span>(<span style=color:#8be9fd;font-style:italic>$request</span>, <span style=color:#8be9fd;font-style:italic>$maxAttempts</span>);
 
-        <span style="color:#ff79c6">if</span> (<span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">limiter</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">tooManyAttempts</span>(<span style="color:#8be9fd;font-style:italic">$key</span>, <span style="color:#8be9fd;font-style:italic">$maxAttempts</span>, <span style="color:#8be9fd;font-style:italic">$decayMinutes</span>)) {
-            <span style="color:#ff79c6">if</span>(<span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">buildException</span>(<span style="color:#8be9fd;font-style:italic">$key</span>, <span style="color:#8be9fd;font-style:italic">$maxAttempts</span>)){
-                <span style="color:#ff79c6">return</span> response()<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">json</span>([<span style="color:#f1fa8c">&#39;code&#39;</span><span style="color:#ff79c6">=&gt;</span><span style="color:#bd93f9">429</span>,<span style="color:#f1fa8c">&#39;data&#39;</span><span style="color:#ff79c6">=&gt;</span><span style="color:#f1fa8c">&#39;Too Many Attempts.&#39;</span>]);
+        <span style=color:#ff79c6>if</span> (<span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>limiter</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>tooManyAttempts</span>(<span style=color:#8be9fd;font-style:italic>$key</span>, <span style=color:#8be9fd;font-style:italic>$maxAttempts</span>, <span style=color:#8be9fd;font-style:italic>$decayMinutes</span>)) {
+            <span style=color:#ff79c6>if</span>(<span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>buildException</span>(<span style=color:#8be9fd;font-style:italic>$key</span>, <span style=color:#8be9fd;font-style:italic>$maxAttempts</span>)){
+                <span style=color:#ff79c6>return</span> response()<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>json</span>([<span style=color:#f1fa8c>&#39;code&#39;</span><span style=color:#ff79c6>=&gt;</span><span style=color:#bd93f9>429</span>,<span style=color:#f1fa8c>&#39;data&#39;</span><span style=color:#ff79c6>=&gt;</span><span style=color:#f1fa8c>&#39;Too Many Attempts.&#39;</span>]);
             }
 
         }
 
-        <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">limiter</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">hit</span>(<span style="color:#8be9fd;font-style:italic">$key</span>, <span style="color:#8be9fd;font-style:italic">$decayMinutes</span>);
+        <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>limiter</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>hit</span>(<span style=color:#8be9fd;font-style:italic>$key</span>, <span style=color:#8be9fd;font-style:italic>$decayMinutes</span>);
 
-        <span style="color:#8be9fd;font-style:italic">$response</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$next</span>(<span style="color:#8be9fd;font-style:italic">$request</span>);
+        <span style=color:#8be9fd;font-style:italic>$response</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$next</span>(<span style=color:#8be9fd;font-style:italic>$request</span>);
 
-        <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">addHeaders</span>(
-            <span style="color:#8be9fd;font-style:italic">$response</span>, <span style="color:#8be9fd;font-style:italic">$maxAttempts</span>,
-            <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">calculateRemainingAttempts</span>(<span style="color:#8be9fd;font-style:italic">$key</span>, <span style="color:#8be9fd;font-style:italic">$maxAttempts</span>)
+        <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>addHeaders</span>(
+            <span style=color:#8be9fd;font-style:italic>$response</span>, <span style=color:#8be9fd;font-style:italic>$maxAttempts</span>,
+            <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>calculateRemainingAttempts</span>(<span style=color:#8be9fd;font-style:italic>$key</span>, <span style=color:#8be9fd;font-style:italic>$maxAttempts</span>)
         );
     }
 
-    <span style="color:#f1fa8c">/**
-</span><span style="color:#f1fa8c">     * Resolve the number of attempts if the user is authenticated or not.
-</span><span style="color:#f1fa8c">     *
-</span><span style="color:#f1fa8c">     * @param  \Illuminate\Http\Request  $request
-</span><span style="color:#f1fa8c">     * @param  int|string  $maxAttempts
-</span><span style="color:#f1fa8c">     * @return int
-</span><span style="color:#f1fa8c">     */</span>
-    <span style="color:#ff79c6">protected</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">resolveMaxAttempts</span>(<span style="color:#8be9fd;font-style:italic">$request</span>, <span style="color:#8be9fd;font-style:italic">$maxAttempts</span>)
+    <span style=color:#f1fa8c>/**
+</span><span style=color:#f1fa8c>     * Resolve the number of attempts if the user is authenticated or not.
+</span><span style=color:#f1fa8c>     *
+</span><span style=color:#f1fa8c>     * @param  \Illuminate\Http\Request  $request
+</span><span style=color:#f1fa8c>     * @param  int|string  $maxAttempts
+</span><span style=color:#f1fa8c>     * @return int
+</span><span style=color:#f1fa8c>     */</span>
+    <span style=color:#ff79c6>protected</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>resolveMaxAttempts</span>(<span style=color:#8be9fd;font-style:italic>$request</span>, <span style=color:#8be9fd;font-style:italic>$maxAttempts</span>)
     {
-        <span style="color:#ff79c6">if</span> (Str<span style="color:#ff79c6">::</span><span style="color:#50fa7b">contains</span>(<span style="color:#8be9fd;font-style:italic">$maxAttempts</span>, <span style="color:#f1fa8c">&#39;|&#39;</span>)) {
-            <span style="color:#8be9fd;font-style:italic">$maxAttempts</span> <span style="color:#ff79c6">=</span> explode(<span style="color:#f1fa8c">&#39;|&#39;</span>, <span style="color:#8be9fd;font-style:italic">$maxAttempts</span>, <span style="color:#bd93f9">2</span>)[<span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">user</span>() <span style="color:#ff79c6">?</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">:</span> <span style="color:#bd93f9">0</span>];
+        <span style=color:#ff79c6>if</span> (Str<span style=color:#ff79c6>::</span><span style=color:#50fa7b>contains</span>(<span style=color:#8be9fd;font-style:italic>$maxAttempts</span>, <span style=color:#f1fa8c>&#39;|&#39;</span>)) {
+            <span style=color:#8be9fd;font-style:italic>$maxAttempts</span> <span style=color:#ff79c6>=</span> explode(<span style=color:#f1fa8c>&#39;|&#39;</span>, <span style=color:#8be9fd;font-style:italic>$maxAttempts</span>, <span style=color:#bd93f9>2</span>)[<span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>user</span>() <span style=color:#ff79c6>?</span> <span style=color:#bd93f9>1</span> <span style=color:#ff79c6>:</span> <span style=color:#bd93f9>0</span>];
         }
 
-        <span style="color:#ff79c6">return</span> (int) <span style="color:#8be9fd;font-style:italic">$maxAttempts</span>;
+        <span style=color:#ff79c6>return</span> (int) <span style=color:#8be9fd;font-style:italic>$maxAttempts</span>;
     }
 
-    <span style="color:#f1fa8c">/**
-</span><span style="color:#f1fa8c">     * Resolve request signature.
-</span><span style="color:#f1fa8c">     *
-</span><span style="color:#f1fa8c">     * @param  \Illuminate\Http\Request  $request
-</span><span style="color:#f1fa8c">     * @return string
-</span><span style="color:#f1fa8c">     * @throws \RuntimeException
-</span><span style="color:#f1fa8c">     */</span>
-    <span style="color:#ff79c6">protected</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">resolveRequestSignature</span>(<span style="color:#8be9fd;font-style:italic">$request</span>)
+    <span style=color:#f1fa8c>/**
+</span><span style=color:#f1fa8c>     * Resolve request signature.
+</span><span style=color:#f1fa8c>     *
+</span><span style=color:#f1fa8c>     * @param  \Illuminate\Http\Request  $request
+</span><span style=color:#f1fa8c>     * @return string
+</span><span style=color:#f1fa8c>     * @throws \RuntimeException
+</span><span style=color:#f1fa8c>     */</span>
+    <span style=color:#ff79c6>protected</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>resolveRequestSignature</span>(<span style=color:#8be9fd;font-style:italic>$request</span>)
     {
-        <span style="color:#ff79c6">if</span> (<span style="color:#8be9fd;font-style:italic">$user</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">user</span>()) {
-            <span style="color:#ff79c6">return</span> sha1(<span style="color:#8be9fd;font-style:italic">$user</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">getAuthIdentifier</span>());
+        <span style=color:#ff79c6>if</span> (<span style=color:#8be9fd;font-style:italic>$user</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>user</span>()) {
+            <span style=color:#ff79c6>return</span> sha1(<span style=color:#8be9fd;font-style:italic>$user</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>getAuthIdentifier</span>());
         }
 
-        <span style="color:#ff79c6">if</span> (<span style="color:#8be9fd;font-style:italic">$route</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">route</span>()) {
-            <span style="color:#ff79c6">return</span> sha1(<span style="color:#8be9fd;font-style:italic">$route</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">getDomain</span>()<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">&#39;|&#39;</span><span style="color:#ff79c6">.</span><span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">ip</span>());
+        <span style=color:#ff79c6>if</span> (<span style=color:#8be9fd;font-style:italic>$route</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>route</span>()) {
+            <span style=color:#ff79c6>return</span> sha1(<span style=color:#8be9fd;font-style:italic>$route</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>getDomain</span>()<span style=color:#ff79c6>.</span><span style=color:#f1fa8c>&#39;|&#39;</span><span style=color:#ff79c6>.</span><span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>ip</span>());
         }
 
-        <span style="color:#ff79c6">throw</span> <span style="color:#ff79c6">new</span> RuntimeException(
-            <span style="color:#f1fa8c">&#39;Unable to generate the request signature. Route unavailable.&#39;</span>
+        <span style=color:#ff79c6>throw</span> <span style=color:#ff79c6>new</span> RuntimeException(
+            <span style=color:#f1fa8c>&#39;Unable to generate the request signature. Route unavailable.&#39;</span>
         );
     }
 
-    <span style="color:#f1fa8c">/**
-</span><span style="color:#f1fa8c">     * Create a &#39;too many attempts&#39; exception.
-</span><span style="color:#f1fa8c">     *
-</span><span style="color:#f1fa8c">     * @param  string  $key
-</span><span style="color:#f1fa8c">     * @param  int  $maxAttempts
-</span><span style="color:#f1fa8c">     * @return \Symfony\Component\HttpKernel\Exception\HttpException
-</span><span style="color:#f1fa8c">     */</span>
-    <span style="color:#ff79c6">protected</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">buildException</span>(<span style="color:#8be9fd;font-style:italic">$key</span>, <span style="color:#8be9fd;font-style:italic">$maxAttempts</span>)
+    <span style=color:#f1fa8c>/**
+</span><span style=color:#f1fa8c>     * Create a &#39;too many attempts&#39; exception.
+</span><span style=color:#f1fa8c>     *
+</span><span style=color:#f1fa8c>     * @param  string  $key
+</span><span style=color:#f1fa8c>     * @param  int  $maxAttempts
+</span><span style=color:#f1fa8c>     * @return \Symfony\Component\HttpKernel\Exception\HttpException
+</span><span style=color:#f1fa8c>     */</span>
+    <span style=color:#ff79c6>protected</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>buildException</span>(<span style=color:#8be9fd;font-style:italic>$key</span>, <span style=color:#8be9fd;font-style:italic>$maxAttempts</span>)
     {
-        <span style="color:#8be9fd;font-style:italic">$retryAfter</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">getTimeUntilNextRetry</span>(<span style="color:#8be9fd;font-style:italic">$key</span>);
+        <span style=color:#8be9fd;font-style:italic>$retryAfter</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>getTimeUntilNextRetry</span>(<span style=color:#8be9fd;font-style:italic>$key</span>);
 
-        <span style="color:#8be9fd;font-style:italic">$headers</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">getHeaders</span>(
-            <span style="color:#8be9fd;font-style:italic">$maxAttempts</span>,
-            <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">calculateRemainingAttempts</span>(<span style="color:#8be9fd;font-style:italic">$key</span>, <span style="color:#8be9fd;font-style:italic">$maxAttempts</span>, <span style="color:#8be9fd;font-style:italic">$retryAfter</span>),
-            <span style="color:#8be9fd;font-style:italic">$retryAfter</span>
+        <span style=color:#8be9fd;font-style:italic>$headers</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>getHeaders</span>(
+            <span style=color:#8be9fd;font-style:italic>$maxAttempts</span>,
+            <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>calculateRemainingAttempts</span>(<span style=color:#8be9fd;font-style:italic>$key</span>, <span style=color:#8be9fd;font-style:italic>$maxAttempts</span>, <span style=color:#8be9fd;font-style:italic>$retryAfter</span>),
+            <span style=color:#8be9fd;font-style:italic>$retryAfter</span>
         );
 
-<span style="color:#6272a4">//        return new HttpException(
-</span><span style="color:#6272a4">//            429, &#39;Too Many Attempts.&#39;, null, $headers
-</span><span style="color:#6272a4">//        );
-</span><span style="color:#6272a4"></span>        <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">1</span>;
+<span style=color:#6272a4>//        return new HttpException(
+</span><span style=color:#6272a4>//            429, &#39;Too Many Attempts.&#39;, null, $headers
+</span><span style=color:#6272a4>//        );
+</span><span style=color:#6272a4></span>        <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>1</span>;
     }
 
-    <span style="color:#f1fa8c">/**
-</span><span style="color:#f1fa8c">     * Get the number of seconds until the next retry.
-</span><span style="color:#f1fa8c">     *
-</span><span style="color:#f1fa8c">     * @param  string  $key
-</span><span style="color:#f1fa8c">     * @return int
-</span><span style="color:#f1fa8c">     */</span>
-    <span style="color:#ff79c6">protected</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">getTimeUntilNextRetry</span>(<span style="color:#8be9fd;font-style:italic">$key</span>)
+    <span style=color:#f1fa8c>/**
+</span><span style=color:#f1fa8c>     * Get the number of seconds until the next retry.
+</span><span style=color:#f1fa8c>     *
+</span><span style=color:#f1fa8c>     * @param  string  $key
+</span><span style=color:#f1fa8c>     * @return int
+</span><span style=color:#f1fa8c>     */</span>
+    <span style=color:#ff79c6>protected</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>getTimeUntilNextRetry</span>(<span style=color:#8be9fd;font-style:italic>$key</span>)
     {
-        <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">limiter</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">availableIn</span>(<span style="color:#8be9fd;font-style:italic">$key</span>);
+        <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>limiter</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>availableIn</span>(<span style=color:#8be9fd;font-style:italic>$key</span>);
     }
 
-    <span style="color:#f1fa8c">/**
-</span><span style="color:#f1fa8c">     * Add the limit header information to the given response.
-</span><span style="color:#f1fa8c">     *
-</span><span style="color:#f1fa8c">     * @param  \Symfony\Component\HttpFoundation\Response  $response
-</span><span style="color:#f1fa8c">     * @param  int  $maxAttempts
-</span><span style="color:#f1fa8c">     * @param  int  $remainingAttempts
-</span><span style="color:#f1fa8c">     * @param  int|null  $retryAfter
-</span><span style="color:#f1fa8c">     * @return \Symfony\Component\HttpFoundation\Response
-</span><span style="color:#f1fa8c">     */</span>
-    <span style="color:#ff79c6">protected</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">addHeaders</span>(Response <span style="color:#8be9fd;font-style:italic">$response</span>, <span style="color:#8be9fd;font-style:italic">$maxAttempts</span>, <span style="color:#8be9fd;font-style:italic">$remainingAttempts</span>, <span style="color:#8be9fd;font-style:italic">$retryAfter</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">null</span>)
+    <span style=color:#f1fa8c>/**
+</span><span style=color:#f1fa8c>     * Add the limit header information to the given response.
+</span><span style=color:#f1fa8c>     *
+</span><span style=color:#f1fa8c>     * @param  \Symfony\Component\HttpFoundation\Response  $response
+</span><span style=color:#f1fa8c>     * @param  int  $maxAttempts
+</span><span style=color:#f1fa8c>     * @param  int  $remainingAttempts
+</span><span style=color:#f1fa8c>     * @param  int|null  $retryAfter
+</span><span style=color:#f1fa8c>     * @return \Symfony\Component\HttpFoundation\Response
+</span><span style=color:#f1fa8c>     */</span>
+    <span style=color:#ff79c6>protected</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>addHeaders</span>(Response <span style=color:#8be9fd;font-style:italic>$response</span>, <span style=color:#8be9fd;font-style:italic>$maxAttempts</span>, <span style=color:#8be9fd;font-style:italic>$remainingAttempts</span>, <span style=color:#8be9fd;font-style:italic>$retryAfter</span> <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>null</span>)
     {
-        <span style="color:#8be9fd;font-style:italic">$response</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">headers</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">add</span>(
-            <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">getHeaders</span>(<span style="color:#8be9fd;font-style:italic">$maxAttempts</span>, <span style="color:#8be9fd;font-style:italic">$remainingAttempts</span>, <span style="color:#8be9fd;font-style:italic">$retryAfter</span>)
+        <span style=color:#8be9fd;font-style:italic>$response</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>headers</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>add</span>(
+            <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>getHeaders</span>(<span style=color:#8be9fd;font-style:italic>$maxAttempts</span>, <span style=color:#8be9fd;font-style:italic>$remainingAttempts</span>, <span style=color:#8be9fd;font-style:italic>$retryAfter</span>)
         );
 
-        <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">$response</span>;
+        <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$response</span>;
     }
 
-    <span style="color:#f1fa8c">/**
-</span><span style="color:#f1fa8c">     * Get the limit headers information.
-</span><span style="color:#f1fa8c">     *
-</span><span style="color:#f1fa8c">     * @param  int  $maxAttempts
-</span><span style="color:#f1fa8c">     * @param  int  $remainingAttempts
-</span><span style="color:#f1fa8c">     * @param  int|null  $retryAfter
-</span><span style="color:#f1fa8c">     * @return array
-</span><span style="color:#f1fa8c">     */</span>
-    <span style="color:#ff79c6">protected</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">getHeaders</span>(<span style="color:#8be9fd;font-style:italic">$maxAttempts</span>, <span style="color:#8be9fd;font-style:italic">$remainingAttempts</span>, <span style="color:#8be9fd;font-style:italic">$retryAfter</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">null</span>)
+    <span style=color:#f1fa8c>/**
+</span><span style=color:#f1fa8c>     * Get the limit headers information.
+</span><span style=color:#f1fa8c>     *
+</span><span style=color:#f1fa8c>     * @param  int  $maxAttempts
+</span><span style=color:#f1fa8c>     * @param  int  $remainingAttempts
+</span><span style=color:#f1fa8c>     * @param  int|null  $retryAfter
+</span><span style=color:#f1fa8c>     * @return array
+</span><span style=color:#f1fa8c>     */</span>
+    <span style=color:#ff79c6>protected</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>getHeaders</span>(<span style=color:#8be9fd;font-style:italic>$maxAttempts</span>, <span style=color:#8be9fd;font-style:italic>$remainingAttempts</span>, <span style=color:#8be9fd;font-style:italic>$retryAfter</span> <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>null</span>)
     {
-        <span style="color:#8be9fd;font-style:italic">$headers</span> <span style="color:#ff79c6">=</span> [
-            <span style="color:#f1fa8c">&#39;X-RateLimit-Limit&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#8be9fd;font-style:italic">$maxAttempts</span>,
-            <span style="color:#f1fa8c">&#39;X-RateLimit-Remaining&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#8be9fd;font-style:italic">$remainingAttempts</span>,
+        <span style=color:#8be9fd;font-style:italic>$headers</span> <span style=color:#ff79c6>=</span> [
+            <span style=color:#f1fa8c>&#39;X-RateLimit-Limit&#39;</span> <span style=color:#ff79c6>=&gt;</span> <span style=color:#8be9fd;font-style:italic>$maxAttempts</span>,
+            <span style=color:#f1fa8c>&#39;X-RateLimit-Remaining&#39;</span> <span style=color:#ff79c6>=&gt;</span> <span style=color:#8be9fd;font-style:italic>$remainingAttempts</span>,
         ];
 
-        <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">!</span> is_null(<span style="color:#8be9fd;font-style:italic">$retryAfter</span>)) {
-            <span style="color:#8be9fd;font-style:italic">$headers</span>[<span style="color:#f1fa8c">&#39;Retry-After&#39;</span>] <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$retryAfter</span>;
-            <span style="color:#8be9fd;font-style:italic">$headers</span>[<span style="color:#f1fa8c">&#39;X-RateLimit-Reset&#39;</span>] <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">availableAt</span>(<span style="color:#8be9fd;font-style:italic">$retryAfter</span>);
+        <span style=color:#ff79c6>if</span> (<span style=color:#ff79c6>!</span> is_null(<span style=color:#8be9fd;font-style:italic>$retryAfter</span>)) {
+            <span style=color:#8be9fd;font-style:italic>$headers</span>[<span style=color:#f1fa8c>&#39;Retry-After&#39;</span>] <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$retryAfter</span>;
+            <span style=color:#8be9fd;font-style:italic>$headers</span>[<span style=color:#f1fa8c>&#39;X-RateLimit-Reset&#39;</span>] <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>availableAt</span>(<span style=color:#8be9fd;font-style:italic>$retryAfter</span>);
         }
 
-        <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">$headers</span>;
+        <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$headers</span>;
     }
 
-    <span style="color:#f1fa8c">/**
-</span><span style="color:#f1fa8c">     * Calculate the number of remaining attempts.
-</span><span style="color:#f1fa8c">     *
-</span><span style="color:#f1fa8c">     * @param  string  $key
-</span><span style="color:#f1fa8c">     * @param  int  $maxAttempts
-</span><span style="color:#f1fa8c">     * @param  int|null  $retryAfter
-</span><span style="color:#f1fa8c">     * @return int
-</span><span style="color:#f1fa8c">     */</span>
-    <span style="color:#ff79c6">protected</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">calculateRemainingAttempts</span>(<span style="color:#8be9fd;font-style:italic">$key</span>, <span style="color:#8be9fd;font-style:italic">$maxAttempts</span>, <span style="color:#8be9fd;font-style:italic">$retryAfter</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">null</span>)
+    <span style=color:#f1fa8c>/**
+</span><span style=color:#f1fa8c>     * Calculate the number of remaining attempts.
+</span><span style=color:#f1fa8c>     *
+</span><span style=color:#f1fa8c>     * @param  string  $key
+</span><span style=color:#f1fa8c>     * @param  int  $maxAttempts
+</span><span style=color:#f1fa8c>     * @param  int|null  $retryAfter
+</span><span style=color:#f1fa8c>     * @return int
+</span><span style=color:#f1fa8c>     */</span>
+    <span style=color:#ff79c6>protected</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>calculateRemainingAttempts</span>(<span style=color:#8be9fd;font-style:italic>$key</span>, <span style=color:#8be9fd;font-style:italic>$maxAttempts</span>, <span style=color:#8be9fd;font-style:italic>$retryAfter</span> <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>null</span>)
     {
-        <span style="color:#ff79c6">if</span> (is_null(<span style="color:#8be9fd;font-style:italic">$retryAfter</span>)) {
-            <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">limiter</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">retriesLeft</span>(<span style="color:#8be9fd;font-style:italic">$key</span>, <span style="color:#8be9fd;font-style:italic">$maxAttempts</span>);
+        <span style=color:#ff79c6>if</span> (is_null(<span style=color:#8be9fd;font-style:italic>$retryAfter</span>)) {
+            <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>limiter</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>retriesLeft</span>(<span style=color:#8be9fd;font-style:italic>$key</span>, <span style=color:#8be9fd;font-style:italic>$maxAttempts</span>);
         }
 
-        <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
+        <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
     }
 }
 
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="open-apphttpkernelphp-and-add-the-following-to-the-routemiddleware-array">
-  Open <code>app\Http\Kernel.php</code> and add the following to the <code>$routeMiddleware</code> array
-  <a class="heading-link" href="#open-apphttpkernelphp-and-add-the-following-to-the-routemiddleware-array">
-    <i class="fa fa-link" aria-hidden="true"></i>
-  </a>
+</div><h3 id=open-apphttpkernelphp-and-add-the-following-to-the-routemiddleware-array>
+Open <code>app\Http\Kernel.php</code> and add the following to the <code>$routeMiddleware</code> array
+<a class=heading-link href=#open-apphttpkernelphp-and-add-the-following-to-the-routemiddleware-array>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
 </h3>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f1fa8c">&#39;throttle&#39;</span> <span style="color:#ff79c6">=&gt;</span> \App\Http\Middleware\ThrottleRequests<span style="color:#ff79c6">::</span><span style="color:#50fa7b">class</span>,
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f1fa8c>&#39;throttle&#39;</span> <span style=color:#ff79c6>=&gt;</span> \App\Http\Middleware\ThrottleRequests<span style=color:#ff79c6>::</span><span style=color:#50fa7b>class</span>,
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="use">
-  Use
-  <a class="heading-link" href="#use">
-    <i class="fa fa-link" aria-hidden="true"></i>
-  </a>
+</div><h2 id=use>
+Use
+<a class=heading-link href=#use>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
 </h2>
 <p>Use in route</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">    Route<span style="color:#ff79c6">::</span><span style="color:#50fa7b">post</span>(<span style="color:#f1fa8c">&#39;api/test&#39;</span>,[<span style="color:#f1fa8c">&#39;uses&#39;</span><span style="color:#ff79c6">=&gt;</span><span style="color:#f1fa8c">&#39;TestController@test&#39;</span>,<span style="color:#f1fa8c">&#39;middleware&#39;</span><span style="color:#ff79c6">=&gt;</span>[<span style="color:#f1fa8c">&#39;throttle:1&#39;</span>]]);
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php>    Route<span style=color:#ff79c6>::</span><span style=color:#50fa7b>post</span>(<span style=color:#f1fa8c>&#39;api/test&#39;</span>,[<span style=color:#f1fa8c>&#39;uses&#39;</span><span style=color:#ff79c6>=&gt;</span><span style=color:#f1fa8c>&#39;TestController@test&#39;</span>,<span style=color:#f1fa8c>&#39;middleware&#39;</span><span style=color:#ff79c6>=&gt;</span>[<span style=color:#f1fa8c>&#39;throttle:1&#39;</span>]]);
 </code></pre></td></tr></table>
 </div>
 </div>
-      </div>
-
-
-      <footer>
-        
-
-
-        
-        
-        
-      </footer>
-    </article>
-
-    
-  </section>
-
-      </div>
-
-      <footer class="footer">
-  <section class="container">
-    ©
-    
-      2019 -
-    
-    2022
-     Ethan Kuo 
-    ·
-    
-    Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
-    
-  </section>
+</div>
+<footer>
 </footer>
-
-    </main>
-
-    
-      
-      <script src="/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js" integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
+</article>
+</section>
+</div>
+<footer class=footer>
+<section class=container>
+©
+2019 -
+2022
+Ethan Kuo
+·
+Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
+</section>
+</footer>
+</main>
+<script src=/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NK08XEDHKZ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-NK08XEDHKZ');
-</script>
-
-  </body>
-
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-NK08XEDHKZ')</script>
+</body>
 </html>

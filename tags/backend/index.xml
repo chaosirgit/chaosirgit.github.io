@@ -1,22 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Backend on Ethan Kuo Blog</title>
-    <link>https://blog.adminchao.com/tags/backend/</link>
-    <description>Recent content in Backend on Ethan Kuo Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Mon, 15 Oct 2018 10:04:39 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/tags/backend/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Laravel Artisan Backend Call</title>
-      <link>https://blog.adminchao.com/posts/laravel-artisan-backend-call/</link>
-      <pubDate>Mon, 15 Oct 2018 10:04:39 +0000</pubDate>
-      
-      <guid>https://blog.adminchao.com/posts/laravel-artisan-backend-call/</guid>
-      <description>Preface If you need to execute a script programmatically in the background in your project, with the official Artisan::call() call, if the script takes too long, the process will be interrupted and the script will not execute successfully, so you need to hang the execution in the background.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Backend on Ethan Kuo Blog</title><link>https://blog.adminchao.com/tags/backend/</link><description>Recent content in Backend on Ethan Kuo Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 15 Oct 2018 10:04:39 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/tags/backend/index.xml" rel="self" type="application/rss+xml"/><item><title>Laravel Artisan Backend Call</title><link>https://blog.adminchao.com/posts/laravel-artisan-backend-call/</link><pubDate>Mon, 15 Oct 2018 10:04:39 +0000</pubDate><guid>https://blog.adminchao.com/posts/laravel-artisan-backend-call/</guid><description>Preface If you need to execute a script programmatically in the background in your project, with the official Artisan::call() call, if the script takes too long, the process will be interrupted and the script will not execute successfully, so you need to hang the execution in the background.
 Artisan Command Line Tools Please refer to the official documentation.
-Called programmatically 1 2 3 4 5  &amp;lt;?php use Illuminate\Support\Facades\Artisan; Artisan::call(&amp;#39;command&amp;#39;,[&amp;#39;id&amp;#39;=&amp;gt;1]);   If there is a transaction in the code, Artisan::call() needs to be called after commit or rollback.</description>
-    </item>
-    
-  </channel>
-</rss>
+Called programmatically 1 2 3 4 5 &amp;lt;?php use Illuminate\Support\Facades\Artisan; Artisan::call(&amp;#39;command&amp;#39;,[&amp;#39;id&amp;#39;=&amp;gt;1]); If there is a transaction in the code, Artisan::call() needs to be called after commit or rollback.</description></item></channel></rss>

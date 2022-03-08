@@ -1,204 +1,132 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="light dark">
-
-    
-
-    <meta name="author" content="郭超超">
-    <meta name="description" content="项目需求    开发一个用户注册的 rest API 要求：
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=color-scheme content="light dark">
+<meta name=author content="郭超超">
+<meta name=description content="项目需求    开发一个用户注册的 rest API 要求：
 HttpMethod: Post
 URI: api/account/register
 Request Body
    字段 必选 类型及范围 说明     phone 是 string 注册手机号   password 是 string 密码   code 是 string 验证码   gender 是 enum 性别   nickname 否 string 昵称，不超过 20 字符   birthday 否 date 生日   height 否 int 身高   weight 否 int 体重   email 否 string 邮箱    Response code:">
-    <meta name="keywords" content="RestApi,Lumen,PHP框架,实例,教程">
-
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="使用 Lumen 创建 RestApi 实例教程"/>
-<meta name="twitter:description" content="项目需求    开发一个用户注册的 rest API 要求：
+<meta name=keywords content="RestApi,Lumen,PHP框架,实例,教程">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="使用 Lumen 创建 RestApi 实例教程">
+<meta name=twitter:description content="项目需求    开发一个用户注册的 rest API 要求：
 HttpMethod: Post
 URI: api/account/register
 Request Body
-   字段 必选 类型及范围 说明     phone 是 string 注册手机号   password 是 string 密码   code 是 string 验证码   gender 是 enum 性别   nickname 否 string 昵称，不超过 20 字符   birthday 否 date 生日   height 否 int 身高   weight 否 int 体重   email 否 string 邮箱    Response code:"/>
-
-    <meta property="og:title" content="使用 Lumen 创建 RestApi 实例教程" />
+   字段 必选 类型及范围 说明     phone 是 string 注册手机号   password 是 string 密码   code 是 string 验证码   gender 是 enum 性别   nickname 否 string 昵称，不超过 20 字符   birthday 否 date 生日   height 否 int 身高   weight 否 int 体重   email 否 string 邮箱    Response code:">
+<meta property="og:title" content="使用 Lumen 创建 RestApi 实例教程">
 <meta property="og:description" content="项目需求    开发一个用户注册的 rest API 要求：
 HttpMethod: Post
 URI: api/account/register
 Request Body
-   字段 必选 类型及范围 说明     phone 是 string 注册手机号   password 是 string 密码   code 是 string 验证码   gender 是 enum 性别   nickname 否 string 昵称，不超过 20 字符   birthday 否 date 生日   height 否 int 身高   weight 否 int 体重   email 否 string 邮箱    Response code:" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.adminchao.com/zh-cn/posts/%E4%BD%BF%E7%94%A8-lumen-%E5%88%9B%E5%BB%BA-restapi-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2017-06-09T11:43:31+00:00" />
-<meta property="article:modified_time" content="2017-06-09T11:43:31+00:00" /><meta property="og:site_name" content="郭超超的博客" />
-
-
-
-    <title>
-  使用 Lumen 创建 RestApi 实例教程 · 郭超超的博客
+   字段 必选 类型及范围 说明     phone 是 string 注册手机号   password 是 string 密码   code 是 string 验证码   gender 是 enum 性别   nickname 否 string 昵称，不超过 20 字符   birthday 否 date 生日   height 否 int 身高   weight 否 int 体重   email 否 string 邮箱    Response code:">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.adminchao.com/zh-cn/posts/%E4%BD%BF%E7%94%A8-lumen-%E5%88%9B%E5%BB%BA-restapi-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2017-06-09T11:43:31+00:00">
+<meta property="article:modified_time" content="2017-06-09T11:43:31+00:00"><meta property="og:site_name" content="郭超超的博客">
+<title>
+使用 Lumen 创建 RestApi 实例教程 · 郭超超的博客
 </title>
-
-    
-      <link rel="canonical" href="https://blog.adminchao.com/zh-cn/posts/%E4%BD%BF%E7%94%A8-lumen-%E5%88%9B%E5%BB%BA-restapi-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/">
-    
-
-    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
-
-    
-      
-      
-      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
-    
-
-    
-
-    
-      
-        
-        
-        <link rel="stylesheet" href="/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css" integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin="anonymous" media="screen" />
-      
-    
-
-    
-
-    
-
-    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
-
-    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-
-    <meta name="generator" content="Hugo 0.89.1" />
-  </head>
-
-  
-  
-    
-  
-  <body class="preload-transitions colorscheme-dark">
-    
-<div class="float-container">
-    <a id="dark-mode-toggle" class="colorscheme-toggle">
-        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
-    </a>
+<link rel=canonical href=https://blog.adminchao.com/zh-cn/posts/%E4%BD%BF%E7%94%A8-lumen-%E5%88%9B%E5%BB%BA-restapi-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/>
+<link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin>
+<link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen>
+<link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen>
+<link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32>
+<link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16>
+<link rel=apple-touch-icon href=/images/apple-touch-icon.png>
+<link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png>
+<meta name=generator content="Hugo 0.89.1">
+</head>
+<body class="preload-transitions colorscheme-dark">
+<div class=float-container>
+<a id=dark-mode-toggle class=colorscheme-toggle>
+<i class="fa fa-adjust fa-fw" aria-hidden=true></i>
+</a>
 </div>
-
-
-    <main class="wrapper">
-      <nav class="navigation">
-  <section class="container">
-    <a class="navigation-title" href="/zh-cn">
-      郭超超的博客
-    </a>
-    
-      <input type="checkbox" id="menu-toggle" />
-      <label class="menu-button float-right" for="menu-toggle">
-        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
-      </label>
-      <ul class="navigation-list">
-        
-          
-            <li class="navigation-item">
-              <a class="navigation-link" href="/zh-cn/about/">关于</a>
-            </li>
-          
-            <li class="navigation-item">
-              <a class="navigation-link" href="/zh-cn/posts/">博文</a>
-            </li>
-          
-            <li class="navigation-item">
-              <a class="navigation-link" href="/zh-cn/contact/">联系</a>
-            </li>
-          
-        
-        
-          
-          
-          
-            
-              
-                <li class="navigation-item menu-separator">
-                  <span>|</span>
-                </li>
-                
-              
-              <li class="navigation-item">
-                <a href="https://blog.adminchao.com/">🇺🇸</a>
-              </li>
-            
-          
-            
-          
-        
-      </ul>
-    
-  </section>
+<main class=wrapper>
+<nav class=navigation>
+<section class=container>
+<a class=navigation-title href=/zh-cn>
+郭超超的博客
+</a>
+<input type=checkbox id=menu-toggle>
+<label class="menu-button float-right" for=menu-toggle>
+<i class="fa fa-bars fa-fw" aria-hidden=true></i>
+</label>
+<ul class=navigation-list>
+<li class=navigation-item>
+<a class=navigation-link href=/zh-cn/about/>关于</a>
+</li>
+<li class=navigation-item>
+<a class=navigation-link href=/zh-cn/posts/>博文</a>
+</li>
+<li class=navigation-item>
+<a class=navigation-link href=/zh-cn/contact/>联系</a>
+</li>
+<li class="navigation-item menu-separator">
+<span>|</span>
+</li>
+<li class=navigation-item>
+<a href=https://blog.adminchao.com/>🇺🇸</a>
+</li>
+</ul>
+</section>
 </nav>
-
-
-      <div class="content">
-        
-  <section class="container post">
-    <article>
-      <header>
-        <div class="post-title">
-          <h1 class="title">
-            <a class="title-link" href="https://blog.adminchao.com/zh-cn/posts/%E4%BD%BF%E7%94%A8-lumen-%E5%88%9B%E5%BB%BA-restapi-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/">
-              使用 Lumen 创建 RestApi 实例教程
-            </a>
-          </h1>
-        </div>
-        <div class="post-meta">
-          <div class="date">
-            <span class="posted-on">
-              <i class="fa fa-calendar" aria-hidden="true"></i>
-              <time datetime="2017-06-09T11:43:31Z">
-                2017-06-09 11:43:31
-              </time>
-            </span>
-            <span class="reading-time">
-              <i class="fa fa-clock-o" aria-hidden="true"></i>
-              阅读时间：5 分钟
-            </span>
-          </div>
-          
-          <div class="categories">
-  <i class="fa fa-folder" aria-hidden="true"></i>
-    <a href="/zh-cn/categories/lumen/">Lumen</a></div>
-
-          <div class="tags">
-  <i class="fa fa-tag" aria-hidden="true"></i>
-    <span class="tag">
-      <a href="/zh-cn/tags/restapi/">RestApi</a>
-    </span>
-      <span class="separator">•</span>
-    <span class="tag">
-      <a href="/zh-cn/tags/lumen/">Lumen</a>
-    </span>
-      <span class="separator">•</span>
-    <span class="tag">
-      <a href="/zh-cn/tags/php%E6%A1%86%E6%9E%B6/">PHP框架</a>
-    </span>
-      <span class="separator">•</span>
-    <span class="tag">
-      <a href="/zh-cn/tags/%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/">实例教程</a>
-    </span></div>
-
-        </div>
-      </header>
-
-      <div>
-        
-        <h2 id="项目需求">
-  项目需求
-  <a class="heading-link" href="#%e9%a1%b9%e7%9b%ae%e9%9c%80%e6%b1%82">
-    <i class="fa fa-link" aria-hidden="true"></i>
-  </a>
+<div class=content>
+<section class="container post">
+<article>
+<header>
+<div class=post-title>
+<h1 class=title>
+<a class=title-link href=https://blog.adminchao.com/zh-cn/posts/%E4%BD%BF%E7%94%A8-lumen-%E5%88%9B%E5%BB%BA-restapi-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/>
+使用 Lumen 创建 RestApi 实例教程
+</a>
+</h1>
+</div>
+<div class=post-meta>
+<div class=date>
+<span class=posted-on>
+<i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2017-06-09T11:43:31Z>
+2017-06-09 11:43:31
+</time>
+</span>
+<span class=reading-time>
+<i class="fa fa-clock-o" aria-hidden=true></i>
+阅读时间：5 分钟
+</span>
+</div>
+<div class=categories>
+<i class="fa fa-folder" aria-hidden=true></i>
+<a href=/zh-cn/categories/lumen/>Lumen</a></div>
+<div class=tags>
+<i class="fa fa-tag" aria-hidden=true></i>
+<span class=tag>
+<a href=/zh-cn/tags/restapi/>RestApi</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/zh-cn/tags/lumen/>Lumen</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/zh-cn/tags/php%E6%A1%86%E6%9E%B6/>PHP框架</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/zh-cn/tags/%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/>实例教程</a>
+</span></div>
+</div>
+</header>
+<div>
+<h2 id=项目需求>
+项目需求
+<a class=heading-link href=#%e9%a1%b9%e7%9b%ae%e9%9c%80%e6%b1%82>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
 </h2>
 <p>开发一个用户注册的 rest API 要求：</p>
 <p>HttpMethod: Post<br>
@@ -293,158 +221,158 @@ URI: api/account/register<br>
 </tr>
 </tbody>
 </table>
-<h2 id="项目开始">
-  项目开始
-  <a class="heading-link" href="#%e9%a1%b9%e7%9b%ae%e5%bc%80%e5%a7%8b">
-    <i class="fa fa-link" aria-hidden="true"></i>
-  </a>
+<h2 id=项目开始>
+项目开始
+<a class=heading-link href=#%e9%a1%b9%e7%9b%ae%e5%bc%80%e5%a7%8b>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
 </h2>
-<h3 id="配置数据库">
-  配置数据库
-  <a class="heading-link" href="#%e9%85%8d%e7%bd%ae%e6%95%b0%e6%8d%ae%e5%ba%93">
-    <i class="fa fa-link" aria-hidden="true"></i>
-  </a>
+<h3 id=配置数据库>
+配置数据库
+<a class=heading-link href=#%e9%85%8d%e7%bd%ae%e6%95%b0%e6%8d%ae%e5%ba%93>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
 </h3>
 <p>在 lumen 项目根目录下找到 .env.example 拷贝为 .env</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cp ./.env.example ./.env
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>cp ./.env.example ./.env
 </code></pre></td></tr></table>
 </div>
 </div><p>打开 .env 文件 , 配置数据库连接信息(数据库名等不加引号)</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">DB_DATABASE=&lt;db_name&gt;
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>DB_DATABASE=&lt;db_name&gt;
 DB_USERNAME=&lt;db_username&gt;
 DB_PASSWORD=&lt;db_password&gt;
 </code></pre></td></tr></table>
 </div>
 </div><p>然后在 bootstrap/app.php 中取消下面两行之前的注释：</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$app-&gt;withFacades();
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>$app-&gt;withFacades();
 $app-&gt;withEloquent();
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="数据库迁移">
-  数据库迁移
-  <a class="heading-link" href="#%e6%95%b0%e6%8d%ae%e5%ba%93%e8%bf%81%e7%a7%bb">
-    <i class="fa fa-link" aria-hidden="true"></i>
-  </a>
+</div><h3 id=数据库迁移>
+数据库迁移
+<a class=heading-link href=#%e6%95%b0%e6%8d%ae%e5%ba%93%e8%bf%81%e7%a7%bb>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
 </h3>
 <p>接下来我们来创建数据表。<br>
 项目根目录下运行如下命令：</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">php artisan make:migration create_table_user --create=user
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>php artisan make:migration create_table_user --create=user
 </code></pre></td></tr></table>
 </div>
-</div><p>该命令将会在 <code>database/migrations</code> 目录下创建一个迁移文件 <code>&lt;date&gt;_create_table_user.php</code><br>
+</div><p>该命令将会在 <code>database/migrations</code> 目录下创建一个迁移文件 <code>&lt;date>_create_table_user.php</code><br>
 接下来我们来编辑这个文件来定义数据表。</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#ff79c6">&lt;?</span>php
-<span style="color:#ff79c6">use</span> Illuminate\Support\Facades\Schema;
-<span style="color:#ff79c6">use</span> Illuminate\Database\Schema\Blueprint;
-<span style="color:#ff79c6">use</span> Illuminate\Database\Migrations\Migration;
-<span style="color:#ff79c6">class</span> <span style="color:#50fa7b">CreateTableUser</span> <span style="color:#ff79c6">extends</span> Migration
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#ff79c6>&lt;?</span>php
+<span style=color:#ff79c6>use</span> Illuminate\Support\Facades\Schema;
+<span style=color:#ff79c6>use</span> Illuminate\Database\Schema\Blueprint;
+<span style=color:#ff79c6>use</span> Illuminate\Database\Migrations\Migration;
+<span style=color:#ff79c6>class</span> <span style=color:#50fa7b>CreateTableUser</span> <span style=color:#ff79c6>extends</span> Migration
 {
-     <span style="color:#f1fa8c">/**
-</span><span style="color:#f1fa8c">      * Run the migrations.
-</span><span style="color:#f1fa8c">      *
-</span><span style="color:#f1fa8c">      * @return void
-</span><span style="color:#f1fa8c">      */</span>
-     <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">up</span>()
+     <span style=color:#f1fa8c>/**
+</span><span style=color:#f1fa8c>      * Run the migrations.
+</span><span style=color:#f1fa8c>      *
+</span><span style=color:#f1fa8c>      * @return void
+</span><span style=color:#f1fa8c>      */</span>
+     <span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>up</span>()
      {
-       <span style="color:#6272a4">//以下为自定义修改，其他代码自动生成
-</span><span style="color:#6272a4"></span>         Schema<span style="color:#ff79c6">::</span><span style="color:#50fa7b">create</span>(<span style="color:#f1fa8c">&#39;user&#39;</span>, <span style="color:#ff79c6">function</span> (Blueprint <span style="color:#8be9fd;font-style:italic">$table</span>) {
-             <span style="color:#8be9fd;font-style:italic">$table</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">increments</span>(<span style="color:#f1fa8c">&#39;id&#39;</span>);
-             <span style="color:#8be9fd;font-style:italic">$table</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">timestamps</span>();<span style="color:#6272a4">//该方法会自动在表里建立 created_at 与 updated_at;
-</span><span style="color:#6272a4"></span>             <span style="color:#8be9fd;font-style:italic">$table</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">string</span>(<span style="color:#f1fa8c">&#39;phone&#39;</span>);
-             <span style="color:#8be9fd;font-style:italic">$table</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">string</span>(<span style="color:#f1fa8c">&#39;password&#39;</span>);
-             <span style="color:#8be9fd;font-style:italic">$table</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">enum</span>(<span style="color:#f1fa8c">&#39;gender&#39;</span>,[<span style="color:#f1fa8c">&#39;male&#39;</span>,<span style="color:#f1fa8c">&#39;female&#39;</span>]);
-             <span style="color:#8be9fd;font-style:italic">$table</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">string</span>(<span style="color:#f1fa8c">&#39;nickname&#39;</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">nullable</span>();
-             <span style="color:#8be9fd;font-style:italic">$table</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">date</span>(<span style="color:#f1fa8c">&#39;birthday&#39;</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">nullable</span>();<span style="color:#6272a4">//使用列修改器设置允许为null;
-</span><span style="color:#6272a4"></span>             <span style="color:#8be9fd;font-style:italic">$table</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">integer</span>(<span style="color:#f1fa8c">&#39;height&#39;</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">nullable</span>();
-             <span style="color:#8be9fd;font-style:italic">$table</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">integer</span>(<span style="color:#f1fa8c">&#39;weight&#39;</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">nullable</span>();
-             <span style="color:#8be9fd;font-style:italic">$table</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">string</span>(<span style="color:#f1fa8c">&#39;email&#39;</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">nullable</span>();
+       <span style=color:#6272a4>//以下为自定义修改，其他代码自动生成
+</span><span style=color:#6272a4></span>         Schema<span style=color:#ff79c6>::</span><span style=color:#50fa7b>create</span>(<span style=color:#f1fa8c>&#39;user&#39;</span>, <span style=color:#ff79c6>function</span> (Blueprint <span style=color:#8be9fd;font-style:italic>$table</span>) {
+             <span style=color:#8be9fd;font-style:italic>$table</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>increments</span>(<span style=color:#f1fa8c>&#39;id&#39;</span>);
+             <span style=color:#8be9fd;font-style:italic>$table</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>timestamps</span>();<span style=color:#6272a4>//该方法会自动在表里建立 created_at 与 updated_at;
+</span><span style=color:#6272a4></span>             <span style=color:#8be9fd;font-style:italic>$table</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>string</span>(<span style=color:#f1fa8c>&#39;phone&#39;</span>);
+             <span style=color:#8be9fd;font-style:italic>$table</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>string</span>(<span style=color:#f1fa8c>&#39;password&#39;</span>);
+             <span style=color:#8be9fd;font-style:italic>$table</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>enum</span>(<span style=color:#f1fa8c>&#39;gender&#39;</span>,[<span style=color:#f1fa8c>&#39;male&#39;</span>,<span style=color:#f1fa8c>&#39;female&#39;</span>]);
+             <span style=color:#8be9fd;font-style:italic>$table</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>string</span>(<span style=color:#f1fa8c>&#39;nickname&#39;</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>nullable</span>();
+             <span style=color:#8be9fd;font-style:italic>$table</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>date</span>(<span style=color:#f1fa8c>&#39;birthday&#39;</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>nullable</span>();<span style=color:#6272a4>//使用列修改器设置允许为null;
+</span><span style=color:#6272a4></span>             <span style=color:#8be9fd;font-style:italic>$table</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>integer</span>(<span style=color:#f1fa8c>&#39;height&#39;</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>nullable</span>();
+             <span style=color:#8be9fd;font-style:italic>$table</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>integer</span>(<span style=color:#f1fa8c>&#39;weight&#39;</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>nullable</span>();
+             <span style=color:#8be9fd;font-style:italic>$table</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>string</span>(<span style=color:#f1fa8c>&#39;email&#39;</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>nullable</span>();
          });
-      <span style="color:#6272a4">//以上为自定义修改，其他代码自动生成
-</span><span style="color:#6272a4"></span>     }
-     <span style="color:#f1fa8c">/**
-</span><span style="color:#f1fa8c">      * Reverse the migrations.
-</span><span style="color:#f1fa8c">      *
-</span><span style="color:#f1fa8c">      * @return void
-</span><span style="color:#f1fa8c">      */</span>
-     <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">down</span>()
+      <span style=color:#6272a4>//以上为自定义修改，其他代码自动生成
+</span><span style=color:#6272a4></span>     }
+     <span style=color:#f1fa8c>/**
+</span><span style=color:#f1fa8c>      * Reverse the migrations.
+</span><span style=color:#f1fa8c>      *
+</span><span style=color:#f1fa8c>      * @return void
+</span><span style=color:#f1fa8c>      */</span>
+     <span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>down</span>()
      {
-         Schema<span style="color:#ff79c6">::</span><span style="color:#50fa7b">dropIfExists</span>(<span style="color:#f1fa8c">&#39;user&#39;</span>);
+         Schema<span style=color:#ff79c6>::</span><span style=color:#50fa7b>dropIfExists</span>(<span style=color:#f1fa8c>&#39;user&#39;</span>);
      }
  }
- <span style="color:#ff79c6">?&gt;</span>
+ <span style=color:#ff79c6>?&gt;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="列修改器">
-  列修改器
-  <a class="heading-link" href="#%e5%88%97%e4%bf%ae%e6%94%b9%e5%99%a8">
-    <i class="fa fa-link" aria-hidden="true"></i>
-  </a>
+</div><h4 id=列修改器>
+列修改器
+<a class=heading-link href=#%e5%88%97%e4%bf%ae%e6%94%b9%e5%99%a8>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
 </h4>
 <p>把必选为否的字段用列修改器设置允许为 <code>null</code> ，列修改器列表：</p>
 <table>
@@ -456,60 +384,60 @@ $app-&gt;withEloquent();
 </thead>
 <tbody>
 <tr>
-<td>-&gt;first()</td>
+<td>->first()</td>
 <td>将该列置为表中第一个列 (仅适用于MySQL)</td>
 </tr>
 <tr>
-<td>-&gt;after(‘column’)</td>
+<td>->after(‘column’)</td>
 <td>将该列置于另一个列之后 (仅适用于MySQL)</td>
 </tr>
 <tr>
-<td>-&gt;nullable()</td>
+<td>->nullable()</td>
 <td>允许该列的值为NULL</td>
 </tr>
 <tr>
-<td>-&gt;default($value)</td>
+<td>->default($value)</td>
 <td>指定列的默认值</td>
 </tr>
 <tr>
-<td>-&gt;unsigned()</td>
+<td>->unsigned()</td>
 <td>设置 integer 列为 UNSIGNED</td>
 </tr>
 </tbody>
 </table>
 <p>现在我们来运行这个迁移：</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">php artisan migrate
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>php artisan migrate
 </code></pre></td></tr></table>
 </div>
 </div><p>这样，就会在数据库中创建对应的表。<br>
 查询这个表的字段看看:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">mysql&gt; show columns from user;
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>mysql&gt; show columns from user;
 +------------+-----------------------+------+-----+---------+----------------+
 | Field      | Type                  | Null | Key | Default | Extra          |
 +------------+-----------------------+------+-----+---------+----------------+
@@ -528,11 +456,11 @@ $app-&gt;withEloquent();
 11 rows in set (0.00 sec)
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="常用的字段类型">
-  常用的字段类型
-  <a class="heading-link" href="#%e5%b8%b8%e7%94%a8%e7%9a%84%e5%ad%97%e6%ae%b5%e7%b1%bb%e5%9e%8b">
-    <i class="fa fa-link" aria-hidden="true"></i>
-  </a>
+</div><h4 id=常用的字段类型>
+常用的字段类型
+<a class=heading-link href=#%e5%b8%b8%e7%94%a8%e7%9a%84%e5%ad%97%e6%ae%b5%e7%b1%bb%e5%9e%8b>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
 </h4>
 <table>
 <thead>
@@ -543,471 +471,425 @@ $app-&gt;withEloquent();
 </thead>
 <tbody>
 <tr>
-<td>$table-&gt;bigIncrements(‘id’)</td>
+<td>$table->bigIncrements(‘id’)</td>
 <td>递增 ID（主键），相当于「UNSIGNED BIG INTEGER」型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;boolean(‘confirmed’)</td>
+<td>$table->boolean(‘confirmed’)</td>
 <td>相当于 BOOLEAN 型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;char(‘name’, 4)</td>
+<td>$table->char(‘name’, 4)</td>
 <td>相当于 CHAR 型态，并带有长度。</td>
 </tr>
 <tr>
-<td>$table-&gt;date(‘created_at’)</td>
+<td>$table->date(‘created_at’)</td>
 <td>相当于 DATE 型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;dateTime(‘created_at’)</td>
+<td>$table->dateTime(‘created_at’)</td>
 <td>相当于 DATETIME 型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;dateTimeTz(‘created_at’)</td>
+<td>$table->dateTimeTz(‘created_at’)</td>
 <td>DATETIME (带时区) 形态</td>
 </tr>
 <tr>
-<td>$table-&gt;decimal(‘amount’, 5, 2)</td>
+<td>$table->decimal(‘amount’, 5, 2)</td>
 <td>相当于 DECIMAL 型态，并带有精度与基数。</td>
 </tr>
 <tr>
-<td>$table-&gt;double(‘column’, 15, 8)</td>
+<td>$table->double(‘column’, 15, 8)</td>
 <td>相当于 DOUBLE 型态，总共有 15 位数，在小数点后面有 8 位数。</td>
 </tr>
 <tr>
-<td>$table-&gt;enum(‘choices’, [‘foo’, ‘bar’])</td>
+<td>$table->enum(‘choices’, [‘foo’, ‘bar’])</td>
 <td>相当于 ENUM 型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;float(‘amount’, 8, 2)</td>
+<td>$table->float(‘amount’, 8, 2)</td>
 <td>相当于 FLOAT 型态，总共有 8 位数，在小数点后面有 2 位数。</td>
 </tr>
 <tr>
-<td>$table-&gt;increments(‘id’)</td>
+<td>$table->increments(‘id’)</td>
 <td>递增的 ID (主键)，使用相当于「UNSIGNED INTEGER」的型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;integer(‘votes’)</td>
+<td>$table->integer(‘votes’)</td>
 <td>相当于 INTEGER 型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;ipAddress(‘visitor’)</td>
+<td>$table->ipAddress(‘visitor’)</td>
 <td>相当于 IP 地址形态。</td>
 </tr>
 <tr>
-<td>$table-&gt;json(‘options’)</td>
+<td>$table->json(‘options’)</td>
 <td>相当于 JSON 型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;jsonb(‘options’)</td>
+<td>$table->jsonb(‘options’)</td>
 <td>相当于 JSONB 型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;longText(‘description’)</td>
+<td>$table->longText(‘description’)</td>
 <td>相当于 LONGTEXT 型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;mediumIncrements(‘id’)</td>
+<td>$table->mediumIncrements(‘id’)</td>
 <td>递增 ID (主键) ，相当于「UNSIGNED MEDIUM INTEGER」型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;mediumInteger(‘numbers’)</td>
+<td>$table->mediumInteger(‘numbers’)</td>
 <td>相当于 MEDIUMINT 型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;mediumText(‘description’)</td>
+<td>$table->mediumText(‘description’)</td>
 <td>相当于 MEDIUMTEXT 型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;nullableTimestamps()</td>
+<td>$table->nullableTimestamps()</td>
 <td>与 timestamps() 相同，但允许为 NULL。</td>
 </tr>
 <tr>
-<td>$table-&gt;rememberToken()</td>
+<td>$table->rememberToken()</td>
 <td>加入 remember_token 并使用 VARCHAR(100) NULL。</td>
 </tr>
 <tr>
-<td>$table-&gt;smallIncrements(‘id’)</td>
+<td>$table->smallIncrements(‘id’)</td>
 <td>递增 ID (主键) ，相当于「UNSIGNED SMALL INTEGER」型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;smallInteger(‘votes’)</td>
+<td>$table->smallInteger(‘votes’)</td>
 <td>相当于 SMALLINT 型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;softDeletes()</td>
+<td>$table->softDeletes()</td>
 <td>加入 deleted_at 字段用于软删除操作。</td>
 </tr>
 <tr>
-<td>$table-&gt;string(‘email’)</td>
+<td>$table->string(‘email’)</td>
 <td>相当于 VARCHAR 型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;string(‘name’, 100)</td>
+<td>$table->string(‘name’, 100)</td>
 <td>相当于 VARCHAR 型态，并带有长度。</td>
 </tr>
 <tr>
-<td>$table-&gt;text(‘description’)</td>
+<td>$table->text(‘description’)</td>
 <td>相当于 TEXT 型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;time(‘sunrise’)</td>
+<td>$table->time(‘sunrise’)</td>
 <td>相当于 TIME 型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;timeTz(‘sunrise’)</td>
+<td>$table->timeTz(‘sunrise’)</td>
 <td>相当于 TIME (带时区) 形态。</td>
 </tr>
 <tr>
-<td>$table-&gt;tinyInteger(‘numbers’)</td>
+<td>$table->tinyInteger(‘numbers’)</td>
 <td>相当于 TINYINT 型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;timestamp(‘added_on’)</td>
+<td>$table->timestamp(‘added_on’)</td>
 <td>相当于 TIMESTAMP 型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;timestamps()</td>
+<td>$table->timestamps()</td>
 <td>加入 created_at 和 updated_at 字段。</td>
 </tr>
 <tr>
-<td>$table-&gt;unsignedInteger(‘votes’)</td>
+<td>$table->unsignedInteger(‘votes’)</td>
 <td>相当于 Unsigned INT 型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;unsignedMediumInteger(‘votes’)</td>
+<td>$table->unsignedMediumInteger(‘votes’)</td>
 <td>相当于 Unsigned MEDIUMINT 型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;unsignedSmallInteger(‘votes’)</td>
+<td>$table->unsignedSmallInteger(‘votes’)</td>
 <td>相当于 Unsigned SMALLINT 型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;unsignedTinyInteger(‘votes’)</td>
+<td>$table->unsignedTinyInteger(‘votes’)</td>
 <td>相当于 Unsigned TINYINT 型态。</td>
 </tr>
 <tr>
-<td>$table-&gt;uuid(‘id’)</td>
+<td>$table->uuid(‘id’)</td>
 <td>相当于 UUID 型态。</td>
 </tr>
 </tbody>
 </table>
-<h3 id="创建模型">
-  创建模型
-  <a class="heading-link" href="#%e5%88%9b%e5%bb%ba%e6%a8%a1%e5%9e%8b">
-    <i class="fa fa-link" aria-hidden="true"></i>
-  </a>
+<h3 id=创建模型>
+创建模型
+<a class=heading-link href=#%e5%88%9b%e5%bb%ba%e6%a8%a1%e5%9e%8b>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
 </h3>
 <p>接下来我们在 <code>app</code> 目录下创建模型文件 <code>User.php</code>，并编写代码如下：</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">9
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#ff79c6">&lt;?</span>php
- <span style="color:#ff79c6">namespace</span> App;
- <span style="color:#ff79c6">use</span> Illuminate\Database\Eloquent\Model;
- <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">User</span> <span style="color:#ff79c6">extends</span> Model
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#ff79c6>&lt;?</span>php
+ <span style=color:#ff79c6>namespace</span> App;
+ <span style=color:#ff79c6>use</span> Illuminate\Database\Eloquent\Model;
+ <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>User</span> <span style=color:#ff79c6>extends</span> Model
  {
-         <span style="color:#ff79c6">protected</span> <span style="color:#8be9fd;font-style:italic">$fillable</span> <span style="color:#ff79c6">=</span>
-          [<span style="color:#f1fa8c">&#39;phone&#39;</span>,<span style="color:#f1fa8c">&#39;password&#39;</span>,<span style="color:#f1fa8c">&#39;gender&#39;</span>,<span style="color:#f1fa8c">&#39;nickname&#39;</span>,<span style="color:#f1fa8c">&#39;birthday&#39;</span>,<span style="color:#f1fa8c">&#39;height&#39;</span>,<span style="color:#f1fa8c">&#39;weight&#39;</span>,<span style="color:#f1fa8c">&#39;email&#39;</span>];
+         <span style=color:#ff79c6>protected</span> <span style=color:#8be9fd;font-style:italic>$fillable</span> <span style=color:#ff79c6>=</span>
+          [<span style=color:#f1fa8c>&#39;phone&#39;</span>,<span style=color:#f1fa8c>&#39;password&#39;</span>,<span style=color:#f1fa8c>&#39;gender&#39;</span>,<span style=color:#f1fa8c>&#39;nickname&#39;</span>,<span style=color:#f1fa8c>&#39;birthday&#39;</span>,<span style=color:#f1fa8c>&#39;height&#39;</span>,<span style=color:#f1fa8c>&#39;weight&#39;</span>,<span style=color:#f1fa8c>&#39;email&#39;</span>];
  }
- <span style="color:#ff79c6">?&gt;</span>
+ <span style=color:#ff79c6>?&gt;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="创建控制器">
-  创建控制器
-  <a class="heading-link" href="#%e5%88%9b%e5%bb%ba%e6%8e%a7%e5%88%b6%e5%99%a8">
-    <i class="fa fa-link" aria-hidden="true"></i>
-  </a>
+</div><h3 id=创建控制器>
+创建控制器
+<a class=heading-link href=#%e5%88%9b%e5%bb%ba%e6%8e%a7%e5%88%b6%e5%99%a8>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
 </h3>
 <p>然后创建控制器文件 <code>app/Http/Controllers/UserController.php</code> :</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">56
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">57
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">58
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">59
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">60
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#ff79c6">&lt;?</span>php
-<span style="color:#ff79c6">namespace</span> App\Http\Controllers;
-<span style="color:#ff79c6">use</span> App\User;
-<span style="color:#ff79c6">use</span> Illuminate\Http\Request;
-<span style="color:#ff79c6">use</span> Illuminate\Http\Response; <span style="color:#6272a4">//这个会自动引用
-</span><span style="color:#6272a4"></span><span style="color:#ff79c6">use</span> Illuminate\Support\Facades\Crypt;<span style="color:#6272a4">//加密所需门面
-</span><span style="color:#6272a4"></span><span style="color:#ff79c6">use</span> Illuminate\Support\Facades\DB;<span style="color:#6272a4">//引入数据库操作门面
-</span><span style="color:#6272a4"></span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">UserController</span> <span style="color:#ff79c6">extends</span> Controller
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#ff79c6>&lt;?</span>php
+<span style=color:#ff79c6>namespace</span> App\Http\Controllers;
+<span style=color:#ff79c6>use</span> App\User;
+<span style=color:#ff79c6>use</span> Illuminate\Http\Request;
+<span style=color:#ff79c6>use</span> Illuminate\Http\Response; <span style=color:#6272a4>//这个会自动引用
+</span><span style=color:#6272a4></span><span style=color:#ff79c6>use</span> Illuminate\Support\Facades\Crypt;<span style=color:#6272a4>//加密所需门面
+</span><span style=color:#6272a4></span><span style=color:#ff79c6>use</span> Illuminate\Support\Facades\DB;<span style=color:#6272a4>//引入数据库操作门面
+</span><span style=color:#6272a4></span><span style=color:#ff79c6>class</span> <span style=color:#50fa7b>UserController</span> <span style=color:#ff79c6>extends</span> Controller
 {
-         <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">register</span> (Request <span style="color:#8be9fd;font-style:italic">$request</span>){
-         <span style="color:#8be9fd;font-style:italic">$phone</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">input</span>(<span style="color:#f1fa8c">&#39;phone&#39;</span>);
-         <span style="color:#8be9fd;font-style:italic">$password</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">input</span>(<span style="color:#f1fa8c">&#39;password&#39;</span>);
-         <span style="color:#8be9fd;font-style:italic">$code</span><span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">input</span>(<span style="color:#f1fa8c">&#39;code&#39;</span>);
-         <span style="color:#8be9fd;font-style:italic">$gender</span><span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">input</span>(<span style="color:#f1fa8c">&#39;gender&#39;</span>);
-         <span style="color:#8be9fd;font-style:italic">$nickname</span><span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">input</span>(<span style="color:#f1fa8c">&#39;nickname&#39;</span>) <span style="color:#ff79c6">??</span> <span style="color:#ff79c6">null</span>;
-         <span style="color:#8be9fd;font-style:italic">$birthday</span><span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">input</span>(<span style="color:#f1fa8c">&#39;birthday&#39;</span>) <span style="color:#ff79c6">??</span> <span style="color:#ff79c6">null</span>;
-         <span style="color:#8be9fd;font-style:italic">$height</span><span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">input</span>(<span style="color:#f1fa8c">&#39;height&#39;</span>) <span style="color:#ff79c6">??</span> <span style="color:#ff79c6">null</span>;
-         <span style="color:#8be9fd;font-style:italic">$weight</span><span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">input</span>(<span style="color:#f1fa8c">&#39;weight&#39;</span>) <span style="color:#ff79c6">??</span> <span style="color:#ff79c6">null</span>;
-         <span style="color:#8be9fd;font-style:italic">$email</span><span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">input</span>(<span style="color:#f1fa8c">&#39;email&#39;</span>) <span style="color:#ff79c6">??</span> <span style="color:#ff79c6">null</span>;
-         <span style="color:#6272a4">//如果验证码正确
-</span><span style="color:#6272a4"></span>         <span style="color:#ff79c6">if</span>(<span style="color:#8be9fd;font-style:italic">$code</span> <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;888888&#39;</span>){
-                 <span style="color:#ff79c6">if</span>(<span style="color:#ff79c6">!</span>preg_match(<span style="color:#f1fa8c">&#39;/^\d{11}$/&#39;</span>,<span style="color:#8be9fd;font-style:italic">$phone</span>)){
-                 <span style="color:#6272a4">//return &#39;phone flase &lt;br&gt;&#39;;}
-</span><span style="color:#6272a4"></span>                 <span style="color:#ff79c6">return</span> response(<span style="color:#f1fa8c">&#39;请填写正确的手机号&#39;</span>,<span style="color:#bd93f9">400</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">header</span>(<span style="color:#f1fa8c">&#39;Content-Type&#39;</span>,<span style="color:#f1fa8c">&#39;text/html;charset=utf-8&#39;</span>);}
-                 <span style="color:#ff79c6">if</span>(<span style="color:#ff79c6">!</span>preg_match(<span style="color:#f1fa8c">&#39;/^[0-9a-zA-Z\S]{6,16}$/&#39;</span>,<span style="color:#8be9fd;font-style:italic">$password</span>)){
-                 <span style="color:#6272a4">//return &#39;password is 6-16 &lt;br&gt;&#39;;}
-</span><span style="color:#6272a4"></span>                 <span style="color:#ff79c6">return</span> response(<span style="color:#f1fa8c">&#39;密码必须是6-16位字母or数字or符号&#39;</span>,<span style="color:#bd93f9">400</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">header</span>(<span style="color:#f1fa8c">&#39;Content-Type&#39;</span>,<span style="color:#f1fa8c">&#39;text/html;charset=utf-8&#39;</span>);}
-                 <span style="color:#ff79c6">if</span>(<span style="color:#8be9fd;font-style:italic">$gender</span> <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">null</span>){
-                 <span style="color:#6272a4">//return &#39;select gender &lt;br&gt;&#39;;}
-</span><span style="color:#6272a4"></span>                 <span style="color:#ff79c6">return</span> response(<span style="color:#f1fa8c">&#39;性别不能为空&#39;</span>,<span style="color:#bd93f9">400</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">header</span>(<span style="color:#f1fa8c">&#39;Content-Type&#39;</span>,<span style="color:#f1fa8c">&#39;text/html;charset=utf-8&#39;</span>);}
-                 <span style="color:#ff79c6">if</span>(<span style="color:#8be9fd;font-style:italic">$nickname</span> <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span> <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#ff79c6">!</span>preg_match(<span style="color:#f1fa8c">&#39;/^[\x{4e00}-\x{9fa5}A-Za-z0-9]{1,20}$/u&#39;</span>,<span style="color:#8be9fd;font-style:italic">$nickname</span>)){
-         <span style="color:#6272a4">//      return &#39;nickname mast &lt;=20 &lt;br&gt;&#39;;}
-</span><span style="color:#6272a4"></span>                 <span style="color:#ff79c6">return</span> response(<span style="color:#f1fa8c">&#39;昵称不能超过20个字符且不能含有符号&#39;</span>,<span style="color:#bd93f9">400</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">header</span>(<span style="color:#f1fa8c">&#39;Content-Type&#39;</span>,<span style="color:#f1fa8c">&#39;text/html;charset=utf-8&#39;</span>);}
-                 <span style="color:#ff79c6">if</span>(<span style="color:#8be9fd;font-style:italic">$birthday</span> <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span> <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#ff79c6">!</span>preg_match(<span style="color:#f1fa8c">&#39;/\d{4}-\d{2}-\d{2}/&#39;</span>,<span style="color:#8be9fd;font-style:italic">$birthday</span>)){
-                 <span style="color:#6272a4">//return &#39;birthday: yyyy-mm-dd &lt;br&gt;&#39;;}
-</span><span style="color:#6272a4"></span>                 <span style="color:#ff79c6">return</span> response(<span style="color:#f1fa8c">&#39;请填写正确的生日格式&#39;</span>,<span style="color:#bd93f9">400</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">header</span>(<span style="color:#f1fa8c">&#39;Content-Type&#39;</span>,<span style="color:#f1fa8c">&#39;text/html;charset=utf-8&#39;</span>);}
-                 <span style="color:#ff79c6">if</span>(<span style="color:#8be9fd;font-style:italic">$height</span> <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span> <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#ff79c6">!</span>preg_match(<span style="color:#f1fa8c">&#39;/^\d{2,3}$/&#39;</span>,<span style="color:#8be9fd;font-style:italic">$height</span>)){
-                 <span style="color:#6272a4">//return &#39;height is 2-3bit number &lt;br&gt;&#39;;}
-</span><span style="color:#6272a4"></span>                 <span style="color:#ff79c6">return</span> response(<span style="color:#f1fa8c">&#39;请填写正确的身高&#39;</span>,<span style="color:#bd93f9">400</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">header</span>(<span style="color:#f1fa8c">&#39;Content-Type&#39;</span>,<span style="color:#f1fa8c">&#39;text/html;charset=utf-8&#39;</span>);}
-                 <span style="color:#ff79c6">if</span>(<span style="color:#8be9fd;font-style:italic">$weight</span> <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span> <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#ff79c6">!</span>preg_match(<span style="color:#f1fa8c">&#39;/^\d{2,3}$/&#39;</span>,<span style="color:#8be9fd;font-style:italic">$weight</span>)){
-                 <span style="color:#6272a4">//return &#39;weight is 2-3bit number &lt;br&gt;&#39;;}
-</span><span style="color:#6272a4"></span>                 <span style="color:#ff79c6">return</span> response(<span style="color:#f1fa8c">&#39;请填写正确的体重&#39;</span>,<span style="color:#bd93f9">400</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">header</span>(<span style="color:#f1fa8c">&#39;Content-Type&#39;</span>,<span style="color:#f1fa8c">&#39;text/html;charset=utf-8&#39;</span>);}
-                 <span style="color:#ff79c6">if</span>(<span style="color:#8be9fd;font-style:italic">$email</span> <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span> <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#ff79c6">!</span>preg_match(<span style="color:#f1fa8c">&#39;/\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/&#39;</span>,<span style="color:#8be9fd;font-style:italic">$email</span>)){
-                 <span style="color:#ff79c6">return</span> response(<span style="color:#f1fa8c">&#39;请填写正确的电子邮箱&#39;</span>,<span style="color:#bd93f9">400</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">header</span>(<span style="color:#f1fa8c">&#39;Content-Type&#39;</span>,<span style="color:#f1fa8c">&#39;text/html;charset=utf-8&#39;</span>);}
-                 <span style="color:#6272a4">//是否存在重复的
-</span><span style="color:#6272a4"></span>                 <span style="color:#8be9fd;font-style:italic">$userlist</span> <span style="color:#ff79c6">=</span> DB<span style="color:#ff79c6">::</span><span style="color:#50fa7b">select</span>(<span style="color:#f1fa8c">&#39;select id,phone,email from user where phone = :phone or email = :email&#39;</span>,[<span style="color:#f1fa8c">&#39;phone&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#8be9fd;font-style:italic">$phone</span>,<span style="color:#f1fa8c">&#39;email&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#8be9fd;font-style:italic">$email</span>]);
-                 <span style="color:#ff79c6">if</span>(<span style="color:#8be9fd;font-style:italic">$userlist</span>){
-                         <span style="color:#ff79c6">return</span> response(<span style="color:#f1fa8c">&#39;您的手机号或邮箱已注册&#39;</span>,<span style="color:#bd93f9">400</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">header</span>(<span style="color:#f1fa8c">&#39;Content-Type&#39;</span>,<span style="color:#f1fa8c">&#39;text/html;charset=utf-8&#39;</span>);
-                 }<span style="color:#ff79c6">else</span>{
-                 DB<span style="color:#ff79c6">::</span><span style="color:#50fa7b">insert</span>(<span style="color:#f1fa8c">&#39;insert into user (created_at,phone,password,gender,nickname,birthday,height,weight,email) values (:created_at,:phone,:            password,:gender,:nickname,:birthday,:height,:weight,:email)&#39;</span>,[<span style="color:#f1fa8c">&#39;created_at&#39;</span><span style="color:#ff79c6">=&gt;</span>date(<span style="color:#f1fa8c">&#39;Y-m-d H:i:s&#39;</span>),<span style="color:#f1fa8c">&#39;phone&#39;</span><span style="color:#ff79c6">=&gt;</span><span style="color:#8be9fd;font-style:italic">$phone</span>,<span style="color:#f1fa8c">&#39;password&#39;</span><span style="color:#ff79c6">=&gt;</span>Crypt<span style="color:#ff79c6">::</span><span style="color:#50fa7b">encrypt</span>(<span style="color:#8be9fd;font-style:italic">$password</span>),       <span style="color:#f1fa8c">&#39;gender&#39;</span><span style="color:#ff79c6">=&gt;</span><span style="color:#8be9fd;font-style:italic">$gender</span>,<span style="color:#f1fa8c">&#39;nickname&#39;</span><span style="color:#ff79c6">=&gt;</span><span style="color:#8be9fd;font-style:italic">$nickname</span>,<span style="color:#f1fa8c">&#39;birthday&#39;</span><span style="color:#ff79c6">=&gt;</span><span style="color:#8be9fd;font-style:italic">$birthday</span>,<span style="color:#f1fa8c">&#39;height&#39;</span><span style="color:#ff79c6">=&gt;</span><span style="color:#8be9fd;font-style:italic">$height</span>,<span style="color:#f1fa8c">&#39;weight&#39;</span><span style="color:#ff79c6">=&gt;</span><span style="color:#8be9fd;font-style:italic">$weight</span>,<span style="color:#f1fa8c">&#39;email&#39;</span><span style="color:#ff79c6">=&gt;</span><span style="color:#8be9fd;font-style:italic">$email</span>]);
-                 <span style="color:#ff79c6">return</span> response(<span style="color:#f1fa8c">&#39;注册成功&#39;</span>,<span style="color:#bd93f9">200</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">header</span>(<span style="color:#f1fa8c">&#39;Content-Type&#39;</span>,<span style="color:#f1fa8c">&#39;text/html;charset=utf-8&#39;</span>);
-         <span style="color:#6272a4">//      return &#39;oK&#39;;
-</span><span style="color:#6272a4"></span>                 }
-         }<span style="color:#ff79c6">else</span>{
-         <span style="color:#6272a4">//      return &#39;验证码错误&#39;;
-</span><span style="color:#6272a4"></span>                 <span style="color:#ff79c6">return</span> response(<span style="color:#f1fa8c">&#39;验证码错误&#39;</span>,<span style="color:#bd93f9">400</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">header</span>(<span style="color:#f1fa8c">&#39;Content-Type&#39;</span>,<span style="color:#f1fa8c">&#39;text/html;charset=utf-8&#39;</span>);
+         <span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>register</span> (Request <span style=color:#8be9fd;font-style:italic>$request</span>){
+         <span style=color:#8be9fd;font-style:italic>$phone</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>input</span>(<span style=color:#f1fa8c>&#39;phone&#39;</span>);
+         <span style=color:#8be9fd;font-style:italic>$password</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>input</span>(<span style=color:#f1fa8c>&#39;password&#39;</span>);
+         <span style=color:#8be9fd;font-style:italic>$code</span><span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>input</span>(<span style=color:#f1fa8c>&#39;code&#39;</span>);
+         <span style=color:#8be9fd;font-style:italic>$gender</span><span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>input</span>(<span style=color:#f1fa8c>&#39;gender&#39;</span>);
+         <span style=color:#8be9fd;font-style:italic>$nickname</span><span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>input</span>(<span style=color:#f1fa8c>&#39;nickname&#39;</span>) <span style=color:#ff79c6>??</span> <span style=color:#ff79c6>null</span>;
+         <span style=color:#8be9fd;font-style:italic>$birthday</span><span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>input</span>(<span style=color:#f1fa8c>&#39;birthday&#39;</span>) <span style=color:#ff79c6>??</span> <span style=color:#ff79c6>null</span>;
+         <span style=color:#8be9fd;font-style:italic>$height</span><span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>input</span>(<span style=color:#f1fa8c>&#39;height&#39;</span>) <span style=color:#ff79c6>??</span> <span style=color:#ff79c6>null</span>;
+         <span style=color:#8be9fd;font-style:italic>$weight</span><span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>input</span>(<span style=color:#f1fa8c>&#39;weight&#39;</span>) <span style=color:#ff79c6>??</span> <span style=color:#ff79c6>null</span>;
+         <span style=color:#8be9fd;font-style:italic>$email</span><span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>input</span>(<span style=color:#f1fa8c>&#39;email&#39;</span>) <span style=color:#ff79c6>??</span> <span style=color:#ff79c6>null</span>;
+         <span style=color:#6272a4>//如果验证码正确
+</span><span style=color:#6272a4></span>         <span style=color:#ff79c6>if</span>(<span style=color:#8be9fd;font-style:italic>$code</span> <span style=color:#ff79c6>==</span> <span style=color:#f1fa8c>&#39;888888&#39;</span>){
+                 <span style=color:#ff79c6>if</span>(<span style=color:#ff79c6>!</span>preg_match(<span style=color:#f1fa8c>&#39;/^\d{11}$/&#39;</span>,<span style=color:#8be9fd;font-style:italic>$phone</span>)){
+                 <span style=color:#6272a4>//return &#39;phone flase &lt;br&gt;&#39;;}
+</span><span style=color:#6272a4></span>                 <span style=color:#ff79c6>return</span> response(<span style=color:#f1fa8c>&#39;请填写正确的手机号&#39;</span>,<span style=color:#bd93f9>400</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>header</span>(<span style=color:#f1fa8c>&#39;Content-Type&#39;</span>,<span style=color:#f1fa8c>&#39;text/html;charset=utf-8&#39;</span>);}
+                 <span style=color:#ff79c6>if</span>(<span style=color:#ff79c6>!</span>preg_match(<span style=color:#f1fa8c>&#39;/^[0-9a-zA-Z\S]{6,16}$/&#39;</span>,<span style=color:#8be9fd;font-style:italic>$password</span>)){
+                 <span style=color:#6272a4>//return &#39;password is 6-16 &lt;br&gt;&#39;;}
+</span><span style=color:#6272a4></span>                 <span style=color:#ff79c6>return</span> response(<span style=color:#f1fa8c>&#39;密码必须是6-16位字母or数字or符号&#39;</span>,<span style=color:#bd93f9>400</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>header</span>(<span style=color:#f1fa8c>&#39;Content-Type&#39;</span>,<span style=color:#f1fa8c>&#39;text/html;charset=utf-8&#39;</span>);}
+                 <span style=color:#ff79c6>if</span>(<span style=color:#8be9fd;font-style:italic>$gender</span> <span style=color:#ff79c6>==</span> <span style=color:#ff79c6>null</span>){
+                 <span style=color:#6272a4>//return &#39;select gender &lt;br&gt;&#39;;}
+</span><span style=color:#6272a4></span>                 <span style=color:#ff79c6>return</span> response(<span style=color:#f1fa8c>&#39;性别不能为空&#39;</span>,<span style=color:#bd93f9>400</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>header</span>(<span style=color:#f1fa8c>&#39;Content-Type&#39;</span>,<span style=color:#f1fa8c>&#39;text/html;charset=utf-8&#39;</span>);}
+                 <span style=color:#ff79c6>if</span>(<span style=color:#8be9fd;font-style:italic>$nickname</span> <span style=color:#ff79c6>!=</span> <span style=color:#ff79c6>null</span> <span style=color:#ff79c6>&amp;&amp;</span> <span style=color:#ff79c6>!</span>preg_match(<span style=color:#f1fa8c>&#39;/^[\x{4e00}-\x{9fa5}A-Za-z0-9]{1,20}$/u&#39;</span>,<span style=color:#8be9fd;font-style:italic>$nickname</span>)){
+         <span style=color:#6272a4>//      return &#39;nickname mast &lt;=20 &lt;br&gt;&#39;;}
+</span><span style=color:#6272a4></span>                 <span style=color:#ff79c6>return</span> response(<span style=color:#f1fa8c>&#39;昵称不能超过20个字符且不能含有符号&#39;</span>,<span style=color:#bd93f9>400</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>header</span>(<span style=color:#f1fa8c>&#39;Content-Type&#39;</span>,<span style=color:#f1fa8c>&#39;text/html;charset=utf-8&#39;</span>);}
+                 <span style=color:#ff79c6>if</span>(<span style=color:#8be9fd;font-style:italic>$birthday</span> <span style=color:#ff79c6>!=</span> <span style=color:#ff79c6>null</span> <span style=color:#ff79c6>&amp;&amp;</span> <span style=color:#ff79c6>!</span>preg_match(<span style=color:#f1fa8c>&#39;/\d{4}-\d{2}-\d{2}/&#39;</span>,<span style=color:#8be9fd;font-style:italic>$birthday</span>)){
+                 <span style=color:#6272a4>//return &#39;birthday: yyyy-mm-dd &lt;br&gt;&#39;;}
+</span><span style=color:#6272a4></span>                 <span style=color:#ff79c6>return</span> response(<span style=color:#f1fa8c>&#39;请填写正确的生日格式&#39;</span>,<span style=color:#bd93f9>400</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>header</span>(<span style=color:#f1fa8c>&#39;Content-Type&#39;</span>,<span style=color:#f1fa8c>&#39;text/html;charset=utf-8&#39;</span>);}
+                 <span style=color:#ff79c6>if</span>(<span style=color:#8be9fd;font-style:italic>$height</span> <span style=color:#ff79c6>!=</span> <span style=color:#ff79c6>null</span> <span style=color:#ff79c6>&amp;&amp;</span> <span style=color:#ff79c6>!</span>preg_match(<span style=color:#f1fa8c>&#39;/^\d{2,3}$/&#39;</span>,<span style=color:#8be9fd;font-style:italic>$height</span>)){
+                 <span style=color:#6272a4>//return &#39;height is 2-3bit number &lt;br&gt;&#39;;}
+</span><span style=color:#6272a4></span>                 <span style=color:#ff79c6>return</span> response(<span style=color:#f1fa8c>&#39;请填写正确的身高&#39;</span>,<span style=color:#bd93f9>400</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>header</span>(<span style=color:#f1fa8c>&#39;Content-Type&#39;</span>,<span style=color:#f1fa8c>&#39;text/html;charset=utf-8&#39;</span>);}
+                 <span style=color:#ff79c6>if</span>(<span style=color:#8be9fd;font-style:italic>$weight</span> <span style=color:#ff79c6>!=</span> <span style=color:#ff79c6>null</span> <span style=color:#ff79c6>&amp;&amp;</span> <span style=color:#ff79c6>!</span>preg_match(<span style=color:#f1fa8c>&#39;/^\d{2,3}$/&#39;</span>,<span style=color:#8be9fd;font-style:italic>$weight</span>)){
+                 <span style=color:#6272a4>//return &#39;weight is 2-3bit number &lt;br&gt;&#39;;}
+</span><span style=color:#6272a4></span>                 <span style=color:#ff79c6>return</span> response(<span style=color:#f1fa8c>&#39;请填写正确的体重&#39;</span>,<span style=color:#bd93f9>400</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>header</span>(<span style=color:#f1fa8c>&#39;Content-Type&#39;</span>,<span style=color:#f1fa8c>&#39;text/html;charset=utf-8&#39;</span>);}
+                 <span style=color:#ff79c6>if</span>(<span style=color:#8be9fd;font-style:italic>$email</span> <span style=color:#ff79c6>!=</span> <span style=color:#ff79c6>null</span> <span style=color:#ff79c6>&amp;&amp;</span> <span style=color:#ff79c6>!</span>preg_match(<span style=color:#f1fa8c>&#39;/\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/&#39;</span>,<span style=color:#8be9fd;font-style:italic>$email</span>)){
+                 <span style=color:#ff79c6>return</span> response(<span style=color:#f1fa8c>&#39;请填写正确的电子邮箱&#39;</span>,<span style=color:#bd93f9>400</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>header</span>(<span style=color:#f1fa8c>&#39;Content-Type&#39;</span>,<span style=color:#f1fa8c>&#39;text/html;charset=utf-8&#39;</span>);}
+                 <span style=color:#6272a4>//是否存在重复的
+</span><span style=color:#6272a4></span>                 <span style=color:#8be9fd;font-style:italic>$userlist</span> <span style=color:#ff79c6>=</span> DB<span style=color:#ff79c6>::</span><span style=color:#50fa7b>select</span>(<span style=color:#f1fa8c>&#39;select id,phone,email from user where phone = :phone or email = :email&#39;</span>,[<span style=color:#f1fa8c>&#39;phone&#39;</span> <span style=color:#ff79c6>=&gt;</span> <span style=color:#8be9fd;font-style:italic>$phone</span>,<span style=color:#f1fa8c>&#39;email&#39;</span> <span style=color:#ff79c6>=&gt;</span> <span style=color:#8be9fd;font-style:italic>$email</span>]);
+                 <span style=color:#ff79c6>if</span>(<span style=color:#8be9fd;font-style:italic>$userlist</span>){
+                         <span style=color:#ff79c6>return</span> response(<span style=color:#f1fa8c>&#39;您的手机号或邮箱已注册&#39;</span>,<span style=color:#bd93f9>400</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>header</span>(<span style=color:#f1fa8c>&#39;Content-Type&#39;</span>,<span style=color:#f1fa8c>&#39;text/html;charset=utf-8&#39;</span>);
+                 }<span style=color:#ff79c6>else</span>{
+                 DB<span style=color:#ff79c6>::</span><span style=color:#50fa7b>insert</span>(<span style=color:#f1fa8c>&#39;insert into user (created_at,phone,password,gender,nickname,birthday,height,weight,email) values (:created_at,:phone,:            password,:gender,:nickname,:birthday,:height,:weight,:email)&#39;</span>,[<span style=color:#f1fa8c>&#39;created_at&#39;</span><span style=color:#ff79c6>=&gt;</span>date(<span style=color:#f1fa8c>&#39;Y-m-d H:i:s&#39;</span>),<span style=color:#f1fa8c>&#39;phone&#39;</span><span style=color:#ff79c6>=&gt;</span><span style=color:#8be9fd;font-style:italic>$phone</span>,<span style=color:#f1fa8c>&#39;password&#39;</span><span style=color:#ff79c6>=&gt;</span>Crypt<span style=color:#ff79c6>::</span><span style=color:#50fa7b>encrypt</span>(<span style=color:#8be9fd;font-style:italic>$password</span>),       <span style=color:#f1fa8c>&#39;gender&#39;</span><span style=color:#ff79c6>=&gt;</span><span style=color:#8be9fd;font-style:italic>$gender</span>,<span style=color:#f1fa8c>&#39;nickname&#39;</span><span style=color:#ff79c6>=&gt;</span><span style=color:#8be9fd;font-style:italic>$nickname</span>,<span style=color:#f1fa8c>&#39;birthday&#39;</span><span style=color:#ff79c6>=&gt;</span><span style=color:#8be9fd;font-style:italic>$birthday</span>,<span style=color:#f1fa8c>&#39;height&#39;</span><span style=color:#ff79c6>=&gt;</span><span style=color:#8be9fd;font-style:italic>$height</span>,<span style=color:#f1fa8c>&#39;weight&#39;</span><span style=color:#ff79c6>=&gt;</span><span style=color:#8be9fd;font-style:italic>$weight</span>,<span style=color:#f1fa8c>&#39;email&#39;</span><span style=color:#ff79c6>=&gt;</span><span style=color:#8be9fd;font-style:italic>$email</span>]);
+                 <span style=color:#ff79c6>return</span> response(<span style=color:#f1fa8c>&#39;注册成功&#39;</span>,<span style=color:#bd93f9>200</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>header</span>(<span style=color:#f1fa8c>&#39;Content-Type&#39;</span>,<span style=color:#f1fa8c>&#39;text/html;charset=utf-8&#39;</span>);
+         <span style=color:#6272a4>//      return &#39;oK&#39;;
+</span><span style=color:#6272a4></span>                 }
+         }<span style=color:#ff79c6>else</span>{
+         <span style=color:#6272a4>//      return &#39;验证码错误&#39;;
+</span><span style=color:#6272a4></span>                 <span style=color:#ff79c6>return</span> response(<span style=color:#f1fa8c>&#39;验证码错误&#39;</span>,<span style=color:#bd93f9>400</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>header</span>(<span style=color:#f1fa8c>&#39;Content-Type&#39;</span>,<span style=color:#f1fa8c>&#39;text/html;charset=utf-8&#39;</span>);
          }
          }
 }
-<span style="color:#ff79c6">?&gt;</span>
+<span style=color:#ff79c6>?&gt;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="遇到的问题">
-  遇到的问题
-  <a class="heading-link" href="#%e9%81%87%e5%88%b0%e7%9a%84%e9%97%ae%e9%a2%98">
-    <i class="fa fa-link" aria-hidden="true"></i>
-  </a>
+</div><h4 id=遇到的问题>
+遇到的问题
+<a class=heading-link href=#%e9%81%87%e5%88%b0%e7%9a%84%e9%97%ae%e9%a2%98>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
 </h4>
 <p>response 的使用方法</p>
 <p>单个:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#ff79c6">return</span> response(<span style="color:#f1fa8c">&#39;失败&#39;</span>,<span style="color:#bd93f9">400</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">header</span>(<span style="color:#f1fa8c">&#39;Content-Type&#39;</span>,<span style="color:#f1fa8c">&#39;text/html;charset=utf-8&#39;</span>);
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#ff79c6>return</span> response(<span style=color:#f1fa8c>&#39;失败&#39;</span>,<span style=color:#bd93f9>400</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>header</span>(<span style=color:#f1fa8c>&#39;Content-Type&#39;</span>,<span style=color:#f1fa8c>&#39;text/html;charset=utf-8&#39;</span>);
 </code></pre></td></tr></table>
 </div>
 </div><p>多个:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#ff79c6">return</span> response(<span style="color:#8be9fd;font-style:italic">$content</span>)
-            <span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">header</span>(<span style="color:#f1fa8c">&#39;Content-Type&#39;</span>, <span style="color:#8be9fd;font-style:italic">$type</span>)
-            <span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">header</span>(<span style="color:#f1fa8c">&#39;X-Header-One&#39;</span>, <span style="color:#f1fa8c">&#39;Header Value&#39;</span>)
-            <span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">header</span>(<span style="color:#f1fa8c">&#39;X-Header-Two&#39;</span>, <span style="color:#f1fa8c">&#39;Header Value&#39;</span>);
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#ff79c6>return</span> response(<span style=color:#8be9fd;font-style:italic>$content</span>)
+            <span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>header</span>(<span style=color:#f1fa8c>&#39;Content-Type&#39;</span>, <span style=color:#8be9fd;font-style:italic>$type</span>)
+            <span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>header</span>(<span style=color:#f1fa8c>&#39;X-Header-One&#39;</span>, <span style=color:#f1fa8c>&#39;Header Value&#39;</span>)
+            <span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>header</span>(<span style=color:#f1fa8c>&#39;X-Header-Two&#39;</span>, <span style=color:#f1fa8c>&#39;Header Value&#39;</span>);
 
 </code></pre></td></tr></table>
 </div>
 </div><p>json:<br>
 <code>json</code> 方法会自动将标头的 <code>Content-Type</code> 设置为 <code>application/json</code>，
 并通过 <code>PHP</code> 的 <code>json_encode</code> 函数将指定的数组转换为 <code>JSON</code>:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#ff79c6">return</span> response()<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">json</span>([<span style="color:#f1fa8c">&#39;name&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;chaosir&#39;</span>, <span style="color:#f1fa8c">&#39;age&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;30&#39;</span>]);
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#ff79c6>return</span> response()<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>json</span>([<span style=color:#f1fa8c>&#39;name&#39;</span> <span style=color:#ff79c6>=&gt;</span> <span style=color:#f1fa8c>&#39;chaosir&#39;</span>, <span style=color:#f1fa8c>&#39;age&#39;</span> <span style=color:#ff79c6>=&gt;</span> <span style=color:#f1fa8c>&#39;30&#39;</span>]);
 </code></pre></td></tr></table>
 </div>
 </div><p>DB 操作问题
 在使用 <code>DB</code> 类来操作数据库时报错，原因是没有引入数据库操作门面：</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#ff79c6">use</span> Illuminate\Support\Facades\DB;
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#ff79c6>use</span> Illuminate\Support\Facades\DB;
 </code></pre></td></tr></table>
 </div>
-</div><p>并且打开 <code>bootstrap\app.php</code> 取消 <code>$app-&gt;withFacades();</code> 之前的注释</p>
+</div><p>并且打开 <code>bootstrap\app.php</code> 取消 <code>$app->withFacades();</code> 之前的注释</p>
 <p>使用实例:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#8be9fd;font-style:italic">$userlist</span> <span style="color:#ff79c6">=</span> DB<span style="color:#ff79c6">::</span><span style="color:#50fa7b">select</span>(<span style="color:#f1fa8c">&#39;select id,phone,email from user where phone = :phone or email = :email&#39;</span>,
-[<span style="color:#f1fa8c">&#39;phone&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#8be9fd;font-style:italic">$phone</span>,<span style="color:#f1fa8c">&#39;email&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#8be9fd;font-style:italic">$email</span>]);
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#8be9fd;font-style:italic>$userlist</span> <span style=color:#ff79c6>=</span> DB<span style=color:#ff79c6>::</span><span style=color:#50fa7b>select</span>(<span style=color:#f1fa8c>&#39;select id,phone,email from user where phone = :phone or email = :email&#39;</span>,
+[<span style=color:#f1fa8c>&#39;phone&#39;</span> <span style=color:#ff79c6>=&gt;</span> <span style=color:#8be9fd;font-style:italic>$phone</span>,<span style=color:#f1fa8c>&#39;email&#39;</span> <span style=color:#ff79c6>=&gt;</span> <span style=color:#8be9fd;font-style:italic>$email</span>]);
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="定义路由">
-  定义路由
-  <a class="heading-link" href="#%e5%ae%9a%e4%b9%89%e8%b7%af%e7%94%b1">
-    <i class="fa fa-link" aria-hidden="true"></i>
-  </a>
+</div><h3 id=定义路由>
+定义路由
+<a class=heading-link href=#%e5%ae%9a%e4%b9%89%e8%b7%af%e7%94%b1>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
 </h3>
 <p>打开 <code>/routes/web.php</code> 设置如下路由：</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#8be9fd;font-style:italic">$app</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">post</span>(<span style="color:#f1fa8c">&#39;api/account/register&#39;</span>,<span style="color:#f1fa8c">&#39;UserController@register&#39;</span>);
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#8be9fd;font-style:italic>$app</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>post</span>(<span style=color:#f1fa8c>&#39;api/account/register&#39;</span>,<span style=color:#f1fa8c>&#39;UserController@register&#39;</span>);
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="项目完成">
-  项目完成
-  <a class="heading-link" href="#%e9%a1%b9%e7%9b%ae%e5%ae%8c%e6%88%90">
-    <i class="fa fa-link" aria-hidden="true"></i>
-  </a>
+</div><h2 id=项目完成>
+项目完成
+<a class=heading-link href=#%e9%a1%b9%e7%9b%ae%e5%ae%8c%e6%88%90>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
 </h2>
-
-      </div>
-
-
-      <footer>
-        
-
-
-        
-        
-        
-      </footer>
-    </article>
-
-    
-  </section>
-
-      </div>
-
-      <footer class="footer">
-  <section class="container">
-    ©
-    
-      2019 -
-    
-    2022
-     郭超超 
-    ·
-    
-    技术支持 <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
-    
-  </section>
+</div>
+<footer>
 </footer>
-
-    </main>
-
-    
-      
-      <script src="/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js" integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
+</article>
+</section>
+</div>
+<footer class=footer>
+<section class=container>
+©
+2019 -
+2022
+郭超超
+·
+技术支持 <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
+</section>
+</footer>
+</main>
+<script src=/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NK08XEDHKZ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-NK08XEDHKZ');
-</script>
-
-  </body>
-
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-NK08XEDHKZ')</script>
+</body>
 </html>

@@ -1,26 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>phpstrom on 郭超超的博客</title>
-    <link>https://blog.adminchao.com/zh-cn/categories/phpstrom/</link>
-    <description>Recent content in phpstrom on 郭超超的博客</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Fri, 22 Sep 2017 12:55:39 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/categories/phpstrom/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>我的 phpstorm 配置</title>
-      <link>https://blog.adminchao.com/zh-cn/posts/%E6%88%91%E7%9A%84-phpstorm-%E9%85%8D%E7%BD%AE/</link>
-      <pubDate>Fri, 22 Sep 2017 12:55:39 +0000</pubDate>
-      
-      <guid>https://blog.adminchao.com/zh-cn/posts/%E6%88%91%E7%9A%84-phpstorm-%E9%85%8D%E7%BD%AE/</guid>
-      <description>前言 感觉 phpstorm 很爽，所以抛弃了我心爱的 atom 转身投入 phpstorm 的怀抱，把我的 phpstorm 配置做个笔记，以便在不同环境下使用。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>phpstrom on 郭超超的博客</title><link>https://blog.adminchao.com/zh-cn/categories/phpstrom/</link><description>Recent content in phpstrom on 郭超超的博客</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 22 Sep 2017 12:55:39 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/categories/phpstrom/index.xml" rel="self" type="application/rss+xml"/><item><title>我的 phpstorm 配置</title><link>https://blog.adminchao.com/zh-cn/posts/%E6%88%91%E7%9A%84-phpstorm-%E9%85%8D%E7%BD%AE/</link><pubDate>Fri, 22 Sep 2017 12:55:39 +0000</pubDate><guid>https://blog.adminchao.com/zh-cn/posts/%E6%88%91%E7%9A%84-phpstorm-%E9%85%8D%E7%BD%AE/</guid><description>前言 感觉 phpstorm 很爽，所以抛弃了我心爱的 atom 转身投入 phpstorm 的怀抱，把我的 phpstorm 配置做个笔记，以便在不同环境下使用。
 下载 在 Google 搜索 phpstorm 下载。
 安装 这个直接默认下一步安装就可以。
-配置 视觉美化配置   ⌘+, 来打开配置项。
-  选择 Appearance &amp;amp; Behavior -&amp;gt; Appearance ，把 UI Options 里的 Theme 设为 Darcula ，打开 Override default fonts by ， Name 设为 Fira Code Medium ，Size 设为 15
-  选择 Editor-&amp;gt;Font ，Font 设为 Fira Code ，Size 设为 15 ，Line spacing 设为 1.4。
-  关闭 View 标签下的 Tool Buttons 、Status Bar 、Navigation Bar。</description>
-    </item>
-    
-  </channel>
-</rss>
+配置 视觉美化配置 ⌘+, 来打开配置项。
+选择 Appearance &amp;amp; Behavior -&amp;gt; Appearance ，把 UI Options 里的 Theme 设为 Darcula ，打开 Override default fonts by ， Name 设为 Fira Code Medium ，Size 设为 15
+选择 Editor-&amp;gt;Font ，Font 设为 Fira Code ，Size 设为 15 ，Line spacing 设为 1.4。
+关闭 View 标签下的 Tool Buttons 、Status Bar 、Navigation Bar。</description></item></channel></rss>

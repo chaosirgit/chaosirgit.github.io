@@ -1,32 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>工具 on 郭超超的博客</title>
-    <link>https://blog.adminchao.com/zh-cn/categories/%E5%B7%A5%E5%85%B7/</link>
-    <description>Recent content in 工具 on 郭超超的博客</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Thu, 02 May 2019 17:39:49 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/categories/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>更改 alfred 默认 shell 为 iTerm</title>
-      <link>https://blog.adminchao.com/zh-cn/posts/%E6%9B%B4%E6%94%B9-alfred-%E9%BB%98%E8%AE%A4-shell-%E4%B8%BA-iterm/</link>
-      <pubDate>Thu, 02 May 2019 17:39:49 +0000</pubDate>
-      
-      <guid>https://blog.adminchao.com/zh-cn/posts/%E6%9B%B4%E6%94%B9-alfred-%E9%BB%98%E8%AE%A4-shell-%E4%B8%BA-iterm/</guid>
-      <description>更改 alfred 默认 shell 为 iTerm2 上码记录
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  on alfred_script(q) run script &amp;#34; on run {q} tell application \&amp;#34;:Applications:iTerm.app\&amp;#34; activate try select first window on error create window with default profile select first window end try tell the first window tell current session to write text q end tell end tell end run &amp;#34; with parameters {q} end alfred_script   </description>
-    </item>
-    
-    <item>
-      <title>Mac Aria2 使用</title>
-      <link>https://blog.adminchao.com/zh-cn/posts/mac-aria2-%E4%BD%BF%E7%94%A8/</link>
-      <pubDate>Sat, 27 Apr 2019 16:36:20 +0000</pubDate>
-      
-      <guid>https://blog.adminchao.com/zh-cn/posts/mac-aria2-%E4%BD%BF%E7%94%A8/</guid>
-      <description>前言 每次下载一个文件就要交保护费，不交下载速度简直是在让时代倒退。还好无意间发现了 Aria2 谢谢各位大神。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>工具 on 郭超超的博客</title><link>https://blog.adminchao.com/zh-cn/categories/%E5%B7%A5%E5%85%B7/</link><description>Recent content in 工具 on 郭超超的博客</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 02 May 2019 17:39:49 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/categories/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml"/><item><title>更改 alfred 默认 shell 为 iTerm</title><link>https://blog.adminchao.com/zh-cn/posts/%E6%9B%B4%E6%94%B9-alfred-%E9%BB%98%E8%AE%A4-shell-%E4%B8%BA-iterm/</link><pubDate>Thu, 02 May 2019 17:39:49 +0000</pubDate><guid>https://blog.adminchao.com/zh-cn/posts/%E6%9B%B4%E6%94%B9-alfred-%E9%BB%98%E8%AE%A4-shell-%E4%B8%BA-iterm/</guid><description>更改 alfred 默认 shell 为 iTerm2 上码记录
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 on alfred_script(q) run script &amp;#34; on run {q} tell application \&amp;#34;:Applications:iTerm.app\&amp;#34; activate try select first window on error create window with default profile select first window end try tell the first window tell current session to write text q end tell end tell end run &amp;#34; with parameters {q} end alfred_script</description></item><item><title>Mac Aria2 使用</title><link>https://blog.adminchao.com/zh-cn/posts/mac-aria2-%E4%BD%BF%E7%94%A8/</link><pubDate>Sat, 27 Apr 2019 16:36:20 +0000</pubDate><guid>https://blog.adminchao.com/zh-cn/posts/mac-aria2-%E4%BD%BF%E7%94%A8/</guid><description>前言 每次下载一个文件就要交保护费，不交下载速度简直是在让时代倒退。还好无意间发现了 Aria2 谢谢各位大神。
 安装 Mac 下安装 Aria2 很方便
-1  brew install aria2   使用  下载文件到默认目录 aria2c 运行的目录, Mac 这里是 /Users/你的用户名  1  aria2c [下载文件地址]    下载文件到指定目录  1  aria2c -d [目录名] [下载文件地址]    下载文件重命名  1  aria2c -o [文件名] [下载文件地址]    分段下载文件，段数为 1-5 之间  1  aria2c -s [段数] [下载文件地址]    断点续传下载  1  aria2c -c [下载文件地址]    后台下载  1  aria2c -D [下载文件地址]   下载百度云盘文件 需要在 Chrome 浏览器上安装一个 BaiduPan Explorer 扩展来获取百度云盘文件的真实地址</description>
-    </item>
-    
-  </channel>
-</rss>
+1 brew install aria2 使用 下载文件到默认目录 aria2c 运行的目录, Mac 这里是 /Users/你的用户名 1 aria2c [下载文件地址] 下载文件到指定目录 1 aria2c -d [目录名] [下载文件地址] 下载文件重命名 1 aria2c -o [文件名] [下载文件地址] 分段下载文件，段数为 1-5 之间 1 aria2c -s [段数] [下载文件地址] 断点续传下载 1 aria2c -c [下载文件地址] 后台下载 1 aria2c -D [下载文件地址] 下载百度云盘文件 需要在 Chrome 浏览器上安装一个 BaiduPan Explorer 扩展来获取百度云盘文件的真实地址</description></item></channel></rss>

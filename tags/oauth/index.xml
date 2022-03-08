@@ -1,21 +1,2 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Oauth on Ethan Kuo Blog</title>
-    <link>https://blog.adminchao.com/tags/oauth/</link>
-    <description>Recent content in Oauth on Ethan Kuo Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Fri, 27 Mar 2020 21:08:27 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/tags/oauth/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Laravel Passport Personal Token Multi-User Login</title>
-      <link>https://blog.adminchao.com/posts/laravel-passport-personal-token-multi-user-login/</link>
-      <pubDate>Fri, 27 Mar 2020 21:08:27 +0000</pubDate>
-      
-      <guid>https://blog.adminchao.com/posts/laravel-passport-personal-token-multi-user-login/</guid>
-      <description>Preface Recently a project needs to use multi-user table system authentication, using Passport to achieve for Token issuance and authentication, but for multi-user table login Passport is still difficult to achieve, see some multi-user table login is also used GuzzleHttp carry additional parameters to achieve, does not meet my needs. After a period of exploration, I finally implemented Passport through the personal token multi-user table login.
-Step Laravel Version 6.0</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Oauth on Ethan Kuo Blog</title><link>https://blog.adminchao.com/tags/oauth/</link><description>Recent content in Oauth on Ethan Kuo Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 27 Mar 2020 21:08:27 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/tags/oauth/index.xml" rel="self" type="application/rss+xml"/><item><title>Laravel Passport Personal Token Multi-User Login</title><link>https://blog.adminchao.com/posts/laravel-passport-personal-token-multi-user-login/</link><pubDate>Fri, 27 Mar 2020 21:08:27 +0000</pubDate><guid>https://blog.adminchao.com/posts/laravel-passport-personal-token-multi-user-login/</guid><description>Preface Recently a project needs to use multi-user table system authentication, using Passport to achieve for Token issuance and authentication, but for multi-user table login Passport is still difficult to achieve, see some multi-user table login is also used GuzzleHttp carry additional parameters to achieve, does not meet my needs. After a period of exploration, I finally implemented Passport through the personal token multi-user table login.
+Step Laravel Version 6.0</description></item></channel></rss>

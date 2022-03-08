@@ -1,25 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>bearer token on 郭超超的博客</title>
-    <link>https://blog.adminchao.com/zh-cn/tags/bearer-token/</link>
-    <description>Recent content in bearer token on 郭超超的博客</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Wed, 21 Jun 2017 16:42:09 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/tags/bearer-token/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>rest API 实例教程之 token 生成</title>
-      <link>https://blog.adminchao.com/zh-cn/posts/rest-api-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B%E4%B9%8B-token-%E7%94%9F%E6%88%90/</link>
-      <pubDate>Wed, 21 Jun 2017 16:42:09 +0000</pubDate>
-      
-      <guid>https://blog.adminchao.com/zh-cn/posts/rest-api-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B%E4%B9%8B-token-%E7%94%9F%E6%88%90/</guid>
-      <description>&lt;h2 id=&#34;项目需求&#34;&gt;项目需求&lt;/h2&gt;
-&lt;p&gt;  实现登陆功能，获取 token&lt;/p&gt;
-&lt;p&gt;  &lt;strong&gt;HttpMethod: Post&lt;/strong&gt;&lt;br&gt;
-  &lt;strong&gt;URI: /token&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;  &lt;strong&gt;Request Header&lt;/strong&gt;&lt;br&gt;
-  &lt;strong&gt;Content-Type: application/x-www-form-urlencoded&lt;/strong&gt;&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>bearer token on 郭超超的博客</title><link>https://blog.adminchao.com/zh-cn/tags/bearer-token/</link><description>Recent content in bearer token on 郭超超的博客</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 21 Jun 2017 16:42:09 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/tags/bearer-token/index.xml" rel="self" type="application/rss+xml"/><item><title>rest API 实例教程之 token 生成</title><link>https://blog.adminchao.com/zh-cn/posts/rest-api-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B%E4%B9%8B-token-%E7%94%9F%E6%88%90/</link><pubDate>Wed, 21 Jun 2017 16:42:09 +0000</pubDate><guid>https://blog.adminchao.com/zh-cn/posts/rest-api-%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B%E4%B9%8B-token-%E7%94%9F%E6%88%90/</guid><description>&lt;h2 id="项目需求">项目需求&lt;/h2>
+&lt;p>  实现登陆功能，获取 token&lt;/p>
+&lt;p>  &lt;strong>HttpMethod: Post&lt;/strong>&lt;br>
+  &lt;strong>URI: /token&lt;/strong>&lt;/p>
+&lt;p>  &lt;strong>Request Header&lt;/strong>&lt;br>
+  &lt;strong>Content-Type: application/x-www-form-urlencoded&lt;/strong>&lt;/p></description></item></channel></rss>

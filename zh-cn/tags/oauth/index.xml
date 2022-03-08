@@ -1,25 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Oauth on 郭超超的博客</title>
-    <link>https://blog.adminchao.com/zh-cn/tags/oauth/</link>
-    <description>Recent content in Oauth on 郭超超的博客</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Fri, 27 Mar 2020 21:08:27 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/tags/oauth/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Laravel Passport 个人令牌多用户登陆</title>
-      <link>https://blog.adminchao.com/zh-cn/posts/laravel-passport-%E4%B8%AA%E4%BA%BA%E4%BB%A4%E7%89%8C%E5%A4%9A%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86/</link>
-      <pubDate>Fri, 27 Mar 2020 21:08:27 +0000</pubDate>
-      
-      <guid>https://blog.adminchao.com/zh-cn/posts/laravel-passport-%E4%B8%AA%E4%BA%BA%E4%BB%A4%E7%89%8C%E5%A4%9A%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86/</guid>
-      <description>前言 最近有个项目需要用到多用户表系统认证，对于 Token 的发放和鉴权，使用了 Passport 来实现 API 授权认证，但是 Passport 对于多用户表登陆实现还是比较难的，在网上到的一些多用户表登陆也都是用 GuzzleHttp 携带额外参数来实现的，不太满足我的需求。经过了一段时期的摸索，终于实现了 Passport 通过个人令牌来多用户登陆。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Oauth on 郭超超的博客</title><link>https://blog.adminchao.com/zh-cn/tags/oauth/</link><description>Recent content in Oauth on 郭超超的博客</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 27 Mar 2020 21:08:27 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/tags/oauth/index.xml" rel="self" type="application/rss+xml"/><item><title>Laravel Passport 个人令牌多用户登陆</title><link>https://blog.adminchao.com/zh-cn/posts/laravel-passport-%E4%B8%AA%E4%BA%BA%E4%BB%A4%E7%89%8C%E5%A4%9A%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86/</link><pubDate>Fri, 27 Mar 2020 21:08:27 +0000</pubDate><guid>https://blog.adminchao.com/zh-cn/posts/laravel-passport-%E4%B8%AA%E4%BA%BA%E4%BB%A4%E7%89%8C%E5%A4%9A%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86/</guid><description>前言 最近有个项目需要用到多用户表系统认证，对于 Token 的发放和鉴权，使用了 Passport 来实现 API 授权认证，但是 Passport 对于多用户表登陆实现还是比较难的，在网上到的一些多用户表登陆也都是用 GuzzleHttp 携带额外参数来实现的，不太满足我的需求。经过了一段时期的摸索，终于实现了 Passport 通过个人令牌来多用户登陆。
 实现 Laravel 版本 6.0
-安装 1  composer require laravel/passport   导出默认迁移文件 1  php artisan vendor:publish --tag=passport-migrations   运行该命令会在 \app\database\migrations\ 生成
- Date_create_oauth_auth_codes_table.php Date_create_oauth_access_tokens_table.php Date_create_oauth_refresh_tokens_table.php Date_create_oauth_clients_table.php Date_create_oauth_personal_access_clients_table.php  五个数据库迁移文件，其中 Date_create_oauth_access_tokens_table 是用来记录发放成功的 Token 的。我们需要拷贝一个这个表用来建立另一个用户表的 Token 记录。
-建立自定义 access_token 表 1  php artisan make:migration create_oauth_other_tokens --create=oauth_other_tokens   生成 Date_create_oauth_other_tokens 迁移文件。
-复制 Date_create_oauth_access_tokens_table 文件内容到 Date_create_oauth_other_tokens</description>
-    </item>
-    
-  </channel>
-</rss>
+安装 1 composer require laravel/passport 导出默认迁移文件 1 php artisan vendor:publish --tag=passport-migrations 运行该命令会在 \app\database\migrations\ 生成
+Date_create_oauth_auth_codes_table.php Date_create_oauth_access_tokens_table.php Date_create_oauth_refresh_tokens_table.php Date_create_oauth_clients_table.php Date_create_oauth_personal_access_clients_table.php 五个数据库迁移文件，其中 Date_create_oauth_access_tokens_table 是用来记录发放成功的 Token 的。我们需要拷贝一个这个表用来建立另一个用户表的 Token 记录。
+建立自定义 access_token 表 1 php artisan make:migration create_oauth_other_tokens --create=oauth_other_tokens 生成 Date_create_oauth_other_tokens 迁移文件。
+复制 Date_create_oauth_access_tokens_table 文件内容到 Date_create_oauth_other_tokens</description></item></channel></rss>
