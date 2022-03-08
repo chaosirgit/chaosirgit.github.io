@@ -2,4 +2,4 @@
 Artisan 命令行工具 请参照官方文档
 以编程方式调用 1 2 3 4 5 &amp;lt;?php use Illuminate\Support\Facades\Artisan; Artisan::call(&amp;#39;command&amp;#39;,[&amp;#39;id&amp;#39;=&amp;gt;1]); 这里注意，如果在代码有事务，Artisan::call() 需要在 commit 或 rollback 后调用。
 后台调用 直接上代码
-1 2 3 4 5 6 7 &amp;lt;?php use Symfony\Component\Process\Process; $process = new Process(&amp;#39;nohup php artisan command &amp;#39;.$id .&amp;#39; &amp;gt;/var/www/html/crowd/nohup.log 2&amp;gt;&amp;amp;1 &amp;amp;&amp;#39;,&amp;#39;path/to/artisan&amp;#39;); //第一个参数是运行的命令,命令方式跟 Linux 一致，第二个参数是可以执行此条命令的路径 $process-&amp;gt;start(); ?&amp;gt;</description></item></channel></rss>
+1 2 3 4 5 6 7 &amp;lt;?php use Symfony\Component\Process\Process; $process = new Process(&amp;#39;nohup php artisan command &amp;#39;.$id .&amp;#39; &amp;gt;/var/www/html/crowd/nohup.log 2&amp;gt;&amp;amp;1 &amp;amp;&amp;#39;,&amp;#39;path/to/artisan&amp;#39;); //第一个参数是运行的命令,命令方式跟 Linux 一致，第二个参数是可以执行此条命令的路径 $process-&amp;gt;start(); ?</description></item></channel></rss>

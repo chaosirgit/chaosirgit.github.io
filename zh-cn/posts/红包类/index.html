@@ -20,8 +20,7 @@
 <meta property="article:modified_time" content="2019-03-16T10:39:09+00:00"><meta property="og:site_name" content="郭超超的博客">
 <title>
 红包类 · 郭超超的博客
-</title>
-<link rel=canonical href=https://blog.adminchao.com/zh-cn/posts/%E7%BA%A2%E5%8C%85%E7%B1%BB/>
+</title><link rel=canonical href=https://blog.adminchao.com/zh-cn/posts/%E7%BA%A2%E5%8C%85%E7%B1%BB/>
 <link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin>
 <link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen>
 <link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen>
@@ -29,15 +28,13 @@
 <link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16>
 <link rel=apple-touch-icon href=/images/apple-touch-icon.png>
 <link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png>
-<meta name=generator content="Hugo 0.89.1">
-</head>
-<body class="preload-transitions colorscheme-dark">
+<meta name=generator content="Hugo 0.93.2">
+</head><body class="preload-transitions colorscheme-dark">
 <div class=float-container>
 <a id=dark-mode-toggle class=colorscheme-toggle>
 <i class="fa fa-adjust fa-fw" aria-hidden=true></i>
 </a>
-</div>
-<main class=wrapper>
+</div><main class=wrapper>
 <nav class=navigation>
 <section class=container>
 <a class=navigation-title href=/zh-cn>
@@ -50,23 +47,15 @@
 <ul class=navigation-list>
 <li class=navigation-item>
 <a class=navigation-link href=/zh-cn/about/>关于</a>
-</li>
-<li class=navigation-item>
+</li><li class=navigation-item>
 <a class=navigation-link href=/zh-cn/posts/>博文</a>
-</li>
-<li class=navigation-item>
+</li><li class=navigation-item>
 <a class=navigation-link href=/zh-cn/contact/>联系</a>
-</li>
-<li class="navigation-item menu-separator">
+</li><li class="navigation-item menu-separator">
 <span>|</span>
-</li>
-<li class=navigation-item>
+</li><li class=navigation-item>
 <a href=https://blog.adminchao.com/>🇺🇸</a>
-</li>
-</ul>
-</section>
-</nav>
-<div class=content>
+</li></ul></section></nav><div class=content>
 <section class="container post">
 <article>
 <header>
@@ -75,9 +64,7 @@
 <a class=title-link href=https://blog.adminchao.com/zh-cn/posts/%E7%BA%A2%E5%8C%85%E7%B1%BB/>
 红包类
 </a>
-</h1>
-</div>
-<div class=post-meta>
+</h1></div><div class=post-meta>
 <div class=date>
 <span class=posted-on>
 <i class="fa fa-calendar" aria-hidden=true></i>
@@ -89,11 +76,9 @@
 <i class="fa fa-clock-o" aria-hidden=true></i>
 阅读时间：3 分钟
 </span>
-</div>
-<div class=categories>
+</div><div class=categories>
 <i class="fa fa-folder" aria-hidden=true></i>
-<a href=/zh-cn/categories/%E6%8A%80%E6%9C%AF/>技术</a></div>
-<div class=tags>
+<a href=/zh-cn/categories/%E6%8A%80%E6%9C%AF/>技术</a></div><div class=tags>
 <i class="fa fa-tag" aria-hidden=true></i>
 <span class=tag>
 <a href=/zh-cn/tags/php/>php</a>
@@ -101,391 +86,376 @@
 <span class=separator>•</span>
 <span class=tag>
 <a href=/zh-cn/tags/%E7%BA%A2%E5%8C%85/>红包</a>
-</span></div>
-</div>
-</header>
-<div>
+</span></div></div></header><div>
 <h2 id=前言>
 前言
 <a class=heading-link href=#%e5%89%8d%e8%a8%80>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<p>照搬了别人写的红包类，感觉挺好用。原文地址在注释里。特此记录</p>
-<h2 id=代码>
+</h2><p>照搬了别人写的红包类，感觉挺好用。原文地址在注释里。特此记录</p><h2 id=代码>
 代码
 <a class=heading-link href=#%e4%bb%a3%e7%a0%81>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 25
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 26
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 27
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 28
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 29
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 30
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 31
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 32
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 33
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 34
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 35
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 36
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 37
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 38
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 39
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 40
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 41
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 42
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 43
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 44
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 45
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 46
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 47
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 48
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 49
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 50
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 51
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 52
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 53
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 54
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 55
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 56
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 57
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 58
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 59
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 60
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 61
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 62
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 63
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 64
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 65
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 66
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 67
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 68
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 69
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 70
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 71
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 72
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 73
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 74
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 75
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 76
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 77
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 78
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 79
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 80
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 81
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 82
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 83
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 84
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 85
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 86
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 87
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 88
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 89
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 90
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 91
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 92
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 93
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 94
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 95
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 96
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 97
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 98
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 99
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">100
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">101
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">102
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">103
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">104
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">105
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">106
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">107
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">108
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">109
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">110
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">111
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">112
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">113
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">114
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">115
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">116
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">117
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">118
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">119
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">120
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">121
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">122
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">123
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">124
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">125
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">126
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">127
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">128
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">129
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">130
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">131
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">132
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">133
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">134
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">135
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">136
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">137
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">138
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">139
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">140
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">141
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">142
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">143
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">144
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">145
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">146
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">147
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">148
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">149
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">150
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">151
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">152
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">153
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">154
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">155
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">156
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">157
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">158
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">159
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">160
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">161
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">162
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">163
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">164
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">165
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">166
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">167
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">168
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">169
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">170
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">171
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">172
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">173
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">174
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">175
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">176
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">177
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#ff79c6>&lt;?</span>php
-
-<span style=color:#ff79c6>namespace</span> App\Utils;
-<span style=color:#f1fa8c>/**
-</span><span style=color:#f1fa8c> * 红包分配算法
-</span><span style=color:#f1fa8c> *
-</span><span style=color:#f1fa8c> * example
-</span><span style=color:#f1fa8c> *      $coupon = new Coupon(200, 5);
-</span><span style=color:#f1fa8c> *      $res = $coupon-&gt;handle();
-</span><span style=color:#f1fa8c> *      print_r($res);
-</span><span style=color:#f1fa8c> *
-</span><span style=color:#f1fa8c> * @author Flc &lt;2018-04-06 20:09:53&gt;
-</span><span style=color:#f1fa8c> * @see http://flc.ren | http://flc.io | https://github.com/flc1125
-</span><span style=color:#f1fa8c> */</span>
-<span style=color:#ff79c6>class</span> <span style=color:#50fa7b>Coupon</span>
-{
-    <span style=color:#f1fa8c>/**
-</span><span style=color:#f1fa8c>     * 红包金额
-</span><span style=color:#f1fa8c>     *
-</span><span style=color:#f1fa8c>     * @var float
-</span><span style=color:#f1fa8c>     */</span>
-    <span style=color:#ff79c6>protected</span> <span style=color:#8be9fd;font-style:italic>$amount</span>;
-
-    <span style=color:#f1fa8c>/**
-</span><span style=color:#f1fa8c>     * 红包个数
-</span><span style=color:#f1fa8c>     *
-</span><span style=color:#f1fa8c>     * @var int
-</span><span style=color:#f1fa8c>     */</span>
-    <span style=color:#ff79c6>protected</span> <span style=color:#8be9fd;font-style:italic>$num</span>;
-
-    <span style=color:#f1fa8c>/**
-</span><span style=color:#f1fa8c>     * 领取的红包最小金额
-</span><span style=color:#f1fa8c>     *
-</span><span style=color:#f1fa8c>     * @var float
-</span><span style=color:#f1fa8c>     */</span>
-    <span style=color:#ff79c6>protected</span> <span style=color:#8be9fd;font-style:italic>$coupon_min</span>;
-
-    <span style=color:#f1fa8c>/**
-</span><span style=color:#f1fa8c>     * 红包分配结果
-</span><span style=color:#f1fa8c>     *
-</span><span style=color:#f1fa8c>     * @var array
-</span><span style=color:#f1fa8c>     */</span>
-    <span style=color:#ff79c6>protected</span> <span style=color:#8be9fd;font-style:italic>$items</span> <span style=color:#ff79c6>=</span> [];
-
-    <span style=color:#f1fa8c>/**
-</span><span style=color:#f1fa8c>     * 初始化
-</span><span style=color:#f1fa8c>     *
-</span><span style=color:#f1fa8c>     * @param float $amount     红包金额（单位：元）最多保留2位小数
-</span><span style=color:#f1fa8c>     * @param int   $num        红包个数
-</span><span style=color:#f1fa8c>     * @param float $coupon_min 每个至少领取的红包金额
-</span><span style=color:#f1fa8c>     */</span>
-    <span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> __construct(<span style=color:#8be9fd;font-style:italic>$amount</span>, <span style=color:#8be9fd;font-style:italic>$num</span> <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>1</span>, <span style=color:#8be9fd;font-style:italic>$coupon_min</span> <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0.01</span>)
-    {
-        <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>amount</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$amount</span>;
-        <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>num</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$num</span>;
-        <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>coupon_min</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$coupon_min</span>;
-    }
-
-    <span style=color:#f1fa8c>/**
-</span><span style=color:#f1fa8c>     * 处理返回
-</span><span style=color:#f1fa8c>     *
-</span><span style=color:#f1fa8c>     * @return array
-</span><span style=color:#f1fa8c>     */</span>
-    <span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>handle</span>()
-    {
-        <span style=color:#6272a4>// A. 验证
-</span><span style=color:#6272a4></span>        <span style=color:#ff79c6>if</span> (<span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>amount</span> <span style=color:#ff79c6>&lt;</span> <span style=color:#8be9fd;font-style:italic>$validAmount</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>coupon_min</span> <span style=color:#ff79c6>*</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>num</span>) {
-            <span style=color:#ff79c6>throw</span> <span style=color:#ff79c6>new</span> \Exception(<span style=color:#f1fa8c>&#39;红包总金额必须≥&#39;</span><span style=color:#ff79c6>.</span><span style=color:#8be9fd;font-style:italic>$validAmount</span><span style=color:#ff79c6>.</span><span style=color:#f1fa8c>&#39;元&#39;</span>);
-        }
-
-        <span style=color:#6272a4>// B. 分配红包
-</span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>apportion</span>();
-
-        <span style=color:#ff79c6>return</span> [
-            <span style=color:#f1fa8c>&#39;items&#39;</span> <span style=color:#ff79c6>=&gt;</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>items</span>,
-        ];
-    }
-
-    <span style=color:#f1fa8c>/**
-</span><span style=color:#f1fa8c>     * 分配红包
-</span><span style=color:#f1fa8c>     */</span>
-    <span style=color:#ff79c6>protected</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>apportion</span>()
-    {
-        <span style=color:#8be9fd;font-style:italic>$num</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>num</span>;  <span style=color:#6272a4>// 剩余可分配的红包个数
-</span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>$amount</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>amount</span>;  <span style=color:#6272a4>//剩余可领取的红包金额
-</span><span style=color:#6272a4></span>
-        <span style=color:#ff79c6>while</span> (<span style=color:#8be9fd;font-style:italic>$num</span> <span style=color:#ff79c6>&gt;=</span> <span style=color:#bd93f9>1</span>) {
-            <span style=color:#6272a4>// 剩余一个的时候，直接取剩余红包
-</span><span style=color:#6272a4></span>            <span style=color:#ff79c6>if</span> (<span style=color:#8be9fd;font-style:italic>$num</span> <span style=color:#ff79c6>==</span> <span style=color:#bd93f9>1</span>) {
-                <span style=color:#8be9fd;font-style:italic>$coupon_amount</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>decimal_number</span>(<span style=color:#8be9fd;font-style:italic>$amount</span>);
-            } <span style=color:#ff79c6>else</span> {
-                <span style=color:#8be9fd;font-style:italic>$avg_amount</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>decimal_number</span>(<span style=color:#8be9fd;font-style:italic>$amount</span> <span style=color:#ff79c6>/</span> <span style=color:#8be9fd;font-style:italic>$num</span>);  <span style=color:#6272a4>// 剩余的红包的平均金额
-</span><span style=color:#6272a4></span>
-                <span style=color:#8be9fd;font-style:italic>$coupon_amount</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>decimal_number</span>(
-                    <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>calcCouponAmount</span>(<span style=color:#8be9fd;font-style:italic>$avg_amount</span>, <span style=color:#8be9fd;font-style:italic>$amount</span>, <span style=color:#8be9fd;font-style:italic>$num</span>)
-                );
-            }
-
-            <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>items</span>[] <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$coupon_amount</span>; <span style=color:#6272a4>// 追加分配
-</span><span style=color:#6272a4></span>
-            <span style=color:#8be9fd;font-style:italic>$amount</span> <span style=color:#ff79c6>-=</span> <span style=color:#8be9fd;font-style:italic>$coupon_amount</span>;
-            <span style=color:#ff79c6>--</span><span style=color:#8be9fd;font-style:italic>$num</span>;
-        }
-
-        shuffle(<span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>items</span>);  <span style=color:#6272a4>//随机打乱
-</span><span style=color:#6272a4></span>    }
-
-    <span style=color:#f1fa8c>/**
-</span><span style=color:#f1fa8c>     * 计算分配的红包金额
-</span><span style=color:#f1fa8c>     *
-</span><span style=color:#f1fa8c>     * @param float $avg_amount 每次计算的平均金额
-</span><span style=color:#f1fa8c>     * @param float $amount     剩余可领取金额
-</span><span style=color:#f1fa8c>     * @param int   $num        剩余可领取的红包个数
-</span><span style=color:#f1fa8c>     *
-</span><span style=color:#f1fa8c>     * @return float
-</span><span style=color:#f1fa8c>     */</span>
-    <span style=color:#ff79c6>protected</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>calcCouponAmount</span>(<span style=color:#8be9fd;font-style:italic>$avg_amount</span>, <span style=color:#8be9fd;font-style:italic>$amount</span>, <span style=color:#8be9fd;font-style:italic>$num</span>)
-    {
-        <span style=color:#6272a4>// 如果平均金额小于等于最低金额，则直接返回最低金额
-</span><span style=color:#6272a4></span>        <span style=color:#ff79c6>if</span> (<span style=color:#8be9fd;font-style:italic>$avg_amount</span> <span style=color:#ff79c6>&lt;=</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>coupon_min</span>) {
-            <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>coupon_min</span>;
-        }
-
-        <span style=color:#6272a4>// 浮动计算
-</span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>$coupon_amount</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>decimal_number</span>(<span style=color:#8be9fd;font-style:italic>$avg_amount</span> <span style=color:#ff79c6>*</span> (<span style=color:#bd93f9>1</span> <span style=color:#ff79c6>+</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>apportionRandRatio</span>()));
-
-        <span style=color:#6272a4>// 如果低于最低金额或超过可领取的最大金额，则重新获取
-</span><span style=color:#6272a4></span>        <span style=color:#ff79c6>if</span> (<span style=color:#8be9fd;font-style:italic>$coupon_amount</span> <span style=color:#ff79c6>&lt;</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>coupon_min</span>
-            <span style=color:#ff79c6>||</span> <span style=color:#8be9fd;font-style:italic>$coupon_amount</span> <span style=color:#ff79c6>&gt;</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>calcCouponAmountMax</span>(<span style=color:#8be9fd;font-style:italic>$amount</span>, <span style=color:#8be9fd;font-style:italic>$num</span>)
-        ) {
-            <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>calcCouponAmount</span>(<span style=color:#8be9fd;font-style:italic>$avg_amount</span>, <span style=color:#8be9fd;font-style:italic>$amount</span>, <span style=color:#8be9fd;font-style:italic>$num</span>);
-        }
-
-        <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$coupon_amount</span>;
-    }
-
-    <span style=color:#f1fa8c>/**
-</span><span style=color:#f1fa8c>     * 计算分配的红包金额-可领取的最大金额
-</span><span style=color:#f1fa8c>     *
-</span><span style=color:#f1fa8c>     * @param float $amount
-</span><span style=color:#f1fa8c>     * @param int   $num
-</span><span style=color:#f1fa8c>     */</span>
-    <span style=color:#ff79c6>protected</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>calcCouponAmountMax</span>(<span style=color:#8be9fd;font-style:italic>$amount</span>, <span style=color:#8be9fd;font-style:italic>$num</span>)
-    {
-        <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>coupon_min</span> <span style=color:#ff79c6>+</span> <span style=color:#8be9fd;font-style:italic>$amount</span> <span style=color:#ff79c6>-</span> <span style=color:#8be9fd;font-style:italic>$num</span> <span style=color:#ff79c6>*</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>coupon_min</span>;
-    }
-
-    <span style=color:#f1fa8c>/**
-</span><span style=color:#f1fa8c>     * 红包金额浮动比例
-</span><span style=color:#f1fa8c>     */</span>
-    <span style=color:#ff79c6>protected</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>apportionRandRatio</span>()
-    {
-        <span style=color:#6272a4>// 60%机率获取剩余平均值的大幅度红包（可能正数、可能负数）
-</span><span style=color:#6272a4></span>        <span style=color:#ff79c6>if</span> (rand(<span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>100</span>) <span style=color:#ff79c6>&lt;=</span> <span style=color:#bd93f9>60</span>) {
-            <span style=color:#ff79c6>return</span> rand(<span style=color:#ff79c6>-</span><span style=color:#bd93f9>70</span>, <span style=color:#bd93f9>70</span>) <span style=color:#ff79c6>/</span> <span style=color:#bd93f9>100</span>; <span style=color:#6272a4>// 上下幅度70%
-</span><span style=color:#6272a4></span>        }
-
-        <span style=color:#ff79c6>return</span> rand(<span style=color:#ff79c6>-</span><span style=color:#bd93f9>30</span>, <span style=color:#bd93f9>30</span>) <span style=color:#ff79c6>/</span> <span style=color:#bd93f9>100</span>; <span style=color:#6272a4>// 其他情况，上下浮动30%；
-</span><span style=color:#6272a4></span>    }
-
-    <span style=color:#f1fa8c>/**
-</span><span style=color:#f1fa8c>     * 格式化金额，保留2位
-</span><span style=color:#f1fa8c>     *
-</span><span style=color:#f1fa8c>     * @param float $amount
-</span><span style=color:#f1fa8c>     *
-</span><span style=color:#f1fa8c>     * @return float
-</span><span style=color:#f1fa8c>     */</span>
-    <span style=color:#ff79c6>protected</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>decimal_number</span>(<span style=color:#8be9fd;font-style:italic>$amount</span>)
-    {
-        <span style=color:#ff79c6>return</span> sprintf(<span style=color:#f1fa8c>&#39;%01.2f&#39;</span>, round(<span style=color:#8be9fd;font-style:italic>$amount</span>, <span style=color:#bd93f9>2</span>));
-    }
-}
-
-<span style=color:#6272a4>// 例子
-</span><span style=color:#6272a4>//$coupon = new Coupon(200, 5, 30);
-</span><span style=color:#6272a4>//$res = $coupon-&gt;handle();
-</span><span style=color:#6272a4>//print_r($res);
-</span></code></pre></td></tr></table>
-</div>
-</div>
-</div>
-<footer>
-</footer>
-</article>
-</section>
-</div>
-<footer class=footer>
+</h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 24
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 25
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 26
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 27
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 28
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 29
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 30
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 31
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 32
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 33
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 34
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 35
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 36
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 37
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 38
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 39
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 40
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 41
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 42
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 43
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 44
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 45
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 46
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 47
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 48
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 49
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 50
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 51
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 52
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 53
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 54
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 55
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 56
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 57
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 58
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 59
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 60
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 61
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 62
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 63
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 64
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 65
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 66
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 67
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 68
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 69
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 70
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 71
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 72
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 73
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 74
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 75
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 76
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 77
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 78
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 79
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 80
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 81
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 82
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 83
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 84
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 85
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 86
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 87
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 88
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 89
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 90
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 91
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 92
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 93
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 94
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 95
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 96
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 97
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 98
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 99
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">100
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">101
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">102
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">103
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">104
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">105
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">106
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">107
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">108
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">109
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">110
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">111
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">112
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">113
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">114
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">115
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">116
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">117
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">118
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">119
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">120
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">121
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">122
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">123
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">124
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">125
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">126
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">127
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">128
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">129
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">130
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">131
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">132
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">133
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">134
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">135
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">136
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">137
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">138
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">139
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">140
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">141
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">142
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">143
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">144
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">145
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">146
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">147
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">148
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">149
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">150
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">151
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">152
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">153
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">154
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">155
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">156
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">157
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">158
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">159
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">160
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">161
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">162
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">163
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">164
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">165
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">166
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">167
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">168
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">169
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">170
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">171
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">172
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">173
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">174
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">175
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">176
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">177
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>namespace</span> App\Utils;
+</span></span><span style=display:flex><span><span style=color:#f1fa8c>/**
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c> * 红包分配算法
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c> *
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c> * example
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c> *      $coupon = new Coupon(200, 5);
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c> *      $res = $coupon-&gt;handle();
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c> *      print_r($res);
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c> *
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c> * @author Flc &lt;2018-04-06 20:09:53&gt;
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c> * @see http://flc.ren | http://flc.io | https://github.com/flc1125
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c> */</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>class</span> <span style=color:#50fa7b>Coupon</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>/**
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * 红包金额
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     *
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * @var float
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>protected</span> <span style=color:#8be9fd;font-style:italic>$amount</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>/**
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * 红包个数
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     *
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * @var int
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>protected</span> <span style=color:#8be9fd;font-style:italic>$num</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>/**
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * 领取的红包最小金额
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     *
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * @var float
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>protected</span> <span style=color:#8be9fd;font-style:italic>$coupon_min</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>/**
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * 红包分配结果
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     *
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * @var array
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>protected</span> <span style=color:#8be9fd;font-style:italic>$items</span> <span style=color:#ff79c6>=</span> [];
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>/**
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * 初始化
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     *
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * @param float $amount     红包金额（单位：元）最多保留2位小数
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * @param int   $num        红包个数
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * @param float $coupon_min 每个至少领取的红包金额
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> __construct(<span style=color:#8be9fd;font-style:italic>$amount</span>, <span style=color:#8be9fd;font-style:italic>$num</span> <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>1</span>, <span style=color:#8be9fd;font-style:italic>$coupon_min</span> <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0.01</span>)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>amount</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$amount</span>;
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>num</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$num</span>;
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>coupon_min</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$coupon_min</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>/**
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * 处理返回
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     *
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * @return array
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>handle</span>()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// A. 验证
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        <span style=color:#ff79c6>if</span> (<span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>amount</span> <span style=color:#ff79c6>&lt;</span> <span style=color:#8be9fd;font-style:italic>$validAmount</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>coupon_min</span> <span style=color:#ff79c6>*</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>num</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>throw</span> <span style=color:#ff79c6>new</span> \Exception(<span style=color:#f1fa8c>&#39;红包总金额必须≥&#39;</span><span style=color:#ff79c6>.</span><span style=color:#8be9fd;font-style:italic>$validAmount</span><span style=color:#ff79c6>.</span><span style=color:#f1fa8c>&#39;元&#39;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// B. 分配红包
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>apportion</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span> [
+</span></span><span style=display:flex><span>            <span style=color:#f1fa8c>&#39;items&#39;</span> <span style=color:#ff79c6>=&gt;</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>items</span>,
+</span></span><span style=display:flex><span>        ];
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>/**
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * 分配红包
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>protected</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>apportion</span>()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$num</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>num</span>;  <span style=color:#6272a4>// 剩余可分配的红包个数
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>$amount</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>amount</span>;  <span style=color:#6272a4>//剩余可领取的红包金额
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>while</span> (<span style=color:#8be9fd;font-style:italic>$num</span> <span style=color:#ff79c6>&gt;=</span> <span style=color:#bd93f9>1</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#6272a4>// 剩余一个的时候，直接取剩余红包
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>            <span style=color:#ff79c6>if</span> (<span style=color:#8be9fd;font-style:italic>$num</span> <span style=color:#ff79c6>==</span> <span style=color:#bd93f9>1</span>) {
+</span></span><span style=display:flex><span>                <span style=color:#8be9fd;font-style:italic>$coupon_amount</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>decimal_number</span>(<span style=color:#8be9fd;font-style:italic>$amount</span>);
+</span></span><span style=display:flex><span>            } <span style=color:#ff79c6>else</span> {
+</span></span><span style=display:flex><span>                <span style=color:#8be9fd;font-style:italic>$avg_amount</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>decimal_number</span>(<span style=color:#8be9fd;font-style:italic>$amount</span> <span style=color:#ff79c6>/</span> <span style=color:#8be9fd;font-style:italic>$num</span>);  <span style=color:#6272a4>// 剩余的红包的平均金额
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>
+</span></span><span style=display:flex><span>                <span style=color:#8be9fd;font-style:italic>$coupon_amount</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>decimal_number</span>(
+</span></span><span style=display:flex><span>                    <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>calcCouponAmount</span>(<span style=color:#8be9fd;font-style:italic>$avg_amount</span>, <span style=color:#8be9fd;font-style:italic>$amount</span>, <span style=color:#8be9fd;font-style:italic>$num</span>)
+</span></span><span style=display:flex><span>                );
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>items</span>[] <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$coupon_amount</span>; <span style=color:#6272a4>// 追加分配
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>
+</span></span><span style=display:flex><span>            <span style=color:#8be9fd;font-style:italic>$amount</span> <span style=color:#ff79c6>-=</span> <span style=color:#8be9fd;font-style:italic>$coupon_amount</span>;
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>--</span><span style=color:#8be9fd;font-style:italic>$num</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        shuffle(<span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>items</span>);  <span style=color:#6272a4>//随机打乱
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>/**
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * 计算分配的红包金额
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     *
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * @param float $avg_amount 每次计算的平均金额
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * @param float $amount     剩余可领取金额
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * @param int   $num        剩余可领取的红包个数
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     *
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * @return float
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>protected</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>calcCouponAmount</span>(<span style=color:#8be9fd;font-style:italic>$avg_amount</span>, <span style=color:#8be9fd;font-style:italic>$amount</span>, <span style=color:#8be9fd;font-style:italic>$num</span>)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// 如果平均金额小于等于最低金额，则直接返回最低金额
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        <span style=color:#ff79c6>if</span> (<span style=color:#8be9fd;font-style:italic>$avg_amount</span> <span style=color:#ff79c6>&lt;=</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>coupon_min</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>coupon_min</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// 浮动计算
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>$coupon_amount</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>decimal_number</span>(<span style=color:#8be9fd;font-style:italic>$avg_amount</span> <span style=color:#ff79c6>*</span> (<span style=color:#bd93f9>1</span> <span style=color:#ff79c6>+</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>apportionRandRatio</span>()));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// 如果低于最低金额或超过可领取的最大金额，则重新获取
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        <span style=color:#ff79c6>if</span> (<span style=color:#8be9fd;font-style:italic>$coupon_amount</span> <span style=color:#ff79c6>&lt;</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>coupon_min</span>
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>||</span> <span style=color:#8be9fd;font-style:italic>$coupon_amount</span> <span style=color:#ff79c6>&gt;</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>calcCouponAmountMax</span>(<span style=color:#8be9fd;font-style:italic>$amount</span>, <span style=color:#8be9fd;font-style:italic>$num</span>)
+</span></span><span style=display:flex><span>        ) {
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>calcCouponAmount</span>(<span style=color:#8be9fd;font-style:italic>$avg_amount</span>, <span style=color:#8be9fd;font-style:italic>$amount</span>, <span style=color:#8be9fd;font-style:italic>$num</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$coupon_amount</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>/**
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * 计算分配的红包金额-可领取的最大金额
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     *
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * @param float $amount
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * @param int   $num
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>protected</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>calcCouponAmountMax</span>(<span style=color:#8be9fd;font-style:italic>$amount</span>, <span style=color:#8be9fd;font-style:italic>$num</span>)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>coupon_min</span> <span style=color:#ff79c6>+</span> <span style=color:#8be9fd;font-style:italic>$amount</span> <span style=color:#ff79c6>-</span> <span style=color:#8be9fd;font-style:italic>$num</span> <span style=color:#ff79c6>*</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>coupon_min</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>/**
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * 红包金额浮动比例
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>protected</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>apportionRandRatio</span>()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// 60%机率获取剩余平均值的大幅度红包（可能正数、可能负数）
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        <span style=color:#ff79c6>if</span> (rand(<span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>100</span>) <span style=color:#ff79c6>&lt;=</span> <span style=color:#bd93f9>60</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>return</span> rand(<span style=color:#ff79c6>-</span><span style=color:#bd93f9>70</span>, <span style=color:#bd93f9>70</span>) <span style=color:#ff79c6>/</span> <span style=color:#bd93f9>100</span>; <span style=color:#6272a4>// 上下幅度70%
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span> rand(<span style=color:#ff79c6>-</span><span style=color:#bd93f9>30</span>, <span style=color:#bd93f9>30</span>) <span style=color:#ff79c6>/</span> <span style=color:#bd93f9>100</span>; <span style=color:#6272a4>// 其他情况，上下浮动30%；
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>/**
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * 格式化金额，保留2位
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     *
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * @param float $amount
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     *
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     * @return float
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>protected</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>decimal_number</span>(<span style=color:#8be9fd;font-style:italic>$amount</span>)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span> sprintf(<span style=color:#f1fa8c>&#39;%01.2f&#39;</span>, round(<span style=color:#8be9fd;font-style:italic>$amount</span>, <span style=color:#bd93f9>2</span>));
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 例子
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>//$coupon = new Coupon(200, 5, 30);
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>//$res = $coupon-&gt;handle();
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>//print_r($res);
+</span></span></span></code></pre></td></tr></table></div></div></div><footer>
+</footer></article></section></div><footer class=footer>
 <section class=container>
 ©
 2019 -
@@ -493,11 +463,7 @@
 郭超超
 ·
 技术支持 <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
-</section>
-</footer>
-</main>
-<script src=/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
+</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NK08XEDHKZ"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-NK08XEDHKZ')</script>
-</body>
-</html>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script>
+</body></html>

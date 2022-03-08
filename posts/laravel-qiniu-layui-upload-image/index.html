@@ -4,21 +4,20 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=color-scheme content="light dark">
 <meta name=author content="Ethan Kuo">
-<meta name=description content="Installation    1  composer require qiniu/php-sdk   Usage    PHP returns the upload token    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26  <?php namespace App\Http\Controllers\Admin; use App\Setting; use Illuminate\Http\Request; use App\Http\Controllers\Controller; use Qiniu\Auth; class DefaultController extends Controller { public function upload(){ $accessKey = Setting::getValueByKey('qn_accessKey'); $secretKey = Setting::getValueByKey('qn_secretKey'); $bucket = Setting::getValueByKey('qn_bucket_static'); $baseUrl = Setting::getValueByKey('qn_static_url'); //Build forensic objects  $auth = new Auth($accessKey,$secretKey); //generate upload token  $token = $auth->uploadToken($bucket); return $token; } }   layui carry token to request seven cows cloud upload interface    layui HTML code    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22  <div class=&#34;layui-form-item&#34;> <label class=&#34;layui-form-label&#34; for=&#34;fileInput&#34;>Thumbnail</label> <div class=&#34;layui-input-block&#34;> <button type=&#34;button&#34; class=&#34;layui-btn&#34; id=&#34;thum&#34;>Upload image</button> <div class=&#34;layui-upload-list&#34;> <div id=&#34;thum_img&#34;></div> </div> </div> </div> <div class=&#34;layui-form-item&#34;> <label class=&#34;layui-form-label&#34; for=&#34;fileInput&#34;>Detailed image</label> <div class=&#34;layui-input-block&#34;> <button type=&#34;button&#34; class=&#34;layui-btn&#34; id=&#34;imgs&#34;> Upload </button> <div class=&#34;layui-upload-list&#34;> <div id=&#34;imgs_list&#34;></div> </div> </div> </div>   layui JS code    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47  function uploadInsts(elem,multiple,number,imgDiv){ if(multiple == null){ multiple = false; } if(number == null){ number = 0; } layui.">
+<meta name=description content="Installation    1  composer require qiniu/php-sdk   Usage    PHP returns the upload token    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26  <?php  namespace App\Http\Controllers\Admin;  use App\Setting; use Illuminate\Http\Request; use App\Http\Controllers\Controller; use Qiniu\Auth;  class DefaultController extends Controller {  public function upload(){  $accessKey = Setting::getValueByKey('qn_accessKey');  $secretKey = Setting::getValueByKey('qn_secretKey');  $bucket = Setting::getValueByKey('qn_bucket_static');  $baseUrl = Setting::getValueByKey('qn_static_url');   //Build forensic objects  $auth = new Auth($accessKey,$secretKey);   //generate upload token  $token = $auth->uploadToken($bucket);   return $token;  } }   layui carry token to request seven cows cloud upload interface    layui HTML code    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22  <div class=&#34;layui-form-item&#34;>  <label class=&#34;layui-form-label&#34; for=&#34;fileInput&#34;>Thumbnail</label>  <div class=&#34;layui-input-block&#34;>  <button type=&#34;button&#34; class=&#34;layui-btn&#34; id=&#34;thum&#34;>Upload image</button>  <div class=&#34;layui-upload-list&#34;>  <div id=&#34;thum_img&#34;></div>  </div>  </div>  </div>    <div class=&#34;layui-form-item&#34;>  <label class=&#34;layui-form-label&#34; for=&#34;fileInput&#34;>Detailed image</label>  <div class=&#34;layui-input-block&#34;>  <button type=&#34;button&#34; class=&#34;layui-btn&#34; id=&#34;imgs&#34;>  Upload  </button>  <div class=&#34;layui-upload-list&#34;>  <div id=&#34;imgs_list&#34;></div>  </div>  </div>  </div>   layui JS code    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47   function uploadInsts(elem,multiple,number,imgDiv){  if(multiple == null){  multiple = false;  }  if(number == null){  number = 0;  }  layui.">
 <meta name=keywords content="phper,goer,php,golang,php/go">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Laravel Qiniu Layui Upload Image">
-<meta name=twitter:description content="Installation    1  composer require qiniu/php-sdk   Usage    PHP returns the upload token    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26  <?php namespace App\Http\Controllers\Admin; use App\Setting; use Illuminate\Http\Request; use App\Http\Controllers\Controller; use Qiniu\Auth; class DefaultController extends Controller { public function upload(){ $accessKey = Setting::getValueByKey('qn_accessKey'); $secretKey = Setting::getValueByKey('qn_secretKey'); $bucket = Setting::getValueByKey('qn_bucket_static'); $baseUrl = Setting::getValueByKey('qn_static_url'); //Build forensic objects  $auth = new Auth($accessKey,$secretKey); //generate upload token  $token = $auth->uploadToken($bucket); return $token; } }   layui carry token to request seven cows cloud upload interface    layui HTML code    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22  <div class=&#34;layui-form-item&#34;> <label class=&#34;layui-form-label&#34; for=&#34;fileInput&#34;>Thumbnail</label> <div class=&#34;layui-input-block&#34;> <button type=&#34;button&#34; class=&#34;layui-btn&#34; id=&#34;thum&#34;>Upload image</button> <div class=&#34;layui-upload-list&#34;> <div id=&#34;thum_img&#34;></div> </div> </div> </div> <div class=&#34;layui-form-item&#34;> <label class=&#34;layui-form-label&#34; for=&#34;fileInput&#34;>Detailed image</label> <div class=&#34;layui-input-block&#34;> <button type=&#34;button&#34; class=&#34;layui-btn&#34; id=&#34;imgs&#34;> Upload </button> <div class=&#34;layui-upload-list&#34;> <div id=&#34;imgs_list&#34;></div> </div> </div> </div>   layui JS code    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47  function uploadInsts(elem,multiple,number,imgDiv){ if(multiple == null){ multiple = false; } if(number == null){ number = 0; } layui.">
+<meta name=twitter:description content="Installation    1  composer require qiniu/php-sdk   Usage    PHP returns the upload token    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26  <?php  namespace App\Http\Controllers\Admin;  use App\Setting; use Illuminate\Http\Request; use App\Http\Controllers\Controller; use Qiniu\Auth;  class DefaultController extends Controller {  public function upload(){  $accessKey = Setting::getValueByKey('qn_accessKey');  $secretKey = Setting::getValueByKey('qn_secretKey');  $bucket = Setting::getValueByKey('qn_bucket_static');  $baseUrl = Setting::getValueByKey('qn_static_url');   //Build forensic objects  $auth = new Auth($accessKey,$secretKey);   //generate upload token  $token = $auth->uploadToken($bucket);   return $token;  } }   layui carry token to request seven cows cloud upload interface    layui HTML code    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22  <div class=&#34;layui-form-item&#34;>  <label class=&#34;layui-form-label&#34; for=&#34;fileInput&#34;>Thumbnail</label>  <div class=&#34;layui-input-block&#34;>  <button type=&#34;button&#34; class=&#34;layui-btn&#34; id=&#34;thum&#34;>Upload image</button>  <div class=&#34;layui-upload-list&#34;>  <div id=&#34;thum_img&#34;></div>  </div>  </div>  </div>    <div class=&#34;layui-form-item&#34;>  <label class=&#34;layui-form-label&#34; for=&#34;fileInput&#34;>Detailed image</label>  <div class=&#34;layui-input-block&#34;>  <button type=&#34;button&#34; class=&#34;layui-btn&#34; id=&#34;imgs&#34;>  Upload  </button>  <div class=&#34;layui-upload-list&#34;>  <div id=&#34;imgs_list&#34;></div>  </div>  </div>  </div>   layui JS code    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47   function uploadInsts(elem,multiple,number,imgDiv){  if(multiple == null){  multiple = false;  }  if(number == null){  number = 0;  }  layui.">
 <meta property="og:title" content="Laravel Qiniu Layui Upload Image">
-<meta property="og:description" content="Installation    1  composer require qiniu/php-sdk   Usage    PHP returns the upload token    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26  <?php namespace App\Http\Controllers\Admin; use App\Setting; use Illuminate\Http\Request; use App\Http\Controllers\Controller; use Qiniu\Auth; class DefaultController extends Controller { public function upload(){ $accessKey = Setting::getValueByKey('qn_accessKey'); $secretKey = Setting::getValueByKey('qn_secretKey'); $bucket = Setting::getValueByKey('qn_bucket_static'); $baseUrl = Setting::getValueByKey('qn_static_url'); //Build forensic objects  $auth = new Auth($accessKey,$secretKey); //generate upload token  $token = $auth->uploadToken($bucket); return $token; } }   layui carry token to request seven cows cloud upload interface    layui HTML code    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22  <div class=&#34;layui-form-item&#34;> <label class=&#34;layui-form-label&#34; for=&#34;fileInput&#34;>Thumbnail</label> <div class=&#34;layui-input-block&#34;> <button type=&#34;button&#34; class=&#34;layui-btn&#34; id=&#34;thum&#34;>Upload image</button> <div class=&#34;layui-upload-list&#34;> <div id=&#34;thum_img&#34;></div> </div> </div> </div> <div class=&#34;layui-form-item&#34;> <label class=&#34;layui-form-label&#34; for=&#34;fileInput&#34;>Detailed image</label> <div class=&#34;layui-input-block&#34;> <button type=&#34;button&#34; class=&#34;layui-btn&#34; id=&#34;imgs&#34;> Upload </button> <div class=&#34;layui-upload-list&#34;> <div id=&#34;imgs_list&#34;></div> </div> </div> </div>   layui JS code    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47  function uploadInsts(elem,multiple,number,imgDiv){ if(multiple == null){ multiple = false; } if(number == null){ number = 0; } layui.">
+<meta property="og:description" content="Installation    1  composer require qiniu/php-sdk   Usage    PHP returns the upload token    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26  <?php  namespace App\Http\Controllers\Admin;  use App\Setting; use Illuminate\Http\Request; use App\Http\Controllers\Controller; use Qiniu\Auth;  class DefaultController extends Controller {  public function upload(){  $accessKey = Setting::getValueByKey('qn_accessKey');  $secretKey = Setting::getValueByKey('qn_secretKey');  $bucket = Setting::getValueByKey('qn_bucket_static');  $baseUrl = Setting::getValueByKey('qn_static_url');   //Build forensic objects  $auth = new Auth($accessKey,$secretKey);   //generate upload token  $token = $auth->uploadToken($bucket);   return $token;  } }   layui carry token to request seven cows cloud upload interface    layui HTML code    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22  <div class=&#34;layui-form-item&#34;>  <label class=&#34;layui-form-label&#34; for=&#34;fileInput&#34;>Thumbnail</label>  <div class=&#34;layui-input-block&#34;>  <button type=&#34;button&#34; class=&#34;layui-btn&#34; id=&#34;thum&#34;>Upload image</button>  <div class=&#34;layui-upload-list&#34;>  <div id=&#34;thum_img&#34;></div>  </div>  </div>  </div>    <div class=&#34;layui-form-item&#34;>  <label class=&#34;layui-form-label&#34; for=&#34;fileInput&#34;>Detailed image</label>  <div class=&#34;layui-input-block&#34;>  <button type=&#34;button&#34; class=&#34;layui-btn&#34; id=&#34;imgs&#34;>  Upload  </button>  <div class=&#34;layui-upload-list&#34;>  <div id=&#34;imgs_list&#34;></div>  </div>  </div>  </div>   layui JS code    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47   function uploadInsts(elem,multiple,number,imgDiv){  if(multiple == null){  multiple = false;  }  if(number == null){  number = 0;  }  layui.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://blog.adminchao.com/posts/laravel-qiniu-layui-upload-image/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2018-06-08T12:47:33+00:00">
 <meta property="article:modified_time" content="2018-06-08T12:47:33+00:00">
 <title>
 Laravel Qiniu Layui Upload Image · Ethan Kuo Blog
-</title>
-<link rel=canonical href=https://blog.adminchao.com/posts/laravel-qiniu-layui-upload-image/>
+</title><link rel=canonical href=https://blog.adminchao.com/posts/laravel-qiniu-layui-upload-image/>
 <link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin>
 <link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen>
 <link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen>
@@ -26,15 +25,13 @@ Laravel Qiniu Layui Upload Image · Ethan Kuo Blog
 <link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16>
 <link rel=apple-touch-icon href=/images/apple-touch-icon.png>
 <link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png>
-<meta name=generator content="Hugo 0.89.1">
-</head>
-<body class="preload-transitions colorscheme-dark">
+<meta name=generator content="Hugo 0.93.2">
+</head><body class="preload-transitions colorscheme-dark">
 <div class=float-container>
 <a id=dark-mode-toggle class=colorscheme-toggle>
 <i class="fa fa-adjust fa-fw" aria-hidden=true></i>
 </a>
-</div>
-<main class=wrapper>
+</div><main class=wrapper>
 <nav class=navigation>
 <section class=container>
 <a class=navigation-title href=/>
@@ -47,23 +44,15 @@ Ethan Kuo Blog
 <ul class=navigation-list>
 <li class=navigation-item>
 <a class=navigation-link href=/about/>About</a>
-</li>
-<li class=navigation-item>
+</li><li class=navigation-item>
 <a class=navigation-link href=/posts/>Blog</a>
-</li>
-<li class=navigation-item>
+</li><li class=navigation-item>
 <a class=navigation-link href=/contact/>Contact me</a>
-</li>
-<li class="navigation-item menu-separator">
+</li><li class="navigation-item menu-separator">
 <span>|</span>
-</li>
-<li class=navigation-item>
+</li><li class=navigation-item>
 <a href=https://blog.adminchao.com/zh-cn/>🇨🇳</a>
-</li>
-</ul>
-</section>
-</nav>
-<div class=content>
+</li></ul></section></nav><div class=content>
 <section class="container post">
 <article>
 <header>
@@ -72,9 +61,7 @@ Ethan Kuo Blog
 <a class=title-link href=https://blog.adminchao.com/posts/laravel-qiniu-layui-upload-image/>
 Laravel Qiniu Layui Upload Image
 </a>
-</h1>
-</div>
-<div class=post-meta>
+</h1></div><div class=post-meta>
 <div class=date>
 <span class=posted-on>
 <i class="fa fa-calendar" aria-hidden=true></i>
@@ -86,11 +73,9 @@ Laravel Qiniu Layui Upload Image
 <i class="fa fa-clock-o" aria-hidden=true></i>
 6-minute read
 </span>
-</div>
-<div class=categories>
+</div><div class=categories>
 <i class="fa fa-folder" aria-hidden=true></i>
-<a href=/categories/laravel/>Laravel</a></div>
-<div class=tags>
+<a href=/categories/laravel/>Laravel</a></div><div class=tags>
 <i class="fa fa-tag" aria-hidden=true></i>
 <span class=tag>
 <a href=/tags/laravel/>Laravel</a>
@@ -114,713 +99,646 @@ Laravel Qiniu Layui Upload Image
 <span class=separator>•</span>
 <span class=tag>
 <a href=/tags/image/>Image</a>
-</span></div>
-</div>
-</header>
-<div>
+</span></div></div></header><div>
 <h3 id=installation>
 Installation
 <a class=heading-link href=#installation>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h3>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php>composer <span style=color:#ff79c6>require</span> qiniu<span style=color:#ff79c6>/</span>php<span style=color:#ff79c6>-</span>sdk
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=usage>
+</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>composer <span style=color:#ff79c6>require</span> qiniu<span style=color:#ff79c6>/</span>php<span style=color:#ff79c6>-</span>sdk
+</span></span></code></pre></td></tr></table></div></div><h3 id=usage>
 Usage
 <a class=heading-link href=#usage>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h3>
-<h4 id=php-returns-the-upload-token>
+</h3><h4 id=php-returns-the-upload-token>
 PHP returns the upload token
 <a class=heading-link href=#php-returns-the-upload-token>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h4>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#ff79c6>&lt;?</span>php
-
-<span style=color:#ff79c6>namespace</span> App\Http\Controllers\Admin;
-
-<span style=color:#ff79c6>use</span> App\Setting;
-<span style=color:#ff79c6>use</span> Illuminate\Http\Request;
-<span style=color:#ff79c6>use</span> App\Http\Controllers\Controller;
-<span style=color:#ff79c6>use</span> Qiniu\Auth;
-
-<span style=color:#ff79c6>class</span> <span style=color:#50fa7b>DefaultController</span> <span style=color:#ff79c6>extends</span> Controller
-{
-    <span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>upload</span>(){
-        <span style=color:#8be9fd;font-style:italic>$accessKey</span> <span style=color:#ff79c6>=</span> Setting<span style=color:#ff79c6>::</span><span style=color:#50fa7b>getValueByKey</span>(<span style=color:#f1fa8c>&#39;qn_accessKey&#39;</span>);
-        <span style=color:#8be9fd;font-style:italic>$secretKey</span> <span style=color:#ff79c6>=</span> Setting<span style=color:#ff79c6>::</span><span style=color:#50fa7b>getValueByKey</span>(<span style=color:#f1fa8c>&#39;qn_secretKey&#39;</span>);
-        <span style=color:#8be9fd;font-style:italic>$bucket</span> <span style=color:#ff79c6>=</span> Setting<span style=color:#ff79c6>::</span><span style=color:#50fa7b>getValueByKey</span>(<span style=color:#f1fa8c>&#39;qn_bucket_static&#39;</span>);
-        <span style=color:#8be9fd;font-style:italic>$baseUrl</span> <span style=color:#ff79c6>=</span> Setting<span style=color:#ff79c6>::</span><span style=color:#50fa7b>getValueByKey</span>(<span style=color:#f1fa8c>&#39;qn_static_url&#39;</span>);
-        
-        <span style=color:#6272a4>//Build forensic objects
-</span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>$auth</span> <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>new</span> Auth(<span style=color:#8be9fd;font-style:italic>$accessKey</span>,<span style=color:#8be9fd;font-style:italic>$secretKey</span>);
-        
-        <span style=color:#6272a4>//generate upload token
-</span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>$token</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$auth</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>uploadToken</span>(<span style=color:#8be9fd;font-style:italic>$bucket</span>);
-
-        <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$token</span>;
-    }
-}
-</code></pre></td></tr></table>
-</div>
-</div><h4 id=layui-carry-token-to-request-seven-cows-cloud-upload-interface>
+</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>namespace</span> App\Http\Controllers\Admin;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>use</span> App\Setting;
+</span></span><span style=display:flex><span><span style=color:#ff79c6>use</span> Illuminate\Http\Request;
+</span></span><span style=display:flex><span><span style=color:#ff79c6>use</span> App\Http\Controllers\Controller;
+</span></span><span style=display:flex><span><span style=color:#ff79c6>use</span> Qiniu\Auth;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>class</span> <span style=color:#50fa7b>DefaultController</span> <span style=color:#ff79c6>extends</span> Controller
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>upload</span>(){
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$accessKey</span> <span style=color:#ff79c6>=</span> Setting<span style=color:#ff79c6>::</span><span style=color:#50fa7b>getValueByKey</span>(<span style=color:#f1fa8c>&#39;qn_accessKey&#39;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$secretKey</span> <span style=color:#ff79c6>=</span> Setting<span style=color:#ff79c6>::</span><span style=color:#50fa7b>getValueByKey</span>(<span style=color:#f1fa8c>&#39;qn_secretKey&#39;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$bucket</span> <span style=color:#ff79c6>=</span> Setting<span style=color:#ff79c6>::</span><span style=color:#50fa7b>getValueByKey</span>(<span style=color:#f1fa8c>&#39;qn_bucket_static&#39;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$baseUrl</span> <span style=color:#ff79c6>=</span> Setting<span style=color:#ff79c6>::</span><span style=color:#50fa7b>getValueByKey</span>(<span style=color:#f1fa8c>&#39;qn_static_url&#39;</span>);
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>//Build forensic objects
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>$auth</span> <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>new</span> Auth(<span style=color:#8be9fd;font-style:italic>$accessKey</span>,<span style=color:#8be9fd;font-style:italic>$secretKey</span>);
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>//generate upload token
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>$token</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$auth</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>uploadToken</span>(<span style=color:#8be9fd;font-style:italic>$bucket</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$token</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div><h4 id=layui-carry-token-to-request-seven-cows-cloud-upload-interface>
 layui carry token to request seven cows cloud upload interface
 <a class=heading-link href=#layui-carry-token-to-request-seven-cows-cloud-upload-interface>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h4>
-<h5 id=layui-html-code>
+</h4><h5 id=layui-html-code>
 layui HTML code
 <a class=heading-link href=#layui-html-code>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h5>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html>&lt;<span style=color:#ff79c6>div</span> <span style=color:#50fa7b>class</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;layui-form-item&#34;</span>&gt;
-            &lt;<span style=color:#ff79c6>label</span> <span style=color:#50fa7b>class</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;layui-form-label&#34;</span> <span style=color:#50fa7b>for</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;fileInput&#34;</span>&gt;Thumbnail&lt;/<span style=color:#ff79c6>label</span>&gt;
-            &lt;<span style=color:#ff79c6>div</span> <span style=color:#50fa7b>class</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;layui-input-block&#34;</span>&gt;
-                &lt;<span style=color:#ff79c6>button</span> <span style=color:#50fa7b>type</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;button&#34;</span> <span style=color:#50fa7b>class</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;layui-btn&#34;</span> <span style=color:#50fa7b>id</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;thum&#34;</span>&gt;Upload image&lt;/<span style=color:#ff79c6>button</span>&gt;
-                &lt;<span style=color:#ff79c6>div</span> <span style=color:#50fa7b>class</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;layui-upload-list&#34;</span>&gt;
-                    &lt;<span style=color:#ff79c6>div</span>  <span style=color:#50fa7b>id</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;thum_img&#34;</span>&gt;&lt;/<span style=color:#ff79c6>div</span>&gt;
-                &lt;/<span style=color:#ff79c6>div</span>&gt;
-            &lt;/<span style=color:#ff79c6>div</span>&gt;
-        &lt;/<span style=color:#ff79c6>div</span>&gt;
-
-
-        &lt;<span style=color:#ff79c6>div</span> <span style=color:#50fa7b>class</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;layui-form-item&#34;</span>&gt;
-            &lt;<span style=color:#ff79c6>label</span> <span style=color:#50fa7b>class</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;layui-form-label&#34;</span> <span style=color:#50fa7b>for</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;fileInput&#34;</span>&gt;Detailed image&lt;/<span style=color:#ff79c6>label</span>&gt;
-            &lt;<span style=color:#ff79c6>div</span> <span style=color:#50fa7b>class</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;layui-input-block&#34;</span>&gt;
-                &lt;<span style=color:#ff79c6>button</span> <span style=color:#50fa7b>type</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;button&#34;</span> <span style=color:#50fa7b>class</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;layui-btn&#34;</span> <span style=color:#50fa7b>id</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;imgs&#34;</span>&gt;
-                    Upload
-                &lt;/<span style=color:#ff79c6>button</span>&gt;
-                &lt;<span style=color:#ff79c6>div</span> <span style=color:#50fa7b>class</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;layui-upload-list&#34;</span>&gt;
-                    &lt;<span style=color:#ff79c6>div</span> <span style=color:#50fa7b>id</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;imgs_list&#34;</span>&gt;&lt;/<span style=color:#ff79c6>div</span>&gt;
-                &lt;/<span style=color:#ff79c6>div</span>&gt;
-            &lt;/<span style=color:#ff79c6>div</span>&gt;
-        &lt;/<span style=color:#ff79c6>div</span>&gt;
-</code></pre></td></tr></table>
-</div>
-</div><h5 id=layui-js-code>
+</h5><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>&lt;<span style=color:#ff79c6>div</span> <span style=color:#50fa7b>class</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;layui-form-item&#34;</span>&gt;
+</span></span><span style=display:flex><span>            &lt;<span style=color:#ff79c6>label</span> <span style=color:#50fa7b>class</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;layui-form-label&#34;</span> <span style=color:#50fa7b>for</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;fileInput&#34;</span>&gt;Thumbnail&lt;/<span style=color:#ff79c6>label</span>&gt;
+</span></span><span style=display:flex><span>            &lt;<span style=color:#ff79c6>div</span> <span style=color:#50fa7b>class</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;layui-input-block&#34;</span>&gt;
+</span></span><span style=display:flex><span>                &lt;<span style=color:#ff79c6>button</span> <span style=color:#50fa7b>type</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;button&#34;</span> <span style=color:#50fa7b>class</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;layui-btn&#34;</span> <span style=color:#50fa7b>id</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;thum&#34;</span>&gt;Upload image&lt;/<span style=color:#ff79c6>button</span>&gt;
+</span></span><span style=display:flex><span>                &lt;<span style=color:#ff79c6>div</span> <span style=color:#50fa7b>class</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;layui-upload-list&#34;</span>&gt;
+</span></span><span style=display:flex><span>                    &lt;<span style=color:#ff79c6>div</span>  <span style=color:#50fa7b>id</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;thum_img&#34;</span>&gt;&lt;/<span style=color:#ff79c6>div</span>&gt;
+</span></span><span style=display:flex><span>                &lt;/<span style=color:#ff79c6>div</span>&gt;
+</span></span><span style=display:flex><span>            &lt;/<span style=color:#ff79c6>div</span>&gt;
+</span></span><span style=display:flex><span>        &lt;/<span style=color:#ff79c6>div</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        &lt;<span style=color:#ff79c6>div</span> <span style=color:#50fa7b>class</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;layui-form-item&#34;</span>&gt;
+</span></span><span style=display:flex><span>            &lt;<span style=color:#ff79c6>label</span> <span style=color:#50fa7b>class</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;layui-form-label&#34;</span> <span style=color:#50fa7b>for</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;fileInput&#34;</span>&gt;Detailed image&lt;/<span style=color:#ff79c6>label</span>&gt;
+</span></span><span style=display:flex><span>            &lt;<span style=color:#ff79c6>div</span> <span style=color:#50fa7b>class</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;layui-input-block&#34;</span>&gt;
+</span></span><span style=display:flex><span>                &lt;<span style=color:#ff79c6>button</span> <span style=color:#50fa7b>type</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;button&#34;</span> <span style=color:#50fa7b>class</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;layui-btn&#34;</span> <span style=color:#50fa7b>id</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;imgs&#34;</span>&gt;
+</span></span><span style=display:flex><span>                    Upload
+</span></span><span style=display:flex><span>                &lt;/<span style=color:#ff79c6>button</span>&gt;
+</span></span><span style=display:flex><span>                &lt;<span style=color:#ff79c6>div</span> <span style=color:#50fa7b>class</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;layui-upload-list&#34;</span>&gt;
+</span></span><span style=display:flex><span>                    &lt;<span style=color:#ff79c6>div</span> <span style=color:#50fa7b>id</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;imgs_list&#34;</span>&gt;&lt;/<span style=color:#ff79c6>div</span>&gt;
+</span></span><span style=display:flex><span>                &lt;/<span style=color:#ff79c6>div</span>&gt;
+</span></span><span style=display:flex><span>            &lt;/<span style=color:#ff79c6>div</span>&gt;
+</span></span><span style=display:flex><span>        &lt;/<span style=color:#ff79c6>div</span>&gt;
+</span></span></code></pre></td></tr></table></div></div><h5 id=layui-js-code>
 layui JS code
 <a class=heading-link href=#layui-js-code>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h5>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript>     <span style=color:#8be9fd;font-style:italic>function</span> uploadInsts(elem,multiple,number,imgDiv){
-            <span style=color:#ff79c6>if</span>(multiple <span style=color:#ff79c6>==</span> <span style=color:#ff79c6>null</span>){
-                multiple <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>false</span>;
-            }
-            <span style=color:#ff79c6>if</span>(number <span style=color:#ff79c6>==</span> <span style=color:#ff79c6>null</span>){
-                number <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>;
-            }
-            layui.use([<span style=color:#f1fa8c>&#39;upload&#39;</span>],<span style=color:#8be9fd;font-style:italic>function</span> () {
-                <span style=color:#8be9fd;font-style:italic>var</span> $ <span style=color:#ff79c6>=</span> layui.jquery
-                    ,upload <span style=color:#ff79c6>=</span> layui.upload;
-                upload.render({
-
-                    elem<span style=color:#ff79c6>:</span> elem                      <span style=color:#6272a4>//Upload button ID
-</span><span style=color:#6272a4></span>                    ,url<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;https://up.qbox.me/&#39;</span>     <span style=color:#6272a4>//Qiniu upload interface
-</span><span style=color:#6272a4></span>                    ,data<span style=color:#ff79c6>:</span>{<span style=color:#f1fa8c>&#39;token&#39;</span><span style=color:#ff79c6>:</span><span style=color:#f1fa8c>&#39;{{$token ?? null}}&#39;</span>}    <span style=color:#6272a4>//with token
-</span><span style=color:#6272a4></span>                    ,multiple<span style=color:#ff79c6>:</span>multiple              <span style=color:#6272a4>// Is multiple images ?
-</span><span style=color:#6272a4></span>                    ,number<span style=color:#ff79c6>:</span>number                  <span style=color:#6272a4>//Maximum number of images to upload
-</span><span style=color:#6272a4></span>                    <span style=color:#6272a4>// ,before: function(obj){
-</span><span style=color:#6272a4></span>                    <span style=color:#6272a4>//     obj.preview(function(index, file, result){
-</span><span style=color:#6272a4></span>                    <span style=color:#6272a4>//         $(&#39;#demo1&#39;).attr(&#39;src&#39;, result);
-</span><span style=color:#6272a4></span>                    <span style=color:#6272a4>//     });
-</span><span style=color:#6272a4></span>                    <span style=color:#6272a4>// }
-</span><span style=color:#6272a4></span>                    ,done<span style=color:#ff79c6>:</span> <span style=color:#8be9fd;font-style:italic>function</span>(res){
-                        <span style=color:#6272a4>//res The data returned by Qiniu after successful upload 
-</span><span style=color:#6272a4></span>                        $.ajax({
-                            url<span style=color:#ff79c6>:</span><span style=color:#f1fa8c>&#34;{{url(&#39;admin/upload_save&#39;)}}&#34;</span>      <span style=color:#6272a4>// Request php interface
-</span><span style=color:#6272a4></span>                            ,data<span style=color:#ff79c6>:</span>{<span style=color:#f1fa8c>&#39;key&#39;</span><span style=color:#ff79c6>:</span>res.key,<span style=color:#f1fa8c>&#39;multiple&#39;</span><span style=color:#ff79c6>:</span>multiple,<span style=color:#f1fa8c>&#39;num&#39;</span><span style=color:#ff79c6>:</span>number} <span style=color:#6272a4>//res.key image name
-</span><span style=color:#6272a4></span>                            ,type<span style=color:#ff79c6>:</span><span style=color:#f1fa8c>&#39;post&#39;</span>
-                            ,success<span style=color:#ff79c6>:</span><span style=color:#8be9fd;font-style:italic>function</span>(result){
-                                <span style=color:#ff79c6>if</span>(result.error <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>0</span>){           <span style=color:#6272a4>// Failed
-</span><span style=color:#6272a4></span>                                    layer.msg(result.msg);
-                                }<span style=color:#ff79c6>else</span>{                          <span style=color:#6272a4>//Success Get the stitched image url to show
-</span><span style=color:#6272a4></span>                                    $(imgDiv).append(<span style=color:#f1fa8c>&#34;&lt;img class=&#39;layui-upload-img&#39; style=&#39;width:150px;height:150px;margin-right:3px;&#39; src=&#39;&#34;</span><span style=color:#ff79c6>+</span>result.msg<span style=color:#ff79c6>+</span><span style=color:#f1fa8c>&#34;&#39;&gt;&#34;</span>);
-                                }
-                            }
-                        });
-                    }
-                    ,error<span style=color:#ff79c6>:</span> <span style=color:#8be9fd;font-style:italic>function</span>(){     <span style=color:#6272a4>// Upload failed
-</span><span style=color:#6272a4></span>                        layer.msg(<span style=color:#f1fa8c>&#39;请刷新重试&#39;</span>);
-                        <span style=color:#ff79c6>return</span> <span style=color:#ff79c6>false</span>;
-                    }
-                });
-            });
-    }
-    
-                uploadInsts(<span style=color:#f1fa8c>&#39;#thum&#39;</span>,<span style=color:#ff79c6>false</span>,<span style=color:#bd93f9>0</span>,<span style=color:#f1fa8c>&#39;#thum_img&#39;</span>);<span style=color:#6272a4>//Single Image
-</span><span style=color:#6272a4></span>                uploadInsts(<span style=color:#f1fa8c>&#39;#imgs&#39;</span>,<span style=color:#ff79c6>true</span>,<span style=color:#bd93f9>5</span>,<span style=color:#f1fa8c>&#39;#imgs_list&#39;</span>);<span style=color:#6272a4>//Multiple images
-</span></code></pre></td></tr></table>
-</div>
-</div><h5 id=php-receive-qiniu-key-stitching-image-address>
+</h5><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>     <span style=color:#8be9fd;font-style:italic>function</span> uploadInsts(elem,multiple,number,imgDiv){
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>if</span>(multiple <span style=color:#ff79c6>==</span> <span style=color:#ff79c6>null</span>){
+</span></span><span style=display:flex><span>                multiple <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>false</span>;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>if</span>(number <span style=color:#ff79c6>==</span> <span style=color:#ff79c6>null</span>){
+</span></span><span style=display:flex><span>                number <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            layui.use([<span style=color:#f1fa8c>&#39;upload&#39;</span>],<span style=color:#8be9fd;font-style:italic>function</span> () {
+</span></span><span style=display:flex><span>                <span style=color:#8be9fd;font-style:italic>var</span> $ <span style=color:#ff79c6>=</span> layui.jquery
+</span></span><span style=display:flex><span>                    ,upload <span style=color:#ff79c6>=</span> layui.upload;
+</span></span><span style=display:flex><span>                upload.render({
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                    elem<span style=color:#ff79c6>:</span> elem                      <span style=color:#6272a4>//Upload button ID
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    ,url<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;https://up.qbox.me/&#39;</span>     <span style=color:#6272a4>//Qiniu upload interface
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    ,data<span style=color:#ff79c6>:</span>{<span style=color:#f1fa8c>&#39;token&#39;</span><span style=color:#ff79c6>:</span><span style=color:#f1fa8c>&#39;{{$token ?? null}}&#39;</span>}    <span style=color:#6272a4>//with token
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    ,multiple<span style=color:#ff79c6>:</span>multiple              <span style=color:#6272a4>// Is multiple images ?
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    ,number<span style=color:#ff79c6>:</span>number                  <span style=color:#6272a4>//Maximum number of images to upload
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    <span style=color:#6272a4>// ,before: function(obj){
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    <span style=color:#6272a4>//     obj.preview(function(index, file, result){
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    <span style=color:#6272a4>//         $(&#39;#demo1&#39;).attr(&#39;src&#39;, result);
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    <span style=color:#6272a4>//     });
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    <span style=color:#6272a4>// }
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    ,done<span style=color:#ff79c6>:</span> <span style=color:#8be9fd;font-style:italic>function</span>(res){
+</span></span><span style=display:flex><span>                        <span style=color:#6272a4>//res The data returned by Qiniu after successful upload 
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                        $.ajax({
+</span></span><span style=display:flex><span>                            url<span style=color:#ff79c6>:</span><span style=color:#f1fa8c>&#34;{{url(&#39;admin/upload_save&#39;)}}&#34;</span>      <span style=color:#6272a4>// Request php interface
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                            ,data<span style=color:#ff79c6>:</span>{<span style=color:#f1fa8c>&#39;key&#39;</span><span style=color:#ff79c6>:</span>res.key,<span style=color:#f1fa8c>&#39;multiple&#39;</span><span style=color:#ff79c6>:</span>multiple,<span style=color:#f1fa8c>&#39;num&#39;</span><span style=color:#ff79c6>:</span>number} <span style=color:#6272a4>//res.key image name
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                            ,type<span style=color:#ff79c6>:</span><span style=color:#f1fa8c>&#39;post&#39;</span>
+</span></span><span style=display:flex><span>                            ,success<span style=color:#ff79c6>:</span><span style=color:#8be9fd;font-style:italic>function</span>(result){
+</span></span><span style=display:flex><span>                                <span style=color:#ff79c6>if</span>(result.error <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>0</span>){           <span style=color:#6272a4>// Failed
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                                    layer.msg(result.msg);
+</span></span><span style=display:flex><span>                                }<span style=color:#ff79c6>else</span>{                          <span style=color:#6272a4>//Success Get the stitched image url to show
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                                    $(imgDiv).append(<span style=color:#f1fa8c>&#34;&lt;img class=&#39;layui-upload-img&#39; style=&#39;width:150px;height:150px;margin-right:3px;&#39; src=&#39;&#34;</span><span style=color:#ff79c6>+</span>result.msg<span style=color:#ff79c6>+</span><span style=color:#f1fa8c>&#34;&#39;&gt;&#34;</span>);
+</span></span><span style=display:flex><span>                                }
+</span></span><span style=display:flex><span>                            }
+</span></span><span style=display:flex><span>                        });
+</span></span><span style=display:flex><span>                    }
+</span></span><span style=display:flex><span>                    ,error<span style=color:#ff79c6>:</span> <span style=color:#8be9fd;font-style:italic>function</span>(){     <span style=color:#6272a4>// Upload failed
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                        layer.msg(<span style=color:#f1fa8c>&#39;请刷新重试&#39;</span>);
+</span></span><span style=display:flex><span>                        <span style=color:#ff79c6>return</span> <span style=color:#ff79c6>false</span>;
+</span></span><span style=display:flex><span>                    }
+</span></span><span style=display:flex><span>                });
+</span></span><span style=display:flex><span>            });
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>                uploadInsts(<span style=color:#f1fa8c>&#39;#thum&#39;</span>,<span style=color:#ff79c6>false</span>,<span style=color:#bd93f9>0</span>,<span style=color:#f1fa8c>&#39;#thum_img&#39;</span>);<span style=color:#6272a4>//Single Image
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                uploadInsts(<span style=color:#f1fa8c>&#39;#imgs&#39;</span>,<span style=color:#ff79c6>true</span>,<span style=color:#bd93f9>5</span>,<span style=color:#f1fa8c>&#39;#imgs_list&#39;</span>);<span style=color:#6272a4>//Multiple images
+</span></span></span></code></pre></td></tr></table></div></div><h5 id=php-receive-qiniu-key-stitching-image-address>
 PHP receive Qiniu key stitching image address
 <a class=heading-link href=#php-receive-qiniu-key-stitching-image-address>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h5>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#ff79c6>&lt;?</span>php
-
-<span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>uploadSave</span>(Request <span style=color:#8be9fd;font-style:italic>$request</span>){
-        <span style=color:#8be9fd;font-style:italic>$key</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>get</span>(<span style=color:#f1fa8c>&#39;key&#39;</span>,<span style=color:#ff79c6>null</span>);
-        <span style=color:#8be9fd;font-style:italic>$multiple</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>get</span>(<span style=color:#f1fa8c>&#39;multiple&#39;</span>,<span style=color:#ff79c6>false</span>);
-        <span style=color:#8be9fd;font-style:italic>$num</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>get</span>(<span style=color:#f1fa8c>&#39;number&#39;</span>,<span style=color:#bd93f9>1</span>);
-        <span style=color:#ff79c6>if</span>(<span style=color:#ff79c6>empty</span>(<span style=color:#8be9fd;font-style:italic>$key</span>)){
-            <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>error</span>(<span style=color:#f1fa8c>&#39;Uploading image error.Please try again&#39;</span>);
-        }
-        <span style=color:#8be9fd;font-style:italic>$type</span> <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;image&#39;</span>;
-        <span style=color:#8be9fd;font-style:italic>$user_id</span> <span style=color:#ff79c6>=</span> User<span style=color:#ff79c6>::</span><span style=color:#50fa7b>getAdminId</span>();
-        <span style=color:#8be9fd;font-style:italic>$uploads</span> <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>new</span> Uploads();
-        <span style=color:#8be9fd;font-style:italic>$uploads</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>type</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$type</span>;
-        <span style=color:#8be9fd;font-style:italic>$uploads</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>user_id</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$user_id</span>;
-        <span style=color:#8be9fd;font-style:italic>$uploads</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>key</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$key</span>;
-        <span style=color:#8be9fd;font-style:italic>$uploads</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>time</span> <span style=color:#ff79c6>=</span> time();
-        <span style=color:#ff79c6>try</span>{
-            <span style=color:#8be9fd;font-style:italic>$uploads</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>save</span>();
-            <span style=color:#8be9fd;font-style:italic>$result</span> <span style=color:#ff79c6>=</span> Setting<span style=color:#ff79c6>::</span><span style=color:#50fa7b>getValueByKey</span>(<span style=color:#f1fa8c>&#39;qn_static_url&#39;</span>)<span style=color:#ff79c6>.</span><span style=color:#f1fa8c>&#39;/&#39;</span><span style=color:#ff79c6>.</span><span style=color:#8be9fd;font-style:italic>$key</span>;
-            <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>success</span>(<span style=color:#8be9fd;font-style:italic>$result</span>);
-        }<span style=color:#ff79c6>catch</span> (\Exception <span style=color:#8be9fd;font-style:italic>$exception</span>){
-            <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>error</span>(<span style=color:#8be9fd;font-style:italic>$exception</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>getMessage</span>());
-        }
-    }
-    
-<span style=color:#ff79c6>?&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h5 id=layui--php--qiniu-to-achieve-a-single-multiple-image-upload-single-select-multi-select-image-design>
+</h5><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>uploadSave</span>(Request <span style=color:#8be9fd;font-style:italic>$request</span>){
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$key</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>get</span>(<span style=color:#f1fa8c>&#39;key&#39;</span>,<span style=color:#ff79c6>null</span>);
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$multiple</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>get</span>(<span style=color:#f1fa8c>&#39;multiple&#39;</span>,<span style=color:#ff79c6>false</span>);
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$num</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>get</span>(<span style=color:#f1fa8c>&#39;number&#39;</span>,<span style=color:#bd93f9>1</span>);
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>if</span>(<span style=color:#ff79c6>empty</span>(<span style=color:#8be9fd;font-style:italic>$key</span>)){
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>error</span>(<span style=color:#f1fa8c>&#39;Uploading image error.Please try again&#39;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$type</span> <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;image&#39;</span>;
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$user_id</span> <span style=color:#ff79c6>=</span> User<span style=color:#ff79c6>::</span><span style=color:#50fa7b>getAdminId</span>();
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$uploads</span> <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>new</span> Uploads();
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$uploads</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>type</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$type</span>;
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$uploads</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>user_id</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$user_id</span>;
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$uploads</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>key</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$key</span>;
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$uploads</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>time</span> <span style=color:#ff79c6>=</span> time();
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>try</span>{
+</span></span><span style=display:flex><span>            <span style=color:#8be9fd;font-style:italic>$uploads</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>save</span>();
+</span></span><span style=display:flex><span>            <span style=color:#8be9fd;font-style:italic>$result</span> <span style=color:#ff79c6>=</span> Setting<span style=color:#ff79c6>::</span><span style=color:#50fa7b>getValueByKey</span>(<span style=color:#f1fa8c>&#39;qn_static_url&#39;</span>)<span style=color:#ff79c6>.</span><span style=color:#f1fa8c>&#39;/&#39;</span><span style=color:#ff79c6>.</span><span style=color:#8be9fd;font-style:italic>$key</span>;
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>success</span>(<span style=color:#8be9fd;font-style:italic>$result</span>);
+</span></span><span style=display:flex><span>        }<span style=color:#ff79c6>catch</span> (\Exception <span style=color:#8be9fd;font-style:italic>$exception</span>){
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>error</span>(<span style=color:#8be9fd;font-style:italic>$exception</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>getMessage</span>());
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span><span style=color:#ff79c6>?&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h5 id=layui--php--qiniu-to-achieve-a-single-multiple-image-upload-single-select-multi-select-image-design>
 layui + PHP + Qiniu to achieve a single multiple image upload single-select multi-select image design
 <a class=heading-link href=#layui--php--qiniu-to-achieve-a-single-multiple-image-upload-single-select-multi-select-image-design>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h5>
-<ol>
-<li>Click the upload image button public pop-up layer function</li>
-</ol>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#8be9fd;font-style:italic>function</span> layer_show(title,url,w,h) {
-            <span style=color:#8be9fd;font-style:italic>var</span> width <span style=color:#ff79c6>=</span> w <span style=color:#ff79c6>||</span> <span style=color:#ff79c6>null</span>;
-            <span style=color:#8be9fd;font-style:italic>var</span> height <span style=color:#ff79c6>=</span> h <span style=color:#ff79c6>||</span> <span style=color:#ff79c6>null</span>;
-            <span style=color:#8be9fd;font-style:italic>var</span> areaValue;
-            <span style=color:#ff79c6>if</span> (width <span style=color:#ff79c6>!=</span> <span style=color:#ff79c6>null</span>) {
-                areaValue <span style=color:#ff79c6>=</span> width <span style=color:#ff79c6>+</span> <span style=color:#f1fa8c>&#39;px&#39;</span>;
-                <span style=color:#ff79c6>if</span> (height <span style=color:#ff79c6>!=</span> <span style=color:#ff79c6>null</span>) {
-                    areaValue <span style=color:#ff79c6>=</span> [width <span style=color:#ff79c6>+</span> <span style=color:#f1fa8c>&#39;px&#39;</span>, height <span style=color:#ff79c6>+</span> <span style=color:#f1fa8c>&#39;px&#39;</span>];
-                }
-            }<span style=color:#ff79c6>else</span>{
-                areaValue <span style=color:#ff79c6>=</span> [<span style=color:#f1fa8c>&#39;100%&#39;</span>,<span style=color:#f1fa8c>&#39;100%&#39;</span>];
-            }
-                layui.use(<span style=color:#f1fa8c>&#39;layer&#39;</span>, <span style=color:#8be9fd;font-style:italic>function</span> () { <span style=color:#6272a4>// The standalone version of layer does not need to execute this sentence
-</span><span style=color:#6272a4></span>                    <span style=color:#8be9fd;font-style:italic>var</span> $ <span style=color:#ff79c6>=</span> layui.jquery, layer <span style=color:#ff79c6>=</span> layui.layer; <span style=color:#6272a4>// The standalone version of layer does not need to execute this sentence
-</span><span style=color:#6272a4></span>                    layer.open({
-                        type<span style=color:#ff79c6>:</span> <span style=color:#bd93f9>2</span> <span style=color:#6272a4>// Here is an example of an iframe
-</span><span style=color:#6272a4></span>                        , title<span style=color:#ff79c6>:</span> title
-                        , area<span style=color:#ff79c6>:</span> areaValue
-                        , shade<span style=color:#ff79c6>:</span> <span style=color:#bd93f9>0</span>
-                        , maxmin<span style=color:#ff79c6>:</span> <span style=color:#ff79c6>true</span>
-                        , content<span style=color:#ff79c6>:</span> url
-                        , offset<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;10px&#39;</span>
-
-                    });
-                });
-        }
-</code></pre></td></tr></table>
-</div>
-</div><ol start=2>
-<li>PHP receives the parameters in the url and displays the pop-up layer view, with a callback function</li>
-</ol>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#ff79c6>&lt;?</span>php
-<span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>uploadShow</span>(Request <span style=color:#8be9fd;font-style:italic>$request</span>){
-        <span style=color:#8be9fd;font-style:italic>$limit</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>get</span>(<span style=color:#f1fa8c>&#39;limit&#39;</span>,<span style=color:#bd93f9>9</span>);
-        <span style=color:#8be9fd;font-style:italic>$type</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>get</span>(<span style=color:#f1fa8c>&#39;type&#39;</span>,<span style=color:#f1fa8c>&#39;radio&#39;</span>);          <span style=color:#6272a4>// Picture selection is single or multiple choice
-</span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>$callback</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>get</span>(<span style=color:#f1fa8c>&#39;callback&#39;</span>,<span style=color:#ff79c6>null</span>);     <span style=color:#6272a4>// Callback function name
-</span><span style=color:#6272a4></span>
-        <span style=color:#8be9fd;font-style:italic>$user_id</span> <span style=color:#ff79c6>=</span> User<span style=color:#ff79c6>::</span><span style=color:#50fa7b>getAdminId</span>();
-        <span style=color:#8be9fd;font-style:italic>$results</span> <span style=color:#ff79c6>=</span> Uploads<span style=color:#ff79c6>::</span><span style=color:#50fa7b>where</span>(<span style=color:#f1fa8c>&#39;user_id&#39;</span>,<span style=color:#8be9fd;font-style:italic>$user_id</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>orderBy</span>(<span style=color:#f1fa8c>&#39;id&#39;</span>,<span style=color:#f1fa8c>&#39;desc&#39;</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>paginate</span>(<span style=color:#8be9fd;font-style:italic>$limit</span>);
-        <span style=color:#8be9fd;font-style:italic>$token</span> <span style=color:#ff79c6>=</span> Uploads<span style=color:#ff79c6>::</span><span style=color:#50fa7b>getQiniuUpToken</span>();            <span style=color:#6272a4>//Qiniu upload token
-</span><span style=color:#6272a4></span>        <span style=color:#ff79c6>return</span> view(<span style=color:#f1fa8c>&#39;admin.upload.show&#39;</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>with</span>([<span style=color:#f1fa8c>&#39;results&#39;</span><span style=color:#ff79c6>=&gt;</span><span style=color:#8be9fd;font-style:italic>$results</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>items</span>(),<span style=color:#f1fa8c>&#39;type&#39;</span><span style=color:#ff79c6>=&gt;</span><span style=color:#8be9fd;font-style:italic>$type</span>,<span style=color:#f1fa8c>&#39;callback&#39;</span><span style=color:#ff79c6>=&gt;</span><span style=color:#8be9fd;font-style:italic>$callback</span>,<span style=color:#f1fa8c>&#39;token&#39;</span><span style=color:#ff79c6>=&gt;</span><span style=color:#8be9fd;font-style:italic>$token</span>]);
-    }
-    <span style=color:#ff79c6>?&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><ol start=3>
-<li>Upload image pop-up layer view</li>
-</ol>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>&lt;form class=&#34;layui-form&#34; action=&#34;&#34;&gt;
-        &lt;div class=&#34;layui-form-item&#34;&gt;
-            &lt;div class=&#34;layui-input-block&#34;&gt;
-        &lt;div class=&#34;layui-upload&#34;&gt;
-            &lt;button type=&#34;button&#34; class=&#34;layui-btn&#34; id=&#34;upload_img&#34;&gt;&lt;i class=&#34;layui-icon&#34;&gt;&lt;/i&gt;Upload Image&lt;/button&gt;
-        &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-
-        &lt;div class=&#34;layui-form-item&#34; pane=&#34;&#34;&gt;
-            &lt;label class=&#34;layui-form-label&#34;&gt;Select image&lt;/label&gt;
-            &lt;div class=&#34;layui-input-block&#34;&gt;
-            &lt;! --type is a radio box or a multi-select box --&gt;
-                @foreach($results as $result)
-                &lt;input class=&#34;layui-inline&#34; type=&#34;{{$type}}&#34; name=&#34;like[]&#34; lay-skin=&#34;primary&#34; title=&#34;&lt;img style=&#39;width:150px;height:150px;&#39; src=&#39;{{$result-&gt;img_url}}&#39; class=&#39;imgs&#39;&gt;&#34; value=&#34;{{$result-&gt;img_url}}&#34;&gt;
-                @endforeach
-            &lt;/div&gt;
-        &lt;/div&gt;
-
-        &lt;div class=&#34;layui-form-item&#34;&gt;
-            &lt;div class=&#34;layui-input-block&#34;&gt;
-                &lt;button class=&#34;layui-btn&#34; lay-submit=&#34;&#34; lay-filter=&#34;demo1&#34;&gt;Confirm&lt;/button&gt;
-                &lt;button type=&#34;reset&#34; class=&#34;layui-btn layui-btn-primary&#34;&gt;Reset&lt;/button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/form&gt;
-</code></pre></td></tr></table>
-</div>
-</div><ol start=4>
-<li>Pop-up layer - upload image button</li>
-</ol>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#6272a4>//elem jQuery ID selector  
-</span><span style=color:#6272a4>//multiple single or multiple image uploads 
-</span><span style=color:#6272a4>//number The maximum number of images that can be selected for multiple uploads
-</span><span style=color:#6272a4></span> <span style=color:#8be9fd;font-style:italic>function</span> uploadInsts(elem,multiple,number){
-            <span style=color:#ff79c6>if</span>(multiple <span style=color:#ff79c6>==</span> <span style=color:#ff79c6>null</span>){
-                multiple <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>false</span>;
-            }
-            <span style=color:#ff79c6>if</span>(number <span style=color:#ff79c6>==</span> <span style=color:#ff79c6>null</span>){
-                number <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>;
-            }
-            layui.use([<span style=color:#f1fa8c>&#39;upload&#39;</span>],<span style=color:#8be9fd;font-style:italic>function</span> () {
-                <span style=color:#8be9fd;font-style:italic>var</span> $ <span style=color:#ff79c6>=</span> layui.jquery
-                    ,upload <span style=color:#ff79c6>=</span> layui.upload;
-                upload.render({
-
-                    elem<span style=color:#ff79c6>:</span> elem
-                    ,url<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;https://up.qbox.me/&#39;</span>         <span style=color:#6272a4>//Qiniu upload interface
-</span><span style=color:#6272a4></span>                    ,data<span style=color:#ff79c6>:</span>{<span style=color:#f1fa8c>&#39;token&#39;</span><span style=color:#ff79c6>:</span><span style=color:#f1fa8c>&#39;{{$token ?? null}}&#39;</span>}    <span style=color:#6272a4>//With upload token
-</span><span style=color:#6272a4></span>                    ,multiple<span style=color:#ff79c6>:</span>multiple
-                    ,number<span style=color:#ff79c6>:</span>number
-                    <span style=color:#6272a4>// ,before: function(obj){
-</span><span style=color:#6272a4></span>                    <span style=color:#6272a4>//     //Pre-read local file example, ie8 not supported
-</span><span style=color:#6272a4></span>                    <span style=color:#6272a4>//     obj.preview(function(index, file, result){
-</span><span style=color:#6272a4></span>                    <span style=color:#6272a4>//         $(&#39;#demo1&#39;).attr(&#39;src&#39;, result); // Image link (base64)
-</span><span style=color:#6272a4></span>                    <span style=color:#6272a4>//     });
-</span><span style=color:#6272a4></span>                    <span style=color:#6272a4>// }
-</span><span style=color:#6272a4></span>                    ,done<span style=color:#ff79c6>:</span> <span style=color:#8be9fd;font-style:italic>function</span>(res){
-                        <span style=color:#6272a4>// After a successful upload, Qiniu returns the key and submits it to the back-end interface to save the image address and other information.
-</span><span style=color:#6272a4></span>                        $.ajax({
-                            url<span style=color:#ff79c6>:</span><span style=color:#f1fa8c>&#34;{{url(&#39;admin/upload_save&#39;)}}&#34;</span>      
-                            ,data<span style=color:#ff79c6>:</span>{<span style=color:#f1fa8c>&#39;key&#39;</span><span style=color:#ff79c6>:</span>res.key,<span style=color:#f1fa8c>&#39;multiple&#39;</span><span style=color:#ff79c6>:</span>multiple,<span style=color:#f1fa8c>&#39;num&#39;</span><span style=color:#ff79c6>:</span>number}
-                            ,type<span style=color:#ff79c6>:</span><span style=color:#f1fa8c>&#39;post&#39;</span>
-                            ,success<span style=color:#ff79c6>:</span><span style=color:#8be9fd;font-style:italic>function</span>(result){
-                                <span style=color:#ff79c6>if</span>(result.error <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>0</span>){
-                                    layer.msg(result.msg);
-                                }<span style=color:#ff79c6>else</span>{                      <span style=color:#6272a4>// Reload this page after successful back-end save
-</span><span style=color:#6272a4></span>                                    location.reload();      
-                                }
-                            }
-                        });
-                        <span style=color:#6272a4>// Upload successful
-</span><span style=color:#6272a4></span>                    }
-                    ,error<span style=color:#ff79c6>:</span> <span style=color:#8be9fd;font-style:italic>function</span>(){
-                        layer.msg(<span style=color:#f1fa8c>&#39;Please refresh and try again&#39;</span>);
-                        <span style=color:#ff79c6>return</span> <span style=color:#ff79c6>false</span>;
-                    }
-                });
-            });
-        }
-</code></pre></td></tr></table>
-</div>
-</div><ol start=5>
-<li>Pop-up layer - Confirm button</li>
-</ol>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#6272a4>// Click OK to execute the callback function name passed in from the parent page and close this page
-</span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>function</span> backParent() {
-            layui.use(<span style=color:#f1fa8c>&#39;form&#39;</span>, <span style=color:#8be9fd;font-style:italic>function</span> () {
-                <span style=color:#8be9fd;font-style:italic>var</span> $ <span style=color:#ff79c6>=</span> layui.jquery
-                    , form <span style=color:#ff79c6>=</span> layui.form;
-
-                <span style=color:#6272a4>// Note: parent is a global object that comes with JS and can be used to manipulate the parent page
-</span><span style=color:#6272a4></span>                <span style=color:#8be9fd;font-style:italic>var</span> index <span style=color:#ff79c6>=</span> parent.layer.getFrameIndex(<span style=color:#8be9fd;font-style:italic>window</span>.name); <span style=color:#6272a4>//Get window index
-</span><span style=color:#6272a4></span>
-                <span style=color:#6272a4>// Listening for commits
-</span><span style=color:#6272a4></span>                form.on(<span style=color:#f1fa8c>&#39;submit(demo1)&#39;</span>, <span style=color:#8be9fd;font-style:italic>function</span> (data) {
-                    <span style=color:#6272a4>// Passing values to the parent page
-</span><span style=color:#6272a4></span>                    <span style=color:#8be9fd;font-style:italic>var</span> s <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>;
-                    <span style=color:#8be9fd;font-style:italic>var</span> res <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>new</span> <span style=color:#8be9fd;font-style:italic>Array</span>();
-                    <span style=color:#ff79c6>for</span> (<span style=color:#8be9fd;font-style:italic>var</span> i <span style=color:#ff79c6>in</span> data.field) {
-                        res.push(data.field[<span style=color:#f1fa8c>&#39;like[&#39;</span> <span style=color:#ff79c6>+</span> s <span style=color:#ff79c6>+</span> <span style=color:#f1fa8c>&#39;]&#39;</span>]);
-                        s<span style=color:#ff79c6>++</span>;
-                    }
-                    <span style=color:#6272a4>// Pass the constructed data into the callback function
-</span><span style=color:#6272a4></span>                    parent.{{$callback}}(res);      <span style=color:#6272a4>// Call the name of the callback function passed in from the parent page, where the callback function name is returned from php.
-</span><span style=color:#6272a4></span>                    parent.layer.close(index);      <span style=color:#6272a4>// Close this page
-</span><span style=color:#6272a4></span>
-                    <span style=color:#ff79c6>return</span> <span style=color:#ff79c6>false</span>;
-                });
-            });
-        }
-</code></pre></td></tr></table>
-</div>
-</div><ol start=6>
-<li>Parent page - define callback function</li>
-</ol>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript>        <span style=color:#8be9fd;font-style:italic>function</span> imgsList(res){
-            layui.use(<span style=color:#f1fa8c>&#39;element&#39;</span>,<span style=color:#8be9fd;font-style:italic>function</span>(){
-                <span style=color:#8be9fd;font-style:italic>var</span> $ <span style=color:#ff79c6>=</span> layui.jquery;
-                <span style=color:#ff79c6>for</span>(<span style=color:#8be9fd;font-style:italic>var</span> i<span style=color:#ff79c6>=</span><span style=color:#bd93f9>0</span>;i<span style=color:#ff79c6>&lt;</span>res.length;i<span style=color:#ff79c6>++</span>){
-                    <span style=color:#ff79c6>if</span>(res[i] <span style=color:#ff79c6>!=</span> <span style=color:#ff79c6>undefined</span>){
-                        <span style=color:#8be9fd;font-style:italic>var</span> html <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;&#39;</span>;
-                        html <span style=color:#ff79c6>+=</span> <span style=color:#f1fa8c>&#39;&lt;img src=&#34;&#39;</span><span style=color:#ff79c6>+</span>res[i]<span style=color:#ff79c6>+</span><span style=color:#f1fa8c>&#39;&#34; style=&#34;width:150px;height:150px;&#34;&gt;&#39;</span>;
-                        html <span style=color:#ff79c6>+=</span> <span style=color:#f1fa8c>&#39;&lt;button class=&#34;layui-btn img_delete&#34; type=&#34;button&#34; &gt;删除&lt;/button&gt;&#39;</span>;
-
-                        $(<span style=color:#f1fa8c>&#39;#imgs_list&#39;</span>).append(html);
-                    }
-
-                }
-            });
-        }
-</code></pre></td></tr></table>
-</div>
-</div><ol start=7>
-<li>Event Examples</li>
-</ol>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>&lt;button type=&#34;button&#34; class=&#34;layui-btn&#34; onclick=&#34;layer_show(&#39;Upload Image&#39;,&#39;{{url(&#39;admin/upload_select&#39;)}}?type=checkbox&amp;callback=imgsList&#39;,800,600)&#34; &gt;
-</code></pre></td></tr></table>
-</div>
-</div>
-</div>
-<footer>
-</footer>
-</article>
-</section>
-</div>
-<footer class=footer>
+</h5><ol>
+<li>Click the upload image button public pop-up layer function</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>function</span> layer_show(title,url,w,h) {
+</span></span><span style=display:flex><span>            <span style=color:#8be9fd;font-style:italic>var</span> width <span style=color:#ff79c6>=</span> w <span style=color:#ff79c6>||</span> <span style=color:#ff79c6>null</span>;
+</span></span><span style=display:flex><span>            <span style=color:#8be9fd;font-style:italic>var</span> height <span style=color:#ff79c6>=</span> h <span style=color:#ff79c6>||</span> <span style=color:#ff79c6>null</span>;
+</span></span><span style=display:flex><span>            <span style=color:#8be9fd;font-style:italic>var</span> areaValue;
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>if</span> (width <span style=color:#ff79c6>!=</span> <span style=color:#ff79c6>null</span>) {
+</span></span><span style=display:flex><span>                areaValue <span style=color:#ff79c6>=</span> width <span style=color:#ff79c6>+</span> <span style=color:#f1fa8c>&#39;px&#39;</span>;
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>if</span> (height <span style=color:#ff79c6>!=</span> <span style=color:#ff79c6>null</span>) {
+</span></span><span style=display:flex><span>                    areaValue <span style=color:#ff79c6>=</span> [width <span style=color:#ff79c6>+</span> <span style=color:#f1fa8c>&#39;px&#39;</span>, height <span style=color:#ff79c6>+</span> <span style=color:#f1fa8c>&#39;px&#39;</span>];
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            }<span style=color:#ff79c6>else</span>{
+</span></span><span style=display:flex><span>                areaValue <span style=color:#ff79c6>=</span> [<span style=color:#f1fa8c>&#39;100%&#39;</span>,<span style=color:#f1fa8c>&#39;100%&#39;</span>];
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>                layui.use(<span style=color:#f1fa8c>&#39;layer&#39;</span>, <span style=color:#8be9fd;font-style:italic>function</span> () { <span style=color:#6272a4>// The standalone version of layer does not need to execute this sentence
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    <span style=color:#8be9fd;font-style:italic>var</span> $ <span style=color:#ff79c6>=</span> layui.jquery, layer <span style=color:#ff79c6>=</span> layui.layer; <span style=color:#6272a4>// The standalone version of layer does not need to execute this sentence
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    layer.open({
+</span></span><span style=display:flex><span>                        type<span style=color:#ff79c6>:</span> <span style=color:#bd93f9>2</span> <span style=color:#6272a4>// Here is an example of an iframe
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                        , title<span style=color:#ff79c6>:</span> title
+</span></span><span style=display:flex><span>                        , area<span style=color:#ff79c6>:</span> areaValue
+</span></span><span style=display:flex><span>                        , shade<span style=color:#ff79c6>:</span> <span style=color:#bd93f9>0</span>
+</span></span><span style=display:flex><span>                        , maxmin<span style=color:#ff79c6>:</span> <span style=color:#ff79c6>true</span>
+</span></span><span style=display:flex><span>                        , content<span style=color:#ff79c6>:</span> url
+</span></span><span style=display:flex><span>                        , offset<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;10px&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                    });
+</span></span><span style=display:flex><span>                });
+</span></span><span style=display:flex><span>        }
+</span></span></code></pre></td></tr></table></div></div><ol start=2>
+<li>PHP receives the parameters in the url and displays the pop-up layer view, with a callback function</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
+</span></span><span style=display:flex><span><span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>uploadShow</span>(Request <span style=color:#8be9fd;font-style:italic>$request</span>){
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$limit</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>get</span>(<span style=color:#f1fa8c>&#39;limit&#39;</span>,<span style=color:#bd93f9>9</span>);
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$type</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>get</span>(<span style=color:#f1fa8c>&#39;type&#39;</span>,<span style=color:#f1fa8c>&#39;radio&#39;</span>);          <span style=color:#6272a4>// Picture selection is single or multiple choice
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>$callback</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>get</span>(<span style=color:#f1fa8c>&#39;callback&#39;</span>,<span style=color:#ff79c6>null</span>);     <span style=color:#6272a4>// Callback function name
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$user_id</span> <span style=color:#ff79c6>=</span> User<span style=color:#ff79c6>::</span><span style=color:#50fa7b>getAdminId</span>();
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$results</span> <span style=color:#ff79c6>=</span> Uploads<span style=color:#ff79c6>::</span><span style=color:#50fa7b>where</span>(<span style=color:#f1fa8c>&#39;user_id&#39;</span>,<span style=color:#8be9fd;font-style:italic>$user_id</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>orderBy</span>(<span style=color:#f1fa8c>&#39;id&#39;</span>,<span style=color:#f1fa8c>&#39;desc&#39;</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>paginate</span>(<span style=color:#8be9fd;font-style:italic>$limit</span>);
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$token</span> <span style=color:#ff79c6>=</span> Uploads<span style=color:#ff79c6>::</span><span style=color:#50fa7b>getQiniuUpToken</span>();            <span style=color:#6272a4>//Qiniu upload token
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        <span style=color:#ff79c6>return</span> view(<span style=color:#f1fa8c>&#39;admin.upload.show&#39;</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>with</span>([<span style=color:#f1fa8c>&#39;results&#39;</span><span style=color:#ff79c6>=&gt;</span><span style=color:#8be9fd;font-style:italic>$results</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>items</span>(),<span style=color:#f1fa8c>&#39;type&#39;</span><span style=color:#ff79c6>=&gt;</span><span style=color:#8be9fd;font-style:italic>$type</span>,<span style=color:#f1fa8c>&#39;callback&#39;</span><span style=color:#ff79c6>=&gt;</span><span style=color:#8be9fd;font-style:italic>$callback</span>,<span style=color:#f1fa8c>&#39;token&#39;</span><span style=color:#ff79c6>=&gt;</span><span style=color:#8be9fd;font-style:italic>$token</span>]);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>?&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=3>
+<li>Upload image pop-up layer view</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>&lt;form class=&#34;layui-form&#34; action=&#34;&#34;&gt;
+</span></span><span style=display:flex><span>        &lt;div class=&#34;layui-form-item&#34;&gt;
+</span></span><span style=display:flex><span>            &lt;div class=&#34;layui-input-block&#34;&gt;
+</span></span><span style=display:flex><span>        &lt;div class=&#34;layui-upload&#34;&gt;
+</span></span><span style=display:flex><span>            &lt;button type=&#34;button&#34; class=&#34;layui-btn&#34; id=&#34;upload_img&#34;&gt;&lt;i class=&#34;layui-icon&#34;&gt;&lt;/i&gt;Upload Image&lt;/button&gt;
+</span></span><span style=display:flex><span>        &lt;/div&gt;
+</span></span><span style=display:flex><span>            &lt;/div&gt;
+</span></span><span style=display:flex><span>        &lt;/div&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        &lt;div class=&#34;layui-form-item&#34; pane=&#34;&#34;&gt;
+</span></span><span style=display:flex><span>            &lt;label class=&#34;layui-form-label&#34;&gt;Select image&lt;/label&gt;
+</span></span><span style=display:flex><span>            &lt;div class=&#34;layui-input-block&#34;&gt;
+</span></span><span style=display:flex><span>            &lt;! --type is a radio box or a multi-select box --&gt;
+</span></span><span style=display:flex><span>                @foreach($results as $result)
+</span></span><span style=display:flex><span>                &lt;input class=&#34;layui-inline&#34; type=&#34;{{$type}}&#34; name=&#34;like[]&#34; lay-skin=&#34;primary&#34; title=&#34;&lt;img style=&#39;width:150px;height:150px;&#39; src=&#39;{{$result-&gt;img_url}}&#39; class=&#39;imgs&#39;&gt;&#34; value=&#34;{{$result-&gt;img_url}}&#34;&gt;
+</span></span><span style=display:flex><span>                @endforeach
+</span></span><span style=display:flex><span>            &lt;/div&gt;
+</span></span><span style=display:flex><span>        &lt;/div&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        &lt;div class=&#34;layui-form-item&#34;&gt;
+</span></span><span style=display:flex><span>            &lt;div class=&#34;layui-input-block&#34;&gt;
+</span></span><span style=display:flex><span>                &lt;button class=&#34;layui-btn&#34; lay-submit=&#34;&#34; lay-filter=&#34;demo1&#34;&gt;Confirm&lt;/button&gt;
+</span></span><span style=display:flex><span>                &lt;button type=&#34;reset&#34; class=&#34;layui-btn layui-btn-primary&#34;&gt;Reset&lt;/button&gt;
+</span></span><span style=display:flex><span>            &lt;/div&gt;
+</span></span><span style=display:flex><span>        &lt;/div&gt;
+</span></span><span style=display:flex><span>    &lt;/form&gt;
+</span></span></code></pre></td></tr></table></div></div><ol start=4>
+<li>Pop-up layer - upload image button</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#6272a4>//elem jQuery ID selector  
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>//multiple single or multiple image uploads 
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>//number The maximum number of images that can be selected for multiple uploads
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span> <span style=color:#8be9fd;font-style:italic>function</span> uploadInsts(elem,multiple,number){
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>if</span>(multiple <span style=color:#ff79c6>==</span> <span style=color:#ff79c6>null</span>){
+</span></span><span style=display:flex><span>                multiple <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>false</span>;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>if</span>(number <span style=color:#ff79c6>==</span> <span style=color:#ff79c6>null</span>){
+</span></span><span style=display:flex><span>                number <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            layui.use([<span style=color:#f1fa8c>&#39;upload&#39;</span>],<span style=color:#8be9fd;font-style:italic>function</span> () {
+</span></span><span style=display:flex><span>                <span style=color:#8be9fd;font-style:italic>var</span> $ <span style=color:#ff79c6>=</span> layui.jquery
+</span></span><span style=display:flex><span>                    ,upload <span style=color:#ff79c6>=</span> layui.upload;
+</span></span><span style=display:flex><span>                upload.render({
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                    elem<span style=color:#ff79c6>:</span> elem
+</span></span><span style=display:flex><span>                    ,url<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;https://up.qbox.me/&#39;</span>         <span style=color:#6272a4>//Qiniu upload interface
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    ,data<span style=color:#ff79c6>:</span>{<span style=color:#f1fa8c>&#39;token&#39;</span><span style=color:#ff79c6>:</span><span style=color:#f1fa8c>&#39;{{$token ?? null}}&#39;</span>}    <span style=color:#6272a4>//With upload token
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    ,multiple<span style=color:#ff79c6>:</span>multiple
+</span></span><span style=display:flex><span>                    ,number<span style=color:#ff79c6>:</span>number
+</span></span><span style=display:flex><span>                    <span style=color:#6272a4>// ,before: function(obj){
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    <span style=color:#6272a4>//     //Pre-read local file example, ie8 not supported
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    <span style=color:#6272a4>//     obj.preview(function(index, file, result){
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    <span style=color:#6272a4>//         $(&#39;#demo1&#39;).attr(&#39;src&#39;, result); // Image link (base64)
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    <span style=color:#6272a4>//     });
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    <span style=color:#6272a4>// }
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    ,done<span style=color:#ff79c6>:</span> <span style=color:#8be9fd;font-style:italic>function</span>(res){
+</span></span><span style=display:flex><span>                        <span style=color:#6272a4>// After a successful upload, Qiniu returns the key and submits it to the back-end interface to save the image address and other information.
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                        $.ajax({
+</span></span><span style=display:flex><span>                            url<span style=color:#ff79c6>:</span><span style=color:#f1fa8c>&#34;{{url(&#39;admin/upload_save&#39;)}}&#34;</span>      
+</span></span><span style=display:flex><span>                            ,data<span style=color:#ff79c6>:</span>{<span style=color:#f1fa8c>&#39;key&#39;</span><span style=color:#ff79c6>:</span>res.key,<span style=color:#f1fa8c>&#39;multiple&#39;</span><span style=color:#ff79c6>:</span>multiple,<span style=color:#f1fa8c>&#39;num&#39;</span><span style=color:#ff79c6>:</span>number}
+</span></span><span style=display:flex><span>                            ,type<span style=color:#ff79c6>:</span><span style=color:#f1fa8c>&#39;post&#39;</span>
+</span></span><span style=display:flex><span>                            ,success<span style=color:#ff79c6>:</span><span style=color:#8be9fd;font-style:italic>function</span>(result){
+</span></span><span style=display:flex><span>                                <span style=color:#ff79c6>if</span>(result.error <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>0</span>){
+</span></span><span style=display:flex><span>                                    layer.msg(result.msg);
+</span></span><span style=display:flex><span>                                }<span style=color:#ff79c6>else</span>{                      <span style=color:#6272a4>// Reload this page after successful back-end save
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                                    location.reload();      
+</span></span><span style=display:flex><span>                                }
+</span></span><span style=display:flex><span>                            }
+</span></span><span style=display:flex><span>                        });
+</span></span><span style=display:flex><span>                        <span style=color:#6272a4>// Upload successful
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    }
+</span></span><span style=display:flex><span>                    ,error<span style=color:#ff79c6>:</span> <span style=color:#8be9fd;font-style:italic>function</span>(){
+</span></span><span style=display:flex><span>                        layer.msg(<span style=color:#f1fa8c>&#39;Please refresh and try again&#39;</span>);
+</span></span><span style=display:flex><span>                        <span style=color:#ff79c6>return</span> <span style=color:#ff79c6>false</span>;
+</span></span><span style=display:flex><span>                    }
+</span></span><span style=display:flex><span>                });
+</span></span><span style=display:flex><span>            });
+</span></span><span style=display:flex><span>        }
+</span></span></code></pre></td></tr></table></div></div><ol start=5>
+<li>Pop-up layer - Confirm button</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#6272a4>// Click OK to execute the callback function name passed in from the parent page and close this page
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>function</span> backParent() {
+</span></span><span style=display:flex><span>            layui.use(<span style=color:#f1fa8c>&#39;form&#39;</span>, <span style=color:#8be9fd;font-style:italic>function</span> () {
+</span></span><span style=display:flex><span>                <span style=color:#8be9fd;font-style:italic>var</span> $ <span style=color:#ff79c6>=</span> layui.jquery
+</span></span><span style=display:flex><span>                    , form <span style=color:#ff79c6>=</span> layui.form;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                <span style=color:#6272a4>// Note: parent is a global object that comes with JS and can be used to manipulate the parent page
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                <span style=color:#8be9fd;font-style:italic>var</span> index <span style=color:#ff79c6>=</span> parent.layer.getFrameIndex(<span style=color:#8be9fd;font-style:italic>window</span>.name); <span style=color:#6272a4>//Get window index
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>
+</span></span><span style=display:flex><span>                <span style=color:#6272a4>// Listening for commits
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                form.on(<span style=color:#f1fa8c>&#39;submit(demo1)&#39;</span>, <span style=color:#8be9fd;font-style:italic>function</span> (data) {
+</span></span><span style=display:flex><span>                    <span style=color:#6272a4>// Passing values to the parent page
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    <span style=color:#8be9fd;font-style:italic>var</span> s <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>                    <span style=color:#8be9fd;font-style:italic>var</span> res <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>new</span> <span style=color:#8be9fd;font-style:italic>Array</span>();
+</span></span><span style=display:flex><span>                    <span style=color:#ff79c6>for</span> (<span style=color:#8be9fd;font-style:italic>var</span> i <span style=color:#ff79c6>in</span> data.field) {
+</span></span><span style=display:flex><span>                        res.push(data.field[<span style=color:#f1fa8c>&#39;like[&#39;</span> <span style=color:#ff79c6>+</span> s <span style=color:#ff79c6>+</span> <span style=color:#f1fa8c>&#39;]&#39;</span>]);
+</span></span><span style=display:flex><span>                        s<span style=color:#ff79c6>++</span>;
+</span></span><span style=display:flex><span>                    }
+</span></span><span style=display:flex><span>                    <span style=color:#6272a4>// Pass the constructed data into the callback function
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    parent.{{$callback}}(res);      <span style=color:#6272a4>// Call the name of the callback function passed in from the parent page, where the callback function name is returned from php.
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    parent.layer.close(index);      <span style=color:#6272a4>// Close this page
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>
+</span></span><span style=display:flex><span>                    <span style=color:#ff79c6>return</span> <span style=color:#ff79c6>false</span>;
+</span></span><span style=display:flex><span>                });
+</span></span><span style=display:flex><span>            });
+</span></span><span style=display:flex><span>        }
+</span></span></code></pre></td></tr></table></div></div><ol start=6>
+<li>Parent page - define callback function</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>function</span> imgsList(res){
+</span></span><span style=display:flex><span>            layui.use(<span style=color:#f1fa8c>&#39;element&#39;</span>,<span style=color:#8be9fd;font-style:italic>function</span>(){
+</span></span><span style=display:flex><span>                <span style=color:#8be9fd;font-style:italic>var</span> $ <span style=color:#ff79c6>=</span> layui.jquery;
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>for</span>(<span style=color:#8be9fd;font-style:italic>var</span> i<span style=color:#ff79c6>=</span><span style=color:#bd93f9>0</span>;i<span style=color:#ff79c6>&lt;</span>res.length;i<span style=color:#ff79c6>++</span>){
+</span></span><span style=display:flex><span>                    <span style=color:#ff79c6>if</span>(res[i] <span style=color:#ff79c6>!=</span> <span style=color:#ff79c6>undefined</span>){
+</span></span><span style=display:flex><span>                        <span style=color:#8be9fd;font-style:italic>var</span> html <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;&#39;</span>;
+</span></span><span style=display:flex><span>                        html <span style=color:#ff79c6>+=</span> <span style=color:#f1fa8c>&#39;&lt;img src=&#34;&#39;</span><span style=color:#ff79c6>+</span>res[i]<span style=color:#ff79c6>+</span><span style=color:#f1fa8c>&#39;&#34; style=&#34;width:150px;height:150px;&#34;&gt;&#39;</span>;
+</span></span><span style=display:flex><span>                        html <span style=color:#ff79c6>+=</span> <span style=color:#f1fa8c>&#39;&lt;button class=&#34;layui-btn img_delete&#34; type=&#34;button&#34; &gt;删除&lt;/button&gt;&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                        $(<span style=color:#f1fa8c>&#39;#imgs_list&#39;</span>).append(html);
+</span></span><span style=display:flex><span>                    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            });
+</span></span><span style=display:flex><span>        }
+</span></span></code></pre></td></tr></table></div></div><ol start=7>
+<li>Event Examples</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>&lt;button type=&#34;button&#34; class=&#34;layui-btn&#34; onclick=&#34;layer_show(&#39;Upload Image&#39;,&#39;{{url(&#39;admin/upload_select&#39;)}}?type=checkbox&amp;callback=imgsList&#39;,800,600)&#34; &gt;
+</span></span></code></pre></td></tr></table></div></div></div><footer>
+</footer></article></section></div><footer class=footer>
 <section class=container>
 ©
 2019 -
@@ -828,11 +746,7 @@ layui + PHP + Qiniu to achieve a single multiple image upload single-select mult
 Ethan Kuo
 ·
 Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
-</section>
-</footer>
-</main>
-<script src=/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
+</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NK08XEDHKZ"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-NK08XEDHKZ')</script>
-</body>
-</html>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script>
+</body></html>

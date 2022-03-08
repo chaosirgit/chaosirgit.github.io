@@ -35,8 +35,7 @@
 <meta property="article:modified_time" content="2017-08-08T20:54:56+00:00"><meta property="og:site_name" content="郭超超的博客">
 <title>
 JavaScript 学习笔记 · 郭超超的博客
-</title>
-<link rel=canonical href=https://blog.adminchao.com/zh-cn/posts/javascript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>
+</title><link rel=canonical href=https://blog.adminchao.com/zh-cn/posts/javascript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>
 <link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin>
 <link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen>
 <link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen>
@@ -44,15 +43,13 @@ JavaScript 学习笔记 · 郭超超的博客
 <link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16>
 <link rel=apple-touch-icon href=/images/apple-touch-icon.png>
 <link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png>
-<meta name=generator content="Hugo 0.89.1">
-</head>
-<body class="preload-transitions colorscheme-dark">
+<meta name=generator content="Hugo 0.93.2">
+</head><body class="preload-transitions colorscheme-dark">
 <div class=float-container>
 <a id=dark-mode-toggle class=colorscheme-toggle>
 <i class="fa fa-adjust fa-fw" aria-hidden=true></i>
 </a>
-</div>
-<main class=wrapper>
+</div><main class=wrapper>
 <nav class=navigation>
 <section class=container>
 <a class=navigation-title href=/zh-cn>
@@ -65,23 +62,15 @@ JavaScript 学习笔记 · 郭超超的博客
 <ul class=navigation-list>
 <li class=navigation-item>
 <a class=navigation-link href=/zh-cn/about/>关于</a>
-</li>
-<li class=navigation-item>
+</li><li class=navigation-item>
 <a class=navigation-link href=/zh-cn/posts/>博文</a>
-</li>
-<li class=navigation-item>
+</li><li class=navigation-item>
 <a class=navigation-link href=/zh-cn/contact/>联系</a>
-</li>
-<li class="navigation-item menu-separator">
+</li><li class="navigation-item menu-separator">
 <span>|</span>
-</li>
-<li class=navigation-item>
+</li><li class=navigation-item>
 <a href=https://blog.adminchao.com/>🇺🇸</a>
-</li>
-</ul>
-</section>
-</nav>
-<div class=content>
+</li></ul></section></nav><div class=content>
 <section class="container post">
 <article>
 <header>
@@ -90,9 +79,7 @@ JavaScript 学习笔记 · 郭超超的博客
 <a class=title-link href=https://blog.adminchao.com/zh-cn/posts/javascript-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>
 JavaScript 学习笔记
 </a>
-</h1>
-</div>
-<div class=post-meta>
+</h1></div><div class=post-meta>
 <div class=date>
 <span class=posted-on>
 <i class="fa fa-calendar" aria-hidden=true></i>
@@ -104,11 +91,9 @@ JavaScript 学习笔记
 <i class="fa fa-clock-o" aria-hidden=true></i>
 阅读时间：1 分钟
 </span>
-</div>
-<div class=categories>
+</div><div class=categories>
 <i class="fa fa-folder" aria-hidden=true></i>
-<a href=/zh-cn/categories/javascript/>JavaScript</a></div>
-<div class=tags>
+<a href=/zh-cn/categories/javascript/>JavaScript</a></div><div class=tags>
 <i class="fa fa-tag" aria-hidden=true></i>
 <span class=tag>
 <a href=/zh-cn/tags/javascript/>JavaScript</a>
@@ -116,168 +101,73 @@ JavaScript 学习笔记
 <span class=separator>•</span>
 <span class=tag>
 <a href=/zh-cn/tags/js/>JS</a>
-</span></div>
-</div>
-</header>
-<div>
+</span></div></div></header><div>
 <h2 id=前言>
 前言
 <a class=heading-link href=#%e5%89%8d%e8%a8%80>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<p>基本理论了解，只是为了记住JS众多的函数</p>
-<h2 id=属性>
+</h2><p>基本理论了解，只是为了记住JS众多的函数</p><h2 id=属性>
 属性
 <a class=heading-link href=#%e5%b1%9e%e6%80%a7>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<ul>
-<li><code>display=block</code> 显示</li>
-<li><code>display=none</code> 隐藏</li>
-<li><code>length</code> 数组个数</li>
-<li><code>checked</code> true 选中</li>
-<li><code>innerHTML</code> (inner里边的)HTML</li>
-<li><code>style</code> 获取行间样式</li>
-<li><code>oDiv.currentStyle.width</code> 获取非行间样式(只兼容IE)</li>
-<li><code>getComputedStyle(oDiv,null).width</code> 获取非行间样式（chrome FF）获取计算后的样式 兼容IE9+</li>
-<li><code>offsetLeft</code> 获取元素的左边距</li>
-<li><code>offsetTop</code> 获取元素顶部边距</li>
-<li><code>offsetWidth</code> 获取元素的宽</li>
-<li><code>offsetHeight</code> 获取元素的高</li>
-<li><code>childNodes</code> 查看该节点下有几个子节点(数组) 空白也算一个节点</li>
-<li><code>nodeType</code> 获取节点类型</li>
-<li><code>children</code> 指包括元素子节点，不包括文本子节点(数组)-（兼容)</li>
-<li><code>parentNode</code> 查找某一个元素的父节点</li>
-<li><code>offsetParent</code> 查找某个元素的父级定位元素(结合css相对绝对定位)</li>
-<li><code>firstElementChild</code> 某元素第一个子节点</li>
-<li><code>lastElementChild</code> 某元素最后一个子节点</li>
-<li><code>nextElementSibling</code> 下一个兄弟节点</li>
-<li><code>previousElementSibling</code> 上一个兄弟节点</li>
-<li><code>className</code> 获取 class 名</li>
-<li></li>
-</ul>
-<h2 id=事件>
+</h2><ul>
+<li><code>display=block</code> 显示</li><li><code>display=none</code> 隐藏</li><li><code>length</code> 数组个数</li><li><code>checked</code> true 选中</li><li><code>innerHTML</code> (inner里边的)HTML</li><li><code>style</code> 获取行间样式</li><li><code>oDiv.currentStyle.width</code> 获取非行间样式(只兼容IE)</li><li><code>getComputedStyle(oDiv,null).width</code> 获取非行间样式（chrome FF）获取计算后的样式 兼容IE9+</li><li><code>offsetLeft</code> 获取元素的左边距</li><li><code>offsetTop</code> 获取元素顶部边距</li><li><code>offsetWidth</code> 获取元素的宽</li><li><code>offsetHeight</code> 获取元素的高</li><li><code>childNodes</code> 查看该节点下有几个子节点(数组) 空白也算一个节点</li><li><code>nodeType</code> 获取节点类型</li><li><code>children</code> 指包括元素子节点，不包括文本子节点(数组)-（兼容)</li><li><code>parentNode</code> 查找某一个元素的父节点</li><li><code>offsetParent</code> 查找某个元素的父级定位元素(结合css相对绝对定位)</li><li><code>firstElementChild</code> 某元素第一个子节点</li><li><code>lastElementChild</code> 某元素最后一个子节点</li><li><code>nextElementSibling</code> 下一个兄弟节点</li><li><code>previousElementSibling</code> 上一个兄弟节点</li><li><code>className</code> 获取 class 名</li><li></li></ul><h2 id=事件>
 事件
 <a class=heading-link href=#%e4%ba%8b%e4%bb%b6>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<ul>
-<li><code>onclick</code> 当按钮被点击时</li>
-<li><code>onmouseover</code> 当鼠标移入时</li>
-<li><code>onmouseout</code> 当鼠标移出时</li>
-<li></li>
-</ul>
-<h2 id=函数>
+</h2><ul>
+<li><code>onclick</code> 当按钮被点击时</li><li><code>onmouseover</code> 当鼠标移入时</li><li><code>onmouseout</code> 当鼠标移出时</li><li></li></ul><h2 id=函数>
 函数
 <a class=heading-link href=#%e5%87%bd%e6%95%b0>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<ul>
-<li><code>arguments</code> 可变餐，不定参（是一个参数的数组）</li>
-</ul>
-<h3 id=系统方法>
+</h2><ul>
+<li><code>arguments</code> 可变餐，不定参（是一个参数的数组）</li></ul><h3 id=系统方法>
 系统方法
 <a class=heading-link href=#%e7%b3%bb%e7%bb%9f%e6%96%b9%e6%b3%95>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h3>
-<ul>
-<li><code>alert()</code> 弹框</li>
-<li><code>typeof</code> typeof a 获取数据类型</li>
-<li><code>parseInt()</code> 转为整型</li>
-<li><code>parseFloat()</code> 转为浮点型</li>
-<li><code>setInterval(fn,ms)</code> 每隔多少毫秒执行一个函数</li>
-<li><code>setTimeout(fn,ms)</code> 隔多少毫秒执行这个函数</li>
-<li><code>clearInterval(var setInterval的返回值)</code> 关闭定时器</li>
-<li><code>clearTimeout(var setTimeout的返回值)</code> 关闭定时器</li>
-</ul>
-<h3 id=数组操作方法>
+</h3><ul>
+<li><code>alert()</code> 弹框</li><li><code>typeof</code> typeof a 获取数据类型</li><li><code>parseInt()</code> 转为整型</li><li><code>parseFloat()</code> 转为浮点型</li><li><code>setInterval(fn,ms)</code> 每隔多少毫秒执行一个函数</li><li><code>setTimeout(fn,ms)</code> 隔多少毫秒执行这个函数</li><li><code>clearInterval(var setInterval的返回值)</code> 关闭定时器</li><li><code>clearTimeout(var setTimeout的返回值)</code> 关闭定时器</li></ul><h3 id=数组操作方法>
 数组操作方法
 <a class=heading-link href=#%e6%95%b0%e7%bb%84%e6%93%8d%e4%bd%9c%e6%96%b9%e6%b3%95>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h3>
-<ul>
-<li><code>push(元素)</code> 从尾部添加</li>
-<li><code>unshift(元素)</code> 从头部添加</li>
-<li><code>pop()</code> 从尾部删除</li>
-<li><code>shift()</code> 从头部删除</li>
-<li><code>splice(起点，长度)</code> 从 <em>起点</em> 开始删 <em>长度</em> 个</li>
-<li><code>splice(起点，长度=0，元素...)</code> 从 <em>起点</em> 开始删 <em>0</em> 个 插入 <em>元素&mldr;</em> 。</li>
-<li><code>concat(数组)</code> 连接两个数组 a.concat(b)</li>
-<li><code>join(连接符)</code> 数组元素用连接符连接起来</li>
-<li><code>sort(比较函数)</code> 排序</li>
-</ul>
-<h3 id=字符串操作方法>
+</h3><ul>
+<li><code>push(元素)</code> 从尾部添加</li><li><code>unshift(元素)</code> 从头部添加</li><li><code>pop()</code> 从尾部删除</li><li><code>shift()</code> 从头部删除</li><li><code>splice(起点，长度)</code> 从 <em>起点</em> 开始删 <em>长度</em> 个</li><li><code>splice(起点，长度=0，元素...)</code> 从 <em>起点</em> 开始删 <em>0</em> 个 插入 <em>元素&mldr;</em> 。</li><li><code>concat(数组)</code> 连接两个数组 a.concat(b)</li><li><code>join(连接符)</code> 数组元素用连接符连接起来</li><li><code>sort(比较函数)</code> 排序</li></ul><h3 id=字符串操作方法>
 字符串操作方法
 <a class=heading-link href=#%e5%ad%97%e7%ac%a6%e4%b8%b2%e6%93%8d%e4%bd%9c%e6%96%b9%e6%b3%95>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h3>
-<ul>
-<li><code>charAt(0)</code> 可以获取字符串上某一位的值 全兼容 <code>str[0]</code> 不兼容低版本</li>
-<li><code>search(字符串)</code> 搜索并返回字符串出现的位置，没找到返回 -1（模糊搜索）</li>
-<li><code>split(分割符)</code> 字符串分割，返回数组</li>
-</ul>
-<h2 id=对象>
+</h3><ul>
+<li><code>charAt(0)</code> 可以获取字符串上某一位的值 全兼容 <code>str[0]</code> 不兼容低版本</li><li><code>search(字符串)</code> 搜索并返回字符串出现的位置，没找到返回 -1（模糊搜索）</li><li><code>split(分割符)</code> 字符串分割，返回数组</li></ul><h2 id=对象>
 对象
 <a class=heading-link href=#%e5%af%b9%e8%b1%a1>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<h3 id=date-对象>
+</h2><h3 id=date-对象>
 Date 对象
 <a class=heading-link href=#date-%e5%af%b9%e8%b1%a1>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h3>
-<ul>
-<li><code>getHours()</code> 获得小时</li>
-<li><code>getMinutes()</code> 获得分钟</li>
-<li><code>getSeconds()</code> 获得秒数</li>
-<li><code>getFullYear()</code> 获得年份</li>
-<li><code>getMonth()</code> 获得月份（从 0 开始)</li>
-<li><code>getDate()</code> 获得日</li>
-<li><code>getDay()</code> 获得星期(0 是周日)</li>
-</ul>
-<h2 id=dom>
+</h3><ul>
+<li><code>getHours()</code> 获得小时</li><li><code>getMinutes()</code> 获得分钟</li><li><code>getSeconds()</code> 获得秒数</li><li><code>getFullYear()</code> 获得年份</li><li><code>getMonth()</code> 获得月份（从 0 开始)</li><li><code>getDate()</code> 获得日</li><li><code>getDay()</code> 获得星期(0 是周日)</li></ul><h2 id=dom>
 DOM
 <a class=heading-link href=#dom>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<ul>
-<li><code>document.getElementById('')</code> 获取Id元素</li>
-<li><code>document.getElementsByTagName('')</code> 获取一组元素</li>
-<li><code>document.setAttribute('属性名','值')</code> DOM设置属性值</li>
-<li><code>document.getAttribute('属性名')</code> 获取属性值</li>
-<li><code>document.removeAttribute('属性名')</code> 删除属性</li>
-<li><code>document.createElement(标签名)</code> 创建元素(标签)</li>
-<li><code>父级.appendChild(子节点)</code> 先删除原来父级上的元素，再给父级添加子节点（之后），如果原父级没有，直接添加。（排序）</li>
-<li><code>父级.insertBefore(子节点,在谁之前)</code> 给父级添加子节点（之前）</li>
-<li><code>父级.removeChild(子节点)</code> 从父级删除子节点</li>
-<li></li>
-</ul>
-<h2 id=bom>
+</h2><ul>
+<li><code>document.getElementById('')</code> 获取Id元素</li><li><code>document.getElementsByTagName('')</code> 获取一组元素</li><li><code>document.setAttribute('属性名','值')</code> DOM设置属性值</li><li><code>document.getAttribute('属性名')</code> 获取属性值</li><li><code>document.removeAttribute('属性名')</code> 删除属性</li><li><code>document.createElement(标签名)</code> 创建元素(标签)</li><li><code>父级.appendChild(子节点)</code> 先删除原来父级上的元素，再给父级添加子节点（之后），如果原父级没有，直接添加。（排序）</li><li><code>父级.insertBefore(子节点,在谁之前)</code> 给父级添加子节点（之前）</li><li><code>父级.removeChild(子节点)</code> 从父级删除子节点</li><li></li></ul><h2 id=bom>
 BOM
 <a class=heading-link href=#bom>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<ul>
-<li><code>window.onload</code> 页面加载完成时</li>
-</ul>
-</div>
-<footer>
-</footer>
-</article>
-</section>
-</div>
-<footer class=footer>
+</h2><ul>
+<li><code>window.onload</code> 页面加载完成时</li></ul></div><footer>
+</footer></article></section></div><footer class=footer>
 <section class=container>
 ©
 2019 -
@@ -285,11 +175,7 @@ BOM
 郭超超
 ·
 技术支持 <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
-</section>
-</footer>
-</main>
-<script src=/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
+</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NK08XEDHKZ"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-NK08XEDHKZ')</script>
-</body>
-</html>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script>
+</body></html>

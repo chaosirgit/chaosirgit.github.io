@@ -23,8 +23,7 @@ Upgrade software source    1  sudo apt-get update   Installing Mysql    1  sudo 
 <meta property="article:modified_time" content="2017-10-08T13:08:09+00:00">
 <title>
 Building LNMP From Scratch Tutorial · Ethan Kuo Blog
-</title>
-<link rel=canonical href=https://blog.adminchao.com/posts/building-lnmp-from-scratch-tutorial/>
+</title><link rel=canonical href=https://blog.adminchao.com/posts/building-lnmp-from-scratch-tutorial/>
 <link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin>
 <link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen>
 <link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen>
@@ -32,15 +31,13 @@ Building LNMP From Scratch Tutorial · Ethan Kuo Blog
 <link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16>
 <link rel=apple-touch-icon href=/images/apple-touch-icon.png>
 <link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png>
-<meta name=generator content="Hugo 0.89.1">
-</head>
-<body class="preload-transitions colorscheme-dark">
+<meta name=generator content="Hugo 0.93.2">
+</head><body class="preload-transitions colorscheme-dark">
 <div class=float-container>
 <a id=dark-mode-toggle class=colorscheme-toggle>
 <i class="fa fa-adjust fa-fw" aria-hidden=true></i>
 </a>
-</div>
-<main class=wrapper>
+</div><main class=wrapper>
 <nav class=navigation>
 <section class=container>
 <a class=navigation-title href=/>
@@ -53,23 +50,15 @@ Ethan Kuo Blog
 <ul class=navigation-list>
 <li class=navigation-item>
 <a class=navigation-link href=/about/>About</a>
-</li>
-<li class=navigation-item>
+</li><li class=navigation-item>
 <a class=navigation-link href=/posts/>Blog</a>
-</li>
-<li class=navigation-item>
+</li><li class=navigation-item>
 <a class=navigation-link href=/contact/>Contact me</a>
-</li>
-<li class="navigation-item menu-separator">
+</li><li class="navigation-item menu-separator">
 <span>|</span>
-</li>
-<li class=navigation-item>
+</li><li class=navigation-item>
 <a href=https://blog.adminchao.com/zh-cn/>🇨🇳</a>
-</li>
-</ul>
-</section>
-</nav>
-<div class=content>
+</li></ul></section></nav><div class=content>
 <section class="container post">
 <article>
 <header>
@@ -78,9 +67,7 @@ Ethan Kuo Blog
 <a class=title-link href=https://blog.adminchao.com/posts/building-lnmp-from-scratch-tutorial/>
 Building LNMP From Scratch Tutorial
 </a>
-</h1>
-</div>
-<div class=post-meta>
+</h1></div><div class=post-meta>
 <div class=date>
 <span class=posted-on>
 <i class="fa fa-calendar" aria-hidden=true></i>
@@ -92,11 +79,9 @@ Building LNMP From Scratch Tutorial
 <i class="fa fa-clock-o" aria-hidden=true></i>
 3-minute read
 </span>
-</div>
-<div class=categories>
+</div><div class=categories>
 <i class="fa fa-folder" aria-hidden=true></i>
-<a href=/categories/lnmp/>LNMP</a></div>
-<div class=tags>
+<a href=/categories/lnmp/>LNMP</a></div><div class=tags>
 <i class="fa fa-tag" aria-hidden=true></i>
 <span class=tag>
 <a href=/tags/lnmp/>LNMP</a>
@@ -104,287 +89,191 @@ Building LNMP From Scratch Tutorial
 <span class=separator>•</span>
 <span class=tag>
 <a href=/tags/tutorial/>Tutorial</a>
-</span></div>
-</div>
-</header>
-<div>
+</span></div></div></header><div>
 <h2 id=connect-to-the-server-via-ssh>
 Connect to the server via ssh
 <a class=heading-link href=#connect-to-the-server-via-ssh>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<p>Server System Version Ubuntu 16.04</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>ssh root@127.0.0.1
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=create-a-general-account>
+</h2><p>Server System Version Ubuntu 16.04</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>ssh root@127.0.0.1
+</span></span></code></pre></td></tr></table></div></div><h2 id=create-a-general-account>
 Create a general account
 <a class=heading-link href=#create-a-general-account>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>adduser username
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=grant-sudo-privileges-to-the-general-account>
+</h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>adduser username
+</span></span></code></pre></td></tr></table></div></div><h2 id=grant-sudo-privileges-to-the-general-account>
 Grant sudo privileges to the general account
 <a class=heading-link href=#grant-sudo-privileges-to-the-general-account>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<p>Go to <code>/etc/sudoers.d/</code> and create a new file with any name you want. Add <code>username ALL=(ALL:ALL) ALL</code> and you&rsquo;re done.</p>
-<h2 id=upgrade-software-source>
+</h2><p>Go to <code>/etc/sudoers.d/</code> and create a new file with any name you want. Add <code>username ALL=(ALL:ALL) ALL</code> and you&rsquo;re done.</p><h2 id=upgrade-software-source>
 Upgrade software source
 <a class=heading-link href=#upgrade-software-source>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>sudo apt-get update
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=installing-mysql>
+</h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo apt-get update
+</span></span></code></pre></td></tr></table></div></div><h2 id=installing-mysql>
 Installing Mysql
 <a class=heading-link href=#installing-mysql>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>sudo apt-get install mysql-server mysql-client
-</code></pre></td></tr></table>
-</div>
-</div><p><em>mysql-server:</em> MySQL server, the core program of mysql, is responsible for generating database instances and providing related interfaces for different clients to call.
-<em>mysql-client:</em> Is the client program, responsible for operating mysql instances. mysql-client is one of many client programs, other than mysql, mysqldump, mysqlslap, which are tools for accessing, backing up, and stress testing.</p>
-<h2 id=test-if-mysql-is-installed-successfully>
+</h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo apt-get install mysql-server mysql-client
+</span></span></code></pre></td></tr></table></div></div><p><em>mysql-server:</em> MySQL server, the core program of mysql, is responsible for generating database instances and providing related interfaces for different clients to call.
+<em>mysql-client:</em> Is the client program, responsible for operating mysql instances. mysql-client is one of many client programs, other than mysql, mysqldump, mysqlslap, which are tools for accessing, backing up, and stress testing.</p><h2 id=test-if-mysql-is-installed-successfully>
 Test if MySQL is installed successfully
 <a class=heading-link href=#test-if-mysql-is-installed-successfully>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>mysql -uroot -p
-</code></pre></td></tr></table>
-</div>
-</div><p>Enter the password and the <code>mysql></code> command line appears to indicate a successful installation.</p>
-<h2 id=installing-nginx>
+</h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>mysql -uroot -p
+</span></span></code></pre></td></tr></table></div></div><p>Enter the password and the <code>mysql></code> command line appears to indicate a successful installation.</p><h2 id=installing-nginx>
 Installing Nginx
 <a class=heading-link href=#installing-nginx>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>sudo apt-get install nginx
-</code></pre></td></tr></table>
-</div>
-</div><p>All configuration files are located in <code>/etc/nginx/</code> after installation. (and each virtual host is already scheduled under <code>/etc/nginx/sites-available</code>).</p>
-<ul>
-<li>The program files are in <code>/user/sbin/nginx/</code></li>
-<li>The log files are in <code>/var/log/nginx</code></li>
-<li>The startup scripts are in <code>/etc/init.d/</code></li>
-<li>The default project directory is in <code>/var/www/</code></li>
-</ul>
-<h2 id=starting-nginx>
+</h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo apt-get install nginx
+</span></span></code></pre></td></tr></table></div></div><p>All configuration files are located in <code>/etc/nginx/</code> after installation. (and each virtual host is already scheduled under <code>/etc/nginx/sites-available</code>).</p><ul>
+<li>The program files are in <code>/user/sbin/nginx/</code></li><li>The log files are in <code>/var/log/nginx</code></li><li>The startup scripts are in <code>/etc/init.d/</code></li><li>The default project directory is in <code>/var/www/</code></li></ul><h2 id=starting-nginx>
 Starting Nginx
 <a class=heading-link href=#starting-nginx>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>sudo /etc/init.d/nginx start
-</code></pre></td></tr></table>
-</div>
-</div><p>or</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>sudo service nginx start
-</code></pre></td></tr></table>
-</div>
-</div><p>Test if nginx is installed successfully<br>
-Enter the URL and welcome nginx appears successfully.</p>
-<h2 id=installing-php>
+</h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo /etc/init.d/nginx start
+</span></span></code></pre></td></tr></table></div></div><p>or</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo service nginx start
+</span></span></code></pre></td></tr></table></div></div><p>Test if nginx is installed successfully<br>
+Enter the URL and welcome nginx appears successfully.</p><h2 id=installing-php>
 Installing PHP
 <a class=heading-link href=#installing-php>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>sudo apt-get install php5-fpm php5-mysql
-</code></pre></td></tr></table>
-</div>
-</div><p><em>php5-fpm</em> is a php FastCGI manager, originally a patch for php source code, due to its advanced nature, it was officially included after php5.3.3 and is no longer a third party package, now the downloadable php5-fpm is directly php source code and integrates branches of php5-fpm.
+</h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo apt-get install php5-fpm php5-mysql
+</span></span></code></pre></td></tr></table></div></div><p><em>php5-fpm</em> is a php FastCGI manager, originally a patch for php source code, due to its advanced nature, it was officially included after php5.3.3 and is no longer a third party package, now the downloadable php5-fpm is directly php source code and integrates branches of php5-fpm.
 <em>php5-cgi</em> is also a php FastCGI manager. It has many shortcomings, so don&rsquo;t install php5-cgi after installing php5-fpm.
-<em>php5-mysql</em> is a mysql extension for php.</p>
-<h2 id=configuring-nginx>
+<em>php5-mysql</em> is a mysql extension for php.</p><h2 id=configuring-nginx>
 Configuring Nginx
 <a class=heading-link href=#configuring-nginx>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<p>Open the nginx configuration file <code>/etc/nginx/nginx.conf</code><br>
+</h2><p>Open the nginx configuration file <code>/etc/nginx/nginx.conf</code><br>
 Default virtual host configuration file <code>/etc/nginx/sites-available/default</code><br>
-Here we open the default virtual host configuration file and configure the parsing of php files. Find the following configuration and open the comments</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback># pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-        #
-        location ~ \.php$ {
-                include snippets/fastcgi-php.conf;
-        #
-        #       # With php7.0-cgi alone:
-        #       fastcgi_pass 127.0.0.1:9000;
-        #       # With php7.0-fpm:
-               fastcgi_pass unix:/run/php/php7.0-fpm.sock;
-        }
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=test>
+Here we open the default virtual host configuration file and configure the parsing of php files. Find the following configuration and open the comments</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span># pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+</span></span><span style=display:flex><span>        #
+</span></span><span style=display:flex><span>        location ~ \.php$ {
+</span></span><span style=display:flex><span>                include snippets/fastcgi-php.conf;
+</span></span><span style=display:flex><span>        #
+</span></span><span style=display:flex><span>        #       # With php7.0-cgi alone:
+</span></span><span style=display:flex><span>        #       fastcgi_pass 127.0.0.1:9000;
+</span></span><span style=display:flex><span>        #       # With php7.0-fpm:
+</span></span><span style=display:flex><span>               fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+</span></span><span style=display:flex><span>        }
+</span></span></code></pre></td></tr></table></div></div><h2 id=test>
 Test
 <a class=heading-link href=#test>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>sudo service nginx restart
-sudo service php7.0-fpm restart
-</code></pre></td></tr></table>
-</div>
-</div><p>Create <code>phpinfo.php</code> in the web hosting root directory to test if <code>php</code> is installed successfully. If you want to extend it, execute</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>sudo apt-get install php7.0-curl  //php7.0-(库名)
-</code></pre></td></tr></table>
-</div>
-</div><p>Installation.</p>
-<h2 id=setting-mysql-default-encoding-set>
+</h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo service nginx restart
+</span></span><span style=display:flex><span>sudo service php7.0-fpm restart
+</span></span></code></pre></td></tr></table></div></div><p>Create <code>phpinfo.php</code> in the web hosting root directory to test if <code>php</code> is installed successfully. If you want to extend it, execute</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo apt-get install php7.0-curl  //php7.0-(库名)
+</span></span></code></pre></td></tr></table></div></div><p>Installation.</p><h2 id=setting-mysql-default-encoding-set>
 Setting mysql default encoding set
 <a class=heading-link href=#setting-mysql-default-encoding-set>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<p>View the default set of codes.</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>mysql&gt; SHOW VARIABLES LIKE &#39;character%&#39;;
-</code></pre></td></tr></table>
-</div>
-</div><p>Add two parameters via the <code>my.cnf</code> file.</p>
-<ol>
-<li>Add in <code>[mysqld]</code></li>
-</ol>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>default-character-set=utf8（ mysql 5.5 版本以上添加 character-set-server=utf8 ）
-</code></pre></td></tr></table>
-</div>
-</div><ol start=2>
-<li>Add in <code>[client]</code></li>
-</ol>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>default-character-set=utf8
-</code></pre></td></tr></table>
-</div>
-</div><p>This way we don&rsquo;t have to specify the <code>utf8</code> character set when we build the database and tables. This way of writing in the configuration file solves the problem of data storage and comparison
-However, it does not work for client connections, which usually need to specify <code>utf8</code> to avoid garbled code. This is also known as the <code>set names</code> command. In fact, the <code>set names utf8</code> command corresponds to the following server-side commands.</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>SET character_set_client = utf8;
-SET character_set_results = utf8;
-SET character_set_connection = utf8;
-</code></pre></td></tr></table>
-</div>
-</div><p>However, these three parameters cannot be written in the configuration file <code>my.cnf</code>. They can only be changed dynamically with the <code>set</code> command. What we need is to write it in the configuration file once and for all
+</h2><p>View the default set of codes.</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>mysql&gt; SHOW VARIABLES LIKE &#39;character%&#39;;
+</span></span></code></pre></td></tr></table></div></div><p>Add two parameters via the <code>my.cnf</code> file.</p><ol>
+<li>Add in <code>[mysqld]</code></li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>default-character-set=utf8（ mysql 5.5 版本以上添加 character-set-server=utf8 ）
+</span></span></code></pre></td></tr></table></div></div><ol start=2>
+<li>Add in <code>[client]</code></li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>default-character-set=utf8
+</span></span></code></pre></td></tr></table></div></div><p>This way we don&rsquo;t have to specify the <code>utf8</code> character set when we build the database and tables. This way of writing in the configuration file solves the problem of data storage and comparison
+However, it does not work for client connections, which usually need to specify <code>utf8</code> to avoid garbled code. This is also known as the <code>set names</code> command. In fact, the <code>set names utf8</code> command corresponds to the following server-side commands.</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>SET character_set_client = utf8;
+</span></span><span style=display:flex><span>SET character_set_results = utf8;
+</span></span><span style=display:flex><span>SET character_set_connection = utf8;
+</span></span></code></pre></td></tr></table></div></div><p>However, these three parameters cannot be written in the configuration file <code>my.cnf</code>. They can only be changed dynamically with the <code>set</code> command. What we need is to write it in the configuration file once and for all
 Once and for all. So, is there a server-side solution to this problem, a possible idea is to set it in <code>init_connect</code>. This command is used in every
 can be set in the <code>[mysqld]</code> section by adding the following line to set the connection character set.
-Under <code>[mysqld]</code> add.</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>init_connect = &#39;SET NAMES utf8&#39;
-</code></pre></td></tr></table>
-</div>
-</div>
-</div>
-<footer>
-</footer>
-</article>
-</section>
-</div>
-<footer class=footer>
+Under <code>[mysqld]</code> add.</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>init_connect = &#39;SET NAMES utf8&#39;
+</span></span></code></pre></td></tr></table></div></div></div><footer>
+</footer></article></section></div><footer class=footer>
 <section class=container>
 ©
 2019 -
@@ -392,11 +281,7 @@ Under <code>[mysqld]</code> add.</p>
 Ethan Kuo
 ·
 Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
-</section>
-</footer>
-</main>
-<script src=/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
+</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NK08XEDHKZ"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-NK08XEDHKZ')</script>
-</body>
-</html>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script>
+</body></html>

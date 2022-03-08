@@ -7,27 +7,26 @@
 <meta name=description content="Preface    Laravel&rsquo;s Eloquent is a great ORM, Eloquent is a standalone module, we can also use Eloquent in our own projects through composer, this article will explain in detail how to integrate Eloquent in your own projects.
 Installation    In the project directory, execute
 1  composer require illuminate/database:^5.0   Or add it directly to the composer.json file:
-1 2 3 4 5 6 7 8 9 10 11  { &#34;require&#34;: { &#34;illuminate/database&#34;: &#34;^5.">
+1 2 3 4 5 6 7 8 9 10 11  {  &#34;require&#34;: {  &#34;illuminate/database&#34;: &#34;^5.">
 <meta name=keywords content="Eloquent,Tutorials,Laravel,PHP">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Standalone Use Of Eloquent">
 <meta name=twitter:description content="Preface    Laravel&rsquo;s Eloquent is a great ORM, Eloquent is a standalone module, we can also use Eloquent in our own projects through composer, this article will explain in detail how to integrate Eloquent in your own projects.
 Installation    In the project directory, execute
 1  composer require illuminate/database:^5.0   Or add it directly to the composer.json file:
-1 2 3 4 5 6 7 8 9 10 11  { &#34;require&#34;: { &#34;illuminate/database&#34;: &#34;^5.">
+1 2 3 4 5 6 7 8 9 10 11  {  &#34;require&#34;: {  &#34;illuminate/database&#34;: &#34;^5.">
 <meta property="og:title" content="Standalone Use Of Eloquent">
 <meta property="og:description" content="Preface    Laravel&rsquo;s Eloquent is a great ORM, Eloquent is a standalone module, we can also use Eloquent in our own projects through composer, this article will explain in detail how to integrate Eloquent in your own projects.
 Installation    In the project directory, execute
 1  composer require illuminate/database:^5.0   Or add it directly to the composer.json file:
-1 2 3 4 5 6 7 8 9 10 11  { &#34;require&#34;: { &#34;illuminate/database&#34;: &#34;^5.">
+1 2 3 4 5 6 7 8 9 10 11  {  &#34;require&#34;: {  &#34;illuminate/database&#34;: &#34;^5.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://blog.adminchao.com/posts/standalone-use-of-eloquent/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2018-07-04T14:14:22+00:00">
 <meta property="article:modified_time" content="2018-07-04T14:14:22+00:00">
 <title>
 Standalone Use Of Eloquent · Ethan Kuo Blog
-</title>
-<link rel=canonical href=https://blog.adminchao.com/posts/standalone-use-of-eloquent/>
+</title><link rel=canonical href=https://blog.adminchao.com/posts/standalone-use-of-eloquent/>
 <link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin>
 <link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen>
 <link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen>
@@ -35,15 +34,13 @@ Standalone Use Of Eloquent · Ethan Kuo Blog
 <link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16>
 <link rel=apple-touch-icon href=/images/apple-touch-icon.png>
 <link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png>
-<meta name=generator content="Hugo 0.89.1">
-</head>
-<body class="preload-transitions colorscheme-dark">
+<meta name=generator content="Hugo 0.93.2">
+</head><body class="preload-transitions colorscheme-dark">
 <div class=float-container>
 <a id=dark-mode-toggle class=colorscheme-toggle>
 <i class="fa fa-adjust fa-fw" aria-hidden=true></i>
 </a>
-</div>
-<main class=wrapper>
+</div><main class=wrapper>
 <nav class=navigation>
 <section class=container>
 <a class=navigation-title href=/>
@@ -56,23 +53,15 @@ Ethan Kuo Blog
 <ul class=navigation-list>
 <li class=navigation-item>
 <a class=navigation-link href=/about/>About</a>
-</li>
-<li class=navigation-item>
+</li><li class=navigation-item>
 <a class=navigation-link href=/posts/>Blog</a>
-</li>
-<li class=navigation-item>
+</li><li class=navigation-item>
 <a class=navigation-link href=/contact/>Contact me</a>
-</li>
-<li class="navigation-item menu-separator">
+</li><li class="navigation-item menu-separator">
 <span>|</span>
-</li>
-<li class=navigation-item>
+</li><li class=navigation-item>
 <a href=https://blog.adminchao.com/zh-cn/>🇨🇳</a>
-</li>
-</ul>
-</section>
-</nav>
-<div class=content>
+</li></ul></section></nav><div class=content>
 <section class="container post">
 <article>
 <header>
@@ -81,9 +70,7 @@ Ethan Kuo Blog
 <a class=title-link href=https://blog.adminchao.com/posts/standalone-use-of-eloquent/>
 Standalone Use Of Eloquent
 </a>
-</h1>
-</div>
-<div class=post-meta>
+</h1></div><div class=post-meta>
 <div class=date>
 <span class=posted-on>
 <i class="fa fa-calendar" aria-hidden=true></i>
@@ -95,11 +82,9 @@ Standalone Use Of Eloquent
 <i class="fa fa-clock-o" aria-hidden=true></i>
 2-minute read
 </span>
-</div>
-<div class=categories>
+</div><div class=categories>
 <i class="fa fa-folder" aria-hidden=true></i>
-<a href=/categories/laravel/>Laravel</a></div>
-<div class=tags>
+<a href=/categories/laravel/>Laravel</a></div><div class=tags>
 <i class="fa fa-tag" aria-hidden=true></i>
 <span class=tag>
 <a href=/tags/eloquent/>Eloquent</a>
@@ -115,257 +100,201 @@ Standalone Use Of Eloquent
 <span class=separator>•</span>
 <span class=tag>
 <a href=/tags/php/>PHP</a>
-</span></div>
-</div>
-</header>
-<div>
+</span></div></div></header><div>
 <h2 id=preface>
 Preface
 <a class=heading-link href=#preface>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<p>Laravel&rsquo;s Eloquent is a great ORM, Eloquent is a standalone module, we can also use Eloquent in our own projects through composer, this article will explain in detail how to integrate Eloquent in your own projects.</p>
-<h2 id=installation>
+</h2><p>Laravel&rsquo;s Eloquent is a great ORM, Eloquent is a standalone module, we can also use Eloquent in our own projects through composer, this article will explain in detail how to integrate Eloquent in your own projects.</p><h2 id=installation>
 Installation
 <a class=heading-link href=#installation>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<p>In the project directory, execute</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php>composer <span style=color:#ff79c6>require</span> illuminate<span style=color:#ff79c6>/</span>database<span style=color:#ff79c6>:^</span><span style=color:#bd93f9>5.0</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>Or add it directly to the <code>composer.json</code> file:</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php>{
-  <span style=color:#f1fa8c>&#34;require&#34;</span><span style=color:#ff79c6>:</span> {
-    <span style=color:#f1fa8c>&#34;illuminate/database&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;^5.0&#34;</span>,
-    <span style=color:#f1fa8c>&#34;illuminate/pagination&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;^5.0&#34;</span>
-  },
-  <span style=color:#f1fa8c>&#34;repositories&#34;</span><span style=color:#ff79c6>:</span> {
-    <span style=color:#f1fa8c>&#34;packagist&#34;</span><span style=color:#ff79c6>:</span> {
-      <span style=color:#f1fa8c>&#34;type&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;composer&#34;</span>
-    }
-  }
-}
-</code></pre></td></tr></table>
-</div>
-</div><p>This way Eloquent is installed.</p>
-<h2 id=configuration>
+</h2><p>In the project directory, execute</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>composer <span style=color:#ff79c6>require</span> illuminate<span style=color:#ff79c6>/</span>database<span style=color:#ff79c6>:^</span><span style=color:#bd93f9>5.0</span>
+</span></span></code></pre></td></tr></table></div></div><p>Or add it directly to the <code>composer.json</code> file:</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#f1fa8c>&#34;require&#34;</span><span style=color:#ff79c6>:</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;illuminate/database&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;^5.0&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;illuminate/pagination&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;^5.0&#34;</span>
+</span></span><span style=display:flex><span>  },
+</span></span><span style=display:flex><span>  <span style=color:#f1fa8c>&#34;repositories&#34;</span><span style=color:#ff79c6>:</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;packagist&#34;</span><span style=color:#ff79c6>:</span> {
+</span></span><span style=display:flex><span>      <span style=color:#f1fa8c>&#34;type&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;composer&#34;</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div><p>This way Eloquent is installed.</p><h2 id=configuration>
 Configuration
 <a class=heading-link href=#configuration>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<p>Add to the project entry file</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php>        
-        <span style=color:#6272a4>// Load composer&#39;s autoload file
-</span><span style=color:#6272a4></span>        <span style=color:#ff79c6>require_once</span> IA_ROOT <span style=color:#ff79c6>.</span> <span style=color:#f1fa8c>&#39;/addons/guangqian_shop/vendor/autoload.php&#39;</span>;
-        
-        <span style=color:#8be9fd;font-style:italic>$db_config</span><span style=color:#ff79c6>=</span><span style=color:#8be9fd;font-style:italic>$_W</span>[<span style=color:#f1fa8c>&#39;config&#39;</span>][<span style=color:#f1fa8c>&#39;db&#39;</span>];
-        <span style=color:#6272a4>//database configuration
-</span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>$database</span> <span style=color:#ff79c6>=</span> [
-            <span style=color:#f1fa8c>&#39;driver&#39;</span>    <span style=color:#ff79c6>=&gt;</span> <span style=color:#f1fa8c>&#39;mysql&#39;</span>,
-            <span style=color:#f1fa8c>&#39;host&#39;</span>      <span style=color:#ff79c6>=&gt;</span> <span style=color:#f1fa8c>&#39;127.0.0.1&#39;</span>,
-            <span style=color:#f1fa8c>&#39;database&#39;</span>  <span style=color:#ff79c6>=&gt;</span> <span style=color:#f1fa8c>&#39;test&#39;</span>,
-            <span style=color:#f1fa8c>&#39;username&#39;</span>  <span style=color:#ff79c6>=&gt;</span> <span style=color:#f1fa8c>&#39;test&#39;</span>,
-            <span style=color:#f1fa8c>&#39;password&#39;</span>  <span style=color:#ff79c6>=&gt;</span> <span style=color:#f1fa8c>&#39;123456&#39;</span>,
-            <span style=color:#f1fa8c>&#39;charset&#39;</span>   <span style=color:#ff79c6>=&gt;</span> <span style=color:#f1fa8c>&#39;utf8&#39;</span>,
-            <span style=color:#f1fa8c>&#39;collation&#39;</span> <span style=color:#ff79c6>=&gt;</span> <span style=color:#f1fa8c>&#39;utf8_unicode_ci&#39;</span>,
-            <span style=color:#f1fa8c>&#39;prefix&#39;</span>    <span style=color:#ff79c6>=&gt;</span> <span style=color:#8be9fd;font-style:italic>$db_config</span>[<span style=color:#f1fa8c>&#39;tablepre&#39;</span>],
-        ];
-
-        <span style=color:#8be9fd;font-style:italic>$Capsule</span> <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>new</span> Capsule;
-        <span style=color:#6272a4>// Create database link
-</span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>$Capsule</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>addConnection</span>(<span style=color:#8be9fd;font-style:italic>$database</span>);
-        <span style=color:#6272a4>// Set global static accessibility
-</span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>$Capsule</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>setAsGlobal</span>();
-        <span style=color:#6272a4>// Start Eloquent
-</span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>$Capsule</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>bootEloquent</span>();
-
-</code></pre></td></tr></table>
-</div>
-</div><p>This completes the configuration of Eloquent</p>
-<h2 id=use>
+</h2><p>Add to the project entry file</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// Load composer&#39;s autoload file
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        <span style=color:#ff79c6>require_once</span> IA_ROOT <span style=color:#ff79c6>.</span> <span style=color:#f1fa8c>&#39;/addons/guangqian_shop/vendor/autoload.php&#39;</span>;
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$db_config</span><span style=color:#ff79c6>=</span><span style=color:#8be9fd;font-style:italic>$_W</span>[<span style=color:#f1fa8c>&#39;config&#39;</span>][<span style=color:#f1fa8c>&#39;db&#39;</span>];
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>//database configuration
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>$database</span> <span style=color:#ff79c6>=</span> [
+</span></span><span style=display:flex><span>            <span style=color:#f1fa8c>&#39;driver&#39;</span>    <span style=color:#ff79c6>=&gt;</span> <span style=color:#f1fa8c>&#39;mysql&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#f1fa8c>&#39;host&#39;</span>      <span style=color:#ff79c6>=&gt;</span> <span style=color:#f1fa8c>&#39;127.0.0.1&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#f1fa8c>&#39;database&#39;</span>  <span style=color:#ff79c6>=&gt;</span> <span style=color:#f1fa8c>&#39;test&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#f1fa8c>&#39;username&#39;</span>  <span style=color:#ff79c6>=&gt;</span> <span style=color:#f1fa8c>&#39;test&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#f1fa8c>&#39;password&#39;</span>  <span style=color:#ff79c6>=&gt;</span> <span style=color:#f1fa8c>&#39;123456&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#f1fa8c>&#39;charset&#39;</span>   <span style=color:#ff79c6>=&gt;</span> <span style=color:#f1fa8c>&#39;utf8&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#f1fa8c>&#39;collation&#39;</span> <span style=color:#ff79c6>=&gt;</span> <span style=color:#f1fa8c>&#39;utf8_unicode_ci&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#f1fa8c>&#39;prefix&#39;</span>    <span style=color:#ff79c6>=&gt;</span> <span style=color:#8be9fd;font-style:italic>$db_config</span>[<span style=color:#f1fa8c>&#39;tablepre&#39;</span>],
+</span></span><span style=display:flex><span>        ];
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$Capsule</span> <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>new</span> Capsule;
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// Create database link
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>$Capsule</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>addConnection</span>(<span style=color:#8be9fd;font-style:italic>$database</span>);
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// Set global static accessibility
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>$Capsule</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>setAsGlobal</span>();
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// Start Eloquent
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>$Capsule</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>bootEloquent</span>();
+</span></span></code></pre></td></tr></table></div></div><p>This completes the configuration of Eloquent</p><h2 id=use>
 Use
 <a class=heading-link href=#use>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<h3 id=db-usage>
+</h2><h3 id=db-usage>
 DB Usage
 <a class=heading-link href=#db-usage>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h3>
-<p>At the point of use</p>
-<ul>
-<li>Ensure that the initialization file for Eloquent has been introduced</li>
-<li><code>use Illuminate\Database\Capsule\Manager as DB;</code><br>
+</h3><p>At the point of use</p><ul>
+<li>Ensure that the initialization file for Eloquent has been introduced</li><li><code>use Illuminate\Database\Capsule\Manager as DB;</code><br>
 can be used
 As in:
-<code>db.php</code></li>
-</ul>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#ff79c6>&lt;?</span>php
-<span style=color:#6272a4>// The initialization file has been introduced at the entrance
-</span><span style=color:#6272a4></span><span style=color:#ff79c6>use</span> Illuminate\Database\Capsule\Manager <span style=color:#ff79c6>as</span> DB;
-
-<span style=color:#ff79c6>class</span> <span style=color:#50fa7b>DbGqModel</span> <span style=color:#ff79c6>extends</span> DB{
-
-}
-</code></pre></td></tr></table>
-</div>
-</div><p><code>controller.php</code></p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#ff79c6>&lt;?</span>php
-<span style=color:#ff79c6>use</span> \DbGqModel;
-
-<span style=color:#8be9fd;font-style:italic>$users</span> <span style=color:#ff79c6>=</span> DbGqModel<span style=color:#ff79c6>::</span><span style=color:#50fa7b>select</span>(<span style=color:#f1fa8c>&#39;select * from user&#39;</span>);
-
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=model-usage>
+<code>db.php</code></li></ul><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
+</span></span><span style=display:flex><span><span style=color:#6272a4>// The initialization file has been introduced at the entrance
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span><span style=color:#ff79c6>use</span> Illuminate\Database\Capsule\Manager <span style=color:#ff79c6>as</span> DB;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>class</span> <span style=color:#50fa7b>DbGqModel</span> <span style=color:#ff79c6>extends</span> DB{
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div><p><code>controller.php</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
+</span></span><span style=display:flex><span><span style=color:#ff79c6>use</span> \DbGqModel;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>$users</span> <span style=color:#ff79c6>=</span> DbGqModel<span style=color:#ff79c6>::</span><span style=color:#50fa7b>select</span>(<span style=color:#f1fa8c>&#39;select * from user&#39;</span>);
+</span></span></code></pre></td></tr></table></div></div><h3 id=model-usage>
 Model Usage
 <a class=heading-link href=#model-usage>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h3>
-<p>As long as your model extends Eloquent class, you&rsquo;re good to go.</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#ff79c6>use</span>  Illuminate\Database\Eloquent\Model  <span style=color:#ff79c6>as</span> Eloquent; 
-
-<span style=color:#ff79c6>class</span> <span style=color:#50fa7b>User</span> <span style=color:#ff79c6>extends</span>  Eloquent 
-{
-    <span style=color:#ff79c6>protected</span> <span style=color:#8be9fd;font-style:italic>$table</span> <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;users&#39;</span>;
-}
-
-</code></pre></td></tr></table>
-</div>
-</div><p>Then you can easily use Eloquent as you would in the Laravel framework:</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php>
-<span style=color:#8be9fd;font-style:italic>$users</span> <span style=color:#ff79c6>=</span> User<span style=color:#ff79c6>::</span><span style=color:#50fa7b>find</span>(<span style=color:#bd93f9>2</span>);
-
-
-<span style=color:#8be9fd;font-style:italic>$users</span> <span style=color:#ff79c6>=</span> User<span style=color:#ff79c6>::</span><span style=color:#50fa7b>all</span>();
-
-
-<span style=color:#8be9fd;font-style:italic>$user</span> <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>new</span> User;
-<span style=color:#8be9fd;font-style:italic>$user</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>username</span> <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;someone&#39;</span>;
-<span style=color:#8be9fd;font-style:italic>$user</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>email</span> <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;some@overtrue.me&#39;</span>;
-<span style=color:#8be9fd;font-style:italic>$user</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>save</span>();
-
-<span style=color:#6272a4>// ... more
-</span></code></pre></td></tr></table>
-</div>
-</div><h2 id=epilogue>
+</h3><p>As long as your model extends Eloquent class, you&rsquo;re good to go.</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>use</span>  Illuminate\Database\Eloquent\Model  <span style=color:#ff79c6>as</span> Eloquent; 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>class</span> <span style=color:#50fa7b>User</span> <span style=color:#ff79c6>extends</span>  Eloquent 
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>protected</span> <span style=color:#8be9fd;font-style:italic>$table</span> <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;users&#39;</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div><p>Then you can easily use Eloquent as you would in the Laravel framework:</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>$users</span> <span style=color:#ff79c6>=</span> User<span style=color:#ff79c6>::</span><span style=color:#50fa7b>find</span>(<span style=color:#bd93f9>2</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>$users</span> <span style=color:#ff79c6>=</span> User<span style=color:#ff79c6>::</span><span style=color:#50fa7b>all</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>$user</span> <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>new</span> User;
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>$user</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>username</span> <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;someone&#39;</span>;
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>$user</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>email</span> <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;some@overtrue.me&#39;</span>;
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>$user</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>save</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// ... more
+</span></span></span></code></pre></td></tr></table></div></div><h2 id=epilogue>
 Epilogue
 <a class=heading-link href=#epilogue>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
-<p>Reference to <a href=https://www.golaravel.com/post/zai-laravelwai-du-li-shi-yong-eloquent/>Using Eloquent independently of Laravel</a> by An Zhengchao</p>
-</div>
-<footer>
-</footer>
-</article>
-</section>
-</div>
-<footer class=footer>
+</h2><p>Reference to <a href=https://www.golaravel.com/post/zai-laravelwai-du-li-shi-yong-eloquent/>Using Eloquent independently of Laravel</a> by An Zhengchao</p></div><footer>
+</footer></article></section></div><footer class=footer>
 <section class=container>
 ©
 2019 -
@@ -373,11 +302,7 @@ Epilogue
 Ethan Kuo
 ·
 Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
-</section>
-</footer>
-</main>
-<script src=/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
+</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NK08XEDHKZ"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-NK08XEDHKZ')</script>
-</body>
-</html>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script>
+</body></html>
