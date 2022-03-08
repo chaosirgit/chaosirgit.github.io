@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Series on Ethan Kuo Blog</title>
-    <link>http://chaosirgit.github.io/series/</link>
+    <link>https://blog.adminchao.com/series/</link>
     <description>Recent content in Series on Ethan Kuo Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="http://chaosirgit.github.io/series/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language><atom:link href="https://blog.adminchao.com/series/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

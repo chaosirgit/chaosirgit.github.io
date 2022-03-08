@@ -2,37 +2,37 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>go on Ethan Kuo Blog</title>
-    <link>http://chaosirgit.github.io/tags/go/</link>
+    <link>https://blog.adminchao.com/tags/go/</link>
     <description>Recent content in go on Ethan Kuo Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 03 Mar 2020 08:40:28 +0000</lastBuildDate><atom:link href="http://chaosirgit.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 Mar 2020 08:40:28 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/tags/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Iris MVC Routing-III</title>
-      <link>http://chaosirgit.github.io/posts/iris-mvc-routing-iii/</link>
+      <link>https://blog.adminchao.com/posts/iris-mvc-routing-iii/</link>
       <pubDate>Tue, 03 Mar 2020 08:40:28 +0000</pubDate>
       
-      <guid>http://chaosirgit.github.io/posts/iris-mvc-routing-iii/</guid>
+      <guid>https://blog.adminchao.com/posts/iris-mvc-routing-iii/</guid>
       <description>Define Routes    Enter the following in the root directory main.go
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19  package main import ( &amp;#34;github.com/kataras/iris&amp;#34; &amp;#34;github.com/kataras/iris/mvc&amp;#34; &amp;#34;./controllers&amp;#34; ) func main() { app := iris.New() // Register the view directory 	app.RegisterView(iris.HTML(&amp;#34;./views&amp;#34;, &amp;#34;.html&amp;#34;)) // Define root route controller 	mvc.New(app).Handle(new(controllers.DefaultController)) // Define user group route controller 	mvc.New(app.Party(&amp;#34;/user&amp;#34;)).Handle(new(controllers.UserController)) app.</description>
     </item>
     
     <item>
       <title>Iris Installation And Initialization II</title>
-      <link>http://chaosirgit.github.io/posts/iris-install-and-init-ii/</link>
+      <link>https://blog.adminchao.com/posts/iris-install-and-init-ii/</link>
       <pubDate>Sun, 01 Mar 2020 19:21:06 +0000</pubDate>
       
-      <guid>http://chaosirgit.github.io/posts/iris-install-and-init-ii/</guid>
+      <guid>https://blog.adminchao.com/posts/iris-install-and-init-ii/</guid>
       <description>Installation      Requirement GO &amp;gt;= 1.8 Recommended 1.9
 1  go get -u github.com/kataras/iris     Initializing Web Services    1 2 3 4 5 6 7 8 9 10 11 12  package main import ( &amp;#34;github.com/kataras/iris&amp;#34; ) func main() { // Create App 	app := iris.New() //Listening port 	app.Run(iris.Addr(&amp;#34;:80&amp;#34;),iris.WithoutServerError(iris.ErrServerClosed)) }   Configuration    Iris supports .</description>
     </item>
     
     <item>
       <title>Iris I Love She I</title>
-      <link>http://chaosirgit.github.io/posts/iris-i-love-she-i/</link>
+      <link>https://blog.adminchao.com/posts/iris-i-love-she-i/</link>
       <pubDate>Sun, 01 Mar 2020 14:17:47 +0000</pubDate>
       
-      <guid>http://chaosirgit.github.io/posts/iris-i-love-she-i/</guid>
+      <guid>https://blog.adminchao.com/posts/iris-i-love-she-i/</guid>
       <description>Preface    Golang is popular all over the world, such as Google, AWS, Cloudflare, CoreOS, etc., have started to use Golang to develop their cloud computing related products on a large scale. In the process of learning Golang, I was also deeply impressed by Golang. The Golang natively supports high concurrency and strong performance, and if you are skilled, the development efficiency is no worse than Python and other languages.</description>
     </item>
     

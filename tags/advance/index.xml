@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Advance on Ethan Kuo Blog</title>
-    <link>http://chaosirgit.github.io/tags/advance/</link>
+    <link>https://blog.adminchao.com/tags/advance/</link>
     <description>Recent content in Advance on Ethan Kuo Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 22 Aug 2018 11:02:10 +0000</lastBuildDate><atom:link href="http://chaosirgit.github.io/tags/advance/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Aug 2018 11:02:10 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/tags/advance/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Laravel Eloquent Advanced Usage</title>
-      <link>http://chaosirgit.github.io/posts/laravel-eloquent-advanced-usage/</link>
+      <link>https://blog.adminchao.com/posts/laravel-eloquent-advanced-usage/</link>
       <pubDate>Wed, 22 Aug 2018 11:02:10 +0000</pubDate>
       
-      <guid>http://chaosirgit.github.io/posts/laravel-eloquent-advanced-usage/</guid>
+      <guid>https://blog.adminchao.com/posts/laravel-eloquent-advanced-usage/</guid>
       <description>Preface    When using Laravel Eloquent model, I deeply appreciate what elegance is! Although you can chain calls to DB operation methods in the business logic to solve the problem, but there is always less elegance! Here is a special record of the operation methods with Eloquent to make the code elegant.
 Target    leftJoin where    Target SQL    1  select * from user_second left join user on user_second.</description>
     </item>

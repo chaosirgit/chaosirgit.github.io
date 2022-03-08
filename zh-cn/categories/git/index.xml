@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Git on 郭超超的博客</title>
-    <link>http://chaosirgit.github.io/zh-cn/categories/git/</link>
+    <link>https://blog.adminchao.com/zh-cn/categories/git/</link>
     <description>Recent content in Git on 郭超超的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 01 Dec 2017 13:24:34 +0000</lastBuildDate><atom:link href="http://chaosirgit.github.io/zh-cn/categories/git/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Dec 2017 13:24:34 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/categories/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Git 服务端自动部署项目代码</title>
-      <link>http://chaosirgit.github.io/zh-cn/posts/git-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81/</link>
+      <link>https://blog.adminchao.com/zh-cn/posts/git-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81/</link>
       <pubDate>Fri, 01 Dec 2017 13:24:34 +0000</pubDate>
       
-      <guid>http://chaosirgit.github.io/zh-cn/posts/git-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81/</guid>
+      <guid>https://blog.adminchao.com/zh-cn/posts/git-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81/</guid>
       <description>前言    搭建 LNMP 环境后需要在服务器上部署项目代码，但是用 git 一直在服务端 pull 太麻烦，所以要做个 git 自动部署代码的功能，开发人员 push 上去之后，项目目录自动更新为最新的代码。要用到 hooks 了。
 搭建 Git 服务器    安装 Git    1  sudo apt-get install git   创建一个 Git 用户，用来运行 Git 服务    1  sudo adduser git   创建证书登陆    把开发人员的公钥，id_rsa.pub 放入到 /home/git/.ssh/authorized_keys 文件里，一行一个。
 初始化 Git 仓库    建立一个仓库目录，注意是仓库目录，不是项目目录。假定是 /home/hub/app.git ，在 /home/hub 目录下输入命令：</description>
@@ -20,10 +20,10 @@
     
     <item>
       <title>Git 常用命令</title>
-      <link>http://chaosirgit.github.io/zh-cn/posts/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+      <link>https://blog.adminchao.com/zh-cn/posts/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Sun, 19 Jun 2016 10:13:37 +0000</pubDate>
       
-      <guid>http://chaosirgit.github.io/zh-cn/posts/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      <guid>https://blog.adminchao.com/zh-cn/posts/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
       <description>&lt;h2 id=&#34;git-的常用命令&#34;&gt;
   Git 的常用命令
   &lt;a class=&#34;heading-link&#34; href=&#34;#git-%e7%9a%84%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4&#34;&gt;

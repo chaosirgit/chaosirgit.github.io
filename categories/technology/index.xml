@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Technology on Ethan Kuo Blog</title>
-    <link>http://chaosirgit.github.io/categories/technology/</link>
+    <link>https://blog.adminchao.com/categories/technology/</link>
     <description>Recent content in Technology on Ethan Kuo Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 30 Jun 2021 23:31:29 +0000</lastBuildDate><atom:link href="http://chaosirgit.github.io/categories/technology/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Jun 2021 23:31:29 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/categories/technology/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Laradock Install GRPC Extension</title>
-      <link>http://chaosirgit.github.io/posts/laradock-install-grpc-extension/</link>
+      <link>https://blog.adminchao.com/posts/laradock-install-grpc-extension/</link>
       <pubDate>Wed, 30 Jun 2021 23:31:29 +0000</pubDate>
       
-      <guid>http://chaosirgit.github.io/posts/laradock-install-grpc-extension/</guid>
+      <guid>https://blog.adminchao.com/posts/laradock-install-grpc-extension/</guid>
       <description>Preface    Installing uncommon PHP extensions in a Laradock environment, this method can be used to install GRPC extensions as well as other uncommon extensions.
 Step    Modify configuration file:    laradock/docker-compose.yml
 In the workspace configuration parameter field
@@ -22,10 +22,10 @@ In the workspace configuration parameter field
     
     <item>
       <title>Docker Usage Notes</title>
-      <link>http://chaosirgit.github.io/posts/docker-usage-notes/</link>
+      <link>https://blog.adminchao.com/posts/docker-usage-notes/</link>
       <pubDate>Mon, 20 Jul 2020 15:39:19 +0000</pubDate>
       
-      <guid>http://chaosirgit.github.io/posts/docker-usage-notes/</guid>
+      <guid>https://blog.adminchao.com/posts/docker-usage-notes/</guid>
       <description>Preface    Take some notes in the process of learning and using Docker.
 Command    Check the version of Docker after installation
 1 2 3 4  $ docker --version Docker version 19.03.8, build afacb8b $ docker-compose --version docker-compose version 1.25.5, build 8a1c60f6   Try running an Nginx server：
@@ -34,20 +34,20 @@ Command    Check the version of Docker after installation
     
     <item>
       <title>Laravel Throttle Middleware Response With JSON</title>
-      <link>http://chaosirgit.github.io/posts/laravel-throttle-middleware-response-with-json/</link>
+      <link>https://blog.adminchao.com/posts/laravel-throttle-middleware-response-with-json/</link>
       <pubDate>Thu, 25 Jul 2019 18:33:53 +0000</pubDate>
       
-      <guid>http://chaosirgit.github.io/posts/laravel-throttle-middleware-response-with-json/</guid>
+      <guid>https://blog.adminchao.com/posts/laravel-throttle-middleware-response-with-json/</guid>
       <description>Preface    Laravel comes with a request frequency limitation middleware, but this middleware does not return JSON, which is always needed in the form of JSON in daily work.
 Step    Generate middleware file    1  php artisan make:middleware ThrottleRequests   Copy the code to app\Http\Middleware\ThrottleRequests.php    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198  &amp;lt;?</description>
     </item>
     
     <item>
       <title>Laravel Using WorkerMan(GateWay)</title>
-      <link>http://chaosirgit.github.io/posts/laravel-using-workermangateway/</link>
+      <link>https://blog.adminchao.com/posts/laravel-using-workermangateway/</link>
       <pubDate>Mon, 22 Jul 2019 16:30:53 +0000</pubDate>
       
-      <guid>http://chaosirgit.github.io/posts/laravel-using-workermangateway/</guid>
+      <guid>https://blog.adminchao.com/posts/laravel-using-workermangateway/</guid>
       <description>Preface    Document the process of using WorkerMan or GateWay in Laravel.
 Begin    Installation    1  composer require workerman/gateway-worker   Create command    Use artisan to create a command tool to start WorkerMan because WorkerMan can only be started from the command line.
 1  php artisan make:command WorkerMan   Change the /app/Console/Commands/WorkerMan.php file    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122  &amp;lt;?</description>
@@ -55,40 +55,40 @@ Begin    Installation    1  composer require workerman/gateway-worker   Create c
     
     <item>
       <title>UEditor Multi-Image Upload Changed To QiNiu Cloud.md</title>
-      <link>http://chaosirgit.github.io/posts/ueditor-multi-image-upload-changed-to-qiniu-cloud/</link>
+      <link>https://blog.adminchao.com/posts/ueditor-multi-image-upload-changed-to-qiniu-cloud/</link>
       <pubDate>Wed, 22 May 2019 13:00:10 +0000</pubDate>
       
-      <guid>http://chaosirgit.github.io/posts/ueditor-multi-image-upload-changed-to-qiniu-cloud/</guid>
+      <guid>https://blog.adminchao.com/posts/ueditor-multi-image-upload-changed-to-qiniu-cloud/</guid>
       <description>Preface    Modify UEditor to upload multiple images to Qiniu-cloud UEditor version is 1.4.3
 Begin    Modify the ueditor/1.4.3/php/config.json configuration file    1 2 3 4 5 6 7 8 9 10 11 12 13  { /* Upload image configuration item */ &amp;#34;imageUrl&amp;#34;: &amp;#34;https://up-z2.qiniup.com/&amp;#34;, /* Qiniu-cloud upload interface */ &amp;#34;imageActionName&amp;#34;: &amp;#34;uploadimage&amp;#34;, /* Name of the action to execute the upload image */ &amp;#34;imageFieldName&amp;#34;: &amp;#34;file&amp;#34;, /* The name of the submitted image form is modified to file here.</description>
     </item>
     
     <item>
       <title>Red Packet Class</title>
-      <link>http://chaosirgit.github.io/posts/red-packet-class/</link>
+      <link>https://blog.adminchao.com/posts/red-packet-class/</link>
       <pubDate>Sat, 16 Mar 2019 10:39:09 +0000</pubDate>
       
-      <guid>http://chaosirgit.github.io/posts/red-packet-class/</guid>
+      <guid>https://blog.adminchao.com/posts/red-packet-class/</guid>
       <description>Preface    Copied the bonus class written by someone else and it feels pretty good to use. The original address is in the comments. Hereby record
 Code    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177  &amp;lt;?</description>
     </item>
     
     <item>
       <title>Laravel Eloquent Return Result Optimization</title>
-      <link>http://chaosirgit.github.io/posts/laravel-eloquent-return-result-optimization/</link>
+      <link>https://blog.adminchao.com/posts/laravel-eloquent-return-result-optimization/</link>
       <pubDate>Thu, 10 Jan 2019 15:29:08 +0000</pubDate>
       
-      <guid>http://chaosirgit.github.io/posts/laravel-eloquent-return-result-optimization/</guid>
+      <guid>https://blog.adminchao.com/posts/laravel-eloquent-return-result-optimization/</guid>
       <description>Preface    We all know that using the appends property in the model to build the accessor makes the return result add some field information, but then there is a disadvantage that all the return results of this model will have these field information, which is not appropriate if the interface specifies a strict return information field.
 Can there be a good way to show or hide these fields dynamically?</description>
     </item>
     
     <item>
       <title>Laravel Artisan Backend Call</title>
-      <link>http://chaosirgit.github.io/posts/laravel-artisan-backend-call/</link>
+      <link>https://blog.adminchao.com/posts/laravel-artisan-backend-call/</link>
       <pubDate>Mon, 15 Oct 2018 10:04:39 +0000</pubDate>
       
-      <guid>http://chaosirgit.github.io/posts/laravel-artisan-backend-call/</guid>
+      <guid>https://blog.adminchao.com/posts/laravel-artisan-backend-call/</guid>
       <description>Preface    If you need to execute a script programmatically in the background in your project, with the official Artisan::call() call, if the script takes too long, the process will be interrupted and the script will not execute successfully, so you need to hang the execution in the background.
 Artisan Command Line Tools    Please refer to the official documentation.
 Called programmatically    1 2 3 4 5  &amp;lt;?</description>
@@ -96,10 +96,10 @@ Called programmatically    1 2 3 4 5  &amp;lt;?</description>
     
     <item>
       <title>Laravel Eloquent Advanced Usage</title>
-      <link>http://chaosirgit.github.io/posts/laravel-eloquent-advanced-usage/</link>
+      <link>https://blog.adminchao.com/posts/laravel-eloquent-advanced-usage/</link>
       <pubDate>Wed, 22 Aug 2018 11:02:10 +0000</pubDate>
       
-      <guid>http://chaosirgit.github.io/posts/laravel-eloquent-advanced-usage/</guid>
+      <guid>https://blog.adminchao.com/posts/laravel-eloquent-advanced-usage/</guid>
       <description>Preface    When using Laravel Eloquent model, I deeply appreciate what elegance is! Although you can chain calls to DB operation methods in the business logic to solve the problem, but there is always less elegance! Here is a special record of the operation methods with Eloquent to make the code elegant.
 Target    leftJoin where    Target SQL    1  select * from user_second left join user on user_second.</description>
     </item>

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Github on 郭超超的博客</title>
-    <link>http://chaosirgit.github.io/zh-cn/tags/github/</link>
+    <link>https://blog.adminchao.com/zh-cn/tags/github/</link>
     <description>Recent content in Github on 郭超超的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 19 Jun 2016 10:13:37 +0000</lastBuildDate><atom:link href="http://chaosirgit.github.io/zh-cn/tags/github/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Jun 2016 10:13:37 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/tags/github/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Git 常用命令</title>
-      <link>http://chaosirgit.github.io/zh-cn/posts/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+      <link>https://blog.adminchao.com/zh-cn/posts/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Sun, 19 Jun 2016 10:13:37 +0000</pubDate>
       
-      <guid>http://chaosirgit.github.io/zh-cn/posts/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      <guid>https://blog.adminchao.com/zh-cn/posts/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
       <description>&lt;h2 id=&#34;git-的常用命令&#34;&gt;
   Git 的常用命令
   &lt;a class=&#34;heading-link&#34; href=&#34;#git-%e7%9a%84%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4&#34;&gt;

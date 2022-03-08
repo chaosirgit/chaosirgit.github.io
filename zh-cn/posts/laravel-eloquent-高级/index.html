@@ -25,7 +25,7 @@
 目标    leftJoin where    目标 SQL    1  select * from user_second left join user on user_second.user_id = user.id where user.status = 1   解决方案    1 2  &lt;?php UserSecond::leftJoin(&#39;user&#39;,&#39;user_second.user_id&#39;,&#39;=&#39;,&#39;user.id&#39;)-&gt;where(&#39;user.status&#39;,1)-&gt;get();   但是这样的缺点在于
  得到的结果两个表的字段如果相同，右表会覆盖左表的值。 得到的结果不能使用模型精确控制。  1 2 3 4 5 6 7 8 9  { &#34;id&#34;: 11, //其实左表也就是`user_second`表的 id 为 9 这里被 `user` 表的 id 覆盖了  &#34;user_id&#34;: 11, //这里是 `user_second` 表的 `user_id`  &#34;enlist_currency&#34;: &#34;256." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://chaosirgit.github.io/zh-cn/posts/laravel-eloquent-%E9%AB%98%E7%BA%A7/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.adminchao.com/zh-cn/posts/laravel-eloquent-%E9%AB%98%E7%BA%A7/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2018-08-22T11:02:10+00:00" />
 <meta property="article:modified_time" content="2018-08-22T11:02:10+00:00" /><meta property="og:site_name" content="郭超超的博客" />
 
@@ -36,7 +36,7 @@
 </title>
 
     
-      <link rel="canonical" href="http://chaosirgit.github.io/zh-cn/posts/laravel-eloquent-%E9%AB%98%E7%BA%A7/">
+      <link rel="canonical" href="https://blog.adminchao.com/zh-cn/posts/laravel-eloquent-%E9%AB%98%E7%BA%A7/">
     
 
     <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
@@ -122,7 +122,7 @@
                 
               
               <li class="navigation-item">
-                <a href="http://chaosirgit.github.io/">🇺🇸</a>
+                <a href="https://blog.adminchao.com/">🇺🇸</a>
               </li>
             
           
@@ -142,7 +142,7 @@
       <header>
         <div class="post-title">
           <h1 class="title">
-            <a class="title-link" href="http://chaosirgit.github.io/zh-cn/posts/laravel-eloquent-%E9%AB%98%E7%BA%A7/">
+            <a class="title-link" href="https://blog.adminchao.com/zh-cn/posts/laravel-eloquent-%E9%AB%98%E7%BA%A7/">
               Laravel Eloquent 高级
             </a>
           </h1>

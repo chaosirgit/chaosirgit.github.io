@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>extension on Ethan Kuo Blog</title>
-    <link>http://chaosirgit.github.io/tags/extension/</link>
+    <link>https://blog.adminchao.com/tags/extension/</link>
     <description>Recent content in extension on Ethan Kuo Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 30 Jun 2021 23:31:29 +0000</lastBuildDate><atom:link href="http://chaosirgit.github.io/tags/extension/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Jun 2021 23:31:29 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/tags/extension/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Laradock Install GRPC Extension</title>
-      <link>http://chaosirgit.github.io/posts/laradock-install-grpc-extension/</link>
+      <link>https://blog.adminchao.com/posts/laradock-install-grpc-extension/</link>
       <pubDate>Wed, 30 Jun 2021 23:31:29 +0000</pubDate>
       
-      <guid>http://chaosirgit.github.io/posts/laradock-install-grpc-extension/</guid>
+      <guid>https://blog.adminchao.com/posts/laradock-install-grpc-extension/</guid>
       <description>Preface    Installing uncommon PHP extensions in a Laradock environment, this method can be used to install GRPC extensions as well as other uncommon extensions.
 Step    Modify configuration file:    laradock/docker-compose.yml
 In the workspace configuration parameter field

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>grpc on 郭超超的博客</title>
-    <link>http://chaosirgit.github.io/zh-cn/tags/grpc/</link>
+    <link>https://blog.adminchao.com/zh-cn/tags/grpc/</link>
     <description>Recent content in grpc on 郭超超的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 30 Jun 2021 23:31:29 +0000</lastBuildDate><atom:link href="http://chaosirgit.github.io/zh-cn/tags/grpc/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Jun 2021 23:31:29 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/tags/grpc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Laradock 安装 GRPC 扩展</title>
-      <link>http://chaosirgit.github.io/zh-cn/posts/laradock-%E5%AE%89%E8%A3%85-grpc-%E6%89%A9%E5%B1%95/</link>
+      <link>https://blog.adminchao.com/zh-cn/posts/laradock-%E5%AE%89%E8%A3%85-grpc-%E6%89%A9%E5%B1%95/</link>
       <pubDate>Wed, 30 Jun 2021 23:31:29 +0000</pubDate>
       
-      <guid>http://chaosirgit.github.io/zh-cn/posts/laradock-%E5%AE%89%E8%A3%85-grpc-%E6%89%A9%E5%B1%95/</guid>
+      <guid>https://blog.adminchao.com/zh-cn/posts/laradock-%E5%AE%89%E8%A3%85-grpc-%E6%89%A9%E5%B1%95/</guid>
       <description>前言    在 Laradock 环境下安装不常用的 PHP 扩展，不止用与 GRPC 扩展，其他依此类推即可
 步骤    修改配置文件:    laradock/docker-compose.yml
 在 workspace 配置参数段

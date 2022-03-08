@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>go on Ethan Kuo Blog</title>
-    <link>http://chaosirgit.github.io/categories/go/</link>
+    <link>https://blog.adminchao.com/categories/go/</link>
     <description>Recent content in go on Ethan Kuo Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 01 Mar 2020 14:17:47 +0000</lastBuildDate><atom:link href="http://chaosirgit.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Mar 2020 14:17:47 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/categories/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Iris I Love She I</title>
-      <link>http://chaosirgit.github.io/posts/iris-i-love-she-i/</link>
+      <link>https://blog.adminchao.com/posts/iris-i-love-she-i/</link>
       <pubDate>Sun, 01 Mar 2020 14:17:47 +0000</pubDate>
       
-      <guid>http://chaosirgit.github.io/posts/iris-i-love-she-i/</guid>
+      <guid>https://blog.adminchao.com/posts/iris-i-love-she-i/</guid>
       <description>Preface    Golang is popular all over the world, such as Google, AWS, Cloudflare, CoreOS, etc., have started to use Golang to develop their cloud computing related products on a large scale. In the process of learning Golang, I was also deeply impressed by Golang. The Golang natively supports high concurrency and strong performance, and if you are skilled, the development efficiency is no worse than Python and other languages.</description>
     </item>
     
