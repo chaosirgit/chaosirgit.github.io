@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ETH on 郭超超的博客</title><link>https://blog.adminchao.com/zh-cn/tags/eth/</link><description>Recent content in ETH on 郭超超的博客</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 Mar 2022 09:46:36 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/tags/eth/index.xml" rel="self" type="application/rss+xml"/><item><title>Web3 用法介绍(后端篇-Golang)</title><link>https://blog.adminchao.com/zh-cn/posts/web3-%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D%E5%90%8E%E7%AB%AF%E7%AF%87-go/</link><pubDate>Tue, 08 Mar 2022 09:46:36 +0000</pubDate><guid>https://blog.adminchao.com/zh-cn/posts/web3-%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D%E5%90%8E%E7%AB%AF%E7%AF%87-go/</guid><description>前言 去年至今已完成了两个 DAPP，对于 Web3 也又了一定的认识，这篇记录的是后端库 go-web3 的用法。
+前端篇
+后端篇-PHP
+安装 1 2 3 go get github.com/chenzhijie/go-web3 go get github.com/chenzhijie/go-web3/types go get github.com/ethereum/go-ethereum/common 提供者 初始化 1 2 3 4 5 6 7 var rpcHost = &amp;#34;https://bsc-dataseed1.defibit.io&amp;#34; Web3, err := web3.NewWeb3(rpcHost) if err != nil { panic(err) } chainId := int64(56) Web3.Eth.SetChainId(chainId) 链上交互 初始化 1 2 3 4 5 6 7 //根据私钥获得公钥地址 var PrivateKey = &amp;#34;6.</description></item><item><title>Web3 用法介绍(后端篇-PHP)</title><link>https://blog.adminchao.com/zh-cn/posts/web3-%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D%E5%90%8E%E7%AB%AF%E7%AF%87-php/</link><pubDate>Mon, 07 Mar 2022 15:38:12 +0000</pubDate><guid>https://blog.adminchao.com/zh-cn/posts/web3-%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D%E5%90%8E%E7%AB%AF%E7%AF%87-php/</guid><description>前言 去年至今已完成了两个 DAPP，对于 Web3 也又了一定的认识，这篇记录的是后端库 web3.php 的用法。
+前端篇
+后端篇-Golang
+安装 Web3.php
+如果使用 Laravel 8 以下版本 即 GuzzleHttp 6.x ,可安装 sc0vu/web3.php
+在 composer.json 找到 以下并修改
+1 &amp;#34;minimum-stability&amp;#34;: &amp;#34;dev&amp;#34; Then
+1 2 composer require sc0vu/web3.php dev-master composer require web3p/ethereum-tx //如果需要发送交易 如果使用 Laravel 8 以上 即 GuzzleHttp &amp;gt; 7.x , 参考 [issues/199](
+在 composer.json 中添加
+1 2 3 4 5 6 7 8 9 10 &amp;#34;require&amp;#34;: { &amp;#34;sc0vu/web3.</description></item><item><title>Web3 用法介绍(前端篇)</title><link>https://blog.adminchao.com/zh-cn/posts/web3-%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D%E5%89%8D%E7%AB%AF%E7%AF%87/</link><pubDate>Sun, 06 Mar 2022 15:21:19 +0000</pubDate><guid>https://blog.adminchao.com/zh-cn/posts/web3-%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D%E5%89%8D%E7%AB%AF%E7%AF%87/</guid><description>前言 去年至今已完成了两个 DAPP，对于 Web3 也又了一定的认识，这篇记录的是前端库 web3.js 的用法。
+后端篇-PHP
+后端篇-Golang
+安装 1 npm install web3 WalletConnect 以便手机端使用
+1 npm install @walletconnect/web3-provider 提供者 提供者一般作为与钱包交互时调用,以及监听一些事件
+初始化 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 if (window.ethereum){ //如果有新版小狐狸优先使用 this.walletProvider = window.ethereum }else if (window.</description></item></channel></rss>

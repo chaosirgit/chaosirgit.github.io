@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>WalletConnect on 郭超超的博客</title><link>https://blog.adminchao.com/zh-cn/tags/walletconnect/</link><description>Recent content in WalletConnect on 郭超超的博客</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 06 Mar 2022 15:21:19 +0000</lastBuildDate><atom:link href="https://blog.adminchao.com/zh-cn/tags/walletconnect/index.xml" rel="self" type="application/rss+xml"/><item><title>Web3 用法介绍(前端篇)</title><link>https://blog.adminchao.com/zh-cn/posts/web3-%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D%E5%89%8D%E7%AB%AF%E7%AF%87/</link><pubDate>Sun, 06 Mar 2022 15:21:19 +0000</pubDate><guid>https://blog.adminchao.com/zh-cn/posts/web3-%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D%E5%89%8D%E7%AB%AF%E7%AF%87/</guid><description>前言 去年至今已完成了两个 DAPP，对于 Web3 也又了一定的认识，这篇记录的是前端库 web3.js 的用法。
+后端篇-PHP
+后端篇-Golang
+安装 1 npm install web3 WalletConnect 以便手机端使用
+1 npm install @walletconnect/web3-provider 提供者 提供者一般作为与钱包交互时调用,以及监听一些事件
+初始化 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 if (window.ethereum){ //如果有新版小狐狸优先使用 this.walletProvider = window.ethereum }else if (window.</description></item></channel></rss>
