@@ -1,0 +1,447 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=color-scheme content="light dark">
+<meta name=author content="郭超超">
+<meta name=description content="MetaMask|钱包应用使用 EIP712 协议签名授权后端解析签名实现一键登录功能,DAPP 一键登录实例,Go语言实现 DAPP 一键登录">
+<meta name=keywords content="EIP-712,EIP712,以太坊,Eth,Ethereum,一键登录,DAPP,MetaMask,小狐狸,eth_signTypedData_v4">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="EIP-712:如何打造以太坊一键登录应用">
+<meta name=twitter:description content="MetaMask|钱包应用使用 EIP712 协议签名授权后端解析签名实现一键登录功能,DAPP 一键登录实例,Go语言实现 DAPP 一键登录">
+<meta property="og:title" content="EIP-712:如何打造以太坊一键登录应用">
+<meta property="og:description" content="MetaMask|钱包应用使用 EIP712 协议签名授权后端解析签名实现一键登录功能,DAPP 一键登录实例,Go语言实现 DAPP 一键登录">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.adminchao.com/zh-cn/posts/eip-712%E5%A6%82%E4%BD%95%E6%89%93%E9%80%A0%E4%BB%A5%E5%A4%AA%E5%9D%8A%E4%B8%80%E9%94%AE%E7%99%BB%E5%BD%95%E5%BA%94%E7%94%A8/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-03-09T05:04:02+00:00">
+<meta property="article:modified_time" content="2022-03-09T05:04:02+00:00"><meta property="og:site_name" content="郭超超的博客">
+<title>
+EIP-712:如何打造以太坊一键登录应用 · 郭超超的博客
+</title><link rel=canonical href=https://blog.adminchao.com/zh-cn/posts/eip-712%E5%A6%82%E4%BD%95%E6%89%93%E9%80%A0%E4%BB%A5%E5%A4%AA%E5%9D%8A%E4%B8%80%E9%94%AE%E7%99%BB%E5%BD%95%E5%BA%94%E7%94%A8/>
+<link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin>
+<link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen>
+<link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen>
+<link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32>
+<link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16>
+<link rel=apple-touch-icon href=/images/apple-touch-icon.png>
+<link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png>
+<meta name=generator content="Hugo 0.93.3">
+</head><body class="preload-transitions colorscheme-dark">
+<div class=float-container>
+<a id=dark-mode-toggle class=colorscheme-toggle>
+<i class="fa fa-adjust fa-fw" aria-hidden=true></i>
+</a>
+</div><main class=wrapper>
+<nav class=navigation>
+<section class=container>
+<a class=navigation-title href=/zh-cn>
+郭超超的博客
+</a>
+<input type=checkbox id=menu-toggle>
+<label class="menu-button float-right" for=menu-toggle>
+<i class="fa fa-bars fa-fw" aria-hidden=true></i>
+</label>
+<ul class=navigation-list>
+<li class=navigation-item>
+<a class=navigation-link href=/zh-cn/about/>关于</a>
+</li><li class=navigation-item>
+<a class=navigation-link href=/zh-cn/posts/>博文</a>
+</li><li class=navigation-item>
+<a class=navigation-link href=/zh-cn/contact/>联系</a>
+</li><li class="navigation-item menu-separator">
+<span>|</span>
+</li><li class=navigation-item>
+<a href=https://blog.adminchao.com/>🇺🇸</a>
+</li></ul></section></nav><div class=content>
+<section class="container post">
+<article>
+<header>
+<div class=post-title>
+<h1 class=title>
+<a class=title-link href=https://blog.adminchao.com/zh-cn/posts/eip-712%E5%A6%82%E4%BD%95%E6%89%93%E9%80%A0%E4%BB%A5%E5%A4%AA%E5%9D%8A%E4%B8%80%E9%94%AE%E7%99%BB%E5%BD%95%E5%BA%94%E7%94%A8/>
+EIP-712:如何打造以太坊一键登录应用
+</a>
+</h1></div><div class=post-meta>
+<div class=date>
+<span class=posted-on>
+<i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2022-03-09T05:04:02Z>
+2022-03-09 05:04:02
+</time>
+</span>
+<span class=reading-time>
+<i class="fa fa-clock-o" aria-hidden=true></i>
+阅读时间：3 分钟
+</span>
+</div><div class=categories>
+<i class="fa fa-folder" aria-hidden=true></i>
+<a href=/zh-cn/categories/%E6%8A%80%E6%9C%AF/>技术</a></div><div class=tags>
+<i class="fa fa-tag" aria-hidden=true></i>
+<span class=tag>
+<a href=/zh-cn/tags/eip-712/>EIP-712</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/zh-cn/tags/eip712/>EIP712</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/zh-cn/tags/%E4%BB%A5%E5%A4%AA%E5%9D%8A/>以太坊</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/zh-cn/tags/eth/>Eth</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/zh-cn/tags/ethereum/>Ethereum</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/zh-cn/tags/%E4%B8%80%E9%94%AE%E7%99%BB%E5%BD%95/>一键登录</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/zh-cn/tags/dapp/>DAPP</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/zh-cn/tags/metamask/>MetaMask</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/zh-cn/tags/%E5%B0%8F%E7%8B%90%E7%8B%B8/>小狐狸</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/zh-cn/tags/eth_signtypeddata_v4/>eth_signTypedData_v4</a>
+</span></div></div></header><div>
+<h2 id=前言>
+前言
+<a class=heading-link href=#%e5%89%8d%e8%a8%80>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h2><p>使用以太坊 EIP-712 协议签名授权 DAPP 登录</p><h2 id=设计>
+设计
+<a class=heading-link href=#%e8%ae%be%e8%ae%a1>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h2><ol>
+<li>前端使用签名之前需要授权应用连接钱包</li><li>获得授权成功后的钱包地址</li><li>然后点击签名按钮</li><li>使用钱包地址请求后端 <strong>获得随机数</strong> 功能接口</li><li>后端生成随机数，把钱包地址作为键，随机数作为值，放入缓存，过期时间 5 分钟(安全考虑)</li><li>前端把随机数写入签名消息体</li><li>调用钱包签名</li><li>获得的签名请求后端 <strong>登录</strong> 功能接口</li><li>后端对签名进行解密</li><li>验证解密后的钱包地址与提交的地址是否一致</li><li>通过注册或登录</li><li>不通过提示错误信息</li></ol><p>后端 <strong>获得随机数</strong> 的功能接口不在此文档记录</p><h2 id=实现步骤>
+实现步骤
+<a class=heading-link href=#%e5%ae%9e%e7%8e%b0%e6%ad%a5%e9%aa%a4>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h2><h3 id=连接钱包>
+连接钱包
+<a class=heading-link href=#%e8%bf%9e%e6%8e%a5%e9%92%b1%e5%8c%85>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h3><p>签名之前需要先授权连接钱包。</p><p><a href=https://blog.adminchao.com/zh-cn/posts/web3-%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D%E5%89%8D%E7%AB%AF%E7%AF%87/>Web3 前端篇</a></p><h3 id=模板>
+模板
+<a class=heading-link href=#%e6%a8%a1%e6%9d%bf>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>&lt;<span style=color:#ff79c6>div</span>&gt;
+</span></span><span style=display:flex><span>  &lt;<span style=color:#ff79c6>h3</span>&gt;Sign Typed Data V4&lt;/<span style=color:#ff79c6>h3</span>&gt;
+</span></span><span style=display:flex><span>  &lt;<span style=color:#ff79c6>button</span> <span style=color:#50fa7b>type</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;button&#34;</span> <span style=color:#50fa7b>id</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;signTypedDataV4Button&#34;</span>&gt;sign typed data v4&lt;/<span style=color:#ff79c6>button</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#ff79c6>div</span>&gt;
+</span></span></code></pre></td></tr></table></div></div><h3 id=javascript>
+Javascript
+<a class=heading-link href=#javascript>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">56
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">57
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">58
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">59
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">60
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">61
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">62
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">63
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">64
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">65
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">66
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">67
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>&lt;</span>script<span style=color:#ff79c6>&gt;</span>
+</span></span><span style=display:flex><span>  signTypedDataV4Button.addEventListener(<span style=color:#f1fa8c>&#39;click&#39;</span>, <span style=color:#ff79c6>async</span> <span style=color:#8be9fd;font-style:italic>function</span> (event) {
+</span></span><span style=display:flex><span>    event.preventDefault();
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>const</span> msgParams <span style=color:#ff79c6>=</span> JSON.stringify({
+</span></span><span style=display:flex><span>        domain<span style=color:#ff79c6>:</span> {
+</span></span><span style=display:flex><span>            <span style=color:#6272a4>// Defining the chain aka Rinkeby testnet or Ethereum Main Net
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>            chainId<span style=color:#ff79c6>:</span> <span style=color:#bd93f9>1</span>,
+</span></span><span style=display:flex><span>            <span style=color:#6272a4>// Give a user friendly name to the specific contract you are signing for.
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>            name<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;testSign&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#6272a4>// Just let&#39;s you know the latest version. Definitely make sure the field name is correct.
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>            version<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;1&#39;</span>,
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// Defining the message signing data content.
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        message<span style=color:#ff79c6>:</span> {
+</span></span><span style=display:flex><span>            <span style=color:#6272a4>/*
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>             - Anything you want. Just a JSON Blob that encodes the data you want to send
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>             - No required fields
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>             - This is DApp Specific
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>             - Be as explicit as possible when building out the message schema.
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>            */</span>
+</span></span><span style=display:flex><span>            email<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;test@test.com&#39;</span>,
+</span></span><span style=display:flex><span>            key<span style=color:#ff79c6>:</span> <span style=color:#bd93f9>123456</span>, <span style=color:#6272a4>//从后端获得的随机数，这个例子写死
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        },
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// Refers to the keys of the *types* object below.
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        primaryType<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;Mail&#39;</span>,
+</span></span><span style=display:flex><span>        types<span style=color:#ff79c6>:</span> {
+</span></span><span style=display:flex><span>            <span style=color:#6272a4>// TODO: Clarify if EIP712Domain refers to the domain the contract is hosted on
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>            EIP712Domain<span style=color:#ff79c6>:</span> [
+</span></span><span style=display:flex><span>                {name<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;name&#39;</span>, type<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;string&#39;</span>},
+</span></span><span style=display:flex><span>                {name<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;version&#39;</span>, type<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;string&#39;</span>},
+</span></span><span style=display:flex><span>                {name<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;chainId&#39;</span>, type<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;uint256&#39;</span>}
+</span></span><span style=display:flex><span>            ],
+</span></span><span style=display:flex><span>            <span style=color:#6272a4>// Not an EIP712Domain definition
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>            <span style=color:#6272a4>// Refer to PrimaryType
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>            Mail<span style=color:#ff79c6>:</span> [
+</span></span><span style=display:flex><span>                {name<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;email&#39;</span>, type<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;string&#39;</span>},
+</span></span><span style=display:flex><span>                {name<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;key&#39;</span>, type<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;uint256&#39;</span>},
+</span></span><span style=display:flex><span>            ],
+</span></span><span style=display:flex><span>            <span style=color:#6272a4>// Not an EIP712Domain definition
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        },
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>const</span> accounts <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>await</span> ethereum.request({method<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;eth_accounts&#39;</span>});
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>var</span> from <span style=color:#ff79c6>=</span> accounts[<span style=color:#bd93f9>0</span>];
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>var</span> params <span style=color:#ff79c6>=</span> [from, msgParams];
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>var</span> method <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;eth_signTypedData_v4&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    web3.currentProvider.sendAsync(
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            method,
+</span></span><span style=display:flex><span>            params,
+</span></span><span style=display:flex><span>            from,
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>function</span> (err, result) {
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>if</span> (err) <span style=color:#ff79c6>return</span> console.dir(err);
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>if</span> (result.error) {
+</span></span><span style=display:flex><span>                alert(result.error.message);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>if</span> (result.error) <span style=color:#ff79c6>return</span> console.error(<span style=color:#f1fa8c>&#39;ERROR&#39;</span>, result);
+</span></span><span style=display:flex><span>            console.log(result)
+</span></span><span style=display:flex><span>            console.log(<span style=color:#f1fa8c>&#39;TYPED SIGNED:&#39;</span> <span style=color:#ff79c6>+</span> JSON.stringify(result.result));
+</span></span><span style=display:flex><span>            <span style=color:#6272a4>//获得签名发送给后端 登录 功能接口
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        }
+</span></span><span style=display:flex><span>    );
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span> <span style=color:#ff79c6>&lt;</span>/script&gt;
+</span></span></code></pre></td></tr></table></div></div><h3 id=golang>
+Golang
+<a class=heading-link href=#golang>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h3><p>Import Package</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#ff79c6>import</span> (
+</span></span><span style=display:flex><span>	<span style=color:#f1fa8c>&#34;fmt&#34;</span>
+</span></span><span style=display:flex><span>	<span style=color:#f1fa8c>&#34;github.com/ethereum/go-ethereum/common/hexutil&#34;</span>
+</span></span><span style=display:flex><span>	<span style=color:#f1fa8c>&#34;github.com/ethereum/go-ethereum/common/math&#34;</span>
+</span></span><span style=display:flex><span>	<span style=color:#f1fa8c>&#34;github.com/ethereum/go-ethereum/crypto&#34;</span>
+</span></span><span style=display:flex><span>	<span style=color:#f1fa8c>&#34;github.com/ethereum/go-ethereum/signer/core/apitypes&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></td></tr></table></div></div><p>Main</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">56
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>func</span> <span style=color:#50fa7b>main</span>()  {
+</span></span><span style=display:flex><span>	td <span style=color:#ff79c6>:=</span> apitypes.TypedData{
+</span></span><span style=display:flex><span>		Domain: apitypes.TypedDataDomain{
+</span></span><span style=display:flex><span>			Name: <span style=color:#f1fa8c>&#34;testSign&#34;</span>,
+</span></span><span style=display:flex><span>			ChainId: math.<span style=color:#50fa7b>NewHexOrDecimal256</span>(<span style=color:#bd93f9>1</span>),
+</span></span><span style=display:flex><span>			Version: <span style=color:#f1fa8c>&#34;1&#34;</span>,
+</span></span><span style=display:flex><span>		},
+</span></span><span style=display:flex><span>		Types: apitypes.Types{
+</span></span><span style=display:flex><span>			<span style=color:#f1fa8c>&#34;EIP712Domain&#34;</span>: {
+</span></span><span style=display:flex><span>				{Name: <span style=color:#f1fa8c>&#34;name&#34;</span>, Type: <span style=color:#f1fa8c>&#34;string&#34;</span>},
+</span></span><span style=display:flex><span>				{Name: <span style=color:#f1fa8c>&#34;version&#34;</span>, Type: <span style=color:#f1fa8c>&#34;string&#34;</span>},
+</span></span><span style=display:flex><span>				{Name: <span style=color:#f1fa8c>&#34;chainId&#34;</span>, Type: <span style=color:#f1fa8c>&#34;uint256&#34;</span>},
+</span></span><span style=display:flex><span>			},
+</span></span><span style=display:flex><span>			<span style=color:#f1fa8c>&#34;Mail&#34;</span> : []apitypes.Type{
+</span></span><span style=display:flex><span>				{Name: <span style=color:#f1fa8c>&#34;email&#34;</span>, Type: <span style=color:#f1fa8c>&#34;string&#34;</span>},
+</span></span><span style=display:flex><span>        {Name: <span style=color:#f1fa8c>&#34;key&#34;</span>, Type: <span style=color:#f1fa8c>&#34;uint256&#34;</span>},
+</span></span><span style=display:flex><span>			},
+</span></span><span style=display:flex><span>		},
+</span></span><span style=display:flex><span>		Message: apitypes.TypedDataMessage{
+</span></span><span style=display:flex><span>			<span style=color:#f1fa8c>&#34;email&#34;</span>: <span style=color:#f1fa8c>&#34;test@test.com&#34;</span>,
+</span></span><span style=display:flex><span>      <span style=color:#f1fa8c>&#34;key&#34;</span>: <span style=color:#bd93f9>123456</span>
+</span></span><span style=display:flex><span>		},
+</span></span><span style=display:flex><span>		PrimaryType: <span style=color:#f1fa8c>&#34;Mail&#34;</span>,
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#6272a4>//前端提交的签名
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>	incomingMetamaskSignature <span style=color:#ff79c6>:=</span> <span style=color:#f1fa8c>&#34;0xeb09063ff......f191c&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#6272a4>//前端提交的钱包地址
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>  walletAddress <span style=color:#ff79c6>:=</span> <span style=color:#f1fa8c>&#34;0x0296c8d68d3dd2df631F740BB13C2583Ca4741B0&#34;</span>
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>	typedDataHash,_ <span style=color:#ff79c6>:=</span> td.<span style=color:#50fa7b>HashStruct</span>(td.PrimaryType,td.Message)
+</span></span><span style=display:flex><span>	domainSeparator, _ <span style=color:#ff79c6>:=</span> td.<span style=color:#50fa7b>HashStruct</span>(<span style=color:#f1fa8c>&#34;EIP712Domain&#34;</span>, td.Domain.<span style=color:#50fa7b>Map</span>())
+</span></span><span style=display:flex><span>	rawData <span style=color:#ff79c6>:=</span> []<span style=color:#8be9fd;font-style:italic>byte</span>(fmt.<span style=color:#50fa7b>Sprintf</span>(<span style=color:#f1fa8c>&#34;\x19\x01%s%s&#34;</span>, <span style=color:#8be9fd;font-style:italic>string</span>(domainSeparator), <span style=color:#8be9fd;font-style:italic>string</span>(typedDataHash)))
+</span></span><span style=display:flex><span>	dataHash <span style=color:#ff79c6>:=</span> crypto.<span style=color:#50fa7b>Keccak256Hash</span>(rawData)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	signature <span style=color:#ff79c6>:=</span> hexutil.<span style=color:#50fa7b>MustDecode</span>(incomingMetamaskSignature)
+</span></span><span style=display:flex><span>	<span style=color:#ff79c6>if</span> <span style=color:#8be9fd;font-style:italic>len</span>(signature) <span style=color:#ff79c6>!=</span> <span style=color:#bd93f9>65</span> {
+</span></span><span style=display:flex><span>		fmt.<span style=color:#50fa7b>Println</span>(<span style=color:#f1fa8c>&#34;invalid signature length: %d&#34;</span>, <span style=color:#8be9fd;font-style:italic>len</span>(signature))
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	<span style=color:#ff79c6>if</span> signature[<span style=color:#bd93f9>64</span>] <span style=color:#ff79c6>!=</span> <span style=color:#bd93f9>27</span> <span style=color:#ff79c6>&amp;&amp;</span> signature[<span style=color:#bd93f9>64</span>] <span style=color:#ff79c6>!=</span> <span style=color:#bd93f9>28</span> {
+</span></span><span style=display:flex><span>		fmt.<span style=color:#50fa7b>Println</span>(<span style=color:#f1fa8c>&#34;invalid recovery id: %d&#34;</span>, signature[<span style=color:#bd93f9>64</span>])
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	signature[<span style=color:#bd93f9>64</span>] <span style=color:#ff79c6>-=</span> <span style=color:#bd93f9>27</span>
+</span></span><span style=display:flex><span>	pubKey,err <span style=color:#ff79c6>:=</span> crypto.<span style=color:#50fa7b>SigToPub</span>(dataHash.<span style=color:#50fa7b>Bytes</span>(), signature)
+</span></span><span style=display:flex><span>	<span style=color:#ff79c6>if</span> err <span style=color:#ff79c6>!=</span> <span style=color:#ff79c6>nil</span> {
+</span></span><span style=display:flex><span>		fmt.<span style=color:#50fa7b>Println</span>(<span style=color:#f1fa8c>&#34;invalid signature: %s&#34;</span>, err.<span style=color:#50fa7b>Error</span>())
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	recoveredAddr <span style=color:#ff79c6>:=</span> crypto.<span style=color:#50fa7b>PubkeyToAddress</span>(<span style=color:#ff79c6>*</span>pubKey)
+</span></span><span style=display:flex><span>	fmt.<span style=color:#50fa7b>Println</span>(recoveredAddr.<span style=color:#50fa7b>String</span>())
+</span></span><span style=display:flex><span>	<span style=color:#ff79c6>if</span> recoveredAddr.<span style=color:#50fa7b>String</span>() <span style=color:#ff79c6>==</span> walletAddress {
+</span></span><span style=display:flex><span>		<span style=color:#6272a4>//Success
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>    fmt.<span style=color:#50fa7b>Println</span>(<span style=color:#f1fa8c>&#34;verify success!&#34;</span>)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>  fmt.<span style=color:#50fa7b>Println</span>(<span style=color:#f1fa8c>&#34;verify error!&#34;</span>)
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div></div><footer>
+</footer></article></section></div><footer class=footer>
+<section class=container>
+©
+2019 -
+2022
+郭超超
+·
+技术支持 <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
+</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NK08XEDHKZ"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script>
+</body></html>
