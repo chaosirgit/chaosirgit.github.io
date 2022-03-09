@@ -31,7 +31,7 @@ H5 Spine 动画运行库 · 郭超超的博客
 <link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16>
 <link rel=apple-touch-icon href=/images/apple-touch-icon.png>
 <link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png>
-<meta name=generator content="Hugo 0.93.2">
+<meta name=generator content="Hugo 0.93.3">
 </head><body class="preload-transitions colorscheme-dark">
 <div class=float-container>
 <a id=dark-mode-toggle class=colorscheme-toggle>
@@ -229,10 +229,10 @@ JS
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        <span style=color:#8be9fd;font-style:italic>document</span>.getElementById(<span style=color:#f1fa8c>&#34;pixi2&#34;</span>).appendChild(app.view);
 </span></span><span style=display:flex><span>        <span style=color:#6272a4>// TODO 路径暂时写死
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        app.loader
-</span></span><span style=display:flex><span>            .add(<span style=color:#f1fa8c>&#39;bxie&#39;</span>, <span style=color:#f1fa8c>&#39;https://api.bxieinfinity.com/storage/bxies/bxie.json&#39;</span>)
+</span></span><span style=display:flex><span>            .add(<span style=color:#f1fa8c>&#39;test&#39;</span>, <span style=color:#f1fa8c>&#39;https://api.test.com/storage/pt/no1.json&#39;</span>)
 </span></span><span style=display:flex><span>            .load(<span style=color:#8be9fd;font-style:italic>function</span> (loader, resources) {
 </span></span><span style=display:flex><span>              console.log(resources)
-</span></span><span style=display:flex><span>              <span style=color:#ff79c6>const</span> animation <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>new</span> PIXI.spine.Spine(resources.bxie.spineData);
+</span></span><span style=display:flex><span>              <span style=color:#ff79c6>const</span> animation <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>new</span> PIXI.spine.Spine(resources.test.spineData);
 </span></span><span style=display:flex><span>              animation.x <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>400</span>	<span style=color:#6272a4>//渲染对象在画布中的 x 坐标
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>              animation.y <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>400</span> <span style=color:#6272a4>//渲染对象在画布中的 y 坐标
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>              animation.width <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>300</span> <span style=color:#6272a4>//渲染对象的宽

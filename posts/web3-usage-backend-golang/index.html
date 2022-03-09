@@ -1,0 +1,394 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=color-scheme content="light dark">
+<meta name=author content="Ethan Kuo">
+<meta name=description content="How to use web3,web3 tutorial,web3 usage,send transactions using Golang|Go,DApp,decentralized,Golang read contracts">
+<meta name=keywords content="Web3,Web3.0,Eth,Blockchain,Wallet,Golang">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Web3 Usage (Backend-Golang)">
+<meta name=twitter:description content="How to use web3,web3 tutorial,web3 usage,send transactions using Golang|Go,DApp,decentralized,Golang read contracts">
+<meta property="og:title" content="Web3 Usage (Backend-Golang)">
+<meta property="og:description" content="How to use web3,web3 tutorial,web3 usage,send transactions using Golang|Go,DApp,decentralized,Golang read contracts">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.adminchao.com/posts/web3-usage-backend-golang/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-03-08T09:46:36+00:00">
+<meta property="article:modified_time" content="2022-03-08T09:46:36+00:00">
+<title>
+Web3 Usage (Backend-Golang) · Ethan Kuo Blog
+</title><link rel=canonical href=https://blog.adminchao.com/posts/web3-usage-backend-golang/>
+<link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin>
+<link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen>
+<link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen>
+<link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32>
+<link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16>
+<link rel=apple-touch-icon href=/images/apple-touch-icon.png>
+<link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png>
+<meta name=generator content="Hugo 0.93.3">
+</head><body class="preload-transitions colorscheme-dark">
+<div class=float-container>
+<a id=dark-mode-toggle class=colorscheme-toggle>
+<i class="fa fa-adjust fa-fw" aria-hidden=true></i>
+</a>
+</div><main class=wrapper>
+<nav class=navigation>
+<section class=container>
+<a class=navigation-title href=/>
+Ethan Kuo Blog
+</a>
+<input type=checkbox id=menu-toggle>
+<label class="menu-button float-right" for=menu-toggle>
+<i class="fa fa-bars fa-fw" aria-hidden=true></i>
+</label>
+<ul class=navigation-list>
+<li class=navigation-item>
+<a class=navigation-link href=/about/>About</a>
+</li><li class=navigation-item>
+<a class=navigation-link href=/posts/>Blog</a>
+</li><li class=navigation-item>
+<a class=navigation-link href=/contact/>Contact me</a>
+</li><li class="navigation-item menu-separator">
+<span>|</span>
+</li><li class=navigation-item>
+<a href=https://blog.adminchao.com/zh-cn/>🇨🇳</a>
+</li></ul></section></nav><div class=content>
+<section class="container post">
+<article>
+<header>
+<div class=post-title>
+<h1 class=title>
+<a class=title-link href=https://blog.adminchao.com/posts/web3-usage-backend-golang/>
+Web3 Usage (Backend-Golang)
+</a>
+</h1></div><div class=post-meta>
+<div class=date>
+<span class=posted-on>
+<i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2022-03-08T09:46:36Z>
+2022-03-08 09:46:36
+</time>
+</span>
+<span class=reading-time>
+<i class="fa fa-clock-o" aria-hidden=true></i>
+3-minute read
+</span>
+</div><div class=categories>
+<i class="fa fa-folder" aria-hidden=true></i>
+<a href=/categories/technology/>Technology</a></div><div class=tags>
+<i class="fa fa-tag" aria-hidden=true></i>
+<span class=tag>
+<a href=/tags/web3/>Web3</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/tags/web3.0/>Web3.0</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/tags/eth/>Eth</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/tags/blockchain/>Blockchain</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/tags/wallet/>Wallet</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/tags/golang/>Golang</a>
+</span></div></div></header><div>
+<h2 id=preface>
+Preface
+<a class=heading-link href=#preface>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h2><p>I&rsquo;ve completed two DAPPs so far last year, and I have some knowledge of Web3, and this is a record of the usage of the backend library <code>go-web3</code>.</p><p><a href=https://blog.adminchao.com/posts/web3-usage-front-end/>Web3 Usage (Front-end)</a></p><p><a href=https://blog.adminchao.com/posts/web3-usage-backend-php/>Web3 Usage (Backend-PHP)</a></p><h2 id=installation>
+Installation
+<a class=heading-link href=#installation>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>go get github.com/chenzhijie/go-web<span style=color:#bd93f9>3</span>
+</span></span><span style=display:flex><span>go get github.com/chenzhijie/go-web<span style=color:#bd93f9>3</span>/types
+</span></span><span style=display:flex><span>go get github.com/ethereum/go-ethereum/common
+</span></span></code></pre></td></tr></table></div></div><h2 id=provider>
+Provider
+<a class=heading-link href=#provider>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h2><h3 id=initialization>
+Initialization
+<a class=heading-link href=#initialization>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>var</span> rpcHost = <span style=color:#f1fa8c>&#34;https://bsc-dataseed1.defibit.io&#34;</span>
+</span></span><span style=display:flex><span>Web3, err <span style=color:#ff79c6>:=</span> web3.<span style=color:#50fa7b>NewWeb3</span>(rpcHost)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>if</span> err <span style=color:#ff79c6>!=</span> <span style=color:#ff79c6>nil</span> {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>panic</span>(err)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>chainId <span style=color:#ff79c6>:=</span> <span style=color:#8be9fd;font-style:italic>int64</span>(<span style=color:#bd93f9>56</span>)
+</span></span><span style=display:flex><span>Web3.Eth.<span style=color:#50fa7b>SetChainId</span>(chainId)
+</span></span></code></pre></td></tr></table></div></div><h2 id=blockchain-interaction>
+Blockchain Interaction
+<a class=heading-link href=#blockchain-interaction>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h2><h3 id=initialization-1>
+Initialization
+<a class=heading-link href=#initialization-1>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#6272a4>// Get the public key address by private key
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span><span style=color:#8be9fd;font-style:italic>var</span> PrivateKey = <span style=color:#f1fa8c>&#34;6...............5&#34;</span>
+</span></span><span style=display:flex><span>err <span style=color:#ff79c6>:=</span> Web3.Eth.<span style=color:#50fa7b>SetAccount</span>(PrivateKey)
+</span></span><span style=display:flex><span>err <span style=color:#ff79c6>!=</span> <span style=color:#ff79c6>nil</span> {
+</span></span><span style=display:flex><span>		<span style=color:#8be9fd;font-style:italic>panic</span>(err)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>address <span style=color:#ff79c6>:=</span> Web3.Eth.<span style=color:#50fa7b>Address</span>().<span style=color:#50fa7b>String</span>()
+</span></span></code></pre></td></tr></table></div></div><h3 id=ethbsc-related-operations>
+ETH/BSC Related Operations
+<a class=heading-link href=#ethbsc-related-operations>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h3><p>Get balance by address</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span>blockNumber, err <span style=color:#ff79c6>:=</span> web3.Eth.<span style=color:#50fa7b>GetBlockNumber</span>()
+</span></span><span style=display:flex><span><span style=color:#ff79c6>if</span> err <span style=color:#ff79c6>!=</span> <span style=color:#ff79c6>nil</span> {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>panic</span>(err)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>fmt.<span style=color:#50fa7b>Println</span>(<span style=color:#f1fa8c>&#34;Current block number: &#34;</span>, blockNumber)
+</span></span><span style=display:flex><span><span style=color:#6272a4>// =&gt; Current block number:  11997285
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>balance,err <span style=color:#ff79c6>:=</span> Web3.Eth.<span style=color:#50fa7b>GetBalance</span>(Web3.Eth.<span style=color:#50fa7b>Address</span>(),<span style=color:#8be9fd;font-style:italic>new</span>(big.Int).<span style=color:#50fa7b>SetUint64</span>(blockNumber))
+</span></span><span style=display:flex><span><span style=color:#ff79c6>if</span> err <span style=color:#ff79c6>!=</span> <span style=color:#ff79c6>nil</span> {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>panic</span>(err)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>fmt.<span style=color:#50fa7b>Println</span>(balance)
+</span></span></code></pre></td></tr></table></div></div><p>Transfer</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>var</span> amount <span style=color:#8be9fd>int</span> = <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>toAddressString <span style=color:#ff79c6>:=</span> <span style=color:#f1fa8c>&#34;0x.............FF&#34;</span>
+</span></span><span style=display:flex><span>amountWei <span style=color:#ff79c6>:=</span> Web3.Utils.<span style=color:#50fa7b>ToWei</span>(<span style=color:#8be9fd;font-style:italic>float64</span>(amount))
+</span></span><span style=display:flex><span>inputData <span style=color:#ff79c6>:=</span> []<span style=color:#8be9fd;font-style:italic>byte</span>(<span style=color:#f1fa8c>&#34;&#34;</span>)
+</span></span><span style=display:flex><span>toAddress <span style=color:#ff79c6>:=</span> common.<span style=color:#50fa7b>HexToAddress</span>(toAddressString)
+</span></span><span style=display:flex><span>call <span style=color:#ff79c6>:=</span> <span style=color:#ff79c6>&amp;</span>types.CallMsg{
+</span></span><span style=display:flex><span>		From: Web3.Eth.<span style=color:#50fa7b>Address</span>(),
+</span></span><span style=display:flex><span>		To:   toAddress,
+</span></span><span style=display:flex><span>		Data: inputData,
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>gasLimit, err <span style=color:#ff79c6>:=</span> Web3.Eth.<span style=color:#50fa7b>EstimateGas</span>(call)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>if</span> err <span style=color:#ff79c6>!=</span> <span style=color:#ff79c6>nil</span> {
+</span></span><span style=display:flex><span>			<span style=color:#8be9fd;font-style:italic>panic</span>(err)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#6272a4>//send transaction
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>txHash, err <span style=color:#ff79c6>:=</span> Web3.Eth.<span style=color:#50fa7b>SyncSendRawTransaction</span>(
+</span></span><span style=display:flex><span>				toAddress,
+</span></span><span style=display:flex><span>				amountWei,
+</span></span><span style=display:flex><span>				gasLimit,
+</span></span><span style=display:flex><span>				Web3.Utils.<span style=color:#50fa7b>ToGWei</span>(<span style=color:#bd93f9>5</span>),
+</span></span><span style=display:flex><span>				inputData,
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>if</span> err <span style=color:#ff79c6>!=</span> <span style=color:#ff79c6>nil</span> {
+</span></span><span style=display:flex><span>	 <span style=color:#8be9fd;font-style:italic>panic</span>(err)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>fmt.<span style=color:#50fa7b>Printf</span>(<span style=color:#f1fa8c>&#34;[%s]Success tx hash: %v\n&#34;</span>, time.<span style=color:#50fa7b>Now</span>().<span style=color:#50fa7b>Format</span>(<span style=color:#f1fa8c>&#34;2006-01-02 15:04:05&#34;</span>), txHash.TxHash)
+</span></span></code></pre></td></tr></table></div></div><h3 id=erc20bep20-related-operations>
+ERC20/BEP20 Related Operations
+<a class=heading-link href=#erc20bep20-related-operations>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h3><p>Contract Read Method Call</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>Abi, err <span style=color:#ff79c6>:=</span> os<span style=color:#ff79c6>.</span>Open(<span style=color:#f1fa8c>&#34;/Abi.json&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>if</span> err <span style=color:#ff79c6>!=</span> nil {
+</span></span><span style=display:flex><span>	 panic(err)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>defer Abi<span style=color:#ff79c6>.</span>Close()
+</span></span><span style=display:flex><span>abiByte, _ <span style=color:#ff79c6>:=</span> ioutil<span style=color:#ff79c6>.</span>ReadAll(Abi)
+</span></span><span style=display:flex><span>ContractAddress <span style=color:#ff79c6>:=</span> <span style=color:#f1fa8c>&#34;0x.............FF&#34;</span>
+</span></span><span style=display:flex><span>contract, err <span style=color:#ff79c6>:=</span> Web3<span style=color:#ff79c6>.</span>Eth<span style=color:#ff79c6>.</span>NewContract(string(abiByte), ContractAddress)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>if</span> err <span style=color:#ff79c6>!=</span> nil {
+</span></span><span style=display:flex><span>			panic(err)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>balance, err <span style=color:#ff79c6>:=</span> contract<span style=color:#ff79c6>.</span>Call(<span style=color:#f1fa8c>&#34;balanceOf&#34;</span>, common<span style=color:#ff79c6>.</span>HexToAddress(ContractAddress))
+</span></span><span style=display:flex><span><span style=color:#ff79c6>if</span> err <span style=color:#ff79c6>!=</span> nil {
+</span></span><span style=display:flex><span>		panic(err)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>fmt<span style=color:#ff79c6>.</span>Println(balance)
+</span></span></code></pre></td></tr></table></div></div><p>Contract writing method call</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>Abi, err <span style=color:#ff79c6>:=</span> os<span style=color:#ff79c6>.</span>Open(<span style=color:#f1fa8c>&#34;/Abi.json&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>if</span> err <span style=color:#ff79c6>!=</span> nil {
+</span></span><span style=display:flex><span>	 panic(err)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>defer Abi<span style=color:#ff79c6>.</span>Close()
+</span></span><span style=display:flex><span>abiByte, _ <span style=color:#ff79c6>:=</span> ioutil<span style=color:#ff79c6>.</span>ReadAll(Abi)
+</span></span><span style=display:flex><span>ContractAddress <span style=color:#ff79c6>:=</span> <span style=color:#f1fa8c>&#34;0x.............FF&#34;</span> 
+</span></span><span style=display:flex><span>contract, err <span style=color:#ff79c6>:=</span> Web3<span style=color:#ff79c6>.</span>Eth<span style=color:#ff79c6>.</span>NewContract(string(abiByte), ContractAddress)
+</span></span><span style=display:flex><span><span style=color:#6272a4>// The difference with sending the native method is the need to add a data field, data needs to be converted to inputData HEX
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span><span style=color:#ff79c6>var</span> amount int <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>toAddressString <span style=color:#ff79c6>:=</span> <span style=color:#f1fa8c>&#34;0x.............FF&#34;</span> 
+</span></span><span style=display:flex><span>toAddress <span style=color:#ff79c6>:=</span> common<span style=color:#ff79c6>.</span>HexToAddress(toAddressString)
+</span></span><span style=display:flex><span>amountWei <span style=color:#ff79c6>:=</span> Web3<span style=color:#ff79c6>.</span>Utils<span style=color:#ff79c6>.</span>ToWei(float64(amount))
+</span></span><span style=display:flex><span>inputData <span style=color:#ff79c6>:=</span> contract<span style=color:#ff79c6>.</span>EncodeABI(<span style=color:#f1fa8c>&#34;transfer&#34;</span>, toAddress, amount)
+</span></span><span style=display:flex><span>call <span style=color:#ff79c6>:=</span> <span style=color:#ff79c6>&amp;</span>types<span style=color:#ff79c6>.</span>CallMsg{
+</span></span><span style=display:flex><span>		From<span style=color:#ff79c6>:</span> Web3<span style=color:#ff79c6>.</span>Eth<span style=color:#ff79c6>.</span>Address(),
+</span></span><span style=display:flex><span>		To<span style=color:#ff79c6>:</span>   toAddress,
+</span></span><span style=display:flex><span>		Data<span style=color:#ff79c6>:</span> inputData,
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#6272a4>//send transaction - get Gaslimit
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>gasLimit, err <span style=color:#ff79c6>:=</span> Web3<span style=color:#ff79c6>.</span>Eth<span style=color:#ff79c6>.</span>EstimateGas(call)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>if</span> err <span style=color:#ff79c6>!=</span> nil {
+</span></span><span style=display:flex><span>			panic(err)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#6272a4>//send transaction
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>txHash, err <span style=color:#ff79c6>:=</span> Web3<span style=color:#ff79c6>.</span>Eth<span style=color:#ff79c6>.</span>SyncSendRawTransaction(
+</span></span><span style=display:flex><span>				common<span style=color:#ff79c6>.</span>HexToAddress(ContractAddress),
+</span></span><span style=display:flex><span>				big<span style=color:#ff79c6>.</span>NewInt(<span style=color:#bd93f9>0</span>),
+</span></span><span style=display:flex><span>				gasLimit,
+</span></span><span style=display:flex><span>				Web3<span style=color:#ff79c6>.</span>Utils<span style=color:#ff79c6>.</span>ToGWei(<span style=color:#bd93f9>5</span>),
+</span></span><span style=display:flex><span>				inputData,
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>if</span> err <span style=color:#ff79c6>!=</span> nil {
+</span></span><span style=display:flex><span>	 panic(err)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>fmt<span style=color:#ff79c6>.</span>Printf(<span style=color:#f1fa8c>&#34;[%s]Success tx hash: %v</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, time<span style=color:#ff79c6>.</span>Now()<span style=color:#ff79c6>.</span>Format(<span style=color:#f1fa8c>&#34;2006-01-02 15:04:05&#34;</span>), txHash<span style=color:#ff79c6>.</span>TxHash)
+</span></span></code></pre></td></tr></table></div></div></div><footer>
+</footer></article></section></div><footer class=footer>
+<section class=container>
+©
+2019 -
+2022
+Ethan Kuo
+·
+Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
+</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NK08XEDHKZ"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script>
+</body></html>

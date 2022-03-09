@@ -1,0 +1,976 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=color-scheme content="light dark">
+<meta name=author content="Ethan Kuo">
+<meta name=description content="How to use web3.js,web3 Tutorial,web3 Usage,Authorized Wallet,Metamask,WalletConnect,DApp,Decentralization">
+<meta name=keywords content="Web3,ETH,WalletConnect,Wallet,Blockchain">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Web3 Usage (Front-end)">
+<meta name=twitter:description content="How to use web3.js,web3 Tutorial,web3 Usage,Authorized Wallet,Metamask,WalletConnect,DApp,Decentralization">
+<meta property="og:title" content="Web3 Usage (Front-end)">
+<meta property="og:description" content="How to use web3.js,web3 Tutorial,web3 Usage,Authorized Wallet,Metamask,WalletConnect,DApp,Decentralization">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.adminchao.com/posts/web3-usage-front-end/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-03-06T15:21:19+00:00">
+<meta property="article:modified_time" content="2022-03-06T15:21:19+00:00">
+<title>
+Web3 Usage (Front-end) · Ethan Kuo Blog
+</title><link rel=canonical href=https://blog.adminchao.com/posts/web3-usage-front-end/>
+<link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin>
+<link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen>
+<link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen>
+<link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32>
+<link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16>
+<link rel=apple-touch-icon href=/images/apple-touch-icon.png>
+<link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png>
+<meta name=generator content="Hugo 0.93.3">
+</head><body class="preload-transitions colorscheme-dark">
+<div class=float-container>
+<a id=dark-mode-toggle class=colorscheme-toggle>
+<i class="fa fa-adjust fa-fw" aria-hidden=true></i>
+</a>
+</div><main class=wrapper>
+<nav class=navigation>
+<section class=container>
+<a class=navigation-title href=/>
+Ethan Kuo Blog
+</a>
+<input type=checkbox id=menu-toggle>
+<label class="menu-button float-right" for=menu-toggle>
+<i class="fa fa-bars fa-fw" aria-hidden=true></i>
+</label>
+<ul class=navigation-list>
+<li class=navigation-item>
+<a class=navigation-link href=/about/>About</a>
+</li><li class=navigation-item>
+<a class=navigation-link href=/posts/>Blog</a>
+</li><li class=navigation-item>
+<a class=navigation-link href=/contact/>Contact me</a>
+</li><li class="navigation-item menu-separator">
+<span>|</span>
+</li><li class=navigation-item>
+<a href=https://blog.adminchao.com/zh-cn/>🇨🇳</a>
+</li></ul></section></nav><div class=content>
+<section class="container post">
+<article>
+<header>
+<div class=post-title>
+<h1 class=title>
+<a class=title-link href=https://blog.adminchao.com/posts/web3-usage-front-end/>
+Web3 Usage (Front-end)
+</a>
+</h1></div><div class=post-meta>
+<div class=date>
+<span class=posted-on>
+<i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2022-03-06T15:21:19Z>
+2022-03-06 15:21:19
+</time>
+</span>
+<span class=reading-time>
+<i class="fa fa-clock-o" aria-hidden=true></i>
+6-minute read
+</span>
+</div><div class=categories>
+<i class="fa fa-folder" aria-hidden=true></i>
+<a href=/categories/technology/>Technology</a></div><div class=tags>
+<i class="fa fa-tag" aria-hidden=true></i>
+<span class=tag>
+<a href=/tags/web3/>Web3</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/tags/eth/>ETH</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/tags/walletconnect/>WalletConnect</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/tags/wallet/>Wallet</a>
+</span>
+<span class=separator>•</span>
+<span class=tag>
+<a href=/tags/blockchain/>Blockchain</a>
+</span></div></div></header><div>
+<h2 id=preface>
+Preface
+<a class=heading-link href=#preface>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h2><p>I&rsquo;ve completed two DAPPs so far last year, and I have some knowledge of Web3, and this is a record of the usage of the front-end library <code>web3.js</code>.</p><p><a href=https://blog.adminchao.com/posts/web3-usage-backend-php/>Web3 Usage (Backend-PHP)</a></p><p><a href=https://blog.adminchao.com/posts/web3-usage-backend-golang/>Web3 Usage (Backend-Golang)</a></p><h2 id=installation>
+Installation
+<a class=heading-link href=#installation>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>npm install web3
+</span></span></code></pre></td></tr></table></div></div><p>WalletConnect for mobile use</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>npm install @walletconnect/web3-provider
+</span></span></code></pre></td></tr></table></div></div><h2 id=provider>
+Provider
+<a class=heading-link href=#provider>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h2><p>Providers are generally called when interacting with the wallet, as well as listening to some events</p><h3 id=initialization>
+Initialization
+<a class=heading-link href=#initialization>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>        <span style=color:#ff79c6>if</span> (<span style=color:#8be9fd;font-style:italic>window</span>.ethereum){		<span style=color:#6272a4>//New version of the Metamask priority use
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>            <span style=color:#ff79c6>this</span>.walletProvider <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>window</span>.ethereum
+</span></span><span style=display:flex><span>        }<span style=color:#ff79c6>else</span> <span style=color:#ff79c6>if</span> (<span style=color:#8be9fd;font-style:italic>window</span>.web3){	 <span style=color:#6272a4>//Use the old version Metamask
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>            <span style=color:#ff79c6>this</span>.walletProvider <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>window</span>.web3.currentProvider
+</span></span><span style=display:flex><span>        }<span style=color:#ff79c6>else</span>{		<span style=color:#6272a4>//Use WalletConnect
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>            <span style=color:#ff79c6>this</span>.walletProvider <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>new</span> WalletConnectProvider({
+</span></span><span style=display:flex><span>                rpc<span style=color:#ff79c6>:</span> {
+</span></span><span style=display:flex><span>                    <span style=color:#6272a4>// 56: &#34;https://bsc-dataseed.binance.org&#34;
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    <span style=color:#bd93f9>97</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;https://data-seed-prebsc-1-s1.binance.org:8545&#34;</span>
+</span></span><span style=display:flex><span>                },
+</span></span><span style=display:flex><span>                <span style=color:#6272a4>// network: &#39;binance&#39;,
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                network<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;BSC Testnet&#39;</span>,
+</span></span><span style=display:flex><span>                chainId<span style=color:#ff79c6>:</span> <span style=color:#bd93f9>97</span>,
+</span></span><span style=display:flex><span>                clientMeta<span style=color:#ff79c6>:</span> {
+</span></span><span style=display:flex><span>                    description <span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;This is test&#39;</span>,
+</span></span><span style=display:flex><span>                    name<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;Dapp&#39;</span>,
+</span></span><span style=display:flex><span>                    icons <span style=color:#ff79c6>:</span> [<span style=color:#f1fa8c>&#39;https://dapp.cc/favicon.ico&#39;</span>,<span style=color:#f1fa8c>&#39;https://dapp.cc/img/fav-icon.svg&#39;</span>]
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            })
+</span></span><span style=display:flex><span>        }
+</span></span></code></pre></td></tr></table></div></div><h3 id=defining-provider-listening-events>
+Defining Provider Listening Events
+<a class=heading-link href=#defining-provider-listening-events>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>this</span>.walletProvider.on(<span style=color:#f1fa8c>&#34;disconnect&#34;</span>, (code, reason) =&gt; {
+</span></span><span style=display:flex><span>		     
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>this</span>.walletProvider.on(<span style=color:#f1fa8c>&#34;accountsChanged&#34;</span>, (accounts) =&gt; {
+</span></span><span style=display:flex><span>     <span style=color:#ff79c6>this</span>.account <span style=color:#ff79c6>=</span> accounts[<span style=color:#bd93f9>0</span>]
+</span></span><span style=display:flex><span>  	
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>this</span>.walletProvider.on(<span style=color:#f1fa8c>&#34;chainChanged&#34;</span>, (chainId) =&gt; {
+</span></span><span style=display:flex><span>     
+</span></span><span style=display:flex><span>     <span style=color:#ff79c6>if</span> (chainId <span style=color:#ff79c6>!==</span> <span style=color:#bd93f9>97</span>){
+</span></span><span style=display:flex><span>           <span style=color:#ff79c6>this</span>.$message.error(<span style=color:#f1fa8c>&#34;Please switch to Binance Smart Chain&#34;</span>)
+</span></span><span style=display:flex><span>           <span style=color:#ff79c6>return</span> <span style=color:#ff79c6>false</span>
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>});
+</span></span></code></pre></td></tr></table></div></div><h3 id=wallet-authorization>
+Wallet authorization
+<a class=heading-link href=#wallet-authorization>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>try</span>{
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>await</span> <span style=color:#ff79c6>this</span>.walletProvider.enable()
+</span></span><span style=display:flex><span>}<span style=color:#ff79c6>catch</span> (err){ <span style=color:#6272a4>//Canceling wallet authorization will throw an exception
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>    <span style=color:#ff79c6>if</span> (err <span style=color:#ff79c6>!==</span> <span style=color:#ff79c6>undefined</span>){
+</span></span><span style=display:flex><span>    		<span style=color:#ff79c6>this</span>.$message.error(<span style=color:#f1fa8c>&#39;Cancel authorization!&#39;</span>)
+</span></span><span style=display:flex><span>    		<span style=color:#ff79c6>return</span>
+</span></span><span style=display:flex><span>		}
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div><h2 id=blockchain-interaction>
+Blockchain Interaction
+<a class=heading-link href=#blockchain-interaction>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h2><h3 id=initialization-1>
+Initialization
+<a class=heading-link href=#initialization-1>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>this</span>.web3 <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>new</span> Web3(<span style=color:#ff79c6>this</span>.walletProvider)
+</span></span></code></pre></td></tr></table></div></div><h3 id=high-precision-calculations>
+High precision calculations
+<a class=heading-link href=#high-precision-calculations>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>npm install <span style=color:#ff79c6>--</span>save decimal.js
+</span></span><span style=display:flex><span><span style=color:#ff79c6>import</span> { Decimal } from <span style=color:#f1fa8c>&#34;decimal.js&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=ethbsc-related-operations>
+ETH/BSC Related Operations
+<a class=heading-link href=#ethbsc-related-operations>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h3><h4 id=get-wallet-address>
+Get wallet address
+<a class=heading-link href=#get-wallet-address>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> accounts <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>await</span> <span style=color:#ff79c6>this</span>.web3.eth.getAccounts()
+</span></span><span style=display:flex><span><span style=color:#6272a4>//return
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>//[&#34;0x6D3121Ea2FF3E882b245c45fACC0eFd82B5Bd908&#34;,&#34;0x6D3121Ea2FF3E882b245c45fACC0eFd82B5Bd908&#34;]
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=get-balance-by-address>
+Get balance by address
+<a class=heading-link href=#get-balance-by-address>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> balance <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>await</span> <span style=color:#ff79c6>this</span>.web3.eth.getBalance(<span style=color:#ff79c6>this</span>.account[<span style=color:#bd93f9>0</span>])
+</span></span><span style=display:flex><span><span style=color:#6272a4>//return
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>//1000000000000000000
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>//Formatting the display requires dividing by 1e+18
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>// 1.0000
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=get-the-chain-id>
+Get the chain ID
+<a class=heading-link href=#get-the-chain-id>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> currentChainId <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>await</span> <span style=color:#ff79c6>this</span>.web3.eth.getChainId()
+</span></span><span style=display:flex><span><span style=color:#6272a4>//return
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>// 97
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=transfer>
+Transfer
+<a class=heading-link href=#transfer>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>this</span>.web3.eth.sendTransaction({
+</span></span><span style=display:flex><span>    from<span style=color:#ff79c6>:</span> accounts[<span style=color:#bd93f9>0</span>], 
+</span></span><span style=display:flex><span>    to<span style=color:#ff79c6>:</span> Address,	
+</span></span><span style=display:flex><span>    value<span style=color:#ff79c6>:</span> <span style=color:#ff79c6>new</span> Decimal(<span style=color:#bd93f9>0.12</span>).mul(<span style=color:#ff79c6>new</span> Decimal(<span style=color:#ff79c6>this</span>.bnbDecimal)).toNumber().toFixed(<span style=color:#bd93f9>0</span>), <span style=color:#6272a4>// IntString
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>}).on(<span style=color:#f1fa8c>&#39;transactionHash&#39;</span>,  (hash) =&gt; {
+</span></span><span style=display:flex><span>  			<span style=color:#6272a4>// transaction is issued and a valid transaction HASH is obtained - return hash
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>  			console.log(hash) <span style=color:#6272a4>//String
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>}).on(<span style=color:#f1fa8c>&#39;receipt&#39;</span>, (receipt) =&gt; {
+</span></span><span style=display:flex><span>  			<span style=color:#6272a4>// Triggered immediately upon receipt of transaction receipt
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>				console.log(receipt) <span style=color:#6272a4>//Object-Receipt object
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>}).on(<span style=color:#f1fa8c>&#39;confirmation&#39;</span>, (confirmationNumber, receipt) =&gt; {
+</span></span><span style=display:flex><span>				<span style=color:#6272a4>// Triggered immediately after each in-chain confirmation - up to 12 confirmations
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>  			console.log(confirmationNumber) <span style=color:#6272a4>//Int-0 confirmation start
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>  			console.log(receipt) <span style=color:#6272a4>//Object-Receipt object
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>}).on(<span style=color:#f1fa8c>&#39;error&#39;</span>, (err) =&gt; {
+</span></span><span style=display:flex><span>				<span style=color:#6272a4>// Triggered immediately by an error during the transaction, if the transaction is rejected by the network with a transaction receipt, then err is the transaction receipt
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>  			console.log(err)
+</span></span><span style=display:flex><span>});
+</span></span></code></pre></td></tr></table></div></div><h3 id=erc20bep20-related-operations>
+ERC20/BEP20 Related Operations
+<a class=heading-link href=#erc20bep20-related-operations>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h3><p><strong>Read with <code>call()</code> Write with <code>send()</code></strong></p><p>First you need to import the Abi JSON of the smart contract</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>import</span> ABI from <span style=color:#f1fa8c>&#34;../abi.json&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=instantiating-smart-contracts>
+Instantiating Smart Contracts
+<a class=heading-link href=#instantiating-smart-contracts>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> ContractAddress <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;0x6D3121Ea2FF3E882b245c45fACC0eFd82B5Bd908&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>const</span> myContract <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>new</span> <span style=color:#ff79c6>this</span>.web3.eth.Contract(ABI, ContractAddress)
+</span></span></code></pre></td></tr></table></div></div><h4 id=get-the-remaining-value-of-the-license>
+Get the remaining value of the license
+<a class=heading-link href=#get-the-remaining-value-of-the-license>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> officeContractAddress <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;0x72............FF&#34;</span> <span style=color:#6272a4>// Trading Contract Address
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span><span style=color:#ff79c6>const</span> approveValue <span style=color:#ff79c6>=</span>  <span style=color:#ff79c6>await</span> myContract.methods.allowance(account,officeContractAddress).call()
+</span></span><span style=display:flex><span><span style=color:#6272a4>// This method is meant to query how much of myContract&#39;s tokens are left for the transactions authorized by the smart contract officeContractAddress
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>// return
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>// 10000000000000000000000
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=authorized-manageable-assets>
+Authorized Manageable Assets
+<a class=heading-link href=#authorized-manageable-assets>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> value <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;1000000000000000000&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>const</span> isApprove <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>await</span> myContract.methods.approve(officeContractAddress,value).send({
+</span></span><span style=display:flex><span>                			<span style=color:#f1fa8c>&#34;from&#34;</span><span style=color:#ff79c6>:</span> account 
+</span></span><span style=display:flex><span>            			})
+</span></span><span style=display:flex><span><span style=color:#6272a4>// This method means that the myContract token adds value to the officeContractAddress smart contract to authorize transactions
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>//Maximum value: new Decimal(2).pow(256).sub(1).toFixed()
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>//return
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>// Object
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=get-erc20bep20-balance>
+Get ERC20/BEP20 balance
+<a class=heading-link href=#get-erc20bep20-balance>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> erc20Balance <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>await</span> myContract.methods.balanceOf(account).call()
+</span></span><span style=display:flex><span><span style=color:#6272a4>// &#39;1000000000000000000&#39;
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=erc20bep20-transfer>
+ERC20/BEP20 transfer
+<a class=heading-link href=#erc20bep20-transfer>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> to <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;0x................CC&#39;</span> <span style=color:#6272a4>//Address
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span><span style=color:#ff79c6>const</span> transahctionHash <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>await</span> myContract.methods.transfer(to,amount).send({
+</span></span><span style=display:flex><span>  														from<span style=color:#ff79c6>:</span> <span style=color:#ff79c6>this</span>.account,
+</span></span><span style=display:flex><span>													})
+</span></span></code></pre></td></tr></table></div></div><h4 id=calling-methods-in-smart-contracts>
+Calling methods in smart contracts
+<a class=heading-link href=#calling-methods-in-smart-contracts>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#6272a4>// params id: Parameters defined in the contract
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span><span style=color:#ff79c6>const</span> info <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>await</span> myContract.methods.getInfo(id).call()
+</span></span></code></pre></td></tr></table></div></div><h4 id=send-ethbsc-to-the-contract>
+Send ETH/BSC to the contract
+<a class=heading-link href=#send-ethbsc-to-the-contract>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> value <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;1000000000000000000&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// params id: Parameters defined in the contract
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span><span style=color:#ff79c6>const</span> mining <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>await</span> myContract.methods.mining(id,value).send({
+</span></span><span style=display:flex><span>                        from<span style=color:#ff79c6>:</span> <span style=color:#ff79c6>this</span>.account, 
+</span></span><span style=display:flex><span>                        value<span style=color:#ff79c6>:</span> value <span style=color:#6272a4>//Send to contract for native coins
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span>               })
+</span></span></code></pre></td></tr></table></div></div><h2 id=attachment>
+Attachment
+<a class=heading-link href=#attachment>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h2><h3 id=get-verified-abi>
+Get verified ABI
+<a class=heading-link href=#get-verified-abi>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>https://api.bscscan.com/api?module<span style=color:#ff79c6>=</span>contract&amp;<span style=color:#8be9fd;font-style:italic>action</span><span style=color:#ff79c6>=</span>getabi&amp;<span style=color:#8be9fd;font-style:italic>address</span><span style=color:#ff79c6>=</span>0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82
+</span></span></code></pre></td></tr></table></div></div><h3 id=test-bnb-collection-address>
+Test BNB Collection Address
+<a class=heading-link href=#test-bnb-collection-address>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>https://testnet.binance.org/faucet-smart
+</span></span></code></pre></td></tr></table></div></div><h3 id=erc20bep20-standard-abi>
+ERC20/BEP20 Standard ABI
+<a class=heading-link href=#erc20bep20-standard-abi>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 24
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 25
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 26
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 27
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 28
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 29
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 30
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 31
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 32
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 33
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 34
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 35
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 36
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 37
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 38
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 39
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 40
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 41
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 42
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 43
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 44
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 45
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 46
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 47
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 48
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 49
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 50
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 51
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 52
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 53
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 54
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 55
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 56
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 57
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 58
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 59
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 60
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 61
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 62
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 63
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 64
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 65
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 66
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 67
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 68
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 69
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 70
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 71
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 72
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 73
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 74
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 75
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 76
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 77
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 78
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 79
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 80
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 81
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 82
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 83
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 84
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 85
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 86
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 87
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 88
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 89
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 90
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 91
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 92
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 93
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 94
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 95
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 96
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 97
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 98
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 99
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">100
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">101
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">102
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">103
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">104
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">105
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">106
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">107
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">108
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">109
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">110
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">111
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">112
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">113
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">114
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">115
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">116
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">117
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">118
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">119
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">120
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">121
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">122
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">123
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">124
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">125
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">126
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">127
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">128
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">129
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">130
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">131
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">132
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">133
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">134
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">135
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">136
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">137
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">138
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">139
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">140
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">141
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">142
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">143
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">144
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">145
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">146
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">147
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">148
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">149
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">150
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">151
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">152
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">153
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">154
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">155
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">156
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">157
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">158
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">159
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">160
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">161
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">162
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">163
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">164
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">165
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">166
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">167
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">168
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">169
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">170
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">171
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">172
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">173
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">174
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">175
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">176
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">177
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">178
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">179
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">180
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">181
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">182
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">183
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">184
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">185
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">186
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">187
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">188
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">189
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">190
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">191
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">192
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">193
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">194
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">195
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">196
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">197
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">198
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">199
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">200
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">201
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">202
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">203
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">204
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">205
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">206
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">207
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">208
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">209
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">210
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">211
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">212
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">213
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">214
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">215
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">216
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">217
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">218
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">219
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">220
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">221
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">222
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>[
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;constant&#34;</span>: <span style=color:#ff79c6>true</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;inputs&#34;</span>: [],
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;name&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;outputs&#34;</span>: [
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;string&#34;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;payable&#34;</span>: <span style=color:#ff79c6>false</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;stateMutability&#34;</span>: <span style=color:#f1fa8c>&#34;view&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;function&#34;</span>
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;constant&#34;</span>: <span style=color:#ff79c6>false</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;inputs&#34;</span>: [
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;_spender&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;address&#34;</span>
+</span></span><span style=display:flex><span>            },
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;_value&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;uint256&#34;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;approve&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;outputs&#34;</span>: [
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;bool&#34;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;payable&#34;</span>: <span style=color:#ff79c6>false</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;stateMutability&#34;</span>: <span style=color:#f1fa8c>&#34;nonpayable&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;function&#34;</span>
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;constant&#34;</span>: <span style=color:#ff79c6>true</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;inputs&#34;</span>: [],
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;totalSupply&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;outputs&#34;</span>: [
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;uint256&#34;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;payable&#34;</span>: <span style=color:#ff79c6>false</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;stateMutability&#34;</span>: <span style=color:#f1fa8c>&#34;view&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;function&#34;</span>
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;constant&#34;</span>: <span style=color:#ff79c6>false</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;inputs&#34;</span>: [
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;_from&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;address&#34;</span>
+</span></span><span style=display:flex><span>            },
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;_to&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;address&#34;</span>
+</span></span><span style=display:flex><span>            },
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;_value&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;uint256&#34;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;transferFrom&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;outputs&#34;</span>: [
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;bool&#34;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;payable&#34;</span>: <span style=color:#ff79c6>false</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;stateMutability&#34;</span>: <span style=color:#f1fa8c>&#34;nonpayable&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;function&#34;</span>
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;constant&#34;</span>: <span style=color:#ff79c6>true</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;inputs&#34;</span>: [],
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;decimals&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;outputs&#34;</span>: [
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;uint8&#34;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;payable&#34;</span>: <span style=color:#ff79c6>false</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;stateMutability&#34;</span>: <span style=color:#f1fa8c>&#34;view&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;function&#34;</span>
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;constant&#34;</span>: <span style=color:#ff79c6>true</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;inputs&#34;</span>: [
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;_owner&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;address&#34;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;balanceOf&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;outputs&#34;</span>: [
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;balance&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;uint256&#34;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;payable&#34;</span>: <span style=color:#ff79c6>false</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;stateMutability&#34;</span>: <span style=color:#f1fa8c>&#34;view&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;function&#34;</span>
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;constant&#34;</span>: <span style=color:#ff79c6>true</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;inputs&#34;</span>: [],
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;symbol&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;outputs&#34;</span>: [
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;string&#34;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;payable&#34;</span>: <span style=color:#ff79c6>false</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;stateMutability&#34;</span>: <span style=color:#f1fa8c>&#34;view&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;function&#34;</span>
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;constant&#34;</span>: <span style=color:#ff79c6>false</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;inputs&#34;</span>: [
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;_to&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;address&#34;</span>
+</span></span><span style=display:flex><span>            },
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;_value&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;uint256&#34;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;transfer&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;outputs&#34;</span>: [
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;bool&#34;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;payable&#34;</span>: <span style=color:#ff79c6>false</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;stateMutability&#34;</span>: <span style=color:#f1fa8c>&#34;nonpayable&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;function&#34;</span>
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;constant&#34;</span>: <span style=color:#ff79c6>true</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;inputs&#34;</span>: [
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;_owner&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;address&#34;</span>
+</span></span><span style=display:flex><span>            },
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;_spender&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;address&#34;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;allowance&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;outputs&#34;</span>: [
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;uint256&#34;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;payable&#34;</span>: <span style=color:#ff79c6>false</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;stateMutability&#34;</span>: <span style=color:#f1fa8c>&#34;view&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;function&#34;</span>
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;payable&#34;</span>: <span style=color:#ff79c6>true</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;stateMutability&#34;</span>: <span style=color:#f1fa8c>&#34;payable&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;fallback&#34;</span>
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;anonymous&#34;</span>: <span style=color:#ff79c6>false</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;inputs&#34;</span>: [
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;indexed&#34;</span>: <span style=color:#ff79c6>true</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;owner&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;address&#34;</span>
+</span></span><span style=display:flex><span>            },
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;indexed&#34;</span>: <span style=color:#ff79c6>true</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;spender&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;address&#34;</span>
+</span></span><span style=display:flex><span>            },
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;indexed&#34;</span>: <span style=color:#ff79c6>false</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;value&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;uint256&#34;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;Approval&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;event&#34;</span>
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;anonymous&#34;</span>: <span style=color:#ff79c6>false</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;inputs&#34;</span>: [
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;indexed&#34;</span>: <span style=color:#ff79c6>true</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;from&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;address&#34;</span>
+</span></span><span style=display:flex><span>            },
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;indexed&#34;</span>: <span style=color:#ff79c6>true</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;to&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;address&#34;</span>
+</span></span><span style=display:flex><span>            },
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;indexed&#34;</span>: <span style=color:#ff79c6>false</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;value&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;uint256&#34;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;name&#34;</span>: <span style=color:#f1fa8c>&#34;Transfer&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;event&#34;</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>]
+</span></span></code></pre></td></tr></table></div></div><h3 id=web3js-documentation>
+Web3.js documentation
+<a class=heading-link href=#web3js-documentation>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h3><p><a href=https://web3js.readthedocs.io/en/v1.7.1/>web3.js documentation</a></p></div><footer>
+</footer></article></section></div><footer class=footer>
+<section class=container>
+©
+2019 -
+2022
+Ethan Kuo
+·
+Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
+</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NK08XEDHKZ"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script>
+</body></html>
