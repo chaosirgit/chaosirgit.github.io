@@ -1,183 +1,45 @@
-<!doctype html><html lang=en>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=color-scheme content="light dark">
-<meta name=author content="Ethan Kuo">
-<meta name=description content="H5 Spine Animation Runtime Library    Description    The runtime library version should match the version of Spine
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=color-scheme content="light dark"><meta name=author content="Ethan Kuo"><meta name=description content="H5 Spine Animation Runtime Library    Description    The runtime library version should match the version of Spine
 Running Spine 3.8 with PIXI version 5 and pixi-spine 2.1.14
-Installing Pixi V5    1  npm i pixi.js@5.3.11   Installation of Pixi-Spine    1  npm i pixi-spine@2.1.14   Import    Import pixi.js    1  import * as PIXI from &#34;pixi.">
-<meta name=keywords content="Spine,Pixi,Javascript,Animation">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="H5 Spine Animation Runtime Library">
-<meta name=twitter:description content="H5 Spine Animation Runtime Library    Description    The runtime library version should match the version of Spine
+Installing Pixi V5    1  npm i pixi.js@5.3.11   Installation of Pixi-Spine    1  npm i pixi-spine@2.1.14   Import    Import pixi.js    1  import * as PIXI from &#34;pixi."><meta name=keywords content="Spine,Pixi,Javascript,Animation"><meta name=twitter:card content="summary"><meta name=twitter:title content="H5 Spine Animation Runtime Library"><meta name=twitter:description content="H5 Spine Animation Runtime Library    Description    The runtime library version should match the version of Spine
 Running Spine 3.8 with PIXI version 5 and pixi-spine 2.1.14
-Installing Pixi V5    1  npm i pixi.js@5.3.11   Installation of Pixi-Spine    1  npm i pixi-spine@2.1.14   Import    Import pixi.js    1  import * as PIXI from &#34;pixi.">
-<meta property="og:title" content="H5 Spine Animation Runtime Library">
-<meta property="og:description" content="H5 Spine Animation Runtime Library    Description    The runtime library version should match the version of Spine
+Installing Pixi V5    1  npm i pixi.js@5.3.11   Installation of Pixi-Spine    1  npm i pixi-spine@2.1.14   Import    Import pixi.js    1  import * as PIXI from &#34;pixi."><meta property="og:title" content="H5 Spine Animation Runtime Library"><meta property="og:description" content="H5 Spine Animation Runtime Library    Description    The runtime library version should match the version of Spine
 Running Spine 3.8 with PIXI version 5 and pixi-spine 2.1.14
-Installing Pixi V5    1  npm i pixi.js@5.3.11   Installation of Pixi-Spine    1  npm i pixi-spine@2.1.14   Import    Import pixi.js    1  import * as PIXI from &#34;pixi.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://blog.adminchao.com/posts/h5-spine-animation-runtime-library/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2021-11-05T15:21:19+00:00">
-<meta property="article:modified_time" content="2021-11-05T15:21:19+00:00">
-<title>
-H5 Spine Animation Runtime Library · Ethan Kuo Blog
-</title><link rel=canonical href=https://blog.adminchao.com/posts/h5-spine-animation-runtime-library/>
-<link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin>
-<link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen>
-<link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen>
-<link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32>
-<link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16>
-<link rel=apple-touch-icon href=/images/apple-touch-icon.png>
-<link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png>
-<meta name=generator content="Hugo 0.93.3">
-</head><body class="preload-transitions colorscheme-dark">
-<div class=float-container>
-<a id=dark-mode-toggle class=colorscheme-toggle>
-<i class="fa fa-adjust fa-fw" aria-hidden=true></i>
-</a>
-</div><main class=wrapper>
-<nav class=navigation>
-<section class=container>
-<a class=navigation-title href=/>
-Ethan Kuo Blog
-</a>
+Installing Pixi V5    1  npm i pixi.js@5.3.11   Installation of Pixi-Spine    1  npm i pixi-spine@2.1.14   Import    Import pixi.js    1  import * as PIXI from &#34;pixi."><meta property="og:type" content="article"><meta property="og:url" content="https://blog.adminchao.com/posts/h5-spine-animation-runtime-library/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-11-05T15:21:19+00:00"><meta property="article:modified_time" content="2021-11-05T15:21:19+00:00"><title>H5 Spine Animation Runtime Library · Ethan Kuo Blog</title><link rel=canonical href=https://blog.adminchao.com/posts/h5-spine-animation-runtime-library/><link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin><link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen><link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen><link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16><link rel=apple-touch-icon href=/images/apple-touch-icon.png><link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png><meta name=generator content="Hugo 0.97.3"></head><body class="preload-transitions colorscheme-dark"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=/>Ethan Kuo Blog</a>
 <input type=checkbox id=menu-toggle>
-<label class="menu-button float-right" for=menu-toggle>
-<i class="fa fa-bars fa-fw" aria-hidden=true></i>
-</label>
-<ul class=navigation-list>
-<li class=navigation-item>
-<a class=navigation-link href=/about/>About</a>
-</li><li class=navigation-item>
-<a class=navigation-link href=/posts/>Blog</a>
-</li><li class=navigation-item>
-<a class=navigation-link href=/contact/>Contact me</a>
-</li><li class="navigation-item menu-separator">
-<span>|</span>
-</li><li class=navigation-item>
-<a href=https://blog.adminchao.com/zh-cn/>🇨🇳</a>
-</li></ul></section></nav><div class=content>
-<section class="container post">
-<article>
-<header>
-<div class=post-title>
-<h1 class=title>
-<a class=title-link href=https://blog.adminchao.com/posts/h5-spine-animation-runtime-library/>
-H5 Spine Animation Runtime Library
-</a>
-</h1></div><div class=post-meta>
-<div class=date>
-<span class=posted-on>
-<i class="fa fa-calendar" aria-hidden=true></i>
-<time datetime=2021-11-05T15:21:19Z>
-2021-11-05 15:21:19
-</time>
-</span>
-<span class=reading-time>
-<i class="fa fa-clock-o" aria-hidden=true></i>
-2-minute read
-</span>
-</div><div class=categories>
-<i class="fa fa-folder" aria-hidden=true></i>
-<a href=/categories/technology/>Technology</a></div><div class=tags>
-<i class="fa fa-tag" aria-hidden=true></i>
-<span class=tag>
-<a href=/tags/spine/>Spine</a>
-</span>
+<label class="menu-button float-right" for=menu-toggle><i class="fa fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=/about/>About</a></li><li class=navigation-item><a class=navigation-link href=/posts/>Blog</a></li><li class=navigation-item><a class=navigation-link href=/contact/>Contact me</a></li><li class="navigation-item menu-separator"><span>|</span></li><li class=navigation-item><a href=https://blog.adminchao.com/zh-cn/>🇨🇳</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=https://blog.adminchao.com/posts/h5-spine-animation-runtime-library/>H5 Spine Animation Runtime Library</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2021-11-05T15:21:19Z>2021-11-05 15:21:19</time></span>
+<span class=reading-time><i class="fa fa-clock-o" aria-hidden=true></i>
+2-minute read</span></div><div class=categories><i class="fa fa-folder" aria-hidden=true></i>
+<a href=/categories/technology/>Technology</a></div><div class=tags><i class="fa fa-tag" aria-hidden=true></i>
+<span class=tag><a href=/tags/spine/>Spine</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/tags/javascript/>Javascript</a>
-</span>
+<span class=tag><a href=/tags/javascript/>Javascript</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/tags/h5/>H5</a>
-</span>
+<span class=tag><a href=/tags/h5/>H5</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/tags/animation/>Animation</a>
-</span></div></div></header><div>
-<h3 id=h5-spine-animation-runtime-library>
-H5 Spine Animation Runtime Library
-<a class=heading-link href=#h5-spine-animation-runtime-library>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><h4 id=description>
-Description
-<a class=heading-link href=#description>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h4><p>The runtime library version should match the version of Spine</p><p>Running Spine 3.8 with <a href=https://github.com/pixijs/spine/tree/pixi5#readme>PIXI version 5</a> and <a href=https://github.com/pixijs/spine#readme>pixi-spine</a> 2.1.14</p><h4 id=installing-pixi-v5>
-Installing Pixi V5
-<a class=heading-link href=#installing-pixi-v5>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>npm i pixi.js@5.3.11
-</span></span></code></pre></td></tr></table></div></div><h4 id=installation-of-pixi-spine>
-Installation of Pixi-Spine
-<a class=heading-link href=#installation-of-pixi-spine>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>npm i pixi-spine@2.1.14
-</span></span></code></pre></td></tr></table></div></div><h4 id=import>
-Import
-<a class=heading-link href=#import>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h4><h5 id=import-pixijs>
-Import <code>pixi.js</code>
-<a class=heading-link href=#import-pixijs>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h5><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>import</span> <span style=color:#ff79c6>*</span> as PIXI from <span style=color:#f1fa8c>&#34;pixi.js&#34;</span>
-</span></span></code></pre></td></tr></table></div></div><h5 id=import-pixi-spine-to-pixi-enrichment-methods>
-Import <code>pixi-spine</code> to PIXI enrichment methods
-<a class=heading-link href=#import-pixi-spine-to-pixi-enrichment-methods>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h5><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+<span class=tag><a href=/tags/animation/>Animation</a></span></div></div></header><div><h3 id=h5-spine-animation-runtime-library>H5 Spine Animation Runtime Library
+<a class=heading-link href=#h5-spine-animation-runtime-library><i class="fa fa-link" aria-hidden=true></i></a></h3><h4 id=description>Description
+<a class=heading-link href=#description><i class="fa fa-link" aria-hidden=true></i></a></h4><p>The runtime library version should match the version of Spine</p><p>Running Spine 3.8 with <a href=https://github.com/pixijs/spine/tree/pixi5#readme>PIXI version 5</a> and <a href=https://github.com/pixijs/spine#readme>pixi-spine</a> 2.1.14</p><h4 id=installing-pixi-v5>Installing Pixi V5
+<a class=heading-link href=#installing-pixi-v5><i class="fa fa-link" aria-hidden=true></i></a></h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>npm i pixi.js@5.3.11
+</span></span></code></pre></td></tr></table></div></div><h4 id=installation-of-pixi-spine>Installation of Pixi-Spine
+<a class=heading-link href=#installation-of-pixi-spine><i class="fa fa-link" aria-hidden=true></i></a></h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>npm i pixi-spine@2.1.14
+</span></span></code></pre></td></tr></table></div></div><h4 id=import>Import
+<a class=heading-link href=#import><i class="fa fa-link" aria-hidden=true></i></a></h4><h5 id=import-pixijs>Import <code>pixi.js</code>
+<a class=heading-link href=#import-pixijs><i class="fa fa-link" aria-hidden=true></i></a></h5><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>import</span> <span style=color:#ff79c6>*</span> as PIXI from <span style=color:#f1fa8c>&#34;pixi.js&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h5 id=import-pixi-spine-to-pixi-enrichment-methods>Import <code>pixi-spine</code> to PIXI enrichment methods
+<a class=heading-link href=#import-pixi-spine-to-pixi-enrichment-methods><i class="fa fa-link" aria-hidden=true></i></a></h5><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>window</span>.PIXI <span style=color:#ff79c6>=</span> PIXI
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>window</span>.PIXI <span style=color:#ff79c6>=</span> PIXI
 </span></span><span style=display:flex><span><span style=color:#ff79c6>import</span>(<span style=color:#f1fa8c>&#34;pixi-spine&#34;</span>)
-</span></span></code></pre></td></tr></table></div></div><h4 id=usage>
-Usage
-<a class=heading-link href=#usage>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h4><h5 id=html>
-HTML
-<a class=heading-link href=#html>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h5><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>  &lt;<span style=color:#ff79c6>div</span> <span style=color:#50fa7b>id</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;pixi2&#34;</span>&gt;&lt;/<span style=color:#ff79c6>div</span>&gt;
-</span></span></code></pre></td></tr></table></div></div><h5 id=js>
-JS
-<a class=heading-link href=#js>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h5><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></code></pre></td></tr></table></div></div><h4 id=usage>Usage
+<a class=heading-link href=#usage><i class="fa fa-link" aria-hidden=true></i></a></h4><h5 id=html>HTML
+<a class=heading-link href=#html><i class="fa fa-link" aria-hidden=true></i></a></h5><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>  &lt;<span style=color:#ff79c6>div</span> <span style=color:#50fa7b>id</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;pixi2&#34;</span>&gt;&lt;/<span style=color:#ff79c6>div</span>&gt;
+</span></span></code></pre></td></tr></table></div></div><h5 id=js>JS
+<a class=heading-link href=#js><i class="fa fa-link" aria-hidden=true></i></a></h5><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -210,8 +72,7 @@ JS
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span> <span style=color:#8be9fd;font-style:italic>function</span> runSpine() {
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span> <span style=color:#8be9fd;font-style:italic>function</span> runSpine() {
 </span></span><span style=display:flex><span>        <span style=color:#ff79c6>const</span> app <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>new</span> PIXI.Application({
 </span></span><span style=display:flex><span>          width<span style=color:#ff79c6>:</span> <span style=color:#bd93f9>800</span>,         <span style=color:#6272a4>//default:800
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>          height<span style=color:#ff79c6>:</span> <span style=color:#bd93f9>600</span>,        <span style=color:#6272a4>//default:600
@@ -244,16 +105,11 @@ JS
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>              app.start();
 </span></span><span style=display:flex><span>            });
 </span></span><span style=display:flex><span>      }
-</span></span></code></pre></td></tr></table></div></div></div><footer>
-</footer></article></section></div><footer class=footer>
-<section class=container>
-©
+</span></span></code></pre></td></tr></table></div></div></div><footer></footer></article></section></div><footer class=footer><section class=container>©
 2019 -
 2022
 Ethan Kuo
 ·
-Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
-</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
+Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NK08XEDHKZ"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script>
-</body></html>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script></body></html>

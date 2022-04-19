@@ -1,126 +1,28 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=color-scheme content="light dark">
-<meta name=author content="郭超超">
-<meta name=description content="curder/laravel-aliyun-sms    安装    1  composer require curder/laravel-aliyun-sms   配置    在 Laravel 项目的 .env 文件中配置如下信息。
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=color-scheme content="light dark"><meta name=author content="郭超超"><meta name=description content="curder/laravel-aliyun-sms    安装    1  composer require curder/laravel-aliyun-sms   配置    在 Laravel 项目的 .env 文件中配置如下信息。
 1 2 3 4 5 6 7 8 9  ALIYUN_SMS_ENABLE_HTTP_PROXY=false ALIYUN_SMS_HTTP_PROXY_IP=127.0.0.1 ALIYUN_SMS_HTTP_PROXY_PORT=8888 ALIYUN_SMS_REGION_ID=cn-hangzhou ALIYUN_SMS_AK=&#34;&#34; ALIYUN_SMS_AS=&#34;&#34; ALIYUN_SMS_SIGN_NAME=&#34;&#34; ALIYUN_SMS_VARIABLE=&#34;&#34; ALIYUN_SMS_CODE=&#34;&#34;   注册 ServiceProvide    在项目的 config/app.php 文件中 providers 数组中新增如下行：
-1  Curder\LaravelAliyunSms\ServiceProvider::class,   生成配置文件    1  php artisan vendor:publish --provider=&#34;Curder\LaravelAliyunSms\ServiceProvider&#34;   生成的文件在 config/aliyunsms.">
-<meta name=keywords content="Laravel,Sms,AliYun,短信">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="Laravel 阿里云短信使用">
-<meta name=twitter:description content="curder/laravel-aliyun-sms    安装    1  composer require curder/laravel-aliyun-sms   配置    在 Laravel 项目的 .env 文件中配置如下信息。
+1  Curder\LaravelAliyunSms\ServiceProvider::class,   生成配置文件    1  php artisan vendor:publish --provider=&#34;Curder\LaravelAliyunSms\ServiceProvider&#34;   生成的文件在 config/aliyunsms."><meta name=keywords content="Laravel,Sms,AliYun,短信"><meta name=twitter:card content="summary"><meta name=twitter:title content="Laravel 阿里云短信使用"><meta name=twitter:description content="curder/laravel-aliyun-sms    安装    1  composer require curder/laravel-aliyun-sms   配置    在 Laravel 项目的 .env 文件中配置如下信息。
 1 2 3 4 5 6 7 8 9  ALIYUN_SMS_ENABLE_HTTP_PROXY=false ALIYUN_SMS_HTTP_PROXY_IP=127.0.0.1 ALIYUN_SMS_HTTP_PROXY_PORT=8888 ALIYUN_SMS_REGION_ID=cn-hangzhou ALIYUN_SMS_AK=&#34;&#34; ALIYUN_SMS_AS=&#34;&#34; ALIYUN_SMS_SIGN_NAME=&#34;&#34; ALIYUN_SMS_VARIABLE=&#34;&#34; ALIYUN_SMS_CODE=&#34;&#34;   注册 ServiceProvide    在项目的 config/app.php 文件中 providers 数组中新增如下行：
-1  Curder\LaravelAliyunSms\ServiceProvider::class,   生成配置文件    1  php artisan vendor:publish --provider=&#34;Curder\LaravelAliyunSms\ServiceProvider&#34;   生成的文件在 config/aliyunsms.">
-<meta property="og:title" content="Laravel 阿里云短信使用">
-<meta property="og:description" content="curder/laravel-aliyun-sms    安装    1  composer require curder/laravel-aliyun-sms   配置    在 Laravel 项目的 .env 文件中配置如下信息。
+1  Curder\LaravelAliyunSms\ServiceProvider::class,   生成配置文件    1  php artisan vendor:publish --provider=&#34;Curder\LaravelAliyunSms\ServiceProvider&#34;   生成的文件在 config/aliyunsms."><meta property="og:title" content="Laravel 阿里云短信使用"><meta property="og:description" content="curder/laravel-aliyun-sms    安装    1  composer require curder/laravel-aliyun-sms   配置    在 Laravel 项目的 .env 文件中配置如下信息。
 1 2 3 4 5 6 7 8 9  ALIYUN_SMS_ENABLE_HTTP_PROXY=false ALIYUN_SMS_HTTP_PROXY_IP=127.0.0.1 ALIYUN_SMS_HTTP_PROXY_PORT=8888 ALIYUN_SMS_REGION_ID=cn-hangzhou ALIYUN_SMS_AK=&#34;&#34; ALIYUN_SMS_AS=&#34;&#34; ALIYUN_SMS_SIGN_NAME=&#34;&#34; ALIYUN_SMS_VARIABLE=&#34;&#34; ALIYUN_SMS_CODE=&#34;&#34;   注册 ServiceProvide    在项目的 config/app.php 文件中 providers 数组中新增如下行：
-1  Curder\LaravelAliyunSms\ServiceProvider::class,   生成配置文件    1  php artisan vendor:publish --provider=&#34;Curder\LaravelAliyunSms\ServiceProvider&#34;   生成的文件在 config/aliyunsms.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://blog.adminchao.com/zh-cn/posts/laravel-%E9%98%BF%E9%87%8C%E4%BA%91%E7%9F%AD%E4%BF%A1%E4%BD%BF%E7%94%A8/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2018-07-31T17:14:34+00:00">
-<meta property="article:modified_time" content="2018-07-31T17:14:34+00:00"><meta property="og:site_name" content="郭超超的博客">
-<title>
-Laravel 阿里云短信使用 · 郭超超的博客
-</title><link rel=canonical href=https://blog.adminchao.com/zh-cn/posts/laravel-%E9%98%BF%E9%87%8C%E4%BA%91%E7%9F%AD%E4%BF%A1%E4%BD%BF%E7%94%A8/>
-<link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin>
-<link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen>
-<link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen>
-<link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32>
-<link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16>
-<link rel=apple-touch-icon href=/images/apple-touch-icon.png>
-<link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png>
-<meta name=generator content="Hugo 0.93.3">
-</head><body class="preload-transitions colorscheme-dark">
-<div class=float-container>
-<a id=dark-mode-toggle class=colorscheme-toggle>
-<i class="fa fa-adjust fa-fw" aria-hidden=true></i>
-</a>
-</div><main class=wrapper>
-<nav class=navigation>
-<section class=container>
-<a class=navigation-title href=/zh-cn>
-郭超超的博客
-</a>
+1  Curder\LaravelAliyunSms\ServiceProvider::class,   生成配置文件    1  php artisan vendor:publish --provider=&#34;Curder\LaravelAliyunSms\ServiceProvider&#34;   生成的文件在 config/aliyunsms."><meta property="og:type" content="article"><meta property="og:url" content="https://blog.adminchao.com/zh-cn/posts/laravel-%E9%98%BF%E9%87%8C%E4%BA%91%E7%9F%AD%E4%BF%A1%E4%BD%BF%E7%94%A8/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2018-07-31T17:14:34+00:00"><meta property="article:modified_time" content="2018-07-31T17:14:34+00:00"><meta property="og:site_name" content="郭超超的博客"><title>Laravel 阿里云短信使用 · 郭超超的博客</title><link rel=canonical href=https://blog.adminchao.com/zh-cn/posts/laravel-%E9%98%BF%E9%87%8C%E4%BA%91%E7%9F%AD%E4%BF%A1%E4%BD%BF%E7%94%A8/><link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin><link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen><link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen><link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16><link rel=apple-touch-icon href=/images/apple-touch-icon.png><link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png><meta name=generator content="Hugo 0.97.3"></head><body class="preload-transitions colorscheme-dark"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=/zh-cn>郭超超的博客</a>
 <input type=checkbox id=menu-toggle>
-<label class="menu-button float-right" for=menu-toggle>
-<i class="fa fa-bars fa-fw" aria-hidden=true></i>
-</label>
-<ul class=navigation-list>
-<li class=navigation-item>
-<a class=navigation-link href=/zh-cn/about/>关于</a>
-</li><li class=navigation-item>
-<a class=navigation-link href=/zh-cn/posts/>博文</a>
-</li><li class=navigation-item>
-<a class=navigation-link href=/zh-cn/contact/>联系</a>
-</li><li class="navigation-item menu-separator">
-<span>|</span>
-</li><li class=navigation-item>
-<a href=https://blog.adminchao.com/>🇺🇸</a>
-</li></ul></section></nav><div class=content>
-<section class="container post">
-<article>
-<header>
-<div class=post-title>
-<h1 class=title>
-<a class=title-link href=https://blog.adminchao.com/zh-cn/posts/laravel-%E9%98%BF%E9%87%8C%E4%BA%91%E7%9F%AD%E4%BF%A1%E4%BD%BF%E7%94%A8/>
-Laravel 阿里云短信使用
-</a>
-</h1></div><div class=post-meta>
-<div class=date>
-<span class=posted-on>
-<i class="fa fa-calendar" aria-hidden=true></i>
-<time datetime=2018-07-31T17:14:34Z>
-2018-07-31 17:14:34
-</time>
-</span>
-<span class=reading-time>
-<i class="fa fa-clock-o" aria-hidden=true></i>
-阅读时间：2 分钟
-</span>
-</div><div class=categories>
-<i class="fa fa-folder" aria-hidden=true></i>
-<a href=/zh-cn/categories/laravel/>Laravel</a></div><div class=tags>
-<i class="fa fa-tag" aria-hidden=true></i>
-<span class=tag>
-<a href=/zh-cn/tags/laravel/>Laravel</a>
-</span>
+<label class="menu-button float-right" for=menu-toggle><i class="fa fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=/zh-cn/about/>关于</a></li><li class=navigation-item><a class=navigation-link href=/zh-cn/posts/>博文</a></li><li class=navigation-item><a class=navigation-link href=/zh-cn/contact/>联系</a></li><li class="navigation-item menu-separator"><span>|</span></li><li class=navigation-item><a href=https://blog.adminchao.com/>🇺🇸</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=https://blog.adminchao.com/zh-cn/posts/laravel-%E9%98%BF%E9%87%8C%E4%BA%91%E7%9F%AD%E4%BF%A1%E4%BD%BF%E7%94%A8/>Laravel 阿里云短信使用</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2018-07-31T17:14:34Z>2018-07-31 17:14:34</time></span>
+<span class=reading-time><i class="fa fa-clock-o" aria-hidden=true></i>
+阅读时间：2 分钟</span></div><div class=categories><i class="fa fa-folder" aria-hidden=true></i>
+<a href=/zh-cn/categories/laravel/>Laravel</a></div><div class=tags><i class="fa fa-tag" aria-hidden=true></i>
+<span class=tag><a href=/zh-cn/tags/laravel/>Laravel</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/zh-cn/tags/sms/>Sms</a>
-</span>
+<span class=tag><a href=/zh-cn/tags/sms/>Sms</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/zh-cn/tags/aliyun/>AliYun</a>
-</span>
+<span class=tag><a href=/zh-cn/tags/aliyun/>AliYun</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/zh-cn/tags/%E7%9F%AD%E4%BF%A1/>短信</a>
-</span></div></div></header><div>
-<h2 id=curderlaravel-aliyun-sms>
-curder/laravel-aliyun-sms
-<a class=heading-link href=#curderlaravel-aliyun-sms>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><h3 id=安装>
-安装
-<a class=heading-link href=#%e5%ae%89%e8%a3%85>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>composer <span style=color:#ff79c6>require</span> curder<span style=color:#ff79c6>/</span>laravel<span style=color:#ff79c6>-</span>aliyun<span style=color:#ff79c6>-</span>sms
-</span></span></code></pre></td></tr></table></div></div><h3 id=配置>
-配置
-<a class=heading-link href=#%e9%85%8d%e7%bd%ae>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><p>在 <code>Laravel</code> 项目的 <code>.env</code> 文件中配置如下信息。</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+<span class=tag><a href=/zh-cn/tags/%E7%9F%AD%E4%BF%A1/>短信</a></span></div></div></header><div><h2 id=curderlaravel-aliyun-sms>curder/laravel-aliyun-sms
+<a class=heading-link href=#curderlaravel-aliyun-sms><i class="fa fa-link" aria-hidden=true></i></a></h2><h3 id=安装>安装
+<a class=heading-link href=#%e5%ae%89%e8%a3%85><i class="fa fa-link" aria-hidden=true></i></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>composer <span style=color:#ff79c6>require</span> curder<span style=color:#ff79c6>/</span>laravel<span style=color:#ff79c6>-</span>aliyun<span style=color:#ff79c6>-</span>sms
+</span></span></code></pre></td></tr></table></div></div><h3 id=配置>配置
+<a class=heading-link href=#%e9%85%8d%e7%bd%ae><i class="fa fa-link" aria-hidden=true></i></a></h3><p>在 <code>Laravel</code> 项目的 <code>.env</code> 文件中配置如下信息。</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
@@ -129,8 +31,7 @@ curder/laravel-aliyun-sms
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">9
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>ALIYUN_SMS_ENABLE_HTTP_PROXY<span style=color:#ff79c6>=</span><span style=color:#ff79c6>false</span>
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>ALIYUN_SMS_ENABLE_HTTP_PROXY<span style=color:#ff79c6>=</span><span style=color:#ff79c6>false</span>
 </span></span><span style=display:flex><span>ALIYUN_SMS_HTTP_PROXY_IP<span style=color:#ff79c6>=</span><span style=color:#bd93f9>127.0</span><span style=color:#ff79c6>.</span><span style=color:#bd93f9>0.1</span>
 </span></span><span style=display:flex><span>ALIYUN_SMS_HTTP_PROXY_PORT<span style=color:#ff79c6>=</span><span style=color:#bd93f9>8888</span>
 </span></span><span style=display:flex><span>ALIYUN_SMS_REGION_ID<span style=color:#ff79c6>=</span>cn<span style=color:#ff79c6>-</span>hangzhou
@@ -139,34 +40,14 @@ curder/laravel-aliyun-sms
 </span></span><span style=display:flex><span>ALIYUN_SMS_SIGN_NAME<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;&#34;</span>
 </span></span><span style=display:flex><span>ALIYUN_SMS_VARIABLE<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;&#34;</span>
 </span></span><span style=display:flex><span>ALIYUN_SMS_CODE<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;&#34;</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=注册-serviceprovide>
-注册 ServiceProvide
-<a class=heading-link href=#%e6%b3%a8%e5%86%8c-serviceprovide>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><p>在项目的 <code>config/app.php</code> 文件中 <code>providers</code> 数组中新增如下行：</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>Curder\LaravelAliyunSms\ServiceProvider<span style=color:#ff79c6>::</span><span style=color:#50fa7b>class</span>,
-</span></span></code></pre></td></tr></table></div></div><h3 id=生成配置文件>
-生成配置文件
-<a class=heading-link href=#%e7%94%9f%e6%88%90%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>php artisan vendor<span style=color:#ff79c6>:</span>publish <span style=color:#ff79c6>--</span>provider<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;Curder\LaravelAliyunSms\ServiceProvider&#34;</span>
-</span></span></code></pre></td></tr></table></div></div><p>生成的文件在 <code>config/aliyunsms.php</code> 可以前往修改</p><h3 id=用法>
-用法
-<a class=heading-link href=#%e7%94%a8%e6%b3%95>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=注册-serviceprovide>注册 ServiceProvide
+<a class=heading-link href=#%e6%b3%a8%e5%86%8c-serviceprovide><i class="fa fa-link" aria-hidden=true></i></a></h3><p>在项目的 <code>config/app.php</code> 文件中 <code>providers</code> 数组中新增如下行：</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>Curder\LaravelAliyunSms\ServiceProvider<span style=color:#ff79c6>::</span><span style=color:#50fa7b>class</span>,
+</span></span></code></pre></td></tr></table></div></div><h3 id=生成配置文件>生成配置文件
+<a class=heading-link href=#%e7%94%9f%e6%88%90%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6><i class="fa fa-link" aria-hidden=true></i></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>php artisan vendor<span style=color:#ff79c6>:</span>publish <span style=color:#ff79c6>--</span>provider<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;Curder\LaravelAliyunSms\ServiceProvider&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><p>生成的文件在 <code>config/aliyunsms.php</code> 可以前往修改</p><h3 id=用法>用法
+<a class=heading-link href=#%e7%94%a8%e6%b3%95><i class="fa fa-link" aria-hidden=true></i></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -256,8 +137,7 @@ curder/laravel-aliyun-sms
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">88
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">89
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">90
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
 </span></span><span style=display:flex><span><span style=color:#ff79c6>namespace</span> App\Http\Controllers\Api;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#ff79c6>use</span> Illuminate\Http\Request;
@@ -347,16 +227,11 @@ curder/laravel-aliyun-sms
 </span></span><span style=display:flex><span>    
 </span></span><span style=display:flex><span>    
 </span></span><span style=display:flex><span>    <span style=color:#ff79c6>?&gt;</span>
-</span></span></code></pre></td></tr></table></div></div></div><footer>
-</footer></article></section></div><footer class=footer>
-<section class=container>
-©
+</span></span></code></pre></td></tr></table></div></div></div><footer></footer></article></section></div><footer class=footer><section class=container>©
 2019 -
 2022
 郭超超
 ·
-技术支持 <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
-</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
+技术支持 <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NK08XEDHKZ"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script>
-</body></html>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script></body></html>

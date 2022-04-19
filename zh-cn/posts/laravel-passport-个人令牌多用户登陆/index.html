@@ -1,153 +1,40 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=color-scheme content="light dark">
-<meta name=author content="郭超超">
-<meta name=description content="前言    最近有个项目需要用到多用户表系统认证，对于 Token 的发放和鉴权，使用了 Passport 来实现 API 授权认证，但是 Passport 对于多用户表登陆实现还是比较难的，在网上到的一些多用户表登陆也都是用 GuzzleHttp 携带额外参数来实现的，不太满足我的需求。经过了一段时期的摸索，终于实现了 Passport 通过个人令牌来多用户登陆。
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=color-scheme content="light dark"><meta name=author content="郭超超"><meta name=description content="前言    最近有个项目需要用到多用户表系统认证，对于 Token 的发放和鉴权，使用了 Passport 来实现 API 授权认证，但是 Passport 对于多用户表登陆实现还是比较难的，在网上到的一些多用户表登陆也都是用 GuzzleHttp 携带额外参数来实现的，不太满足我的需求。经过了一段时期的摸索，终于实现了 Passport 通过个人令牌来多用户登陆。
 实现    Laravel 版本 6.0
 安装    1  composer require laravel/passport   导出默认迁移文件    1  php artisan vendor:publish --tag=passport-migrations   运行该命令会在 \app\database\migrations\ 生成
  Date_create_oauth_auth_codes_table.php Date_create_oauth_access_tokens_table.php Date_create_oauth_refresh_tokens_table.php Date_create_oauth_clients_table.php Date_create_oauth_personal_access_clients_table.php  五个数据库迁移文件，其中 Date_create_oauth_access_tokens_table 是用来记录发放成功的 Token 的。我们需要拷贝一个这个表用来建立另一个用户表的 Token 记录。
-建立自定义 access_token 表    1  php artisan make:migration create_oauth_other_tokens --create=oauth_other_tokens   生成 Date_create_oauth_other_tokens 迁移文件。">
-<meta name=keywords content="Passport,Laravel,Oauth">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="Laravel Passport 个人令牌多用户登陆">
-<meta name=twitter:description content="前言    最近有个项目需要用到多用户表系统认证，对于 Token 的发放和鉴权，使用了 Passport 来实现 API 授权认证，但是 Passport 对于多用户表登陆实现还是比较难的，在网上到的一些多用户表登陆也都是用 GuzzleHttp 携带额外参数来实现的，不太满足我的需求。经过了一段时期的摸索，终于实现了 Passport 通过个人令牌来多用户登陆。
+建立自定义 access_token 表    1  php artisan make:migration create_oauth_other_tokens --create=oauth_other_tokens   生成 Date_create_oauth_other_tokens 迁移文件。"><meta name=keywords content="Passport,Laravel,Oauth"><meta name=twitter:card content="summary"><meta name=twitter:title content="Laravel Passport 个人令牌多用户登陆"><meta name=twitter:description content="前言    最近有个项目需要用到多用户表系统认证，对于 Token 的发放和鉴权，使用了 Passport 来实现 API 授权认证，但是 Passport 对于多用户表登陆实现还是比较难的，在网上到的一些多用户表登陆也都是用 GuzzleHttp 携带额外参数来实现的，不太满足我的需求。经过了一段时期的摸索，终于实现了 Passport 通过个人令牌来多用户登陆。
 实现    Laravel 版本 6.0
 安装    1  composer require laravel/passport   导出默认迁移文件    1  php artisan vendor:publish --tag=passport-migrations   运行该命令会在 \app\database\migrations\ 生成
  Date_create_oauth_auth_codes_table.php Date_create_oauth_access_tokens_table.php Date_create_oauth_refresh_tokens_table.php Date_create_oauth_clients_table.php Date_create_oauth_personal_access_clients_table.php  五个数据库迁移文件，其中 Date_create_oauth_access_tokens_table 是用来记录发放成功的 Token 的。我们需要拷贝一个这个表用来建立另一个用户表的 Token 记录。
-建立自定义 access_token 表    1  php artisan make:migration create_oauth_other_tokens --create=oauth_other_tokens   生成 Date_create_oauth_other_tokens 迁移文件。">
-<meta property="og:title" content="Laravel Passport 个人令牌多用户登陆">
-<meta property="og:description" content="前言    最近有个项目需要用到多用户表系统认证，对于 Token 的发放和鉴权，使用了 Passport 来实现 API 授权认证，但是 Passport 对于多用户表登陆实现还是比较难的，在网上到的一些多用户表登陆也都是用 GuzzleHttp 携带额外参数来实现的，不太满足我的需求。经过了一段时期的摸索，终于实现了 Passport 通过个人令牌来多用户登陆。
+建立自定义 access_token 表    1  php artisan make:migration create_oauth_other_tokens --create=oauth_other_tokens   生成 Date_create_oauth_other_tokens 迁移文件。"><meta property="og:title" content="Laravel Passport 个人令牌多用户登陆"><meta property="og:description" content="前言    最近有个项目需要用到多用户表系统认证，对于 Token 的发放和鉴权，使用了 Passport 来实现 API 授权认证，但是 Passport 对于多用户表登陆实现还是比较难的，在网上到的一些多用户表登陆也都是用 GuzzleHttp 携带额外参数来实现的，不太满足我的需求。经过了一段时期的摸索，终于实现了 Passport 通过个人令牌来多用户登陆。
 实现    Laravel 版本 6.0
 安装    1  composer require laravel/passport   导出默认迁移文件    1  php artisan vendor:publish --tag=passport-migrations   运行该命令会在 \app\database\migrations\ 生成
  Date_create_oauth_auth_codes_table.php Date_create_oauth_access_tokens_table.php Date_create_oauth_refresh_tokens_table.php Date_create_oauth_clients_table.php Date_create_oauth_personal_access_clients_table.php  五个数据库迁移文件，其中 Date_create_oauth_access_tokens_table 是用来记录发放成功的 Token 的。我们需要拷贝一个这个表用来建立另一个用户表的 Token 记录。
-建立自定义 access_token 表    1  php artisan make:migration create_oauth_other_tokens --create=oauth_other_tokens   生成 Date_create_oauth_other_tokens 迁移文件。">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://blog.adminchao.com/zh-cn/posts/laravel-passport-%E4%B8%AA%E4%BA%BA%E4%BB%A4%E7%89%8C%E5%A4%9A%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2020-03-27T21:08:27+00:00">
-<meta property="article:modified_time" content="2020-03-27T21:08:27+00:00"><meta property="og:site_name" content="郭超超的博客">
-<title>
-Laravel Passport 个人令牌多用户登陆 · 郭超超的博客
-</title><link rel=canonical href=https://blog.adminchao.com/zh-cn/posts/laravel-passport-%E4%B8%AA%E4%BA%BA%E4%BB%A4%E7%89%8C%E5%A4%9A%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86/>
-<link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin>
-<link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen>
-<link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen>
-<link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32>
-<link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16>
-<link rel=apple-touch-icon href=/images/apple-touch-icon.png>
-<link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png>
-<meta name=generator content="Hugo 0.93.3">
-</head><body class="preload-transitions colorscheme-dark">
-<div class=float-container>
-<a id=dark-mode-toggle class=colorscheme-toggle>
-<i class="fa fa-adjust fa-fw" aria-hidden=true></i>
-</a>
-</div><main class=wrapper>
-<nav class=navigation>
-<section class=container>
-<a class=navigation-title href=/zh-cn>
-郭超超的博客
-</a>
+建立自定义 access_token 表    1  php artisan make:migration create_oauth_other_tokens --create=oauth_other_tokens   生成 Date_create_oauth_other_tokens 迁移文件。"><meta property="og:type" content="article"><meta property="og:url" content="https://blog.adminchao.com/zh-cn/posts/laravel-passport-%E4%B8%AA%E4%BA%BA%E4%BB%A4%E7%89%8C%E5%A4%9A%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-03-27T21:08:27+00:00"><meta property="article:modified_time" content="2020-03-27T21:08:27+00:00"><meta property="og:site_name" content="郭超超的博客"><title>Laravel Passport 个人令牌多用户登陆 · 郭超超的博客</title><link rel=canonical href=https://blog.adminchao.com/zh-cn/posts/laravel-passport-%E4%B8%AA%E4%BA%BA%E4%BB%A4%E7%89%8C%E5%A4%9A%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86/><link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin><link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen><link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen><link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16><link rel=apple-touch-icon href=/images/apple-touch-icon.png><link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png><meta name=generator content="Hugo 0.97.3"></head><body class="preload-transitions colorscheme-dark"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=/zh-cn>郭超超的博客</a>
 <input type=checkbox id=menu-toggle>
-<label class="menu-button float-right" for=menu-toggle>
-<i class="fa fa-bars fa-fw" aria-hidden=true></i>
-</label>
-<ul class=navigation-list>
-<li class=navigation-item>
-<a class=navigation-link href=/zh-cn/about/>关于</a>
-</li><li class=navigation-item>
-<a class=navigation-link href=/zh-cn/posts/>博文</a>
-</li><li class=navigation-item>
-<a class=navigation-link href=/zh-cn/contact/>联系</a>
-</li><li class="navigation-item menu-separator">
-<span>|</span>
-</li><li class=navigation-item>
-<a href=https://blog.adminchao.com/>🇺🇸</a>
-</li></ul></section></nav><div class=content>
-<section class="container post">
-<article>
-<header>
-<div class=post-title>
-<h1 class=title>
-<a class=title-link href=https://blog.adminchao.com/zh-cn/posts/laravel-passport-%E4%B8%AA%E4%BA%BA%E4%BB%A4%E7%89%8C%E5%A4%9A%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86/>
-Laravel Passport 个人令牌多用户登陆
-</a>
-</h1></div><div class=post-meta>
-<div class=date>
-<span class=posted-on>
-<i class="fa fa-calendar" aria-hidden=true></i>
-<time datetime=2020-03-27T21:08:27Z>
-2020-03-27 21:08:27
-</time>
-</span>
-<span class=reading-time>
-<i class="fa fa-clock-o" aria-hidden=true></i>
-阅读时间：7 分钟
-</span>
-</div><div class=categories>
-<i class="fa fa-folder" aria-hidden=true></i>
-<a href=/zh-cn/categories/laravel/>Laravel</a></div><div class=tags>
-<i class="fa fa-tag" aria-hidden=true></i>
-<span class=tag>
-<a href=/zh-cn/tags/laravel/>Laravel</a>
-</span>
+<label class="menu-button float-right" for=menu-toggle><i class="fa fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=/zh-cn/about/>关于</a></li><li class=navigation-item><a class=navigation-link href=/zh-cn/posts/>博文</a></li><li class=navigation-item><a class=navigation-link href=/zh-cn/contact/>联系</a></li><li class="navigation-item menu-separator"><span>|</span></li><li class=navigation-item><a href=https://blog.adminchao.com/>🇺🇸</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=https://blog.adminchao.com/zh-cn/posts/laravel-passport-%E4%B8%AA%E4%BA%BA%E4%BB%A4%E7%89%8C%E5%A4%9A%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86/>Laravel Passport 个人令牌多用户登陆</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2020-03-27T21:08:27Z>2020-03-27 21:08:27</time></span>
+<span class=reading-time><i class="fa fa-clock-o" aria-hidden=true></i>
+阅读时间：7 分钟</span></div><div class=categories><i class="fa fa-folder" aria-hidden=true></i>
+<a href=/zh-cn/categories/laravel/>Laravel</a></div><div class=tags><i class="fa fa-tag" aria-hidden=true></i>
+<span class=tag><a href=/zh-cn/tags/laravel/>Laravel</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/zh-cn/tags/passport/>Passport</a>
-</span>
+<span class=tag><a href=/zh-cn/tags/passport/>Passport</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/zh-cn/tags/oauth/>Oauth</a>
-</span>
+<span class=tag><a href=/zh-cn/tags/oauth/>Oauth</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/zh-cn/tags/php/>php</a>
-</span></div></div></header><div>
-<h2 id=前言>
-前言
-<a class=heading-link href=#%e5%89%8d%e8%a8%80>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><p>最近有个项目需要用到多用户表系统认证，对于 Token 的发放和鉴权，使用了 Passport 来实现 API 授权认证，但是 Passport 对于多用户表登陆实现还是比较难的，在网上到的一些多用户表登陆也都是用 GuzzleHttp 携带额外参数来实现的，不太满足我的需求。经过了一段时期的摸索，终于实现了 Passport 通过个人令牌来多用户登陆。</p><h2 id=实现>
-实现
-<a class=heading-link href=#%e5%ae%9e%e7%8e%b0>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><p>Laravel 版本 6.0</p><h3 id=安装>
-安装
-<a class=heading-link href=#%e5%ae%89%e8%a3%85>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>composer <span style=color:#ff79c6>require</span> laravel<span style=color:#ff79c6>/</span>passport
-</span></span></code></pre></td></tr></table></div></div><h3 id=导出默认迁移文件>
-导出默认迁移文件
-<a class=heading-link href=#%e5%af%bc%e5%87%ba%e9%bb%98%e8%ae%a4%e8%bf%81%e7%a7%bb%e6%96%87%e4%bb%b6>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>php artisan vendor<span style=color:#ff79c6>:</span>publish <span style=color:#ff79c6>--</span>tag<span style=color:#ff79c6>=</span>passport<span style=color:#ff79c6>-</span>migrations
-</span></span></code></pre></td></tr></table></div></div><p>运行该命令会在 <code>\app\database\migrations\</code> 生成</p><ul>
-<li>Date_create_oauth_auth_codes_table.php</li><li>Date_create_oauth_access_tokens_table.php</li><li>Date_create_oauth_refresh_tokens_table.php</li><li>Date_create_oauth_clients_table.php</li><li>Date_create_oauth_personal_access_clients_table.php</li></ul><p>五个数据库迁移文件，其中 <code>Date_create_oauth_access_tokens_table</code> 是用来记录发放成功的 Token 的。我们需要拷贝一个这个表用来建立另一个用户表的 Token 记录。</p><h3 id=建立自定义-access_token-表>
-建立自定义 access_token 表
-<a class=heading-link href=#%e5%bb%ba%e7%ab%8b%e8%87%aa%e5%ae%9a%e4%b9%89-access_token-%e8%a1%a8>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>php artisan make:migration create_oauth_other_tokens --create=oauth_other_tokens
-</span></span></code></pre></td></tr></table></div></div><p>生成 <code>Date_create_oauth_other_tokens</code> 迁移文件。</p><p>复制 <code>Date_create_oauth_access_tokens_table</code> 文件内容到 <code>Date_create_oauth_other_tokens</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+<span class=tag><a href=/zh-cn/tags/php/>php</a></span></div></div></header><div><h2 id=前言>前言
+<a class=heading-link href=#%e5%89%8d%e8%a8%80><i class="fa fa-link" aria-hidden=true></i></a></h2><p>最近有个项目需要用到多用户表系统认证，对于 Token 的发放和鉴权，使用了 Passport 来实现 API 授权认证，但是 Passport 对于多用户表登陆实现还是比较难的，在网上到的一些多用户表登陆也都是用 GuzzleHttp 携带额外参数来实现的，不太满足我的需求。经过了一段时期的摸索，终于实现了 Passport 通过个人令牌来多用户登陆。</p><h2 id=实现>实现
+<a class=heading-link href=#%e5%ae%9e%e7%8e%b0><i class="fa fa-link" aria-hidden=true></i></a></h2><p>Laravel 版本 6.0</p><h3 id=安装>安装
+<a class=heading-link href=#%e5%ae%89%e8%a3%85><i class="fa fa-link" aria-hidden=true></i></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>composer <span style=color:#ff79c6>require</span> laravel<span style=color:#ff79c6>/</span>passport
+</span></span></code></pre></td></tr></table></div></div><h3 id=导出默认迁移文件>导出默认迁移文件
+<a class=heading-link href=#%e5%af%bc%e5%87%ba%e9%bb%98%e8%ae%a4%e8%bf%81%e7%a7%bb%e6%96%87%e4%bb%b6><i class="fa fa-link" aria-hidden=true></i></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>php artisan vendor<span style=color:#ff79c6>:</span>publish <span style=color:#ff79c6>--</span>tag<span style=color:#ff79c6>=</span>passport<span style=color:#ff79c6>-</span>migrations
+</span></span></code></pre></td></tr></table></div></div><p>运行该命令会在 <code>\app\database\migrations\</code> 生成</p><ul><li>Date_create_oauth_auth_codes_table.php</li><li>Date_create_oauth_access_tokens_table.php</li><li>Date_create_oauth_refresh_tokens_table.php</li><li>Date_create_oauth_clients_table.php</li><li>Date_create_oauth_personal_access_clients_table.php</li></ul><p>五个数据库迁移文件，其中 <code>Date_create_oauth_access_tokens_table</code> 是用来记录发放成功的 Token 的。我们需要拷贝一个这个表用来建立另一个用户表的 Token 记录。</p><h3 id=建立自定义-access_token-表>建立自定义 access_token 表
+<a class=heading-link href=#%e5%bb%ba%e7%ab%8b%e8%87%aa%e5%ae%9a%e4%b9%89-access_token-%e8%a1%a8><i class="fa fa-link" aria-hidden=true></i></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>php artisan make:migration create_oauth_other_tokens --create=oauth_other_tokens
+</span></span></code></pre></td></tr></table></div></div><p>生成 <code>Date_create_oauth_other_tokens</code> 迁移文件。</p><p>复制 <code>Date_create_oauth_access_tokens_table</code> 文件内容到 <code>Date_create_oauth_other_tokens</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -184,8 +71,7 @@ Laravel Passport 个人令牌多用户登陆
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#ff79c6>use</span> Illuminate\Database\Migrations\Migration;
 </span></span><span style=display:flex><span><span style=color:#ff79c6>use</span> Illuminate\Database\Schema\Blueprint;
@@ -222,24 +108,11 @@ Laravel Passport 个人令牌多用户登陆
 </span></span><span style=display:flex><span>        Schema<span style=color:#ff79c6>::</span><span style=color:#50fa7b>dropIfExists</span>(<span style=color:#f1fa8c>&#39;oauth_other_tokens&#39;</span>);
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><h3 id=运行数据库迁移>
-运行数据库迁移
-<a class=heading-link href=#%e8%bf%90%e8%a1%8c%e6%95%b0%e6%8d%ae%e5%ba%93%e8%bf%81%e7%a7%bb>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>php artisan migrate
-</span></span></code></pre></td></tr></table></div></div><h3 id=生成客户端>
-生成客户端
-<a class=heading-link href=#%e7%94%9f%e6%88%90%e5%ae%a2%e6%88%b7%e7%ab%af>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><p>生成两个 <code>personal</code> 客户端，一个用与 User 用户，一个用于 Other 用户</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=运行数据库迁移>运行数据库迁移
+<a class=heading-link href=#%e8%bf%90%e8%a1%8c%e6%95%b0%e6%8d%ae%e5%ba%93%e8%bf%81%e7%a7%bb><i class="fa fa-link" aria-hidden=true></i></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>php artisan migrate
+</span></span></code></pre></td></tr></table></div></div><h3 id=生成客户端>生成客户端
+<a class=heading-link href=#%e7%94%9f%e6%88%90%e5%ae%a2%e6%88%b7%e7%ab%af><i class="fa fa-link" aria-hidden=true></i></a></h3><p>生成两个 <code>personal</code> 客户端，一个用与 User 用户，一个用于 Other 用户</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -258,8 +131,7 @@ Laravel Passport 个人令牌多用户登陆
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#6272a4>#1</span>
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#6272a4>#1</span>
 </span></span><span style=display:flex><span>php artisan passport:client --personal
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>What should we name the personal access client? <span style=color:#ff79c6>[]</span>:
@@ -278,19 +150,10 @@ Laravel Passport 个人令牌多用户登陆
 </span></span><span style=display:flex><span>Personal access client created successfully.
 </span></span><span style=display:flex><span>Client ID: <span style=color:#bd93f9>2</span>
 </span></span><span style=display:flex><span>Client secret: 7KqVA8gPxRhPtFdfdsfsuVi4n3xpUBOEiNW4fde
-</span></span></code></pre></td></tr></table></div></div><h3 id=创建自定义-access_tokens-模型>
-创建自定义 access_tokens 模型
-<a class=heading-link href=#%e5%88%9b%e5%bb%ba%e8%87%aa%e5%ae%9a%e4%b9%89-access_tokens-%e6%a8%a1%e5%9e%8b>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>php artisan make<span style=color:#ff79c6>:</span>model OtherToken
-</span></span></code></pre></td></tr></table></div></div><p><code>\app\OtherToken.php</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=创建自定义-access_tokens-模型>创建自定义 access_tokens 模型
+<a class=heading-link href=#%e5%88%9b%e5%bb%ba%e8%87%aa%e5%ae%9a%e4%b9%89-access_tokens-%e6%a8%a1%e5%9e%8b><i class="fa fa-link" aria-hidden=true></i></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>php artisan make<span style=color:#ff79c6>:</span>model OtherToken
+</span></span></code></pre></td></tr></table></div></div><p><code>\app\OtherToken.php</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -310,8 +173,7 @@ Laravel Passport 个人令牌多用户登陆
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#ff79c6>namespace</span> App;
 </span></span><span style=display:flex><span>
@@ -331,14 +193,8 @@ Laravel Passport 个人令牌多用户登陆
 </span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>belongsTo</span>(config(<span style=color:#f1fa8c>&#39;auth.providers.&#39;</span><span style=color:#ff79c6>.</span><span style=color:#8be9fd;font-style:italic>$provider</span><span style=color:#ff79c6>.</span><span style=color:#f1fa8c>&#39;.model&#39;</span>));
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><h3 id=配置>
-配置
-<a class=heading-link href=#%e9%85%8d%e7%bd%ae>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><p><code>\config\auth.php</code> 配置另一个用户模型</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=配置>配置
+<a class=heading-link href=#%e9%85%8d%e7%bd%ae><i class="fa fa-link" aria-hidden=true></i></a></h3><p><code>\config\auth.php</code> 配置另一个用户模型</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -370,8 +226,7 @@ Laravel Passport 个人令牌多用户登陆
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>   <span style=color:#f1fa8c>&#39;guards&#39;</span> <span style=color:#ff79c6>=&gt;</span> [
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>   <span style=color:#f1fa8c>&#39;guards&#39;</span> <span style=color:#ff79c6>=&gt;</span> [
 </span></span><span style=display:flex><span>        <span style=color:#f1fa8c>&#39;web&#39;</span> <span style=color:#ff79c6>=&gt;</span> [
 </span></span><span style=display:flex><span>            <span style=color:#f1fa8c>&#39;driver&#39;</span> <span style=color:#ff79c6>=&gt;</span> <span style=color:#f1fa8c>&#39;session&#39;</span>,
 </span></span><span style=display:flex><span>            <span style=color:#f1fa8c>&#39;provider&#39;</span> <span style=color:#ff79c6>=&gt;</span> <span style=color:#f1fa8c>&#39;users&#39;</span>,
@@ -403,21 +258,12 @@ Laravel Passport 个人令牌多用户登陆
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        <span style=color:#6272a4>//     &#39;table&#39; =&gt; &#39;users&#39;,
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        <span style=color:#6272a4>// ],
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>    ],
-</span></span></code></pre></td></tr></table></div></div><h3 id=创建中间件>
-创建中间件
-<a class=heading-link href=#%e5%88%9b%e5%bb%ba%e4%b8%ad%e9%97%b4%e4%bb%b6>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><p>对两个用户路由分别创建中间件，此中间件主要用来设置 Passport 相对应的 Token 模型</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><h3 id=创建中间件>创建中间件
+<a class=heading-link href=#%e5%88%9b%e5%bb%ba%e4%b8%ad%e9%97%b4%e4%bb%b6><i class="fa fa-link" aria-hidden=true></i></a></h3><p>对两个用户路由分别创建中间件，此中间件主要用来设置 Passport 相对应的 Token 模型</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>php artisan make<span style=color:#ff79c6>:</span>middleware UserPassport
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>php artisan make<span style=color:#ff79c6>:</span>middleware UserPassport
 </span></span><span style=display:flex><span>php artisan make<span style=color:#ff79c6>:</span>middleware OtherPassport
-</span></span></code></pre></td></tr></table></div></div><p>在中间件设置响应 Token 模型</p><p><code>\app\Http\Middleware\UserPassport.php</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></code></pre></td></tr></table></div></div><p>在中间件设置响应 Token 模型</p><p><code>\app\Http\Middleware\UserPassport.php</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -442,8 +288,7 @@ Laravel Passport 个人令牌多用户登陆
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#ff79c6>namespace</span> App\Http\Middleware;
 </span></span><span style=display:flex><span>
@@ -468,9 +313,7 @@ Laravel Passport 个人令牌多用户登陆
 </span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$next</span>(<span style=color:#8be9fd;font-style:italic>$request</span>);
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><p><code>\app\Http\Middleware\OtherPassport</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></code></pre></td></tr></table></div></div><p><code>\app\Http\Middleware\OtherPassport</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -495,8 +338,7 @@ Laravel Passport 个人令牌多用户登陆
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#ff79c6>namespace</span> App\Http\Middleware;
 </span></span><span style=display:flex><span>
@@ -521,14 +363,8 @@ Laravel Passport 个人令牌多用户登陆
 </span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$next</span>(<span style=color:#8be9fd;font-style:italic>$request</span>);
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><h3 id=注册中间件>
-注册中间件
-<a class=heading-link href=#%e6%b3%a8%e5%86%8c%e4%b8%ad%e9%97%b4%e4%bb%b6>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><p><code>app\Http\Kernel.php</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=注册中间件>注册中间件
+<a class=heading-link href=#%e6%b3%a8%e5%86%8c%e4%b8%ad%e9%97%b4%e4%bb%b6><i class="fa fa-link" aria-hidden=true></i></a></h3><p><code>app\Http\Kernel.php</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -551,8 +387,7 @@ Laravel Passport 个人令牌多用户登陆
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>protected</span> <span style=color:#8be9fd;font-style:italic>$middlewareGroups</span> <span style=color:#ff79c6>=</span> [
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>protected</span> <span style=color:#8be9fd;font-style:italic>$middlewareGroups</span> <span style=color:#ff79c6>=</span> [
 </span></span><span style=display:flex><span>        <span style=color:#f1fa8c>&#39;web&#39;</span> <span style=color:#ff79c6>=&gt;</span> [
 </span></span><span style=display:flex><span>            \App\Http\Middleware\EncryptCookies<span style=color:#ff79c6>::</span><span style=color:#50fa7b>class</span>,
 </span></span><span style=display:flex><span>            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse<span style=color:#ff79c6>::</span><span style=color:#50fa7b>class</span>,
@@ -575,14 +410,8 @@ Laravel Passport 个人令牌多用户登陆
 </span></span><span style=display:flex><span>            \App\Http\Middleware\MiniPassport<span style=color:#ff79c6>::</span><span style=color:#50fa7b>class</span>,
 </span></span><span style=display:flex><span>        ],
 </span></span><span style=display:flex><span>    ];
-</span></span></code></pre></td></tr></table></div></div><h3 id=设置-token-过期时间>
-设置 Token 过期时间
-<a class=heading-link href=#%e8%ae%be%e7%bd%ae-token-%e8%bf%87%e6%9c%9f%e6%97%b6%e9%97%b4>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><p><code>app\Providers\AuthServiceProvider.php</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=设置-token-过期时间>设置 Token 过期时间
+<a class=heading-link href=#%e8%ae%be%e7%bd%ae-token-%e8%bf%87%e6%9c%9f%e6%97%b6%e9%97%b4><i class="fa fa-link" aria-hidden=true></i></a></h3><p><code>app\Providers\AuthServiceProvider.php</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -617,8 +446,7 @@ Laravel Passport 个人令牌多用户登陆
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#ff79c6>namespace</span> App\Providers;
 </span></span><span style=display:flex><span>
@@ -653,14 +481,8 @@ Laravel Passport 个人令牌多用户登陆
 </span></span><span style=display:flex><span>        Passport<span style=color:#ff79c6>::</span><span style=color:#50fa7b>personalAccessTokensExpireIn</span>(Carbon<span style=color:#ff79c6>::</span><span style=color:#50fa7b>now</span>()<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>addWeeks</span>(<span style=color:#bd93f9>2</span>));
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><h3 id=模型-use-trait>
-模型 Use Trait
-<a class=heading-link href=#%e6%a8%a1%e5%9e%8b-use-trait>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><p><code>User</code> 模型 和 <code>Other</code> 模型都要 <code>Use HasApiTokens</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=模型-use-trait>模型 Use Trait
+<a class=heading-link href=#%e6%a8%a1%e5%9e%8b-use-trait><i class="fa fa-link" aria-hidden=true></i></a></h3><p><code>User</code> 模型 和 <code>Other</code> 模型都要 <code>Use HasApiTokens</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -679,8 +501,7 @@ Laravel Passport 个人令牌多用户登陆
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>class</span> <span style=color:#50fa7b>Other</span> <span style=color:#ff79c6>extends</span> Authenticatable
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>class</span> <span style=color:#50fa7b>Other</span> <span style=color:#ff79c6>extends</span> Authenticatable
 </span></span><span style=display:flex><span>{
 </span></span><span style=display:flex><span>    <span style=color:#ff79c6>use</span> HasApiTokens,Notifiable;
 </span></span><span style=display:flex><span>
@@ -699,14 +520,8 @@ Laravel Passport 个人令牌多用户登陆
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#6272a4>// User 模型类似
-</span></span></span></code></pre></td></tr></table></div></div><h3 id=格式化返回信息>
-格式化返回信息
-<a class=heading-link href=#%e6%a0%bc%e5%bc%8f%e5%8c%96%e8%bf%94%e5%9b%9e%e4%bf%a1%e6%81%af>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><p>验证失败返回格式化 json 数据</p><p>在 <code>\app\Exceptions\Handler.php</code> 中</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=格式化返回信息>格式化返回信息
+<a class=heading-link href=#%e6%a0%bc%e5%bc%8f%e5%8c%96%e8%bf%94%e5%9b%9e%e4%bf%a1%e6%81%af><i class="fa fa-link" aria-hidden=true></i></a></h3><p>验证失败返回格式化 json 数据</p><p>在 <code>\app\Exceptions\Handler.php</code> 中</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -722,8 +537,7 @@ Laravel Passport 个人令牌多用户登陆
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>render</span>(<span style=color:#8be9fd;font-style:italic>$request</span>, Exception <span style=color:#8be9fd;font-style:italic>$exception</span>)
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>render</span>(<span style=color:#8be9fd;font-style:italic>$request</span>, Exception <span style=color:#8be9fd;font-style:italic>$exception</span>)
 </span></span><span style=display:flex><span>    {
 </span></span><span style=display:flex><span>  			<span style=color:#6272a4>//判断路由
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>        <span style=color:#ff79c6>if</span> (<span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>is</span>(<span style=color:#f1fa8c>&#39;api/*&#39;</span>) <span style=color:#ff79c6>||</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>is</span>(<span style=color:#f1fa8c>&#39;other/*&#39;</span>)){
@@ -739,19 +553,9 @@ Laravel Passport 个人令牌多用户登陆
 </span></span><span style=display:flex><span>        }
 </span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span> <span style=color:#ff79c6>parent</span><span style=color:#ff79c6>::</span><span style=color:#50fa7b>render</span>(<span style=color:#8be9fd;font-style:italic>$request</span>, <span style=color:#8be9fd;font-style:italic>$exception</span>);
 </span></span><span style=display:flex><span>    }
-</span></span></code></pre></td></tr></table></div></div><h2 id=使用>
-使用
-<a class=heading-link href=#%e4%bd%bf%e7%94%a8>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><p>自定义路由文件自己解决哦 ^_^</p><h3 id=路由>
-路由
-<a class=heading-link href=#%e8%b7%af%e7%94%b1>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><p><code>\routes\api.php</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></code></pre></td></tr></table></div></div><h2 id=使用>使用
+<a class=heading-link href=#%e4%bd%bf%e7%94%a8><i class="fa fa-link" aria-hidden=true></i></a></h2><p>自定义路由文件自己解决哦 ^_^</p><h3 id=路由>路由
+<a class=heading-link href=#%e8%b7%af%e7%94%b1><i class="fa fa-link" aria-hidden=true></i></a></h3><p><code>\routes\api.php</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -776,8 +580,7 @@ Laravel Passport 个人令牌多用户登陆
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#ff79c6>use</span> Illuminate\Http\Request;
 </span></span><span style=display:flex><span>
@@ -802,9 +605,7 @@ Laravel Passport 个人令牌多用户登陆
 </span></span><span style=display:flex><span>        });
 </span></span><span style=display:flex><span>    });
 </span></span><span style=display:flex><span>});
-</span></span></code></pre></td></tr></table></div></div><p><code>\routes\other.php</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></code></pre></td></tr></table></div></div><p><code>\routes\other.php</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -828,8 +629,7 @@ Laravel Passport 个人令牌多用户登陆
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#ff79c6>use</span> Illuminate\Http\Request;
 </span></span><span style=display:flex><span>
@@ -853,14 +653,8 @@ Laravel Passport 个人令牌多用户登陆
 </span></span><span style=display:flex><span>    });
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>});
-</span></span></code></pre></td></tr></table></div></div><h3 id=user-用户发放-token>
-User 用户发放 Token
-<a class=heading-link href=#user-%e7%94%a8%e6%88%b7%e5%8f%91%e6%94%be-token>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=user-用户发放-token>User 用户发放 Token
+<a class=heading-link href=#user-%e7%94%a8%e6%88%b7%e5%8f%91%e6%94%be-token><i class="fa fa-link" aria-hidden=true></i></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -878,8 +672,7 @@ User 用户发放 Token
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#ff79c6>namespace</span> App\Http\Controllers;
 </span></span><span style=display:flex><span><span style=color:#ff79c6>use</span> App\User;
@@ -897,14 +690,8 @@ User 用户发放 Token
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><h3 id=other-用户发放-token>
-Other 用户发放 Token
-<a class=heading-link href=#other-%e7%94%a8%e6%88%b7%e5%8f%91%e6%94%be-token>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=other-用户发放-token>Other 用户发放 Token
+<a class=heading-link href=#other-%e7%94%a8%e6%88%b7%e5%8f%91%e6%94%be-token><i class="fa fa-link" aria-hidden=true></i></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -922,8 +709,7 @@ Other 用户发放 Token
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>&lt;?</span>php
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#ff79c6>namespace</span> App\Http\Controllers;
 </span></span><span style=display:flex><span><span style=color:#ff79c6>use</span> App\Other;
@@ -941,24 +727,10 @@ Other 用户发放 Token
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><h3 id=根据-token-获取-user-用户信息>
-根据 Token 获取 User 用户信息
-<a class=heading-link href=#%e6%a0%b9%e6%8d%ae-token-%e8%8e%b7%e5%8f%96-user-%e7%94%a8%e6%88%b7%e4%bf%a1%e6%81%af>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><p>路由中已写明 请求时注意 Headers 携带 Authorization = Bearer $token</p><h2 id=测试>
-测试
-<a class=heading-link href=#%e6%b5%8b%e8%af%95>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><h3 id=get-apiv1login>
-Get api/v1/login
-<a class=heading-link href=#get-apiv1login>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><h3 id=根据-token-获取-user-用户信息>根据 Token 获取 User 用户信息
+<a class=heading-link href=#%e6%a0%b9%e6%8d%ae-token-%e8%8e%b7%e5%8f%96-user-%e7%94%a8%e6%88%b7%e4%bf%a1%e6%81%af><i class="fa fa-link" aria-hidden=true></i></a></h3><p>路由中已写明 请求时注意 Headers 携带 Authorization = Bearer $token</p><h2 id=测试>测试
+<a class=heading-link href=#%e6%b5%8b%e8%af%95><i class="fa fa-link" aria-hidden=true></i></a></h2><h3 id=get-apiv1login>Get api/v1/login
+<a class=heading-link href=#get-apiv1login><i class="fa fa-link" aria-hidden=true></i></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
@@ -967,8 +739,7 @@ Get api/v1/login
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">9
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>{
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>{
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;success&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#ff79c6>true</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;error_code&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#bd93f9>0</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;message&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;请求成功&#34;</span>,
@@ -977,14 +748,8 @@ Get api/v1/login
 </span></span><span style=display:flex><span>        <span style=color:#f1fa8c>&#34;access_token&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGQ2ZmMzNjYwNmU4YjNhNWU1YWQxODMyNDRlNWNlM2JiY2FkNTFkNjc2MGJkZjUxOWMwNzFkNzdiZDY5YjAzZmNlNjc1ZTM0NmQ1MWNkNDUiLCJpYXQiOjE1ODUzMzQwNzgsIm5iZiI6MTU4NTMzNDA3OCwiZXhwIjoxNTg2NTQzNjc3LCJzdWIiOiIyIiwic2NvcGVzIjpbIioiXX0.sQKSS9WCdhMp8_5GTSkQ_sqGMiTVxdVXomub3i3DI3h1xCoAPWYH_rj8W8uTjlX82wzIsFjn0bSKhqTeZFRQDFZWYN-2MatgBk-i6P0dxm-x97sIPfCRMm-omkXIvdWjeJyt...&#34;</span>
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><h3 id=get-otherv1login>
-Get other/v1/login
-<a class=heading-link href=#get-otherv1login>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><h3 id=get-otherv1login>Get other/v1/login
+<a class=heading-link href=#get-otherv1login><i class="fa fa-link" aria-hidden=true></i></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
@@ -993,8 +758,7 @@ Get other/v1/login
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">9
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-JavaScript data-lang=JavaScript><span style=display:flex><span>{
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-JavaScript data-lang=JavaScript><span style=display:flex><span>{
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;success&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#ff79c6>true</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;error_code&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#bd93f9>0</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;message&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;请求成功&#34;</span>,
@@ -1003,15 +767,8 @@ Get other/v1/login
 </span></span><span style=display:flex><span>        <span style=color:#f1fa8c>&#34;access_token&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiZmM0NDQzZmQwZmEwYmMzMTNjM2JlMmE5NjUyNzBiYjc5Y2IwMDBmODM0YzkwNzg1M2U1Y2E1NWY5ZDJjODNhOTM5Y2M0YTU1Mjg4MTJlNTQiLCJpYXQiOjE1ODUzMzQxNDUsIm5iZiI6MTU4NTMzNDE0NSwiZXhwIjoxNTg2NTQzNzQ1LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.LCXpbAQnFTatXyDJtMZmFitt6mo4_h42CqOd3hbnx...&#34;</span>
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><h3 id=get-apiv1user>
-Get api/v1/user
-<a class=heading-link href=#get-apiv1user>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><ul>
-<li>携带 <code>api/v1/login</code> 返回的 Token</li></ul><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><h3 id=get-apiv1user>Get api/v1/user
+<a class=heading-link href=#get-apiv1user><i class="fa fa-link" aria-hidden=true></i></a></h3><ul><li>携带 <code>api/v1/login</code> 返回的 Token</li></ul><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
@@ -1019,8 +776,7 @@ Get api/v1/user
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>{
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>{
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;id&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#bd93f9>2</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;email&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;test@163.com&#34;</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;sms_verified_at&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#ff79c6>null</span>,
@@ -1028,31 +784,20 @@ Get api/v1/user
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;updated_at&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;2020-03-15 23:58:39&#34;</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;check_company_status&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#bd93f9>2</span>
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><ul>
-<li>携带 <code>other/v1/login</code> 返回的 Token</li></ul><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><ul><li>携带 <code>other/v1/login</code> 返回的 Token</li></ul><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>{
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>{
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;success&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#ff79c6>false</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;error_code&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#bd93f9>40100</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;message&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;授权失败&#34;</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;data&#34;</span><span style=color:#ff79c6>:</span> []
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><h3 id=get-otherv1other>
-Get other/v1/other
-<a class=heading-link href=#get-otherv1other>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><ul>
-<li>携带 <code>api/v1/login</code> 返回的 Token</li></ul><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=get-otherv1other>Get other/v1/other
+<a class=heading-link href=#get-otherv1other><i class="fa fa-link" aria-hidden=true></i></a></h3><ul><li>携带 <code>api/v1/login</code> 返回的 Token</li></ul><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -1062,8 +807,7 @@ Get other/v1/other
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>{
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>{
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;id&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#bd93f9>1</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;user_id&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#bd93f9>1</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;name&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;测试&#34;</span>,
@@ -1073,30 +817,20 @@ Get other/v1/other
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;user_name&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;adminchaochao@163.com&#34;</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;company_name&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;河南模因网络科技有限公司&#34;</span>
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><ul>
-<li>携带 <code>other/v1/login</code> 返回的 Token</li></ul><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><ul><li>携带 <code>other/v1/login</code> 返回的 Token</li></ul><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>{
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>{
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;success&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#ff79c6>false</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;error_code&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#bd93f9>40100</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;message&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;授权失败&#34;</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;data&#34;</span><span style=color:#ff79c6>:</span> []
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><h3 id=问题>
-问题
-<a class=heading-link href=#%e9%97%ae%e9%a2%98>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><p>由此可见并不能满足需求，使用 Api 发放的 Token 可以获得到两个用户的信息，而 Other 发放的 Token 全是授权失败，Bye Bye~!!</p><p>哈哈，开玩笑了啦，在这里要万分感谢我的一个大神朋友～他帮忙找了一下午的源码，最后调试了中间件没执行，原来中间件执行是有顺序的，那么更改一下中间件执行顺序即可：</p><p><code>\app\Http\Kernel.php</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=问题>问题
+<a class=heading-link href=#%e9%97%ae%e9%a2%98><i class="fa fa-link" aria-hidden=true></i></a></h3><p>由此可见并不能满足需求，使用 Api 发放的 Token 可以获得到两个用户的信息，而 Other 发放的 Token 全是授权失败，Bye Bye~!!</p><p>哈哈，开玩笑了啦，在这里要万分感谢我的一个大神朋友～他帮忙找了一下午的源码，最后调试了中间件没执行，原来中间件执行是有顺序的，那么更改一下中间件执行顺序即可：</p><p><code>\app\Http\Kernel.php</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -1111,8 +845,7 @@ Get other/v1/other
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>		<span style=color:#6272a4>//找到这个...
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>		<span style=color:#6272a4>//找到这个...
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>    <span style=color:#ff79c6>protected</span> <span style=color:#8be9fd;font-style:italic>$middlewarePriority</span> <span style=color:#ff79c6>=</span> [
 </span></span><span style=display:flex><span>        <span style=color:#6272a4>//把刚才定义的两个设置 Token 模型的中间件提前
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>      	<span style=color:#6272a4>// 1
@@ -1127,20 +860,9 @@ Get other/v1/other
 </span></span><span style=display:flex><span>        \Illuminate\Routing\Middleware\SubstituteBindings<span style=color:#ff79c6>::</span><span style=color:#50fa7b>class</span>,
 </span></span><span style=display:flex><span>        \Illuminate\Auth\Middleware\Authorize<span style=color:#ff79c6>::</span><span style=color:#50fa7b>class</span>,
 </span></span><span style=display:flex><span>    ];
-</span></span></code></pre></td></tr></table></div></div><h2 id=完成>
-完成
-<a class=heading-link href=#%e5%ae%8c%e6%88%90>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><h3 id=get-apiv1user-1>
-Get api/v1/user
-<a class=heading-link href=#get-apiv1user-1>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><ul>
-<li>携带 <code>api/v1/login</code> 返回的 Token</li></ul><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><h2 id=完成>完成
+<a class=heading-link href=#%e5%ae%8c%e6%88%90><i class="fa fa-link" aria-hidden=true></i></a></h2><h3 id=get-apiv1user-1>Get api/v1/user
+<a class=heading-link href=#get-apiv1user-1><i class="fa fa-link" aria-hidden=true></i></a></h3><ul><li>携带 <code>api/v1/login</code> 返回的 Token</li></ul><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
@@ -1148,8 +870,7 @@ Get api/v1/user
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>{
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>{
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;id&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#bd93f9>2</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;email&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;test@163.com&#34;</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;sms_verified_at&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#ff79c6>null</span>,
@@ -1157,47 +878,32 @@ Get api/v1/user
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;updated_at&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;2020-03-15 23:58:39&#34;</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;check_company_status&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#bd93f9>2</span>
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><ul>
-<li>携带 <code>other/v1/login</code> 返回的 Token</li></ul><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><ul><li>携带 <code>other/v1/login</code> 返回的 Token</li></ul><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>{
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>{
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;success&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#ff79c6>false</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;error_code&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#bd93f9>40100</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;message&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;授权失败&#34;</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;data&#34;</span><span style=color:#ff79c6>:</span> []
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><h3 id=get-otherv1other-1>
-Get other/v1/other
-<a class=heading-link href=#get-otherv1other-1>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><ul>
-<li>携带 <code>api/v1/login</code> 返回的 Token</li></ul><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><h3 id=get-otherv1other-1>Get other/v1/other
+<a class=heading-link href=#get-otherv1other-1><i class="fa fa-link" aria-hidden=true></i></a></h3><ul><li>携带 <code>api/v1/login</code> 返回的 Token</li></ul><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>{
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>{
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;success&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#ff79c6>false</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;error_code&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#bd93f9>40100</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;message&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;授权失败&#34;</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;data&#34;</span><span style=color:#ff79c6>:</span> []
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><ul>
-<li>携带 <code>other/v1/login</code> 返回的 Token</li></ul><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></code></pre></td></tr></table></div></div><ul><li>携带 <code>other/v1/login</code> 返回的 Token</li></ul><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -1207,8 +913,7 @@ Get other/v1/other
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>{
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>{
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;id&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#bd93f9>1</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;user_id&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#bd93f9>1</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;name&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;测试&#34;</span>,
@@ -1218,21 +923,12 @@ Get other/v1/other
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;user_name&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;adminchaochao@163.com&#34;</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;company_name&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;河南模因网络科技有限公司&#34;</span>
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><h3 id=以上-done>
-以上 Done
-<a class=heading-link href=#%e4%bb%a5%e4%b8%8a-done>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><p>谢谢，如果有什么更好的方法请留言哦～</p></div><footer>
-</footer></article></section></div><footer class=footer>
-<section class=container>
-©
+</span></span></code></pre></td></tr></table></div></div><h3 id=以上-done>以上 Done
+<a class=heading-link href=#%e4%bb%a5%e4%b8%8a-done><i class="fa fa-link" aria-hidden=true></i></a></h3><p>谢谢，如果有什么更好的方法请留言哦～</p></div><footer></footer></article></section></div><footer class=footer><section class=container>©
 2019 -
 2022
 郭超超
 ·
-技术支持 <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
-</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
+技术支持 <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NK08XEDHKZ"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script>
-</body></html>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script></body></html>

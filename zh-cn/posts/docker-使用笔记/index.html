@@ -1,244 +1,104 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=color-scheme content="light dark">
-<meta name=author content="郭超超">
-<meta name=description content="前言    在 Docker 的学习及使用过程中作一些笔记。
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=color-scheme content="light dark"><meta name=author content="郭超超"><meta name=description content="前言    在 Docker 的学习及使用过程中作一些笔记。
 命令    检查安装后的 Docker 版本
 1 2 3 4  $ docker --version Docker version 19.03.8, build afacb8b $ docker-compose --version docker-compose version 1.25.5, build 8a1c60f6   尝试运行一个 Nginx 服务器：
-1 2 3 4 5  $ docker run -d -p 80:80 --name webserver nginx # -p 参数指定 本机端口:容器端口 # -d 在后台运行容器 # --name 给容器设置别名 # 此时访问本地 http://localhost 出现 Welcome to Nginx   停止 Nginx 服务器并删除容器：">
-<meta name=keywords content="Docker,Laravel,Laradock">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="Docker 使用笔记">
-<meta name=twitter:description content="前言    在 Docker 的学习及使用过程中作一些笔记。
+1 2 3 4 5  $ docker run -d -p 80:80 --name webserver nginx # -p 参数指定 本机端口:容器端口 # -d 在后台运行容器 # --name 给容器设置别名 # 此时访问本地 http://localhost 出现 Welcome to Nginx   停止 Nginx 服务器并删除容器："><meta name=keywords content="Docker,Laravel,Laradock"><meta name=twitter:card content="summary"><meta name=twitter:title content="Docker 使用笔记"><meta name=twitter:description content="前言    在 Docker 的学习及使用过程中作一些笔记。
 命令    检查安装后的 Docker 版本
 1 2 3 4  $ docker --version Docker version 19.03.8, build afacb8b $ docker-compose --version docker-compose version 1.25.5, build 8a1c60f6   尝试运行一个 Nginx 服务器：
-1 2 3 4 5  $ docker run -d -p 80:80 --name webserver nginx # -p 参数指定 本机端口:容器端口 # -d 在后台运行容器 # --name 给容器设置别名 # 此时访问本地 http://localhost 出现 Welcome to Nginx   停止 Nginx 服务器并删除容器：">
-<meta property="og:title" content="Docker 使用笔记">
-<meta property="og:description" content="前言    在 Docker 的学习及使用过程中作一些笔记。
+1 2 3 4 5  $ docker run -d -p 80:80 --name webserver nginx # -p 参数指定 本机端口:容器端口 # -d 在后台运行容器 # --name 给容器设置别名 # 此时访问本地 http://localhost 出现 Welcome to Nginx   停止 Nginx 服务器并删除容器："><meta property="og:title" content="Docker 使用笔记"><meta property="og:description" content="前言    在 Docker 的学习及使用过程中作一些笔记。
 命令    检查安装后的 Docker 版本
 1 2 3 4  $ docker --version Docker version 19.03.8, build afacb8b $ docker-compose --version docker-compose version 1.25.5, build 8a1c60f6   尝试运行一个 Nginx 服务器：
-1 2 3 4 5  $ docker run -d -p 80:80 --name webserver nginx # -p 参数指定 本机端口:容器端口 # -d 在后台运行容器 # --name 给容器设置别名 # 此时访问本地 http://localhost 出现 Welcome to Nginx   停止 Nginx 服务器并删除容器：">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://blog.adminchao.com/zh-cn/posts/docker-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2020-07-20T15:39:19+00:00">
-<meta property="article:modified_time" content="2020-07-20T15:39:19+00:00"><meta property="og:site_name" content="郭超超的博客">
-<title>
-Docker 使用笔记 · 郭超超的博客
-</title><link rel=canonical href=https://blog.adminchao.com/zh-cn/posts/docker-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/>
-<link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin>
-<link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen>
-<link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen>
-<link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32>
-<link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16>
-<link rel=apple-touch-icon href=/images/apple-touch-icon.png>
-<link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png>
-<meta name=generator content="Hugo 0.93.3">
-</head><body class="preload-transitions colorscheme-dark">
-<div class=float-container>
-<a id=dark-mode-toggle class=colorscheme-toggle>
-<i class="fa fa-adjust fa-fw" aria-hidden=true></i>
-</a>
-</div><main class=wrapper>
-<nav class=navigation>
-<section class=container>
-<a class=navigation-title href=/zh-cn>
-郭超超的博客
-</a>
+1 2 3 4 5  $ docker run -d -p 80:80 --name webserver nginx # -p 参数指定 本机端口:容器端口 # -d 在后台运行容器 # --name 给容器设置别名 # 此时访问本地 http://localhost 出现 Welcome to Nginx   停止 Nginx 服务器并删除容器："><meta property="og:type" content="article"><meta property="og:url" content="https://blog.adminchao.com/zh-cn/posts/docker-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-07-20T15:39:19+00:00"><meta property="article:modified_time" content="2020-07-20T15:39:19+00:00"><meta property="og:site_name" content="郭超超的博客"><title>Docker 使用笔记 · 郭超超的博客</title><link rel=canonical href=https://blog.adminchao.com/zh-cn/posts/docker-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/><link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin><link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen><link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen><link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16><link rel=apple-touch-icon href=/images/apple-touch-icon.png><link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png><meta name=generator content="Hugo 0.97.3"></head><body class="preload-transitions colorscheme-dark"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=/zh-cn>郭超超的博客</a>
 <input type=checkbox id=menu-toggle>
-<label class="menu-button float-right" for=menu-toggle>
-<i class="fa fa-bars fa-fw" aria-hidden=true></i>
-</label>
-<ul class=navigation-list>
-<li class=navigation-item>
-<a class=navigation-link href=/zh-cn/about/>关于</a>
-</li><li class=navigation-item>
-<a class=navigation-link href=/zh-cn/posts/>博文</a>
-</li><li class=navigation-item>
-<a class=navigation-link href=/zh-cn/contact/>联系</a>
-</li><li class="navigation-item menu-separator">
-<span>|</span>
-</li><li class=navigation-item>
-<a href=https://blog.adminchao.com/>🇺🇸</a>
-</li></ul></section></nav><div class=content>
-<section class="container post">
-<article>
-<header>
-<div class=post-title>
-<h1 class=title>
-<a class=title-link href=https://blog.adminchao.com/zh-cn/posts/docker-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/>
-Docker 使用笔记
-</a>
-</h1></div><div class=post-meta>
-<div class=date>
-<span class=posted-on>
-<i class="fa fa-calendar" aria-hidden=true></i>
-<time datetime=2020-07-20T15:39:19Z>
-2020-07-20 15:39:19
-</time>
-</span>
-<span class=reading-time>
-<i class="fa fa-clock-o" aria-hidden=true></i>
-阅读时间：2 分钟
-</span>
-</div><div class=categories>
-<i class="fa fa-folder" aria-hidden=true></i>
-<a href=/zh-cn/categories/%E6%8A%80%E6%9C%AF/>技术</a></div><div class=tags>
-<i class="fa fa-tag" aria-hidden=true></i>
-<span class=tag>
-<a href=/zh-cn/tags/docker/>Docker</a>
-</span>
+<label class="menu-button float-right" for=menu-toggle><i class="fa fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=/zh-cn/about/>关于</a></li><li class=navigation-item><a class=navigation-link href=/zh-cn/posts/>博文</a></li><li class=navigation-item><a class=navigation-link href=/zh-cn/contact/>联系</a></li><li class="navigation-item menu-separator"><span>|</span></li><li class=navigation-item><a href=https://blog.adminchao.com/>🇺🇸</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=https://blog.adminchao.com/zh-cn/posts/docker-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/>Docker 使用笔记</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2020-07-20T15:39:19Z>2020-07-20 15:39:19</time></span>
+<span class=reading-time><i class="fa fa-clock-o" aria-hidden=true></i>
+阅读时间：2 分钟</span></div><div class=categories><i class="fa fa-folder" aria-hidden=true></i>
+<a href=/zh-cn/categories/%E6%8A%80%E6%9C%AF/>技术</a></div><div class=tags><i class="fa fa-tag" aria-hidden=true></i>
+<span class=tag><a href=/zh-cn/tags/docker/>Docker</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/zh-cn/tags/laradock/>Laradock</a>
-</span>
+<span class=tag><a href=/zh-cn/tags/laradock/>Laradock</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/zh-cn/tags/laravel/>Laravel</a>
-</span></div></div></header><div>
-<h2 id=前言>
-前言
-<a class=heading-link href=#%e5%89%8d%e8%a8%80>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><p>在 Docker 的学习及使用过程中作一些笔记。</p><h2 id=命令>
-命令
-<a class=heading-link href=#%e5%91%bd%e4%bb%a4>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><p>检查安装后的 Docker 版本</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+<span class=tag><a href=/zh-cn/tags/laravel/>Laravel</a></span></div></div></header><div><h2 id=前言>前言
+<a class=heading-link href=#%e5%89%8d%e8%a8%80><i class="fa fa-link" aria-hidden=true></i></a></h2><p>在 Docker 的学习及使用过程中作一些笔记。</p><h2 id=命令>命令
+<a class=heading-link href=#%e5%91%bd%e4%bb%a4><i class="fa fa-link" aria-hidden=true></i></a></h2><p>检查安装后的 Docker 版本</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker --version
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker --version
 </span></span><span style=display:flex><span>Docker version 19.03.8, build afacb8b
 </span></span><span style=display:flex><span>$ docker-compose --version
 </span></span><span style=display:flex><span>docker-compose version 1.25.5, build 8a1c60f6
-</span></span></code></pre></td></tr></table></div></div><p>尝试运行一个 <a href=https://hub.docker.com/_/nginx/>Nginx 服务器</a>：</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><p>尝试运行一个 <a href=https://hub.docker.com/_/nginx/>Nginx 服务器</a>：</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker run -d -p 80:80 --name webserver nginx
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker run -d -p 80:80 --name webserver nginx
 </span></span><span style=display:flex><span><span style=color:#6272a4># -p 参数指定 本机端口:容器端口</span>
 </span></span><span style=display:flex><span><span style=color:#6272a4># -d 在后台运行容器</span>
 </span></span><span style=display:flex><span><span style=color:#6272a4># --name 给容器设置别名</span>
 </span></span><span style=display:flex><span><span style=color:#6272a4># 此时访问本地 http://localhost 出现 Welcome to Nginx</span>
-</span></span></code></pre></td></tr></table></div></div><p>停止 Nginx 服务器并删除容器：</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><p>停止 Nginx 服务器并删除容器：</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker stop webserver
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker stop webserver
 </span></span><span style=display:flex><span>$ docker rm webserver
-</span></span></code></pre></td></tr></table></div></div><p>从 Docker 镜像仓库获取镜像:</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><p>从 Docker 镜像仓库获取镜像:</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker pull <span style=color:#ff79c6>[</span>选项<span style=color:#ff79c6>]</span> <span style=color:#ff79c6>[</span>Docker Registry 地址<span style=color:#ff79c6>[</span>:端口号<span style=color:#ff79c6>]</span>/<span style=color:#ff79c6>]</span>仓库名<span style=color:#ff79c6>[</span>:标签<span style=color:#ff79c6>]</span>
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker pull <span style=color:#ff79c6>[</span>选项<span style=color:#ff79c6>]</span> <span style=color:#ff79c6>[</span>Docker Registry 地址<span style=color:#ff79c6>[</span>:端口号<span style=color:#ff79c6>]</span>/<span style=color:#ff79c6>]</span>仓库名<span style=color:#ff79c6>[</span>:标签<span style=color:#ff79c6>]</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#6272a4># Docker 镜像仓库地址：地址的格式一般是 &lt;域名/IP&gt;[:端口号]。默认地址是 Docker Hub。</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#6272a4># 仓库名：如之前所说，这里的仓库名是两段式名称，即 &lt;用户名&gt;/&lt;软件名&gt;。对于 Docker Hub，如果不给出用户名，则默认为 library，也就是官方镜像。</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#6272a4># 如 docker pull ubuntu:18.04 就是 pull from library/ubuntu</span>
-</span></span></code></pre></td></tr></table></div></div><p>以镜像为基础并运行一个容器并与容器里的 <code>bash</code> 进行交互操作</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><p>以镜像为基础并运行一个容器并与容器里的 <code>bash</code> 进行交互操作</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker run -it --rm ubuntu:18.04 bash
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker run -it --rm ubuntu:18.04 bash
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#6272a4># -it：这是两个参数，一个是 -i：交互式操作，一个是 -t 终端。我们这里打算进入 bash 执行一些命令并查看返回结果，因此我们需要交互式终端。</span>
 </span></span><span style=display:flex><span><span style=color:#6272a4># --rm：这个参数是说容器退出后随之将其删除。默认情况下，为了排障需求，退出的容器并不会立即删除，除非手动 docker rm。我们这里只是随便执行个命令，看看结果，不需要排障和保留结果，因此使用 --rm 可以避免浪费空间。</span>
 </span></span><span style=display:flex><span><span style=color:#6272a4># ubuntu:18.04：这是指用 ubuntu:18.04 镜像为基础来启动容器。</span>
 </span></span><span style=display:flex><span><span style=color:#6272a4># bash：放在镜像名后的是 命令，这里我们希望有个交互式 Shell，因此用的是 bash</span>
-</span></span></code></pre></td></tr></table></div></div><p>列出已下载的镜像</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker image ls
-</span></span></code></pre></td></tr></table></div></div><p>列出包含中间层镜像</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker image ls -a
-</span></span></code></pre></td></tr></table></div></div><p>查看镜像、容器、数据卷所占用的实际空间</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker system df
-</span></span></code></pre></td></tr></table></div></div><p>显示虚悬镜像</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker image ls -f <span style=color:#8be9fd;font-style:italic>dangling</span><span style=color:#ff79c6>=</span><span style=color:#8be9fd;font-style:italic>true</span>
-</span></span></code></pre></td></tr></table></div></div><p>删除虚悬镜像</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker image prune
-</span></span></code></pre></td></tr></table></div></div><p>删除本地镜像</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><p>列出已下载的镜像</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker image ls
+</span></span></code></pre></td></tr></table></div></div><p>列出包含中间层镜像</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker image ls -a
+</span></span></code></pre></td></tr></table></div></div><p>查看镜像、容器、数据卷所占用的实际空间</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker system df
+</span></span></code></pre></td></tr></table></div></div><p>显示虚悬镜像</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker image ls -f <span style=color:#8be9fd;font-style:italic>dangling</span><span style=color:#ff79c6>=</span><span style=color:#8be9fd;font-style:italic>true</span>
+</span></span></code></pre></td></tr></table></div></div><p>删除虚悬镜像</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker image prune
+</span></span></code></pre></td></tr></table></div></div><p>删除本地镜像</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker image rm <span style=color:#ff79c6>[</span>选项<span style=color:#ff79c6>]</span> &lt;镜像1&gt; <span style=color:#ff79c6>[</span>&lt;镜像2&gt; ...<span style=color:#ff79c6>]</span>
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker image rm <span style=color:#ff79c6>[</span>选项<span style=color:#ff79c6>]</span> &lt;镜像1&gt; <span style=color:#ff79c6>[</span>&lt;镜像2&gt; ...<span style=color:#ff79c6>]</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#6272a4># &lt;镜像&gt; 可以是 镜像短 ID、镜像长 ID、镜像名 或者 镜像摘要</span>
-</span></span></code></pre></td></tr></table></div></div><p>创建一个数据卷</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker volume create my-vol
-</span></span></code></pre></td></tr></table></div></div><p>查看所有的数据卷</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker volume ls
-</span></span></code></pre></td></tr></table></div></div><p>查看数据卷信息</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker volume inspect my-vol
-</span></span></code></pre></td></tr></table></div></div><p>启动容器并挂载数据卷到 <code>/var/www/</code> 目录</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker run -d -P --name web --mount <span style=color:#8be9fd;font-style:italic>source</span><span style=color:#ff79c6>=</span>my-vol,target<span style=color:#ff79c6>=</span>/var/www/ ubuntu:18.04 bash
-</span></span></code></pre></td></tr></table></div></div><p>启动容器并挂载目录作为数据卷到 <code>/var/www</code> 目录</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker run -d -P --name web --mount <span style=color:#8be9fd;font-style:italic>type</span><span style=color:#ff79c6>=</span>bind,source<span style=color:#ff79c6>=</span>/Users/my/myProject,target<span style=color:#ff79c6>=</span>/var/www/myProject ubuntu:18.04
-</span></span></code></pre></td></tr></table></div></div></div><footer>
-</footer></article></section></div><footer class=footer>
-<section class=container>
-©
+</span></span></code></pre></td></tr></table></div></div><p>创建一个数据卷</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker volume create my-vol
+</span></span></code></pre></td></tr></table></div></div><p>查看所有的数据卷</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker volume ls
+</span></span></code></pre></td></tr></table></div></div><p>查看数据卷信息</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker volume inspect my-vol
+</span></span></code></pre></td></tr></table></div></div><p>启动容器并挂载数据卷到 <code>/var/www/</code> 目录</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker run -d -P --name web --mount <span style=color:#8be9fd;font-style:italic>source</span><span style=color:#ff79c6>=</span>my-vol,target<span style=color:#ff79c6>=</span>/var/www/ ubuntu:18.04 bash
+</span></span></code></pre></td></tr></table></div></div><p>启动容器并挂载目录作为数据卷到 <code>/var/www</code> 目录</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ docker run -d -P --name web --mount <span style=color:#8be9fd;font-style:italic>type</span><span style=color:#ff79c6>=</span>bind,source<span style=color:#ff79c6>=</span>/Users/my/myProject,target<span style=color:#ff79c6>=</span>/var/www/myProject ubuntu:18.04
+</span></span></code></pre></td></tr></table></div></div></div><footer></footer></article></section></div><footer class=footer><section class=container>©
 2019 -
 2022
 郭超超
 ·
-技术支持 <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
-</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
+技术支持 <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NK08XEDHKZ"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script>
-</body></html>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script></body></html>

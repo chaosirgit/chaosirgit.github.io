@@ -1,176 +1,53 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=color-scheme content="light dark">
-<meta name=author content="郭超超">
-<meta name=description content="前言    我们都知道在模型中使用 appends 属性来构建访问器使得返回结果添加一些字段信息，但是这样的话有一个坏处，就是所有这个模型的返回结果都会有这些字段信息，如果接口中规定了严格的返回信息字段，这样就不合适了。
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=color-scheme content="light dark"><meta name=author content="郭超超"><meta name=description content="前言    我们都知道在模型中使用 appends 属性来构建访问器使得返回结果添加一些字段信息，但是这样的话有一个坏处，就是所有这个模型的返回结果都会有这些字段信息，如果接口中规定了严格的返回信息字段，这样就不合适了。
 能不能有好的方法动态的显示或隐藏这些字段信息呢？
 答案是肯定的。
-动态显示    在接口中临时显示    首先在 Model 中构建访问器    1 2 3  public function getUsernameAttribute(){  return $this->hasOne('App\User','id','user_id')->value('username'); }   Model 不建立 appends 属性    单条记录    1 2 3 4 5  public function getUserInfo(Request $request){  $id = $request->get('id',null);  $result = User::find($id)->append('username');  return response()->json($result); }   多条记录    1 2 3 4 5 6 7 8 9 10  public function getUsers(Request $request){  $limit = $request->get('limit',10);  $results = User::orderBy('id','desc')  ->paginate($limit)  ->transform(function($item,$key){  $item->append('username');  return $item; //如果不 return 出去返回的是 null  });  return response()->json($results); }   如果不想用 append 方法的关联关系可以这样用 或者报 Method items does not exist.">
-<meta name=keywords content="Laravel,Eloquent,ORM,模型,实例,PHP">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="Laravel Eloquent 返回结果优化">
-<meta name=twitter:description content="前言    我们都知道在模型中使用 appends 属性来构建访问器使得返回结果添加一些字段信息，但是这样的话有一个坏处，就是所有这个模型的返回结果都会有这些字段信息，如果接口中规定了严格的返回信息字段，这样就不合适了。
+动态显示    在接口中临时显示    首先在 Model 中构建访问器    1 2 3  public function getUsernameAttribute(){  return $this->hasOne('App\User','id','user_id')->value('username'); }   Model 不建立 appends 属性    单条记录    1 2 3 4 5  public function getUserInfo(Request $request){  $id = $request->get('id',null);  $result = User::find($id)->append('username');  return response()->json($result); }   多条记录    1 2 3 4 5 6 7 8 9 10  public function getUsers(Request $request){  $limit = $request->get('limit',10);  $results = User::orderBy('id','desc')  ->paginate($limit)  ->transform(function($item,$key){  $item->append('username');  return $item; //如果不 return 出去返回的是 null  });  return response()->json($results); }   如果不想用 append 方法的关联关系可以这样用 或者报 Method items does not exist."><meta name=keywords content="Laravel,Eloquent,ORM,模型,实例,PHP"><meta name=twitter:card content="summary"><meta name=twitter:title content="Laravel Eloquent 返回结果优化"><meta name=twitter:description content="前言    我们都知道在模型中使用 appends 属性来构建访问器使得返回结果添加一些字段信息，但是这样的话有一个坏处，就是所有这个模型的返回结果都会有这些字段信息，如果接口中规定了严格的返回信息字段，这样就不合适了。
 能不能有好的方法动态的显示或隐藏这些字段信息呢？
 答案是肯定的。
-动态显示    在接口中临时显示    首先在 Model 中构建访问器    1 2 3  public function getUsernameAttribute(){  return $this->hasOne('App\User','id','user_id')->value('username'); }   Model 不建立 appends 属性    单条记录    1 2 3 4 5  public function getUserInfo(Request $request){  $id = $request->get('id',null);  $result = User::find($id)->append('username');  return response()->json($result); }   多条记录    1 2 3 4 5 6 7 8 9 10  public function getUsers(Request $request){  $limit = $request->get('limit',10);  $results = User::orderBy('id','desc')  ->paginate($limit)  ->transform(function($item,$key){  $item->append('username');  return $item; //如果不 return 出去返回的是 null  });  return response()->json($results); }   如果不想用 append 方法的关联关系可以这样用 或者报 Method items does not exist.">
-<meta property="og:title" content="Laravel Eloquent 返回结果优化">
-<meta property="og:description" content="前言    我们都知道在模型中使用 appends 属性来构建访问器使得返回结果添加一些字段信息，但是这样的话有一个坏处，就是所有这个模型的返回结果都会有这些字段信息，如果接口中规定了严格的返回信息字段，这样就不合适了。
+动态显示    在接口中临时显示    首先在 Model 中构建访问器    1 2 3  public function getUsernameAttribute(){  return $this->hasOne('App\User','id','user_id')->value('username'); }   Model 不建立 appends 属性    单条记录    1 2 3 4 5  public function getUserInfo(Request $request){  $id = $request->get('id',null);  $result = User::find($id)->append('username');  return response()->json($result); }   多条记录    1 2 3 4 5 6 7 8 9 10  public function getUsers(Request $request){  $limit = $request->get('limit',10);  $results = User::orderBy('id','desc')  ->paginate($limit)  ->transform(function($item,$key){  $item->append('username');  return $item; //如果不 return 出去返回的是 null  });  return response()->json($results); }   如果不想用 append 方法的关联关系可以这样用 或者报 Method items does not exist."><meta property="og:title" content="Laravel Eloquent 返回结果优化"><meta property="og:description" content="前言    我们都知道在模型中使用 appends 属性来构建访问器使得返回结果添加一些字段信息，但是这样的话有一个坏处，就是所有这个模型的返回结果都会有这些字段信息，如果接口中规定了严格的返回信息字段，这样就不合适了。
 能不能有好的方法动态的显示或隐藏这些字段信息呢？
 答案是肯定的。
-动态显示    在接口中临时显示    首先在 Model 中构建访问器    1 2 3  public function getUsernameAttribute(){  return $this->hasOne('App\User','id','user_id')->value('username'); }   Model 不建立 appends 属性    单条记录    1 2 3 4 5  public function getUserInfo(Request $request){  $id = $request->get('id',null);  $result = User::find($id)->append('username');  return response()->json($result); }   多条记录    1 2 3 4 5 6 7 8 9 10  public function getUsers(Request $request){  $limit = $request->get('limit',10);  $results = User::orderBy('id','desc')  ->paginate($limit)  ->transform(function($item,$key){  $item->append('username');  return $item; //如果不 return 出去返回的是 null  });  return response()->json($results); }   如果不想用 append 方法的关联关系可以这样用 或者报 Method items does not exist.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://blog.adminchao.com/zh-cn/posts/laravel-eloquent-%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C%E4%BC%98%E5%8C%96/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2019-01-10T15:29:08+00:00">
-<meta property="article:modified_time" content="2019-01-10T15:29:08+00:00"><meta property="og:site_name" content="郭超超的博客">
-<title>
-Laravel Eloquent 返回结果优化 · 郭超超的博客
-</title><link rel=canonical href=https://blog.adminchao.com/zh-cn/posts/laravel-eloquent-%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C%E4%BC%98%E5%8C%96/>
-<link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin>
-<link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen>
-<link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen>
-<link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32>
-<link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16>
-<link rel=apple-touch-icon href=/images/apple-touch-icon.png>
-<link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png>
-<meta name=generator content="Hugo 0.93.3">
-</head><body class="preload-transitions colorscheme-dark">
-<div class=float-container>
-<a id=dark-mode-toggle class=colorscheme-toggle>
-<i class="fa fa-adjust fa-fw" aria-hidden=true></i>
-</a>
-</div><main class=wrapper>
-<nav class=navigation>
-<section class=container>
-<a class=navigation-title href=/zh-cn>
-郭超超的博客
-</a>
+动态显示    在接口中临时显示    首先在 Model 中构建访问器    1 2 3  public function getUsernameAttribute(){  return $this->hasOne('App\User','id','user_id')->value('username'); }   Model 不建立 appends 属性    单条记录    1 2 3 4 5  public function getUserInfo(Request $request){  $id = $request->get('id',null);  $result = User::find($id)->append('username');  return response()->json($result); }   多条记录    1 2 3 4 5 6 7 8 9 10  public function getUsers(Request $request){  $limit = $request->get('limit',10);  $results = User::orderBy('id','desc')  ->paginate($limit)  ->transform(function($item,$key){  $item->append('username');  return $item; //如果不 return 出去返回的是 null  });  return response()->json($results); }   如果不想用 append 方法的关联关系可以这样用 或者报 Method items does not exist."><meta property="og:type" content="article"><meta property="og:url" content="https://blog.adminchao.com/zh-cn/posts/laravel-eloquent-%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C%E4%BC%98%E5%8C%96/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2019-01-10T15:29:08+00:00"><meta property="article:modified_time" content="2019-01-10T15:29:08+00:00"><meta property="og:site_name" content="郭超超的博客"><title>Laravel Eloquent 返回结果优化 · 郭超超的博客</title><link rel=canonical href=https://blog.adminchao.com/zh-cn/posts/laravel-eloquent-%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C%E4%BC%98%E5%8C%96/><link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin><link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen><link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen><link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16><link rel=apple-touch-icon href=/images/apple-touch-icon.png><link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png><meta name=generator content="Hugo 0.97.3"></head><body class="preload-transitions colorscheme-dark"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=/zh-cn>郭超超的博客</a>
 <input type=checkbox id=menu-toggle>
-<label class="menu-button float-right" for=menu-toggle>
-<i class="fa fa-bars fa-fw" aria-hidden=true></i>
-</label>
-<ul class=navigation-list>
-<li class=navigation-item>
-<a class=navigation-link href=/zh-cn/about/>关于</a>
-</li><li class=navigation-item>
-<a class=navigation-link href=/zh-cn/posts/>博文</a>
-</li><li class=navigation-item>
-<a class=navigation-link href=/zh-cn/contact/>联系</a>
-</li><li class="navigation-item menu-separator">
-<span>|</span>
-</li><li class=navigation-item>
-<a href=https://blog.adminchao.com/>🇺🇸</a>
-</li></ul></section></nav><div class=content>
-<section class="container post">
-<article>
-<header>
-<div class=post-title>
-<h1 class=title>
-<a class=title-link href=https://blog.adminchao.com/zh-cn/posts/laravel-eloquent-%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C%E4%BC%98%E5%8C%96/>
-Laravel Eloquent 返回结果优化
-</a>
-</h1></div><div class=post-meta>
-<div class=date>
-<span class=posted-on>
-<i class="fa fa-calendar" aria-hidden=true></i>
-<time datetime=2019-01-10T15:29:08Z>
-2019-01-10 15:29:08
-</time>
-</span>
-<span class=reading-time>
-<i class="fa fa-clock-o" aria-hidden=true></i>
-阅读时间：1 分钟
-</span>
-</div><div class=categories>
-<i class="fa fa-folder" aria-hidden=true></i>
-<a href=/zh-cn/categories/%E6%8A%80%E6%9C%AF/>技术</a></div><div class=tags>
-<i class="fa fa-tag" aria-hidden=true></i>
-<span class=tag>
-<a href=/zh-cn/tags/laravel/>Laravel</a>
-</span>
+<label class="menu-button float-right" for=menu-toggle><i class="fa fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=/zh-cn/about/>关于</a></li><li class=navigation-item><a class=navigation-link href=/zh-cn/posts/>博文</a></li><li class=navigation-item><a class=navigation-link href=/zh-cn/contact/>联系</a></li><li class="navigation-item menu-separator"><span>|</span></li><li class=navigation-item><a href=https://blog.adminchao.com/>🇺🇸</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=https://blog.adminchao.com/zh-cn/posts/laravel-eloquent-%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C%E4%BC%98%E5%8C%96/>Laravel Eloquent 返回结果优化</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2019-01-10T15:29:08Z>2019-01-10 15:29:08</time></span>
+<span class=reading-time><i class="fa fa-clock-o" aria-hidden=true></i>
+阅读时间：1 分钟</span></div><div class=categories><i class="fa fa-folder" aria-hidden=true></i>
+<a href=/zh-cn/categories/%E6%8A%80%E6%9C%AF/>技术</a></div><div class=tags><i class="fa fa-tag" aria-hidden=true></i>
+<span class=tag><a href=/zh-cn/tags/laravel/>Laravel</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/zh-cn/tags/eloquent/>Eloquent</a>
-</span>
+<span class=tag><a href=/zh-cn/tags/eloquent/>Eloquent</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/zh-cn/tags/orm/>ORM</a>
-</span>
+<span class=tag><a href=/zh-cn/tags/orm/>ORM</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/zh-cn/tags/%E6%A8%A1%E5%9E%8B/>模型</a>
-</span>
+<span class=tag><a href=/zh-cn/tags/%E6%A8%A1%E5%9E%8B/>模型</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/zh-cn/tags/%E5%AE%9E%E4%BE%8B/>实例</a>
-</span>
+<span class=tag><a href=/zh-cn/tags/%E5%AE%9E%E4%BE%8B/>实例</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/zh-cn/tags/php/>PHP</a>
-</span></div></div></header><div>
-<h2 id=前言>
-前言
-<a class=heading-link href=#%e5%89%8d%e8%a8%80>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><p>我们都知道在模型中使用 <code>appends</code> 属性来构建访问器使得返回结果添加一些字段信息，但是这样的话有一个坏处，就是所有这个模型的返回结果都会有这些字段信息，如果接口中规定了严格的返回信息字段，这样就不合适了。<br>
-能不能有好的方法动态的显示或隐藏这些字段信息呢？<br>
-答案是肯定的。</p><h2 id=动态显示>
-动态显示
-<a class=heading-link href=#%e5%8a%a8%e6%80%81%e6%98%be%e7%a4%ba>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><h3 id=在接口中临时显示>
-在接口中临时显示
-<a class=heading-link href=#%e5%9c%a8%e6%8e%a5%e5%8f%a3%e4%b8%ad%e4%b8%b4%e6%97%b6%e6%98%be%e7%a4%ba>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><h4 id=首先在-model-中构建访问器>
-首先在 Model 中构建访问器
-<a class=heading-link href=#%e9%a6%96%e5%85%88%e5%9c%a8-model-%e4%b8%ad%e6%9e%84%e5%bb%ba%e8%ae%bf%e9%97%ae%e5%99%a8>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+<span class=tag><a href=/zh-cn/tags/php/>PHP</a></span></div></div></header><div><h2 id=前言>前言
+<a class=heading-link href=#%e5%89%8d%e8%a8%80><i class="fa fa-link" aria-hidden=true></i></a></h2><p>我们都知道在模型中使用 <code>appends</code> 属性来构建访问器使得返回结果添加一些字段信息，但是这样的话有一个坏处，就是所有这个模型的返回结果都会有这些字段信息，如果接口中规定了严格的返回信息字段，这样就不合适了。<br>能不能有好的方法动态的显示或隐藏这些字段信息呢？<br>答案是肯定的。</p><h2 id=动态显示>动态显示
+<a class=heading-link href=#%e5%8a%a8%e6%80%81%e6%98%be%e7%a4%ba><i class="fa fa-link" aria-hidden=true></i></a></h2><h3 id=在接口中临时显示>在接口中临时显示
+<a class=heading-link href=#%e5%9c%a8%e6%8e%a5%e5%8f%a3%e4%b8%ad%e4%b8%b4%e6%97%b6%e6%98%be%e7%a4%ba><i class="fa fa-link" aria-hidden=true></i></a></h3><h4 id=首先在-model-中构建访问器>首先在 Model 中构建访问器
+<a class=heading-link href=#%e9%a6%96%e5%85%88%e5%9c%a8-model-%e4%b8%ad%e6%9e%84%e5%bb%ba%e8%ae%bf%e9%97%ae%e5%99%a8><i class="fa fa-link" aria-hidden=true></i></a></h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>getUsernameAttribute</span>(){
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>getUsernameAttribute</span>(){
 </span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>hasOne</span>(<span style=color:#f1fa8c>&#39;App\User&#39;</span>,<span style=color:#f1fa8c>&#39;id&#39;</span>,<span style=color:#f1fa8c>&#39;user_id&#39;</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>value</span>(<span style=color:#f1fa8c>&#39;username&#39;</span>);
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><h4 id=model-不建立-appends-属性>
-Model 不建立 <code>appends</code> 属性
-<a class=heading-link href=#model-%e4%b8%8d%e5%bb%ba%e7%ab%8b-appends-%e5%b1%9e%e6%80%a7>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h4><h4 id=单条记录>
-单条记录
-<a class=heading-link href=#%e5%8d%95%e6%9d%a1%e8%ae%b0%e5%bd%95>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><h4 id=model-不建立-appends-属性>Model 不建立 <code>appends</code> 属性
+<a class=heading-link href=#model-%e4%b8%8d%e5%bb%ba%e7%ab%8b-appends-%e5%b1%9e%e6%80%a7><i class="fa fa-link" aria-hidden=true></i></a></h4><h4 id=单条记录>单条记录
+<a class=heading-link href=#%e5%8d%95%e6%9d%a1%e8%ae%b0%e5%bd%95><i class="fa fa-link" aria-hidden=true></i></a></h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>getUserInfo</span>(Request <span style=color:#8be9fd;font-style:italic>$request</span>){
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>getUserInfo</span>(Request <span style=color:#8be9fd;font-style:italic>$request</span>){
 </span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>$id</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>get</span>(<span style=color:#f1fa8c>&#39;id&#39;</span>,<span style=color:#ff79c6>null</span>);
 </span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>$result</span> <span style=color:#ff79c6>=</span> User<span style=color:#ff79c6>::</span><span style=color:#50fa7b>find</span>(<span style=color:#8be9fd;font-style:italic>$id</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>append</span>(<span style=color:#f1fa8c>&#39;username&#39;</span>);
 </span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> response()<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>json</span>(<span style=color:#8be9fd;font-style:italic>$result</span>);
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><h4 id=多条记录>
-多条记录
-<a class=heading-link href=#%e5%a4%9a%e6%9d%a1%e8%ae%b0%e5%bd%95>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></code></pre></td></tr></table></div></div><h4 id=多条记录>多条记录
+<a class=heading-link href=#%e5%a4%9a%e6%9d%a1%e8%ae%b0%e5%bd%95><i class="fa fa-link" aria-hidden=true></i></a></h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -180,8 +57,7 @@ Model 不建立 <code>appends</code> 属性
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>getUsers</span>(Request <span style=color:#8be9fd;font-style:italic>$request</span>){
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>getUsers</span>(Request <span style=color:#8be9fd;font-style:italic>$request</span>){
 </span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>$limit</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>get</span>(<span style=color:#f1fa8c>&#39;limit&#39;</span>,<span style=color:#bd93f9>10</span>);
 </span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>$results</span> <span style=color:#ff79c6>=</span> User<span style=color:#ff79c6>::</span><span style=color:#50fa7b>orderBy</span>(<span style=color:#f1fa8c>&#39;id&#39;</span>,<span style=color:#f1fa8c>&#39;desc&#39;</span>)
 </span></span><span style=display:flex><span>                    <span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>paginate</span>(<span style=color:#8be9fd;font-style:italic>$limit</span>)
@@ -191,9 +67,7 @@ Model 不建立 <code>appends</code> 属性
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                    });
 </span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> response()<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>json</span>(<span style=color:#8be9fd;font-style:italic>$results</span>);
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><p>如果不想用 <code>append</code> 方法的关联关系可以这样用 或者报 <code>Method items does not exist.</code> 时</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></code></pre></td></tr></table></div></div><p>如果不想用 <code>append</code> 方法的关联关系可以这样用 或者报 <code>Method items does not exist.</code> 时</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -209,8 +83,7 @@ Model 不建立 <code>appends</code> 属性
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#ff79c6>public</span> <span style=color:#ff79c6>function</span> <span style=color:#50fa7b>getUsers</span>(Request <span style=color:#8be9fd;font-style:italic>$request</span>){
 </span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$limit</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>$request</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>get</span>(<span style=color:#f1fa8c>&#39;limit&#39;</span>,<span style=color:#bd93f9>10</span>);
 </span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>$results</span> <span style=color:#ff79c6>=</span> User<span style=color:#ff79c6>::</span><span style=color:#50fa7b>orderBy</span>(<span style=color:#f1fa8c>&#39;id&#39;</span>,<span style=color:#f1fa8c>&#39;desc&#39;</span>)<span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>paginate</span>(<span style=color:#8be9fd;font-style:italic>$limit</span>);
@@ -226,31 +99,16 @@ Model 不建立 <code>appends</code> 属性
 </span></span><span style=display:flex><span>        
 </span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>$this</span><span style=color:#ff79c6>-&gt;</span><span style=color:#50fa7b>pageDate</span>(<span style=color:#8be9fd;font-style:italic>$results</span>);
 </span></span><span style=display:flex><span>    }
-</span></span></code></pre></td></tr></table></div></div><h3 id=在接口中临时隐藏>
-在接口中临时隐藏
-<a class=heading-link href=#%e5%9c%a8%e6%8e%a5%e5%8f%a3%e4%b8%ad%e4%b8%b4%e6%97%b6%e9%9a%90%e8%97%8f>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><p>如果已经添加了很多 <code>appends</code> 属性，那么把上边临时显示的</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>append(<span style=color:#8be9fd;font-style:italic>$attribute</span>)
-</span></span></code></pre></td></tr></table></div></div><p>方法替换成</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>addHidden(<span style=color:#8be9fd;font-style:italic>$attribute</span>)
-</span></span></code></pre></td></tr></table></div></div><p>就可以了</p></div><footer>
-</footer></article></section></div><footer class=footer>
-<section class=container>
-©
+</span></span></code></pre></td></tr></table></div></div><h3 id=在接口中临时隐藏>在接口中临时隐藏
+<a class=heading-link href=#%e5%9c%a8%e6%8e%a5%e5%8f%a3%e4%b8%ad%e4%b8%b4%e6%97%b6%e9%9a%90%e8%97%8f><i class="fa fa-link" aria-hidden=true></i></a></h3><p>如果已经添加了很多 <code>appends</code> 属性，那么把上边临时显示的</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>append(<span style=color:#8be9fd;font-style:italic>$attribute</span>)
+</span></span></code></pre></td></tr></table></div></div><p>方法替换成</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span>addHidden(<span style=color:#8be9fd;font-style:italic>$attribute</span>)
+</span></span></code></pre></td></tr></table></div></div><p>就可以了</p></div><footer></footer></article></section></div><footer class=footer><section class=container>©
 2019 -
 2022
 郭超超
 ·
-技术支持 <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
-</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
+技术支持 <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NK08XEDHKZ"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script>
-</body></html>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script></body></html>

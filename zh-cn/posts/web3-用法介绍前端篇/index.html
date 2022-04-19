@@ -1,138 +1,29 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=color-scheme content="light dark">
-<meta name=author content="郭超超">
-<meta name=description content="如何使用 web3.js 进行交互,web3 教程,web3 使用方法,授权钱包,小狐狸,WalletConnect,DApp,去中心化">
-<meta name=keywords content="Web3,ETH,WalletConnect,以太坊,钱包,区块链">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="Web3 用法介绍(前端篇)">
-<meta name=twitter:description content="如何使用 web3.js 进行交互,web3 教程,web3 使用方法,授权钱包,小狐狸,WalletConnect,DApp,去中心化">
-<meta property="og:title" content="Web3 用法介绍(前端篇)">
-<meta property="og:description" content="如何使用 web3.js 进行交互,web3 教程,web3 使用方法,授权钱包,小狐狸,WalletConnect,DApp,去中心化">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://blog.adminchao.com/zh-cn/posts/web3-%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D%E5%89%8D%E7%AB%AF%E7%AF%87/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2022-03-06T15:21:19+00:00">
-<meta property="article:modified_time" content="2022-03-06T15:21:19+00:00"><meta property="og:site_name" content="郭超超的博客">
-<title>
-Web3 用法介绍(前端篇) · 郭超超的博客
-</title><link rel=canonical href=https://blog.adminchao.com/zh-cn/posts/web3-%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D%E5%89%8D%E7%AB%AF%E7%AF%87/>
-<link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin>
-<link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen>
-<link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen>
-<link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32>
-<link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16>
-<link rel=apple-touch-icon href=/images/apple-touch-icon.png>
-<link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png>
-<meta name=generator content="Hugo 0.93.3">
-</head><body class="preload-transitions colorscheme-dark">
-<div class=float-container>
-<a id=dark-mode-toggle class=colorscheme-toggle>
-<i class="fa fa-adjust fa-fw" aria-hidden=true></i>
-</a>
-</div><main class=wrapper>
-<nav class=navigation>
-<section class=container>
-<a class=navigation-title href=/zh-cn>
-郭超超的博客
-</a>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=color-scheme content="light dark"><meta name=author content="郭超超"><meta name=description content="如何使用 web3.js 进行交互,web3 教程,web3 使用方法,授权钱包,小狐狸,WalletConnect,DApp,去中心化"><meta name=keywords content="Web3,ETH,WalletConnect,以太坊,钱包,区块链"><meta name=twitter:card content="summary"><meta name=twitter:title content="Web3 用法介绍(前端篇)"><meta name=twitter:description content="如何使用 web3.js 进行交互,web3 教程,web3 使用方法,授权钱包,小狐狸,WalletConnect,DApp,去中心化"><meta property="og:title" content="Web3 用法介绍(前端篇)"><meta property="og:description" content="如何使用 web3.js 进行交互,web3 教程,web3 使用方法,授权钱包,小狐狸,WalletConnect,DApp,去中心化"><meta property="og:type" content="article"><meta property="og:url" content="https://blog.adminchao.com/zh-cn/posts/web3-%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D%E5%89%8D%E7%AB%AF%E7%AF%87/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-03-06T15:21:19+00:00"><meta property="article:modified_time" content="2022-03-06T15:21:19+00:00"><meta property="og:site_name" content="郭超超的博客"><title>Web3 用法介绍(前端篇) · 郭超超的博客</title><link rel=canonical href=https://blog.adminchao.com/zh-cn/posts/web3-%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D%E5%89%8D%E7%AB%AF%E7%AF%87/><link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin><link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen><link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen><link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16><link rel=apple-touch-icon href=/images/apple-touch-icon.png><link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png><meta name=generator content="Hugo 0.97.3"></head><body class="preload-transitions colorscheme-dark"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=/zh-cn>郭超超的博客</a>
 <input type=checkbox id=menu-toggle>
-<label class="menu-button float-right" for=menu-toggle>
-<i class="fa fa-bars fa-fw" aria-hidden=true></i>
-</label>
-<ul class=navigation-list>
-<li class=navigation-item>
-<a class=navigation-link href=/zh-cn/about/>关于</a>
-</li><li class=navigation-item>
-<a class=navigation-link href=/zh-cn/posts/>博文</a>
-</li><li class=navigation-item>
-<a class=navigation-link href=/zh-cn/contact/>联系</a>
-</li><li class="navigation-item menu-separator">
-<span>|</span>
-</li><li class=navigation-item>
-<a href=https://blog.adminchao.com/>🇺🇸</a>
-</li></ul></section></nav><div class=content>
-<section class="container post">
-<article>
-<header>
-<div class=post-title>
-<h1 class=title>
-<a class=title-link href=https://blog.adminchao.com/zh-cn/posts/web3-%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D%E5%89%8D%E7%AB%AF%E7%AF%87/>
-Web3 用法介绍(前端篇)
-</a>
-</h1></div><div class=post-meta>
-<div class=date>
-<span class=posted-on>
-<i class="fa fa-calendar" aria-hidden=true></i>
-<time datetime=2022-03-06T15:21:19Z>
-2022-03-06 15:21:19
-</time>
-</span>
-<span class=reading-time>
-<i class="fa fa-clock-o" aria-hidden=true></i>
-阅读时间：5 分钟
-</span>
-</div><div class=categories>
-<i class="fa fa-folder" aria-hidden=true></i>
-<a href=/zh-cn/categories/%E6%8A%80%E6%9C%AF/>技术</a></div><div class=tags>
-<i class="fa fa-tag" aria-hidden=true></i>
-<span class=tag>
-<a href=/zh-cn/tags/web3/>Web3</a>
-</span>
+<label class="menu-button float-right" for=menu-toggle><i class="fa fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=/zh-cn/about/>关于</a></li><li class=navigation-item><a class=navigation-link href=/zh-cn/posts/>博文</a></li><li class=navigation-item><a class=navigation-link href=/zh-cn/contact/>联系</a></li><li class="navigation-item menu-separator"><span>|</span></li><li class=navigation-item><a href=https://blog.adminchao.com/>🇺🇸</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=https://blog.adminchao.com/zh-cn/posts/web3-%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D%E5%89%8D%E7%AB%AF%E7%AF%87/>Web3 用法介绍(前端篇)</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2022-03-06T15:21:19Z>2022-03-06 15:21:19</time></span>
+<span class=reading-time><i class="fa fa-clock-o" aria-hidden=true></i>
+阅读时间：5 分钟</span></div><div class=categories><i class="fa fa-folder" aria-hidden=true></i>
+<a href=/zh-cn/categories/%E6%8A%80%E6%9C%AF/>技术</a></div><div class=tags><i class="fa fa-tag" aria-hidden=true></i>
+<span class=tag><a href=/zh-cn/tags/web3/>Web3</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/zh-cn/tags/eth/>ETH</a>
-</span>
+<span class=tag><a href=/zh-cn/tags/eth/>ETH</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/zh-cn/tags/walletconnect/>WalletConnect</a>
-</span>
+<span class=tag><a href=/zh-cn/tags/walletconnect/>WalletConnect</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/zh-cn/tags/%E4%BB%A5%E5%A4%AA%E5%9D%8A/>以太坊</a>
-</span>
+<span class=tag><a href=/zh-cn/tags/%E4%BB%A5%E5%A4%AA%E5%9D%8A/>以太坊</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/zh-cn/tags/%E9%92%B1%E5%8C%85/>钱包</a>
-</span>
+<span class=tag><a href=/zh-cn/tags/%E9%92%B1%E5%8C%85/>钱包</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/zh-cn/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/>区块链</a>
-</span></div></div></header><div>
-<h2 id=前言>
-前言
-<a class=heading-link href=#%e5%89%8d%e8%a8%80>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><p>去年至今已完成了两个 DAPP，对于 Web3 也又了一定的认识，这篇记录的是前端库 <code>web3.js</code> 的用法。</p><p><a href=https://blog.adminchao.com/zh-cn/posts/web3-%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D%E5%90%8E%E7%AB%AF%E7%AF%87-php/>后端篇-PHP</a></p><p><a href=https://blog.adminchao.com/zh-cn/posts/web3-%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D%E5%90%8E%E7%AB%AF%E7%AF%87-go/>后端篇-Golang</a></p><h2 id=安装>
-安装
-<a class=heading-link href=#%e5%ae%89%e8%a3%85>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>npm install web3
-</span></span></code></pre></td></tr></table></div></div><p>WalletConnect 以便手机端使用</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>npm install @walletconnect/web3-provider
-</span></span></code></pre></td></tr></table></div></div><h2 id=提供者>
-提供者
-<a class=heading-link href=#%e6%8f%90%e4%be%9b%e8%80%85>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><p>提供者一般作为与钱包交互时调用,以及监听一些事件</p><h3 id=初始化>
-初始化
-<a class=heading-link href=#%e5%88%9d%e5%a7%8b%e5%8c%96>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+<span class=tag><a href=/zh-cn/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/>区块链</a></span></div></div></header><div><h2 id=前言>前言
+<a class=heading-link href=#%e5%89%8d%e8%a8%80><i class="fa fa-link" aria-hidden=true></i></a></h2><p>去年至今已完成了两个 DAPP，对于 Web3 也又了一定的认识，这篇记录的是前端库 <code>web3.js</code> 的用法。</p><p><a href=https://blog.adminchao.com/zh-cn/posts/web3-%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D%E5%90%8E%E7%AB%AF%E7%AF%87-php/>后端篇-PHP</a></p><p><a href=https://blog.adminchao.com/zh-cn/posts/web3-%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D%E5%90%8E%E7%AB%AF%E7%AF%87-go/>后端篇-Golang</a></p><h2 id=安装>安装
+<a class=heading-link href=#%e5%ae%89%e8%a3%85><i class="fa fa-link" aria-hidden=true></i></a></h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>npm install web3
+</span></span></code></pre></td></tr></table></div></div><p>WalletConnect 以便手机端使用</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>npm install @walletconnect/web3-provider
+</span></span></code></pre></td></tr></table></div></div><h2 id=提供者>提供者
+<a class=heading-link href=#%e6%8f%90%e4%be%9b%e8%80%85><i class="fa fa-link" aria-hidden=true></i></a></h2><p>提供者一般作为与钱包交互时调用,以及监听一些事件</p><h3 id=初始化>初始化
+<a class=heading-link href=#%e5%88%9d%e5%a7%8b%e5%8c%96><i class="fa fa-link" aria-hidden=true></i></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -152,8 +43,7 @@ Web3 用法介绍(前端篇)
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>        <span style=color:#ff79c6>if</span> (<span style=color:#8be9fd;font-style:italic>window</span>.ethereum){		<span style=color:#6272a4>//如果有新版小狐狸优先使用
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>        <span style=color:#ff79c6>if</span> (<span style=color:#8be9fd;font-style:italic>window</span>.ethereum){		<span style=color:#6272a4>//如果有新版小狐狸优先使用
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>            <span style=color:#ff79c6>this</span>.walletProvider <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>window</span>.ethereum
 </span></span><span style=display:flex><span>        }<span style=color:#ff79c6>else</span> <span style=color:#ff79c6>if</span> (<span style=color:#8be9fd;font-style:italic>window</span>.web3){	 <span style=color:#6272a4>//其次使用老版小狐狸的
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>            <span style=color:#ff79c6>this</span>.walletProvider <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>window</span>.web3.currentProvider
@@ -173,14 +63,8 @@ Web3 用法介绍(前端篇)
 </span></span><span style=display:flex><span>                }
 </span></span><span style=display:flex><span>            })
 </span></span><span style=display:flex><span>        }
-</span></span></code></pre></td></tr></table></div></div><h3 id=定义提供者监听事件>
-定义提供者监听事件
-<a class=heading-link href=#%e5%ae%9a%e4%b9%89%e6%8f%90%e4%be%9b%e8%80%85%e7%9b%91%e5%90%ac%e4%ba%8b%e4%bb%b6>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=定义提供者监听事件>定义提供者监听事件
+<a class=heading-link href=#%e5%ae%9a%e4%b9%89%e6%8f%90%e4%be%9b%e8%80%85%e7%9b%91%e5%90%ac%e4%ba%8b%e4%bb%b6><i class="fa fa-link" aria-hidden=true></i></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -196,8 +80,7 @@ Web3 用法介绍(前端篇)
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>this</span>.walletProvider.on(<span style=color:#f1fa8c>&#34;disconnect&#34;</span>, (code, reason) =&gt; {
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>this</span>.walletProvider.on(<span style=color:#f1fa8c>&#34;disconnect&#34;</span>, (code, reason) =&gt; {
 </span></span><span style=display:flex><span>		<span style=color:#6272a4>//断开链接     
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>})
 </span></span><span style=display:flex><span>
@@ -213,14 +96,8 @@ Web3 用法介绍(前端篇)
 </span></span><span style=display:flex><span>           <span style=color:#ff79c6>return</span> <span style=color:#ff79c6>false</span>
 </span></span><span style=display:flex><span>      }
 </span></span><span style=display:flex><span>});
-</span></span></code></pre></td></tr></table></div></div><h3 id=钱包授权>
-钱包授权
-<a class=heading-link href=#%e9%92%b1%e5%8c%85%e6%8e%88%e6%9d%83>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><h3 id=钱包授权>钱包授权
+<a class=heading-link href=#%e9%92%b1%e5%8c%85%e6%8e%88%e6%9d%83><i class="fa fa-link" aria-hidden=true></i></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
@@ -228,8 +105,7 @@ Web3 用法介绍(前端篇)
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>try</span>{
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>try</span>{
 </span></span><span style=display:flex><span>    <span style=color:#ff79c6>await</span> <span style=color:#ff79c6>this</span>.walletProvider.enable()
 </span></span><span style=display:flex><span>}<span style=color:#ff79c6>catch</span> (err){ <span style=color:#6272a4>//取消链接钱包授权会抛出异常
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>    <span style=color:#ff79c6>if</span> (err <span style=color:#ff79c6>!==</span> <span style=color:#ff79c6>undefined</span>){
@@ -237,92 +113,43 @@ Web3 用法介绍(前端篇)
 </span></span><span style=display:flex><span>    		<span style=color:#ff79c6>return</span>
 </span></span><span style=display:flex><span>		}
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><h2 id=链上交互>
-链上交互
-<a class=heading-link href=#%e9%93%be%e4%b8%8a%e4%ba%a4%e4%ba%92>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><h3 id=初始化-1>
-初始化
-<a class=heading-link href=#%e5%88%9d%e5%a7%8b%e5%8c%96-1>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>this</span>.web3 <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>new</span> Web3(<span style=color:#ff79c6>this</span>.walletProvider)
-</span></span></code></pre></td></tr></table></div></div><h3 id=高精度计算>
-高精度计算
-<a class=heading-link href=#%e9%ab%98%e7%b2%be%e5%ba%a6%e8%ae%a1%e7%ae%97>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><h2 id=链上交互>链上交互
+<a class=heading-link href=#%e9%93%be%e4%b8%8a%e4%ba%a4%e4%ba%92><i class="fa fa-link" aria-hidden=true></i></a></h2><h3 id=初始化-1>初始化
+<a class=heading-link href=#%e5%88%9d%e5%a7%8b%e5%8c%96-1><i class="fa fa-link" aria-hidden=true></i></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>this</span>.web3 <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>new</span> Web3(<span style=color:#ff79c6>this</span>.walletProvider)
+</span></span></code></pre></td></tr></table></div></div><h3 id=高精度计算>高精度计算
+<a class=heading-link href=#%e9%ab%98%e7%b2%be%e5%ba%a6%e8%ae%a1%e7%ae%97><i class="fa fa-link" aria-hidden=true></i></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>npm install <span style=color:#ff79c6>--</span>save decimal.js
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>npm install <span style=color:#ff79c6>--</span>save decimal.js
 </span></span><span style=display:flex><span><span style=color:#ff79c6>import</span> { Decimal } from <span style=color:#f1fa8c>&#34;decimal.js&#34;</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=ethbsc-相关操作>
-ETH/BSC 相关操作
-<a class=heading-link href=#ethbsc-%e7%9b%b8%e5%85%b3%e6%93%8d%e4%bd%9c>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><h4 id=获取钱包地址>
-获取钱包地址
-<a class=heading-link href=#%e8%8e%b7%e5%8f%96%e9%92%b1%e5%8c%85%e5%9c%b0%e5%9d%80>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><h3 id=ethbsc-相关操作>ETH/BSC 相关操作
+<a class=heading-link href=#ethbsc-%e7%9b%b8%e5%85%b3%e6%93%8d%e4%bd%9c><i class="fa fa-link" aria-hidden=true></i></a></h3><h4 id=获取钱包地址>获取钱包地址
+<a class=heading-link href=#%e8%8e%b7%e5%8f%96%e9%92%b1%e5%8c%85%e5%9c%b0%e5%9d%80><i class="fa fa-link" aria-hidden=true></i></a></h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> accounts <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>await</span> <span style=color:#ff79c6>this</span>.web3.eth.getAccounts()
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> accounts <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>await</span> <span style=color:#ff79c6>this</span>.web3.eth.getAccounts()
 </span></span><span style=display:flex><span><span style=color:#6272a4>//return
 </span></span></span><span style=display:flex><span><span style=color:#6272a4>//[&#34;0x6D3121Ea2FF3E882b245c45fACC0eFd82B5Bd908&#34;,&#34;0x6D3121Ea2FF3E882b245c45fACC0eFd82B5Bd908&#34;]
-</span></span></span></code></pre></td></tr></table></div></div><h4 id=根据地址获取余额>
-根据地址获取余额
-<a class=heading-link href=#%e6%a0%b9%e6%8d%ae%e5%9c%b0%e5%9d%80%e8%8e%b7%e5%8f%96%e4%bd%99%e9%a2%9d>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=根据地址获取余额>根据地址获取余额
+<a class=heading-link href=#%e6%a0%b9%e6%8d%ae%e5%9c%b0%e5%9d%80%e8%8e%b7%e5%8f%96%e4%bd%99%e9%a2%9d><i class="fa fa-link" aria-hidden=true></i></a></h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> balance <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>await</span> <span style=color:#ff79c6>this</span>.web3.eth.getBalance(<span style=color:#ff79c6>this</span>.account[<span style=color:#bd93f9>0</span>])
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> balance <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>await</span> <span style=color:#ff79c6>this</span>.web3.eth.getBalance(<span style=color:#ff79c6>this</span>.account[<span style=color:#bd93f9>0</span>])
 </span></span><span style=display:flex><span><span style=color:#6272a4>//return
 </span></span></span><span style=display:flex><span><span style=color:#6272a4>//1000000000000000000
 </span></span></span><span style=display:flex><span><span style=color:#6272a4>//格式化显示需要除以 1e+18
 </span></span></span><span style=display:flex><span><span style=color:#6272a4>// 1.0000
-</span></span></span></code></pre></td></tr></table></div></div><h4 id=获取链的id>
-获取链的ID
-<a class=heading-link href=#%e8%8e%b7%e5%8f%96%e9%93%be%e7%9a%84id>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=获取链的id>获取链的ID
+<a class=heading-link href=#%e8%8e%b7%e5%8f%96%e9%93%be%e7%9a%84id><i class="fa fa-link" aria-hidden=true></i></a></h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> currentChainId <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>await</span> <span style=color:#ff79c6>this</span>.web3.eth.getChainId()
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> currentChainId <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>await</span> <span style=color:#ff79c6>this</span>.web3.eth.getChainId()
 </span></span><span style=display:flex><span><span style=color:#6272a4>//return
 </span></span></span><span style=display:flex><span><span style=color:#6272a4>// 97
-</span></span></span></code></pre></td></tr></table></div></div><h4 id=转账>
-转账
-<a class=heading-link href=#%e8%bd%ac%e8%b4%a6>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=转账>转账
+<a class=heading-link href=#%e8%bd%ac%e8%b4%a6><i class="fa fa-link" aria-hidden=true></i></a></h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -340,8 +167,7 @@ ETH/BSC 相关操作
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>this</span>.web3.eth.sendTransaction({
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>this</span>.web3.eth.sendTransaction({
 </span></span><span style=display:flex><span>    from<span style=color:#ff79c6>:</span> accounts[<span style=color:#bd93f9>0</span>], <span style=color:#6272a4>//转出地址
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>    to<span style=color:#ff79c6>:</span> Address,	<span style=color:#6272a4>//转入地址
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>    value<span style=color:#ff79c6>:</span> <span style=color:#ff79c6>new</span> Decimal(<span style=color:#bd93f9>0.12</span>).mul(<span style=color:#ff79c6>new</span> Decimal(<span style=color:#ff79c6>this</span>.bnbDecimal)).toNumber().toFixed(<span style=color:#bd93f9>0</span>), <span style=color:#6272a4>// IntString
@@ -359,54 +185,27 @@ ETH/BSC 相关操作
 </span></span><span style=display:flex><span>				<span style=color:#6272a4>//交易过程中出现错误立即触发，如果交易被网络拒绝时附带有交易收据,则 err 为 交易收据
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>  			console.log(err)
 </span></span><span style=display:flex><span>});
-</span></span></code></pre></td></tr></table></div></div><h3 id=erc20bep20-相关操作>
-ERC20/BEP20 相关操作
-<a class=heading-link href=#erc20bep20-%e7%9b%b8%e5%85%b3%e6%93%8d%e4%bd%9c>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><p><strong>读用 <code>call()</code> 写用 <code>send()</code></strong></p><p>首先需要导入智能合约的 Abi JSON</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>import</span> ABI from <span style=color:#f1fa8c>&#34;../abi.json&#34;</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=实例化智能合约>
-实例化智能合约
-<a class=heading-link href=#%e5%ae%9e%e4%be%8b%e5%8c%96%e6%99%ba%e8%83%bd%e5%90%88%e7%ba%a6>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><h3 id=erc20bep20-相关操作>ERC20/BEP20 相关操作
+<a class=heading-link href=#erc20bep20-%e7%9b%b8%e5%85%b3%e6%93%8d%e4%bd%9c><i class="fa fa-link" aria-hidden=true></i></a></h3><p><strong>读用 <code>call()</code> 写用 <code>send()</code></strong></p><p>首先需要导入智能合约的 Abi JSON</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>import</span> ABI from <span style=color:#f1fa8c>&#34;../abi.json&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=实例化智能合约>实例化智能合约
+<a class=heading-link href=#%e5%ae%9e%e4%be%8b%e5%8c%96%e6%99%ba%e8%83%bd%e5%90%88%e7%ba%a6><i class="fa fa-link" aria-hidden=true></i></a></h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> ContractAddress <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;0x6D3121Ea2FF3E882b245c45fACC0eFd82B5Bd908&#34;</span> <span style=color:#6272a4>//合约地址
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> ContractAddress <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;0x6D3121Ea2FF3E882b245c45fACC0eFd82B5Bd908&#34;</span> <span style=color:#6272a4>//合约地址
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span><span style=color:#ff79c6>const</span> myContract <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>new</span> <span style=color:#ff79c6>this</span>.web3.eth.Contract(ABI, ContractAddress)
-</span></span></code></pre></td></tr></table></div></div><h4 id=查询授权剩余数值>
-查询授权剩余数值
-<a class=heading-link href=#%e6%9f%a5%e8%af%a2%e6%8e%88%e6%9d%83%e5%89%a9%e4%bd%99%e6%95%b0%e5%80%bc>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><h4 id=查询授权剩余数值>查询授权剩余数值
+<a class=heading-link href=#%e6%9f%a5%e8%af%a2%e6%8e%88%e6%9d%83%e5%89%a9%e4%bd%99%e6%95%b0%e5%80%bc><i class="fa fa-link" aria-hidden=true></i></a></h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> officeContractAddress <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;0x72............FF&#34;</span> <span style=color:#6272a4>//交易合约地址
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> officeContractAddress <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;0x72............FF&#34;</span> <span style=color:#6272a4>//交易合约地址
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span><span style=color:#ff79c6>const</span> approveValue <span style=color:#ff79c6>=</span>  <span style=color:#ff79c6>await</span> myContract.methods.allowance(account,officeContractAddress).call()
 </span></span><span style=display:flex><span><span style=color:#6272a4>//这个方法的意思就是查询 myContract 这个代币给 officeContractAddress 这个智能合约授权的交易额度还剩余多少
 </span></span></span><span style=display:flex><span><span style=color:#6272a4>// return
 </span></span></span><span style=display:flex><span><span style=color:#6272a4>// 10000000000000000000000
-</span></span></span></code></pre></td></tr></table></div></div><h4 id=授权可管理资产>
-授权可管理资产
-<a class=heading-link href=#%e6%8e%88%e6%9d%83%e5%8f%af%e7%ae%a1%e7%90%86%e8%b5%84%e4%ba%a7>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=授权可管理资产>授权可管理资产
+<a class=heading-link href=#%e6%8e%88%e6%9d%83%e5%8f%af%e7%ae%a1%e7%90%86%e8%b5%84%e4%ba%a7><i class="fa fa-link" aria-hidden=true></i></a></h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
@@ -414,8 +213,7 @@ ERC20/BEP20 相关操作
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> value <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;1000000000000000000&#39;</span>
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> value <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;1000000000000000000&#39;</span>
 </span></span><span style=display:flex><span><span style=color:#ff79c6>const</span> isApprove <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>await</span> myContract.methods.approve(officeContractAddress,value).send({
 </span></span><span style=display:flex><span>                			<span style=color:#f1fa8c>&#34;from&#34;</span><span style=color:#ff79c6>:</span> account <span style=color:#6272a4>//用户地址
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>            			})
@@ -423,99 +221,47 @@ ERC20/BEP20 相关操作
 </span></span></span><span style=display:flex><span><span style=color:#6272a4>//最大值 new Decimal(2).pow(256).sub(1).toFixed()
 </span></span></span><span style=display:flex><span><span style=color:#6272a4>//return
 </span></span></span><span style=display:flex><span><span style=color:#6272a4>// Object
-</span></span></span></code></pre></td></tr></table></div></div><h4 id=查询-erc20bep20-余额>
-查询 ERC20/BEP20 余额
-<a class=heading-link href=#%e6%9f%a5%e8%af%a2-erc20bep20-%e4%bd%99%e9%a2%9d>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=查询-erc20bep20-余额>查询 ERC20/BEP20 余额
+<a class=heading-link href=#%e6%9f%a5%e8%af%a2-erc20bep20-%e4%bd%99%e9%a2%9d><i class="fa fa-link" aria-hidden=true></i></a></h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> erc20Balance <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>await</span> myContract.methods.balanceOf(account).call()
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> erc20Balance <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>await</span> myContract.methods.balanceOf(account).call()
 </span></span><span style=display:flex><span><span style=color:#6272a4>// &#39;1000000000000000000&#39;
-</span></span></span></code></pre></td></tr></table></div></div><h4 id=erc20bep20-交易>
-ERC20/BEP20 交易
-<a class=heading-link href=#erc20bep20-%e4%ba%a4%e6%98%93>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=erc20bep20-交易>ERC20/BEP20 交易
+<a class=heading-link href=#erc20bep20-%e4%ba%a4%e6%98%93><i class="fa fa-link" aria-hidden=true></i></a></h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> to <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;0x................CC&#39;</span> <span style=color:#6272a4>//地址
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> to <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;0x................CC&#39;</span> <span style=color:#6272a4>//地址
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span><span style=color:#ff79c6>const</span> transahctionHash <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>await</span> myContract.methods.transfer(to,amount).send({
 </span></span><span style=display:flex><span>  														from<span style=color:#ff79c6>:</span> <span style=color:#ff79c6>this</span>.account,
 </span></span><span style=display:flex><span>													})
-</span></span></code></pre></td></tr></table></div></div><h4 id=调用智能合约里的方法>
-调用智能合约里的方法
-<a class=heading-link href=#%e8%b0%83%e7%94%a8%e6%99%ba%e8%83%bd%e5%90%88%e7%ba%a6%e9%87%8c%e7%9a%84%e6%96%b9%e6%b3%95>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><h4 id=调用智能合约里的方法>调用智能合约里的方法
+<a class=heading-link href=#%e8%b0%83%e7%94%a8%e6%99%ba%e8%83%bd%e5%90%88%e7%ba%a6%e9%87%8c%e7%9a%84%e6%96%b9%e6%b3%95><i class="fa fa-link" aria-hidden=true></i></a></h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#6272a4>// params id 合约里定义的参数
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#6272a4>// params id 合约里定义的参数
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span><span style=color:#ff79c6>const</span> info <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>await</span> myContract.methods.getInfo(id).call()
-</span></span></code></pre></td></tr></table></div></div><h4 id=给合约发送-ethbsc>
-给合约发送 ETH/BSC
-<a class=heading-link href=#%e7%bb%99%e5%90%88%e7%ba%a6%e5%8f%91%e9%80%81-ethbsc>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><h4 id=给合约发送-ethbsc>给合约发送 ETH/BSC
+<a class=heading-link href=#%e7%bb%99%e5%90%88%e7%ba%a6%e5%8f%91%e9%80%81-ethbsc><i class="fa fa-link" aria-hidden=true></i></a></h4><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> value <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;1000000000000000000&#39;</span>
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>const</span> value <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;1000000000000000000&#39;</span>
 </span></span><span style=display:flex><span><span style=color:#6272a4>// params id 合约里定义的参数
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span><span style=color:#ff79c6>const</span> mining <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>await</span> myContract.methods.mining(id,value).send({
 </span></span><span style=display:flex><span>                        from<span style=color:#ff79c6>:</span> <span style=color:#ff79c6>this</span>.account, <span style=color:#6272a4>//用户地址
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>                        value<span style=color:#ff79c6>:</span> value <span style=color:#6272a4>//发送给合约的原生币 单位wei
 </span></span></span><span style=display:flex><span><span style=color:#6272a4></span>               })
-</span></span></code></pre></td></tr></table></div></div><h2 id=附>
-附
-<a class=heading-link href=#%e9%99%84>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><h3 id=获取验证过的abi>
-获取验证过的ABI
-<a class=heading-link href=#%e8%8e%b7%e5%8f%96%e9%aa%8c%e8%af%81%e8%bf%87%e7%9a%84abi>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>https://api.bscscan.com/api?module<span style=color:#ff79c6>=</span>contract&amp;<span style=color:#8be9fd;font-style:italic>action</span><span style=color:#ff79c6>=</span>getabi&amp;<span style=color:#8be9fd;font-style:italic>address</span><span style=color:#ff79c6>=</span>0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82
-</span></span></code></pre></td></tr></table></div></div><h3 id=测试-bnb-领取地址>
-测试 BNB 领取地址
-<a class=heading-link href=#%e6%b5%8b%e8%af%95-bnb-%e9%a2%86%e5%8f%96%e5%9c%b0%e5%9d%80>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>https://testnet.binance.org/faucet-smart
-</span></span></code></pre></td></tr></table></div></div><h3 id=erc20bep20-标准-abi>
-ERC20/BEP20 标准 ABI
-<a class=heading-link href=#erc20bep20-%e6%a0%87%e5%87%86-abi>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  1
+</span></span></code></pre></td></tr></table></div></div><h2 id=附>附
+<a class=heading-link href=#%e9%99%84><i class="fa fa-link" aria-hidden=true></i></a></h2><h3 id=获取验证过的abi>获取验证过的ABI
+<a class=heading-link href=#%e8%8e%b7%e5%8f%96%e9%aa%8c%e8%af%81%e8%bf%87%e7%9a%84abi><i class="fa fa-link" aria-hidden=true></i></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>https://api.bscscan.com/api?module<span style=color:#ff79c6>=</span>contract&amp;<span style=color:#8be9fd;font-style:italic>action</span><span style=color:#ff79c6>=</span>getabi&amp;<span style=color:#8be9fd;font-style:italic>address</span><span style=color:#ff79c6>=</span>0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82
+</span></span></code></pre></td></tr></table></div></div><h3 id=测试-bnb-领取地址>测试 BNB 领取地址
+<a class=heading-link href=#%e6%b5%8b%e8%af%95-bnb-%e9%a2%86%e5%8f%96%e5%9c%b0%e5%9d%80><i class="fa fa-link" aria-hidden=true></i></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>https://testnet.binance.org/faucet-smart
+</span></span></code></pre></td></tr></table></div></div><h3 id=erc20bep20-标准-abi>ERC20/BEP20 标准 ABI
+<a class=heading-link href=#erc20bep20-%e6%a0%87%e5%87%86-abi><i class="fa fa-link" aria-hidden=true></i></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  4
@@ -737,8 +483,7 @@ ERC20/BEP20 标准 ABI
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">220
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">221
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">222
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>[
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>[
 </span></span><span style=display:flex><span>    {
 </span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;constant&#34;</span>: <span style=color:#ff79c6>true</span>,
 </span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;inputs&#34;</span>: [],
@@ -960,21 +705,12 @@ ERC20/BEP20 标准 ABI
 </span></span><span style=display:flex><span>        <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;event&#34;</span>
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>]
-</span></span></code></pre></td></tr></table></div></div><h3 id=web3js-中文文档>
-Web3.js 中文文档
-<a class=heading-link href=#web3js-%e4%b8%ad%e6%96%87%e6%96%87%e6%a1%a3>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3><p><a href=https://learnblockchain.cn/docs/web3.js/index.html>web3.js 中文文档</a></p></div><footer>
-</footer></article></section></div><footer class=footer>
-<section class=container>
-©
+</span></span></code></pre></td></tr></table></div></div><h3 id=web3js-中文文档>Web3.js 中文文档
+<a class=heading-link href=#web3js-%e4%b8%ad%e6%96%87%e6%96%87%e6%a1%a3><i class="fa fa-link" aria-hidden=true></i></a></h3><p><a href=https://learnblockchain.cn/docs/web3.js/index.html>web3.js 中文文档</a></p></div><footer></footer></article></section></div><footer class=footer><section class=container>©
 2019 -
 2022
 郭超超
 ·
-技术支持 <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
-</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
+技术支持 <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NK08XEDHKZ"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script>
-</body></html>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script></body></html>

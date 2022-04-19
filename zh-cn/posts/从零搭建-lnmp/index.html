@@ -1,204 +1,52 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=color-scheme content="light dark">
-<meta name=author content="郭超超">
-<meta name=description content="通过 ssh 连接服务器    服务器系统版本 Ubuntu 16.04
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=color-scheme content="light dark"><meta name=author content="郭超超"><meta name=description content="通过 ssh 连接服务器    服务器系统版本 Ubuntu 16.04
 1  ssh root@127.0.0.1   建立普通账户    1  adduser username   赋予普通账户 sudo 权限    进入 /etc/sudoers.d/ 新建一个文件，文件名随意。添加 username ALL=(ALL:ALL) ALL 即可。
-升级软件源    1  sudo apt-get update   安装 Mysql    1  sudo apt-get install mysql-server mysql-client   mysql-server： mysql 服务端，是 mysql 的核心程序，负责生成数据库实例，并提供相关接口供不同的客户端调用。 mysql-client： 是客户端程序，负责操作 mysql 实例，mysql-client 是众多客户端程序的一种，其他还有 mysql、mysqldump、mysqlslap 这些访问、备份、压力测试的工具。">
-<meta name=keywords content="LNMP,教程,环境,Linux,Nginx,Mysql,PHP">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="从零搭建 LNMP 教程">
-<meta name=twitter:description content="通过 ssh 连接服务器    服务器系统版本 Ubuntu 16.04
+升级软件源    1  sudo apt-get update   安装 Mysql    1  sudo apt-get install mysql-server mysql-client   mysql-server： mysql 服务端，是 mysql 的核心程序，负责生成数据库实例，并提供相关接口供不同的客户端调用。 mysql-client： 是客户端程序，负责操作 mysql 实例，mysql-client 是众多客户端程序的一种，其他还有 mysql、mysqldump、mysqlslap 这些访问、备份、压力测试的工具。"><meta name=keywords content="LNMP,教程,环境,Linux,Nginx,Mysql,PHP"><meta name=twitter:card content="summary"><meta name=twitter:title content="从零搭建 LNMP 教程"><meta name=twitter:description content="通过 ssh 连接服务器    服务器系统版本 Ubuntu 16.04
 1  ssh root@127.0.0.1   建立普通账户    1  adduser username   赋予普通账户 sudo 权限    进入 /etc/sudoers.d/ 新建一个文件，文件名随意。添加 username ALL=(ALL:ALL) ALL 即可。
-升级软件源    1  sudo apt-get update   安装 Mysql    1  sudo apt-get install mysql-server mysql-client   mysql-server： mysql 服务端，是 mysql 的核心程序，负责生成数据库实例，并提供相关接口供不同的客户端调用。 mysql-client： 是客户端程序，负责操作 mysql 实例，mysql-client 是众多客户端程序的一种，其他还有 mysql、mysqldump、mysqlslap 这些访问、备份、压力测试的工具。">
-<meta property="og:title" content="从零搭建 LNMP 教程">
-<meta property="og:description" content="通过 ssh 连接服务器    服务器系统版本 Ubuntu 16.04
+升级软件源    1  sudo apt-get update   安装 Mysql    1  sudo apt-get install mysql-server mysql-client   mysql-server： mysql 服务端，是 mysql 的核心程序，负责生成数据库实例，并提供相关接口供不同的客户端调用。 mysql-client： 是客户端程序，负责操作 mysql 实例，mysql-client 是众多客户端程序的一种，其他还有 mysql、mysqldump、mysqlslap 这些访问、备份、压力测试的工具。"><meta property="og:title" content="从零搭建 LNMP 教程"><meta property="og:description" content="通过 ssh 连接服务器    服务器系统版本 Ubuntu 16.04
 1  ssh root@127.0.0.1   建立普通账户    1  adduser username   赋予普通账户 sudo 权限    进入 /etc/sudoers.d/ 新建一个文件，文件名随意。添加 username ALL=(ALL:ALL) ALL 即可。
-升级软件源    1  sudo apt-get update   安装 Mysql    1  sudo apt-get install mysql-server mysql-client   mysql-server： mysql 服务端，是 mysql 的核心程序，负责生成数据库实例，并提供相关接口供不同的客户端调用。 mysql-client： 是客户端程序，负责操作 mysql 实例，mysql-client 是众多客户端程序的一种，其他还有 mysql、mysqldump、mysqlslap 这些访问、备份、压力测试的工具。">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://blog.adminchao.com/zh-cn/posts/%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BA-lnmp/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2017-10-08T13:08:09+00:00">
-<meta property="article:modified_time" content="2017-10-08T13:08:09+00:00"><meta property="og:site_name" content="郭超超的博客">
-<title>
-从零搭建 LNMP 教程 · 郭超超的博客
-</title><link rel=canonical href=https://blog.adminchao.com/zh-cn/posts/%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BA-lnmp/>
-<link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin>
-<link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen>
-<link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen>
-<link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32>
-<link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16>
-<link rel=apple-touch-icon href=/images/apple-touch-icon.png>
-<link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png>
-<meta name=generator content="Hugo 0.93.3">
-</head><body class="preload-transitions colorscheme-dark">
-<div class=float-container>
-<a id=dark-mode-toggle class=colorscheme-toggle>
-<i class="fa fa-adjust fa-fw" aria-hidden=true></i>
-</a>
-</div><main class=wrapper>
-<nav class=navigation>
-<section class=container>
-<a class=navigation-title href=/zh-cn>
-郭超超的博客
-</a>
+升级软件源    1  sudo apt-get update   安装 Mysql    1  sudo apt-get install mysql-server mysql-client   mysql-server： mysql 服务端，是 mysql 的核心程序，负责生成数据库实例，并提供相关接口供不同的客户端调用。 mysql-client： 是客户端程序，负责操作 mysql 实例，mysql-client 是众多客户端程序的一种，其他还有 mysql、mysqldump、mysqlslap 这些访问、备份、压力测试的工具。"><meta property="og:type" content="article"><meta property="og:url" content="https://blog.adminchao.com/zh-cn/posts/%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BA-lnmp/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2017-10-08T13:08:09+00:00"><meta property="article:modified_time" content="2017-10-08T13:08:09+00:00"><meta property="og:site_name" content="郭超超的博客"><title>从零搭建 LNMP 教程 · 郭超超的博客</title><link rel=canonical href=https://blog.adminchao.com/zh-cn/posts/%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BA-lnmp/><link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin><link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen><link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen><link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16><link rel=apple-touch-icon href=/images/apple-touch-icon.png><link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png><meta name=generator content="Hugo 0.97.3"></head><body class="preload-transitions colorscheme-dark"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=/zh-cn>郭超超的博客</a>
 <input type=checkbox id=menu-toggle>
-<label class="menu-button float-right" for=menu-toggle>
-<i class="fa fa-bars fa-fw" aria-hidden=true></i>
-</label>
-<ul class=navigation-list>
-<li class=navigation-item>
-<a class=navigation-link href=/zh-cn/about/>关于</a>
-</li><li class=navigation-item>
-<a class=navigation-link href=/zh-cn/posts/>博文</a>
-</li><li class=navigation-item>
-<a class=navigation-link href=/zh-cn/contact/>联系</a>
-</li><li class="navigation-item menu-separator">
-<span>|</span>
-</li><li class=navigation-item>
-<a href=https://blog.adminchao.com/>🇺🇸</a>
-</li></ul></section></nav><div class=content>
-<section class="container post">
-<article>
-<header>
-<div class=post-title>
-<h1 class=title>
-<a class=title-link href=https://blog.adminchao.com/zh-cn/posts/%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BA-lnmp/>
-从零搭建 LNMP 教程
-</a>
-</h1></div><div class=post-meta>
-<div class=date>
-<span class=posted-on>
-<i class="fa fa-calendar" aria-hidden=true></i>
-<time datetime=2017-10-08T13:08:09Z>
-2017-10-08 13:08:09
-</time>
-</span>
-<span class=reading-time>
-<i class="fa fa-clock-o" aria-hidden=true></i>
-阅读时间：2 分钟
-</span>
-</div><div class=categories>
-<i class="fa fa-folder" aria-hidden=true></i>
-<a href=/zh-cn/categories/lnmp/>LNMP</a></div><div class=tags>
-<i class="fa fa-tag" aria-hidden=true></i>
-<span class=tag>
-<a href=/zh-cn/tags/lnmp/>LNMP</a>
-</span>
+<label class="menu-button float-right" for=menu-toggle><i class="fa fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=/zh-cn/about/>关于</a></li><li class=navigation-item><a class=navigation-link href=/zh-cn/posts/>博文</a></li><li class=navigation-item><a class=navigation-link href=/zh-cn/contact/>联系</a></li><li class="navigation-item menu-separator"><span>|</span></li><li class=navigation-item><a href=https://blog.adminchao.com/>🇺🇸</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=https://blog.adminchao.com/zh-cn/posts/%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BA-lnmp/>从零搭建 LNMP 教程</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2017-10-08T13:08:09Z>2017-10-08 13:08:09</time></span>
+<span class=reading-time><i class="fa fa-clock-o" aria-hidden=true></i>
+阅读时间：2 分钟</span></div><div class=categories><i class="fa fa-folder" aria-hidden=true></i>
+<a href=/zh-cn/categories/lnmp/>LNMP</a></div><div class=tags><i class="fa fa-tag" aria-hidden=true></i>
+<span class=tag><a href=/zh-cn/tags/lnmp/>LNMP</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/zh-cn/tags/%E6%95%99%E7%A8%8B/>教程</a>
-</span>
+<span class=tag><a href=/zh-cn/tags/%E6%95%99%E7%A8%8B/>教程</a></span>
 <span class=separator>•</span>
-<span class=tag>
-<a href=/zh-cn/tags/%E7%8E%AF%E5%A2%83/>环境</a>
-</span></div></div></header><div>
-<h2 id=通过-ssh-连接服务器>
-通过 ssh 连接服务器
-<a class=heading-link href=#%e9%80%9a%e8%bf%87-ssh-%e8%bf%9e%e6%8e%a5%e6%9c%8d%e5%8a%a1%e5%99%a8>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><p>服务器系统版本 Ubuntu 16.04</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>ssh root@127.0.0.1
-</span></span></code></pre></td></tr></table></div></div><h2 id=建立普通账户>
-建立普通账户
-<a class=heading-link href=#%e5%bb%ba%e7%ab%8b%e6%99%ae%e9%80%9a%e8%b4%a6%e6%88%b7>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>adduser username
-</span></span></code></pre></td></tr></table></div></div><h2 id=赋予普通账户-sudo-权限>
-赋予普通账户 sudo 权限
-<a class=heading-link href=#%e8%b5%8b%e4%ba%88%e6%99%ae%e9%80%9a%e8%b4%a6%e6%88%b7-sudo-%e6%9d%83%e9%99%90>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><p>进入 <code>/etc/sudoers.d/</code> 新建一个文件，文件名随意。添加 <code>username ALL=(ALL:ALL) ALL</code> 即可。</p><h2 id=升级软件源>
-升级软件源
-<a class=heading-link href=#%e5%8d%87%e7%ba%a7%e8%bd%af%e4%bb%b6%e6%ba%90>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo apt-get update
-</span></span></code></pre></td></tr></table></div></div><h2 id=安装-mysql>
-安装 Mysql
-<a class=heading-link href=#%e5%ae%89%e8%a3%85-mysql>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo apt-get install mysql-server mysql-client
+<span class=tag><a href=/zh-cn/tags/%E7%8E%AF%E5%A2%83/>环境</a></span></div></div></header><div><h2 id=通过-ssh-连接服务器>通过 ssh 连接服务器
+<a class=heading-link href=#%e9%80%9a%e8%bf%87-ssh-%e8%bf%9e%e6%8e%a5%e6%9c%8d%e5%8a%a1%e5%99%a8><i class="fa fa-link" aria-hidden=true></i></a></h2><p>服务器系统版本 Ubuntu 16.04</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>ssh root@127.0.0.1
+</span></span></code></pre></td></tr></table></div></div><h2 id=建立普通账户>建立普通账户
+<a class=heading-link href=#%e5%bb%ba%e7%ab%8b%e6%99%ae%e9%80%9a%e8%b4%a6%e6%88%b7><i class="fa fa-link" aria-hidden=true></i></a></h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>adduser username
+</span></span></code></pre></td></tr></table></div></div><h2 id=赋予普通账户-sudo-权限>赋予普通账户 sudo 权限
+<a class=heading-link href=#%e8%b5%8b%e4%ba%88%e6%99%ae%e9%80%9a%e8%b4%a6%e6%88%b7-sudo-%e6%9d%83%e9%99%90><i class="fa fa-link" aria-hidden=true></i></a></h2><p>进入 <code>/etc/sudoers.d/</code> 新建一个文件，文件名随意。添加 <code>username ALL=(ALL:ALL) ALL</code> 即可。</p><h2 id=升级软件源>升级软件源
+<a class=heading-link href=#%e5%8d%87%e7%ba%a7%e8%bd%af%e4%bb%b6%e6%ba%90><i class="fa fa-link" aria-hidden=true></i></a></h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo apt-get update
+</span></span></code></pre></td></tr></table></div></div><h2 id=安装-mysql>安装 Mysql
+<a class=heading-link href=#%e5%ae%89%e8%a3%85-mysql><i class="fa fa-link" aria-hidden=true></i></a></h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo apt-get install mysql-server mysql-client
 </span></span></code></pre></td></tr></table></div></div><p><em>mysql-server：</em> mysql 服务端，是 mysql 的核心程序，负责生成数据库实例，并提供相关接口供不同的客户端调用。
-<em>mysql-client：</em> 是客户端程序，负责操作 mysql 实例，mysql-client 是众多客户端程序的一种，其他还有 mysql、mysqldump、mysqlslap 这些访问、备份、压力测试的工具。</p><h2 id=测试-mysql-是否安装成功>
-测试 Mysql 是否安装成功
-<a class=heading-link href=#%e6%b5%8b%e8%af%95-mysql-%e6%98%af%e5%90%a6%e5%ae%89%e8%a3%85%e6%88%90%e5%8a%9f>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>mysql -uroot -p
-</span></span></code></pre></td></tr></table></div></div><p>输入密码，出现 <code>mysql></code> 命令行代表安装成功。</p><h2 id=安装-nginx>
-安装 Nginx
-<a class=heading-link href=#%e5%ae%89%e8%a3%85-nginx>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo apt-get install nginx
-</span></span></code></pre></td></tr></table></div></div><p>安装后所有的配置文件都在 <code>/etc/nginx/</code> 。（并且每个虚拟主机已经安排在 <code>/etc/nginx/sites-available</code> ）下。</p><ul>
-<li>程序文件在 <code>/user/sbin/nginx/</code></li><li>日志文件在 <code>/var/log/nginx</code></li><li>启动脚本在 <code>/etc/init.d/</code></li><li>默认的项目目录在 <code>/var/www/</code></li></ul><h2 id=启动-nginx>
-启动 Nginx
-<a class=heading-link href=#%e5%90%af%e5%8a%a8-nginx>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo /etc/init.d/nginx start
-</span></span></code></pre></td></tr></table></div></div><p>or</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo service nginx start
-</span></span></code></pre></td></tr></table></div></div><p>测试 nginx 是否安装成功<br>
-输入网址，出现 welcome nginx 成功。</p><h2 id=安装-php>
-安装 PHP
-<a class=heading-link href=#%e5%ae%89%e8%a3%85-php>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo apt-get install php5-fpm php5-mysql
+<em>mysql-client：</em> 是客户端程序，负责操作 mysql 实例，mysql-client 是众多客户端程序的一种，其他还有 mysql、mysqldump、mysqlslap 这些访问、备份、压力测试的工具。</p><h2 id=测试-mysql-是否安装成功>测试 Mysql 是否安装成功
+<a class=heading-link href=#%e6%b5%8b%e8%af%95-mysql-%e6%98%af%e5%90%a6%e5%ae%89%e8%a3%85%e6%88%90%e5%8a%9f><i class="fa fa-link" aria-hidden=true></i></a></h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>mysql -uroot -p
+</span></span></code></pre></td></tr></table></div></div><p>输入密码，出现 <code>mysql></code> 命令行代表安装成功。</p><h2 id=安装-nginx>安装 Nginx
+<a class=heading-link href=#%e5%ae%89%e8%a3%85-nginx><i class="fa fa-link" aria-hidden=true></i></a></h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo apt-get install nginx
+</span></span></code></pre></td></tr></table></div></div><p>安装后所有的配置文件都在 <code>/etc/nginx/</code> 。（并且每个虚拟主机已经安排在 <code>/etc/nginx/sites-available</code> ）下。</p><ul><li>程序文件在 <code>/user/sbin/nginx/</code></li><li>日志文件在 <code>/var/log/nginx</code></li><li>启动脚本在 <code>/etc/init.d/</code></li><li>默认的项目目录在 <code>/var/www/</code></li></ul><h2 id=启动-nginx>启动 Nginx
+<a class=heading-link href=#%e5%90%af%e5%8a%a8-nginx><i class="fa fa-link" aria-hidden=true></i></a></h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo /etc/init.d/nginx start
+</span></span></code></pre></td></tr></table></div></div><p>or</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo service nginx start
+</span></span></code></pre></td></tr></table></div></div><p>测试 nginx 是否安装成功<br>输入网址，出现 welcome nginx 成功。</p><h2 id=安装-php>安装 PHP
+<a class=heading-link href=#%e5%ae%89%e8%a3%85-php><i class="fa fa-link" aria-hidden=true></i></a></h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo apt-get install php5-fpm php5-mysql
 </span></span></code></pre></td></tr></table></div></div><p><em>php5-fpm</em> 是一个 php FastCGI 管理器，原本是 php 源代码的一个补丁，由于它的先进性，在 php5.3.3 以后被官方收录了，不再是第三方的包，现在下载的 php5-fpm 直接是php源代码并整合了 php5-fpm 的分支。
 <em>php5-cgi</em> 也是一个 php FastCGI 管理器。它有许多不足，所以安装过 php5-fpm 就不要再安装 php5-cgi 啦。
-<em>php5-mysql</em> 是 php 的 mysql 扩展。</p><h2 id=配置-nginx>
-配置 Nginx
-<a class=heading-link href=#%e9%85%8d%e7%bd%ae-nginx>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><p>打开 nginx 配置文件 <code>/etc/nginx/nginx.conf</code><br>
-默认虚拟主机配置文件 <code>/etc/nginx/sites-available/default</code><br>
-这里我们打开默认虚拟主机配置文件，配置 php 文件的解析。找到如下配置，打开注释</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+<em>php5-mysql</em> 是 php 的 mysql 扩展。</p><h2 id=配置-nginx>配置 Nginx
+<a class=heading-link href=#%e9%85%8d%e7%bd%ae-nginx><i class="fa fa-link" aria-hidden=true></i></a></h2><p>打开 nginx 配置文件 <code>/etc/nginx/nginx.conf</code><br>默认虚拟主机配置文件 <code>/etc/nginx/sites-available/default</code><br>这里我们打开默认虚拟主机配置文件，配置 php 文件的解析。找到如下配置，打开注释</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -208,8 +56,7 @@
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span># pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span># pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
 </span></span><span style=display:flex><span>        #
 </span></span><span style=display:flex><span>        location ~ \.php$ {
 </span></span><span style=display:flex><span>                include snippets/fastcgi-php.conf;
@@ -219,73 +66,37 @@
 </span></span><span style=display:flex><span>        #       # With php7.0-fpm:
 </span></span><span style=display:flex><span>               fastcgi_pass unix:/run/php/php7.0-fpm.sock;
 </span></span><span style=display:flex><span>        }
-</span></span></code></pre></td></tr></table></div></div><h2 id=测试>
-测试
-<a class=heading-link href=#%e6%b5%8b%e8%af%95>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></span></code></pre></td></tr></table></div></div><h2 id=测试>测试
+<a class=heading-link href=#%e6%b5%8b%e8%af%95><i class="fa fa-link" aria-hidden=true></i></a></h2><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo service nginx restart  //重启 nginx
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo service nginx restart  //重启 nginx
 </span></span><span style=display:flex><span>sudo service php7.0-fpm restart //重启 php
-</span></span></code></pre></td></tr></table></div></div><p>在虚拟主机根目录下创建 <code>phpinfo.php</code> 测试 <code>php</code> 是否安装成功。如果想要扩展，执行</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo apt-get install php7.0-curl  //php7.0-(库名)
-</span></span></code></pre></td></tr></table></div></div><p>安装。</p><h2 id=设置-mysql-默认编码集>
-设置 mysql 默认编码集
-<a class=heading-link href=#%e8%ae%be%e7%bd%ae-mysql-%e9%bb%98%e8%ae%a4%e7%bc%96%e7%a0%81%e9%9b%86>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2><p>查看默认编码集。</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>mysql&gt; SHOW VARIABLES LIKE &#39;character%&#39;;
-</span></span></code></pre></td></tr></table></div></div><p>通过 <code>my.cnf</code> 文件增加两个参数：</p><ol>
-<li>在 <code>[mysqld]</code> 下添加</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>default-character-set=utf8（ mysql 5.5 版本以上添加 character-set-server=utf8 ）
-</span></span></code></pre></td></tr></table></div></div><ol start=2>
-<li>在 <code>[client]</code> 下添加</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>default-character-set=utf8
+</span></span></code></pre></td></tr></table></div></div><p>在虚拟主机根目录下创建 <code>phpinfo.php</code> 测试 <code>php</code> 是否安装成功。如果想要扩展，执行</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo apt-get install php7.0-curl  //php7.0-(库名)
+</span></span></code></pre></td></tr></table></div></div><p>安装。</p><h2 id=设置-mysql-默认编码集>设置 mysql 默认编码集
+<a class=heading-link href=#%e8%ae%be%e7%bd%ae-mysql-%e9%bb%98%e8%ae%a4%e7%bc%96%e7%a0%81%e9%9b%86><i class="fa fa-link" aria-hidden=true></i></a></h2><p>查看默认编码集。</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>mysql&gt; SHOW VARIABLES LIKE &#39;character%&#39;;
+</span></span></code></pre></td></tr></table></div></div><p>通过 <code>my.cnf</code> 文件增加两个参数：</p><ol><li>在 <code>[mysqld]</code> 下添加</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>default-character-set=utf8（ mysql 5.5 版本以上添加 character-set-server=utf8 ）
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li>在 <code>[client]</code> 下添加</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>default-character-set=utf8
 </span></span></code></pre></td></tr></table></div></div><p>这样我们建数据库建表的时候就不用特别指定 <code>utf8</code> 的字符集了。配置文件里的这种写法解决了数据存储和比较的问题
-，但是对客户端的连接是没有作用的，客户端这时候一般需要指定 <code>utf8</code> 方式连接才能避免乱码。也就是传说中的 <code>set names</code> 命令。事实上，<code>set names utf8</code> 命令对应的是服务器端以下几个命令：</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+，但是对客户端的连接是没有作用的，客户端这时候一般需要指定 <code>utf8</code> 方式连接才能避免乱码。也就是传说中的 <code>set names</code> 命令。事实上，<code>set names utf8</code> 命令对应的是服务器端以下几个命令：</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>SET character_set_client = utf8;
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>SET character_set_client = utf8;
 </span></span><span style=display:flex><span>SET character_set_results = utf8;
 </span></span><span style=display:flex><span>SET character_set_connection = utf8;
 </span></span></code></pre></td></tr></table></div></div><p>但这三个参数是不能写在配置文件 <code>my.cnf</code> 里的。只能通过 <code>set</code> 命令来动态修改。我们需要的是在配置文件里写好一劳
 永逸的办法。那么这时候，是否有在服务端解决问题的办法呢，可行的思路是在 <code>init_connect</code> 里设置。这个命令在每
 个普通用户连接上来的时候都会触发执行，可以在 <code>[mysqld]</code> 部分增加以下一行设置连接字符集：
-在 <code>[mysqld]</code> 下添加：</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>init_connect = &#39;SET NAMES utf8&#39;
-</span></span></code></pre></td></tr></table></div></div></div><footer>
-</footer></article></section></div><footer class=footer>
-<section class=container>
-©
+在 <code>[mysqld]</code> 下添加：</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>init_connect = &#39;SET NAMES utf8&#39;
+</span></span></code></pre></td></tr></table></div></div></div><footer></footer></article></section></div><footer class=footer><section class=container>©
 2019 -
 2022
 郭超超
 ·
-技术支持 <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
-</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
+技术支持 <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.</section></footer></main><script src=/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NK08XEDHKZ"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script>
-</body></html>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NK08XEDHKZ")</script></body></html>
