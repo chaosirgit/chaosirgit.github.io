@@ -2,4 +2,5 @@
 Web3 Usage (Backend-PHP)
 Web3 Usage (Backend-Golang)
 Installation 1 npm install web3 WalletConnect for mobile use
-1 npm install @walletconnect/web3-provider Provider Providers are generally called when interacting with the wallet, as well as listening to some events</description></item></channel></rss>
+1 npm install @walletconnect/web3-provider Provider Providers are generally called when interacting with the wallet, as well as listening to some events
+Initialization 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 if (window.</description></item></channel></rss>

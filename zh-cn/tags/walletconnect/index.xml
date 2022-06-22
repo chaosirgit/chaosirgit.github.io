@@ -3,4 +3,4 @@
 后端篇-Golang
 安装 1 npm install web3 WalletConnect 以便手机端使用
 1 npm install @walletconnect/web3-provider 提供者 提供者一般作为与钱包交互时调用,以及监听一些事件
-初始化 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 if (window.ethereum){ //如果有新版小狐狸优先使用 this.walletProvider = window.ethereum }else if (window.</description></item></channel></rss>
+初始化 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 if (window.ethereum){ //如果有新版小狐狸优先使用 this.walletProvider = window.ethereum }else if (window.web3){ //其次使用老版小狐狸的 this.walletProvider = window.web3.currentProvider }else{ //以上都没有使用 walletConnect this.walletProvider = new WalletConnectProvider({ rpc: { // 56: &amp;#34;https://bsc-dataseed.binance.org&amp;#34; 97: &amp;#34;https://data-seed-prebsc-1-s1.</description></item></channel></rss>

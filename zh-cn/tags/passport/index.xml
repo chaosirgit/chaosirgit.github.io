@@ -2,4 +2,6 @@
 实现 Laravel 版本 6.0
 安装 1 composer require laravel/passport 导出默认迁移文件 1 php artisan vendor:publish --tag=passport-migrations 运行该命令会在 \app\database\migrations\ 生成
 Date_create_oauth_auth_codes_table.php Date_create_oauth_access_tokens_table.php Date_create_oauth_refresh_tokens_table.php Date_create_oauth_clients_table.php Date_create_oauth_personal_access_clients_table.php 五个数据库迁移文件，其中 Date_create_oauth_access_tokens_table 是用来记录发放成功的 Token 的。我们需要拷贝一个这个表用来建立另一个用户表的 Token 记录。
-建立自定义 access_token 表 1 php artisan make:migration create_oauth_other_tokens --create=oauth_other_tokens 生成 Date_create_oauth_other_tokens 迁移文件。</description></item></channel></rss>
+建立自定义 access_token 表 1 php artisan make:migration create_oauth_other_tokens --create=oauth_other_tokens 生成 Date_create_oauth_other_tokens 迁移文件。
+复制 Date_create_oauth_access_tokens_table 文件内容到 Date_create_oauth_other_tokens
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 &amp;lt;?</description></item></channel></rss>

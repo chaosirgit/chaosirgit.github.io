@@ -2,7 +2,10 @@
 Step Modify configuration file: laradock/docker-compose.yml
 In the workspace configuration parameter field
 1 2 3 4 workspace: build: context: ./workspace args: Add
-1 - INSTALL_PHPGRPC=${WORKSPACE_INSTALL_PHPGRPC} Modify the startup configuration file laradock/.</description></item><item><title>Docker Usage Notes</title><link>https://blog.adminchao.com/posts/docker-usage-notes/</link><pubDate>Mon, 20 Jul 2020 15:39:19 +0000</pubDate><guid>https://blog.adminchao.com/posts/docker-usage-notes/</guid><description>Preface Take some notes in the process of learning and using Docker.
+1 - INSTALL_PHPGRPC=${WORKSPACE_INSTALL_PHPGRPC} Modify the startup configuration file laradock/.env
+Add two configuration items
+1 2 PHP_FPM_INSTALL_PHPGRPC=true WORKSPACE_INSTALL_PHPGRPC=true Modify the PHP-FPM configuration file laradock/php-fpm/Dockerfile
+1 2 3 4 5 6 7 8 9 10 ########################################################################### # php grpc extension ########################################################################### ARG INSTALL_PHPGRPC=false RUN if [ ${INSTALL_PHPGRPC} = true ]; then \ printf &amp;#34;\n&amp;#34; | pecl install -o -f grpc \ &amp;amp;&amp;amp; rm -rf /tmp/pear \ &amp;amp;&amp;amp; docker-php-ext-enable grpc \ ;fi Modify the WORKSPACE configuration file laradock/workspace/Dockerfile</description></item><item><title>Docker Usage Notes</title><link>https://blog.adminchao.com/posts/docker-usage-notes/</link><pubDate>Mon, 20 Jul 2020 15:39:19 +0000</pubDate><guid>https://blog.adminchao.com/posts/docker-usage-notes/</guid><description>Preface Take some notes in the process of learning and using Docker.
 Command Check the version of Docker after installation
 1 2 3 4 $ docker --version Docker version 19.03.8, build afacb8b $ docker-compose --version docker-compose version 1.25.5, build 8a1c60f6 Try running an Nginx server：
 1 2 3 4 5 $ docker run -d -p 80:80 --name webserver nginx # -p Specifies the local port:container port # -d Running container in the background # --name Set alias for container # When you access your local http://localhost, Welcome to Nginx appears Stop the Nginx server and delete the container:</description></item></channel></rss>

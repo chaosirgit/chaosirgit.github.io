@@ -4,4 +4,5 @@ Web3 Usage (Backend-Golang)
 Installation Web3.php
 If you are using Laravel 8 or below, i.e. GuzzleHttp 6.x, you can install sc0vu/web3.php
 In composer.json find the following and modify it
-1 &amp;#34;minimum-stability&amp;#34;: &amp;#34;dev&amp;#34; Then</description></item></channel></rss>
+1 &amp;#34;minimum-stability&amp;#34;: &amp;#34;dev&amp;#34; Then
+1 2 composer require sc0vu/web3.php dev-master composer require web3p/ethereum-tx //如果需要发送交易 If using Laravel 8 or above i.</description></item></channel></rss>

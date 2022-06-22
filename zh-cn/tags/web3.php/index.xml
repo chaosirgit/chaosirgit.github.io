@@ -7,4 +7,4 @@
 1 &amp;#34;minimum-stability&amp;#34;: &amp;#34;dev&amp;#34; Then
 1 2 composer require sc0vu/web3.php dev-master composer require web3p/ethereum-tx //如果需要发送交易 如果使用 Laravel 8 以上 即 GuzzleHttp &amp;gt; 7.x , 参考 [issues/199](
 在 composer.json 中添加
-1 2 3 4 5 6 7 8 9 10 &amp;#34;require&amp;#34;: { &amp;#34;sc0vu/web3.</description></item></channel></rss>
+1 2 3 4 5 6 7 8 9 10 &amp;#34;require&amp;#34;: { &amp;#34;sc0vu/web3.php&amp;#34;: &amp;#34;dev-g7&amp;#34;, }, &amp;#34;repositories&amp;#34;: [ { &amp;#34;type&amp;#34;: &amp;#34;vcs&amp;#34;, &amp;#34;url&amp;#34;: &amp;#34;https://github.</description></item></channel></rss>

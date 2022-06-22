@@ -2,4 +2,5 @@
 HttpMethod: Post
 URI: api/account/register
 Request Body
-字段 必选 类型及范围 说明 phone 是 string 注册手机号 password 是 string 密码 code 是 string 验证码 gender 是 enum 性别 nickname 否 string 昵称，不超过 20 字符 birthday 否 date 生日 height 否 int 身高 weight 否 int 体重 email 否 string 邮箱 Response code:</description></item></channel></rss>
+字段 必选 类型及范围 说明 phone 是 string 注册手机号 password 是 string 密码 code 是 string 验证码 gender 是 enum 性别 nickname 否 string 昵称，不超过 20 字符 birthday 否 date 生日 height 否 int 身高 weight 否 int 体重 email 否 string 邮箱 Response code:
+状态码 内容 200 成功 400 失败 500 其他未处理错误 项目开始 配置数据库 在 lumen 项目根目录下找到 .env.example 拷贝为 .</description></item></channel></rss>
